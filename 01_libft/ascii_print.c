@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alpha_digit_alnum.c                                :+:      :+:    :+:   */
+/*   ascii_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 13:32:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/19 13:43:37 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/04/19 13:31:31 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/04/19 13:44:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
+int	ft_isascii(int c)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+	if (c >= 0 && <= 127)
 		return (1);
 	return (0);
 }
 
-int	ft_isdigit(int c)
+int	ft_isprint(int c)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
-
-int	ft_isalnum(int c)
-{
-	if (ft_isdigit)
-		return (1);
-	if (ft_isalpha)
+	if (c >= 32 & c <= 126)
 		return (1);
 	return (0);
 }

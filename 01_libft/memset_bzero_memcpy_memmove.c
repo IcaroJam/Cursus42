@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alpha_digit_alnum.c                                :+:      :+:    :+:   */
+/*   memset_bzero_memcpy_memmove.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 13:32:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/19 13:43:37 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/04/19 13:48:48 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/04/19 15:08:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdio.h>
 
-int	ft_isalpha(int c)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1);
-	return (0);
-}
+	size_t			i;
+	unsigned char	newc;
 
-int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	i = 0;
+	newc = (unsigned char)c;
+	while (i < len)
+		((unsigned char *)b)[i++] = newc;
+	return (b);
 }
+/*
+#include <string.h>
 
-int	ft_isalnum(int c)
+int	main(void)
 {
-	if (ft_isdigit)
-		return (1);
-	if (ft_isalpha)
-		return (1);
+	char hey[] = "abcdefghi";
+
+	printf("%s", hey);
+	memset(hey, 57, 3);
+	printf("%s", hey);
+	ft_memset(hey, 55, 3);
+	printf("%s", hey);
 	return (0);
-}
+}*/
