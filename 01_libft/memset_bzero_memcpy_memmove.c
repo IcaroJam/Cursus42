@@ -6,11 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:48:48 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/19 15:08:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/19 19:43:32 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
 
+// Old, inefficient Ver
+/*
 void	*ft_memset(void *b, int c, size_t len)
 {
 	size_t			i;
@@ -20,6 +22,17 @@ void	*ft_memset(void *b, int c, size_t len)
 	newc = (unsigned char)c;
 	while (i < len)
 		((unsigned char *)b)[i++] = newc;
+	return (b);
+}*/
+
+// Casting the int into an unsigned char isn't necessary 4 sum reason
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*newb;
+
+	newb = b;
+	while (len-- > 0)
+		*newb++ = c;
 	return (b);
 }
 /*
