@@ -11,16 +11,20 @@ OBJS	=	$(SRC:.c=.o)
 all:	$(NAME)
 
 $(NAME):	.c.o
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo "Librerida fiquinitada..."
+	@make clean
+	@echo "Y to limpito!"
 
 .c.o:	$(SRC)
-	gcc $(CFLAGS) -c $(SRC)
+	@gcc $(CFLAGS) -c $(SRC)
+	@echo "Objetos creacionados :)"
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean:	clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re:		fclean all
 
