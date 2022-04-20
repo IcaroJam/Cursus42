@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:48:48 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/19 19:43:32 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/20 09:58:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -35,17 +35,40 @@ void	*ft_memset(void *b, int c, size_t len)
 		*newb++ = c;
 	return (b);
 }
-/*
-#include <string.h>
+
+void	ft_bzero(void *s, size_t n)
+{
+	char *temps;
+
+	temps = s;
+	while (n-- > 0)
+		*temps++ = 0;
+}
+
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
+
+	d = dst;
+	s = src;
+	while (n-- > 0)
+		*d++ = *s++;
+	return (dst);
+}
+
+
+#include <strings.h>
 
 int	main(void)
 {
 	char hey[] = "abcdefghi";
+	char hou[] = "123456789";
 
-	printf("%s", hey);
-	memset(hey, 57, 3);
-	printf("%s", hey);
-	ft_memset(hey, 55, 3);
-	printf("%s", hey);
+	printf("%s\n", hey);
+	printf("%s %s\n", ft_memcpy(hey, hou, 3), hey);
+	/*printf("%s\n", hey);
+	ft_memcpy(hey, hou, 3);
+	printf("%s\n", hey);*/
 	return (0);
-}*/
+}
