@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:48:48 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/20 09:58:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:10:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -57,7 +57,16 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 	return (dst);
 }
 
+// memmove implementation with dynamic size buffer string
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char	temp[len];
 
+	ft_memcpy(temp, src, len);
+	ft_memcpy(dst, temp, len);
+	return ((unsigned char *)dst);
+}
+/*
 #include <strings.h>
 
 int	main(void)
@@ -66,9 +75,9 @@ int	main(void)
 	char hou[] = "123456789";
 
 	printf("%s\n", hey);
-	printf("%s %s\n", ft_memcpy(hey, hou, 3), hey);
-	/*printf("%s\n", hey);
+	printf("%s %s\n", ft_memmove(hou + 2, hou, 3), hey);
+	printf("%s\n", hey);
 	ft_memcpy(hey, hou, 3);
-	printf("%s\n", hey);*/
+	printf("%s\n", hey);
 	return (0);
-}
+}*/
