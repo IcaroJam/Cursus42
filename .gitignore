@@ -1,2 +1,3 @@
-*/.git*
-libft-unit-tests/
+./*/.git
+libft-unit-test/
+.DS*
