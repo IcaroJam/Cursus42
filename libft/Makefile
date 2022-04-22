@@ -2,19 +2,13 @@ NAME 	=	libft.a
 
 CFLAGS	=	-Wall -Werror -Wextra
 
-SRC		=	alpha_digit_alnum.c ascii_print.c memset_bzero_memcpy_memmove.c strlen.c
+SRC		=	alpha_digit_alnum.c ascii_print.c memset_bzero_memcpy_memmove.c strlen.c strlcpy_strlcat.c
 
 OBJS	=	$(SRC:.c=.o)
 
 
 
 all:	$(NAME)
-
-$(NAME):	.c.o
-	@ar rcs $(NAME) $(OBJS)
-	@echo "Librerida fiquinitada..."
-	@make clean
-	@echo "Y to limpito!"
 
 # This action isn't really needed since make has it built-in when calling $(OBJS), but I like the msg :)
 ###################################
@@ -23,12 +17,17 @@ $(NAME):	.c.o
 	@echo "Objetos creacionados :)"
 ###################################
 
+$(NAME):	$(OBJS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo "Librerida fiquinitada ^^"
+
 clean:
 	@rm -f $(OBJS)
+	@echo "Limpieza profunda..."
 
 fclean:	clean
 	@rm -f $(NAME)
 
 re:		fclean all
 
-.PHONY:	all fclean clean re
+.PHONY:	all clean fclean re
