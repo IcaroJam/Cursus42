@@ -1,8 +1,3 @@
-<<<<<<< HEAD
 ./*/.git
 libft-unit-test/
-=======
-./.git
-libft-unit-tests/
->>>>>>> 6c629d4030768cad2ff81e99e13b9b14dbcf2cc6
 .DS*
