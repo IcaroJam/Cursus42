@@ -6,11 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:15:31 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/19 15:27:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/22 10:33:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <string.h>
+#include <stddef.h>
 
 size_t	ft_strlen(const char *s)
 {

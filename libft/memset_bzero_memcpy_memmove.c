@@ -6,10 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:48:48 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/20 16:56:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/22 10:33:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+#include <stddef.h>
 
 void	*ft_memset(void *b, int c, size_t len)
 {
