@@ -3,3 +3,4 @@ libft-unit-test/
 .DS*
 *.o
 *.a
+a.out
