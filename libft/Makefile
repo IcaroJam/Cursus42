@@ -16,9 +16,12 @@ $(NAME):	.c.o
 	@make clean
 	@echo "Y to limpito!"
 
+# This action isn't really needed since make has it built-in when calling $(OBJS), but I like the msg :)
+###################################
 .c.o:	$(SRC)
 	@gcc $(CFLAGS) -c $(SRC)
 	@echo "Objetos creacionados :)"
+###################################
 
 clean:
 	@rm -f $(OBJS)
