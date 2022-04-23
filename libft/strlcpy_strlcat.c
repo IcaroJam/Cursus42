@@ -53,7 +53,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		*dst = 0;
 	return (dstlen + srclen);
 }
-
 /*#include <string.h>
 int	main(void)
 {

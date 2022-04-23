@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:48:48 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/22 10:33:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/23 20:16:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stddef.h>
@@ -30,13 +30,15 @@ void	ft_bzero(void *s, size_t n)
 		*temps++ = 0;
 }
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char		*d;
 	const unsigned char	*s;
 
 	d = dst;
 	s = src;
+	if (!d && !s)
+		return (0);
 	while (n--)
 		*d++ = *s++;
 	return (dst);
@@ -49,6 +51,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 	d = dst;
 	s = src;
+	if (!d && !s)
+		return (0);
 	if (d < s)
 		while (len--)
 			*d++ = *s++;
@@ -57,18 +61,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 			d[len] = s[len];
 	return ((unsigned char *)dst);
 }
-/*
-#include <strings.h>
-
-int	main(void)
-{
-	char hey[] = "abcdefghi";
-	char hou[] = "123456789";
-
-	printf("%s\n", hey);
-	printf("%s\n", ft_memmove(hou + 2, hou, 3));
-	printf("%s\n", hey);
-	ft_memcpy(hey, hou, 3);
-	printf("%s\n", hey);
-	return (0);
-}*/
