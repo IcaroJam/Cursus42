@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stddef.h>
-//#include <stdio.h>
 #include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
@@ -53,15 +52,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		*dst = 0;
 	return (dstlen + srclen);
 }
-/*#include <string.h>
-int	main(void)
-{
-	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
-//	char buff1[0xF00] = "there is no stars in the sky";
-	char buff2[0xF00] = "there is no stars in the sky";
-	size_t max = ft_strlen("the cake is a lie !\0I'm hidden lol\r\n") + 4;
-//	char a[] = "12345\0.a.a.a.a.";
-//	char b[] = "abcde.-.-.-";
-	ft_strlcat(buff2, str, max);
-	printf("%s\n", buff2);
-}*/
