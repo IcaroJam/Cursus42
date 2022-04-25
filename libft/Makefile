@@ -2,7 +2,7 @@ NAME 	=	libft.a
 
 CFLAGS	=	-Wall -Werror -Wextra
 
-SRC		=	alpha_digit_alnum.c ascii_print.c memset_bzero_memcpy_memmove.c strlen.c strlcpy_strlcat.c upper_lower.c strmisc.c
+SRC		=	alpha_digit_alnum.c ascii_print.c memset_bzero_memcpy_memmove.c strlen.c strlcpy_strlcat.c upper_lower.c strmisc.c memmisc.c
 
 OBJS	=	$(SRC:.c=.o)
 
