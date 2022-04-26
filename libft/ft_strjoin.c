@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 16:40:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/26 16:51:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/26 18:33:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len;
 	char	*ret;
 
+	if (!s1 || !s2)
+		return (0);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	ret = (char *) malloc((len + 1) * sizeof(char));
 	if (!ret)

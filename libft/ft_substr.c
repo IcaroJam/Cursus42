@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 15:35:34 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/26 16:19:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/26 18:34:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*ret;
 	size_t	slen;
 
+	if (!s)
+		return (0);
 	slen = ft_strlen(s);
 	if (slen <= start)
 	{
