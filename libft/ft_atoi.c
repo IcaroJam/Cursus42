@@ -6,11 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 21:34:53 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/26 12:48:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:39:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static const char *ft_prep(const char *str, int *isneg)
+static const char	*ft_prep(const char *str, int *isneg)
 {
 	while ((*str >= 8 && *str <= 13) || *str == ' ')
 		str++;
