@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/26 19:33:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/27 14:21:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -15,46 +15,57 @@
 static char	*ft_stringalloc(char const *str, char c, size_t *newoff)
 {
 	char	*ret;
-	size_t	i;
+	size_t	wlen;
 
-	i = 0;
-	while (!str[i] && str[i] != c)
-		i++;
-	ret = (char *) malloc((i + 1) * sizeof(char));
+	wlen = 0;
+	while (!str[wlen] || str[wlen] != c)
+		wlen++;
+	ret = (char *) malloc((wlen + 1) * sizeof(char));
 	if (!ret)
 		return (0);
-	*newoff = i + 1;
-	ft_strlcpy(ret, str, i + 1);
+	*newoff = wlen;
+	ft_strlcpy(ret, str, wlen + 1);
 	return (ret);
+}
+
+static size_t	ft_wordcount(char const *s, char c)
+{
+	size_t	words;
+
+	words = 0;
+	while (*s)
+	{
+		if ((*s != c && *(s + 1) == c) || (*s != c && !*(s + 1)))
+			words++;
+		s++;
+	}
+	return (words);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**ret;
 	size_t	i;
-	size_t	divnum;
+	size_t	words;
+	size_t	retindex;
 
 	if (!s)
 		return (0);
-	i = 0;
-	divnum = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			divnum++;
-		i++;
-	}
-	ret = (char **) malloc((divnum + 2) * sizeof(char *));
+	words = ft_wordcount(s, c);
+	ret = (char **) malloc((words + 1) * sizeof(char *));
 	if (!ret)
 		return (0);
 	i = 0;
-	divnum = 0;
-	while (divnum + 1)
+	retindex = 0;
+	while (words)
 	{
-		*ret = ft_stringalloc(&s[i], c, &i);
-		divnum--;
-		(*ret)++;
+		while (*s == c)
+			s++;
+		ret[retindex] = ft_stringalloc(s, c, &i);
+		s = &s[i];
+		words--;
+		retindex++;
 	}
-	*ret = NULL;
+	ret[retindex] = NULL;
 	return (ret);
 }
