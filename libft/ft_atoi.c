@@ -19,7 +19,7 @@ static const char	*ft_prep(const char *str, int *isneg)
 		*isneg = 1;
 		str++;
 	}
-	if (*str == '+' && !*isneg)
+	else if (*str == '+')
 		str++;
 	return (str);
 }
