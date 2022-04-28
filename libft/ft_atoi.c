@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 21:34:53 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/26 16:39:17 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:53:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static const char	*ft_prep(const char *str, int *isneg)
 		*isneg = 1;
 		str++;
 	}
-	if (*str == '+')
+	if (*str == '+' && !*isneg)
 		str++;
 	return (str);
 }
