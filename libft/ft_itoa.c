@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:09:47 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/28 11:02:51 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:05:46 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static unsigned int	ft_prepnum(int n, int *isneg)
 {
 	unsigned int	temp;
 
+	*isneg = 0;
 	if (n < 0)
 	{
 		*isneg = 1;
@@ -36,8 +37,7 @@ char	*ft_itoa(int n)
 
 	numlen = 0;
 	if (!n)
-		numlen = 1; 
-	isneg = 0;
+		numlen = 1;
 	temp = ft_prepnum(n, &isneg);
 	while (n)
 	{
@@ -51,9 +51,8 @@ char	*ft_itoa(int n)
 		*ret = '-';
 	while (numlen)
 	{
-		ret[numlen - !isneg] = temp % 10 + '0';
+		ret[numlen-- - !isneg] = temp % 10 + '0';
 		temp /= 10;
-		numlen--;
 	}
 	return (ret);
 }
