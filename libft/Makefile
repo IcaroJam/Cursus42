@@ -38,6 +38,7 @@ $(NAME):	$(OBJS)
 
 bonus:		$(SRC) $(BONUS_SRC)
 	@gcc $(CFLAGS) -c $(SRC) $(BONUS_SRC)
+	@echo "Objetitos con una pizca de sal ;)"
 	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 	@echo "Bonus-ación completada B)"
 
