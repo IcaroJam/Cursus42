@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/27 15:04:12 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/04/30 16:56:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -18,12 +18,15 @@ static char	*ft_stringalloc(char const *str, char c, size_t *newoff)
 	size_t	wlen;
 
 	wlen = 0;
-	while (!str[wlen] || str[wlen] != c)
+	while (str[wlen] && str[wlen] != c)
 		wlen++;
 	ret = (char *) malloc((wlen + 1) * sizeof(char));
-	if (!ret)
-		return (0);
 	*newoff = wlen;
+	if (!ret)
+	{
+		free(ret);
+		return (NULL);
+	}
 	ft_strlcpy(ret, str, wlen + 1);
 	return (ret);
 }
@@ -54,7 +57,7 @@ char	**ft_split(char const *s, char c)
 	words = ft_wordcount(s, c);
 	ret = (char **) malloc((words + 1) * sizeof(char *));
 	if (!ret)
-		return (0);
+		return (NULL);
 	i = 0;
 	retindex = 0;
 	while (words)
