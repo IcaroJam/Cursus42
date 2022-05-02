@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/30 17:08:30 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/30 19:10:32 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/05/02 18:49:14 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/05/02 18:57:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list	*ret;
-
-	ret = (t_list *) malloc(sizeof(t_list));
-	if (!ret)
-		return (NULL);
-	(*ret).content = content;
-	(*ret).next = NULL;
-	return (ret);
+	(*new).next = *lst;
+	*lst = new;
 }
