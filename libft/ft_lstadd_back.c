@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:01:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 10:57:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:42:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*temp;
 
-	if (!lst || !*lst || !new)
+	if (!lst || !*lst)
 	{
 		*lst = new;
 		return ;
