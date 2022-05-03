@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 19:04:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/02 19:12:14 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 09:37:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_lstsize(t_list *lst)
 	while ((*lst).next)
 	{
 		i++;
-		lst = (*lst).next; 
+		lst = (*lst).next;
 	}
 	return (i);
 }
