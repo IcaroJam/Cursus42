@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 11:35:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 12:20:53 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 16:48:01 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_lstclear(t_list **lst, void (*del) (void *))
 	t_list	*temp;
 
 	if (!lst || !*lst)
-	    return ;
+		return ;
 	temp = (**lst).next;
 	while (temp)
 	{
