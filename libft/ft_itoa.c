@@ -6,11 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:09:47 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/28 11:08:58 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 09:45:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static unsigned int	ft_prepnum(int n, int *isneg)

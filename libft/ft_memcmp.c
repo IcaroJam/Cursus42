@@ -6,10 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 19:06:35 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/25 19:58:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 09:46:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stddef.h>
+
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

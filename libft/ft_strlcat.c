@@ -6,10 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:56:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/25 15:57:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 09:51:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stddef.h>
+
 #include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)

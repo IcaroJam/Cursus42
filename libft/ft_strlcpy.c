@@ -6,10 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:56:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/25 15:56:40 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 09:52:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stddef.h>
+
 #include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)

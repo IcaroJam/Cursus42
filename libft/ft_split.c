@@ -6,10 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/30 16:56:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 09:50:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
+
 #include "libft.h"
 
 static char	*ft_stringalloc(char const *str, char c, size_t *newoff)
