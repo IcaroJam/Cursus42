@@ -1,6 +1,6 @@
 ./*/.git*
-libft-unit-test/
-libft-war-machine/
+*-unit-test/
+*-war-machine/
 .DS*
 *.o
 *.a
