@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 13:47:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/06 12:33:07 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/05/06 12:33:23 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/05/06 12:36:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+void	*ft_bcalloc(size_t count, size_t size)
+{
+	char	*start;
+	char	*temp;
 
-# include <unistd.h>
-# include <stdlib.h>
-
-char	*get_next_line(int fd);
-void	*ft_bcalloc(size_t count, size_t size);
-
-#endif
+	start = malloc(count * size);
+	if (!start)
+		return (0);
+	temp = start;
+	while (size--)
+		*temp++ = 0;
+	return (start);
+}
