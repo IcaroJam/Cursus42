@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 11:35:23 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:51:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
 		if (!ret[retindex - 1])
 		{
 			ft_destroyer(ret, wsplit);
-			break;
+			break ;
 		}
 	}
 	if (wsplit == words)
@@ -85,9 +85,7 @@ static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
 char	**ft_split(char const *s, char c)
 {
 	char	**ret;
-	//size_t	i;
 	size_t	words;
-	//size_t	retindex;
 
 	if (!s)
 		return (0);
@@ -96,17 +94,5 @@ char	**ft_split(char const *s, char c)
 	if (!ret)
 		return (NULL);
 	ret = ft_strstringer(ret, words, c, s);
-	/*i = 0;
-	retindex = 0;
-	while (words)
-	{
-		while (*s == c)
-			s++;
-		ret[retindex] = ft_stralloc(s, c, &i);
-		s = &s[i];
-		words--;
-		retindex++;
-	}
-	ret[retindex] = NULL;*/
 	return (ret);
 }
