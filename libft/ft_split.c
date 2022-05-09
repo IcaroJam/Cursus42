@@ -77,7 +77,7 @@ static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
 			break;
 		}
 	}
-	if (wsplit != words)
+	if (wsplit == words)
 		ret[retindex] = NULL;
 	return (ret);
 }
