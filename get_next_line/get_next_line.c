@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 16:27:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:41:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static int	ft_buffprocess(int fd, char **buff, size_t bufflen)
 {
 	*buff -= bufflen;
-	if (read(fd, *buff, BUFFER_SIZE))
+	if (!read(fd, *buff, BUFFER_SIZE))
 		return (0);
 	return (1);
 }
@@ -47,6 +47,7 @@ static char	*ft_fragfetch(int *nlflag, char **buff, size_t *fraglen)
 static char	*ft_fragconglomerator(int fd, char **buff)
 {
 	int		nlflag;
+	int		eoflag;
 	size_t	bufflen;
 	char	*ret;
 	char	*temp;
@@ -57,10 +58,11 @@ static char	*ft_fragconglomerator(int fd, char **buff)
 		return (NULL);
 	while (!nlflag)
 	{
-		if (!ft_buffprocess(fd, buff, bufflen))
-			break ;
+		eoflag = ft_buffprocess(fd, buff, bufflen);
 		temp = ft_fragfetch(&nlflag, buff, &bufflen);
 		ret = ft_strjoin(ret, temp);
+		if (!eoflag)
+			break ;
 	}
 	return (ret);
 }
@@ -90,7 +92,7 @@ int	main(){
 	int fd = open("coso.txt", O_RDONLY);
 	char *line;
 
-	for (int i = 0; i <5; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		line = get_next_line(fd);
 		printf("%s", line);
