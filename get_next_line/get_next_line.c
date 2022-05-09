@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 13:16:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:27:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 // If the content of the buffer is NULL it has already been completely
 // processed and it should be read on again if possible.
-static void	ft_buffprocess(int fd, char **buff, size_t bufflen)
+static int	ft_buffprocess(int fd, char **buff, size_t bufflen)
 {
 	*buff -= bufflen;
-	read(fd, *buff, BUFFER_SIZE);
+	if (read(fd, *buff, BUFFER_SIZE))
+		return (0);
+	return (1);
 }
 
 static char	*ft_fragfetch(int *nlflag, char **buff, size_t *fraglen)
@@ -55,7 +57,8 @@ static char	*ft_fragconglomerator(int fd, char **buff)
 		return (NULL);
 	while (!nlflag)
 	{
-		ft_buffprocess(fd, buff, bufflen);
+		if (!ft_buffprocess(fd, buff, bufflen))
+			break ;
 		temp = ft_fragfetch(&nlflag, buff, &bufflen);
 		ret = ft_strjoin(ret, temp);
 	}
@@ -77,6 +80,8 @@ char	*get_next_line(int fd)
 			return (NULL);
 		eoflag = read(fd, buff, BUFFER_SIZE);
 	}
+	if (!eoflag)
+		return (NULL);
 	ret = ft_fragconglomerator(fd, &buff);
 	return (ret);
 }
@@ -85,7 +90,7 @@ int	main(){
 	int fd = open("coso.txt", O_RDONLY);
 	char *line;
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i <5; i++)
 	{
 		line = get_next_line(fd);
 		printf("%s", line);
