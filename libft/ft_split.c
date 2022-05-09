@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/07 10:56:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:35:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	*ft_destroyer(char **arr, size_t words)
 	return (NULL);
 }
 
-static void	ft_strstringer(char **ret, size_t words, char c, char *s)
+static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
 {
 	size_t	i;
 	size_t	retindex;
@@ -79,7 +79,7 @@ static void	ft_strstringer(char **ret, size_t words, char c, char *s)
 	}
 	if (wsplit != words)
 		ret[retindex] = NULL;
-	// Should it return the sting array or can it be a void function???
+	return (ret);
 }
 
 char	**ft_split(char const *s, char c)
@@ -95,6 +95,7 @@ char	**ft_split(char const *s, char c)
 	ret = (char **) malloc((words + 1) * sizeof(char *));
 	if (!ret)
 		return (NULL);
+	ret = ft_strstringer(ret, words, c, s);
 	/*i = 0;
 	retindex = 0;
 	while (words)
