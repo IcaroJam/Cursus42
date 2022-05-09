@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 12:33:23 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 13:04:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:59:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,17 @@ void	*ft_bcalloc(size_t count, size_t size)
 	return (start);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)	
 {
-	size_t	len;
+	size_t	s1len;
+	size_t	s2len;
 	char	*ret;
 
 	if (!s1 || !s2)
 		return (0);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	ret = (char *) malloc((len + 1) * sizeof(char));
+	s1len = ft_strlen(s1);
+	s2len = ft_strlen(s2);
+	ret = (char *) malloc((s1len + s2len + 1) * sizeof(char));
 	if (!ret)
 		return (0);
 	while (*s1)
@@ -65,5 +67,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (*s2)
 		*ret++ = *s2++;
 	*ret = 0;
-	return (ret - len);
+	free(s1 - s1len);
+	free(s2 - s2len);
+	return (ret - s1len - s2len);
 }
