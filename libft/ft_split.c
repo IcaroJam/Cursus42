@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/07 10:56:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/03 09:50:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_stralloc(char const *str, char c, size_t *newoff)
+static char	*ft_stringalloc(char const *str, char c, size_t *newoff)
 {
 	char	*ret;
 	size_t	wlen;
@@ -45,49 +45,12 @@ static size_t	ft_wordcount(char const *s, char c)
 	return (words);
 }
 
-static void	*ft_destroyer(char **arr, size_t words)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < words)
-		free(arr[i++]);
-	free(arr);
-	return (NULL);
-}
-
-static void	ft_strstringer(char **ret, size_t words, char c, char *s)
-{
-	size_t	i;
-	size_t	retindex;
-	size_t	wsplit;
-
-	wsplit = 0;
-	retindex = 0;
-	while (wsplit < words)
-	{
-		while (*s == c)
-			s++;
-		ret[retindex++] = ft_stralloc(s, c, &i);
-		s += i;
-		wsplit++;
-		if (!ret[retindex - 1])
-		{
-			ft_destroyer(ret, wsplit);
-			break;
-		}
-	}
-	if (wsplit != words)
-		ret[retindex] = NULL;
-	// Should it return the sting array or can it be a void function???
-}
-
 char	**ft_split(char const *s, char c)
 {
 	char	**ret;
-	//size_t	i;
+	size_t	i;
 	size_t	words;
-	//size_t	retindex;
+	size_t	retindex;
 
 	if (!s)
 		return (0);
@@ -95,17 +58,17 @@ char	**ft_split(char const *s, char c)
 	ret = (char **) malloc((words + 1) * sizeof(char *));
 	if (!ret)
 		return (NULL);
-	/*i = 0;
+	i = 0;
 	retindex = 0;
 	while (words)
 	{
 		while (*s == c)
 			s++;
-		ret[retindex] = ft_stralloc(s, c, &i);
+		ret[retindex] = ft_stringalloc(s, c, &i);
 		s = &s[i];
 		words--;
 		retindex++;
 	}
-	ret[retindex] = NULL;*/
+	ret[retindex] = NULL;
 	return (ret);
 }
