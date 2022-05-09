@@ -1,6 +1,6 @@
 ./*/.git*
 *-unit-test/
-*-war-machine/
+*-war-machine*/
 .DS*
 *.o
 *.a

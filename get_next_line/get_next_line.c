@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 16:41:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:19:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
+//#include <stdio.h>
+//#include <fcntl.h>
 
 // If the content of the buffer is NULL it has already been completely
 // processed and it should be read on again if possible.
@@ -73,6 +73,7 @@ char	*get_next_line(int fd)
 	static char	*buff = NULL;
 	int			eoflag;
 
+	eoflag = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
 		return (NULL);
 	if (!buff)
@@ -87,7 +88,7 @@ char	*get_next_line(int fd)
 	ret = ft_fragconglomerator(fd, &buff);
 	return (ret);
 }
-
+/*
 int	main(){
 	int fd = open("coso.txt", O_RDONLY);
 	char *line;
@@ -97,4 +98,4 @@ int	main(){
 		line = get_next_line(fd);
 		printf("%s", line);
 	}
-}
+}*/

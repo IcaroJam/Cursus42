@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 12:33:23 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 16:59:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:16:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*ft_bcalloc(size_t count, size_t size)
 	return (start);
 }
 
-char	*ft_strjoin(char *s1, char *s2)	
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	s1len;
 	size_t	s2len;
