@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:47:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 18:34:14 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/10 16:32:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-int		ft_buffprocess(int fd, char **buff, size_t bufflen);
-char	*ft_fragfetch(int *nlflag, char **buff, size_t *fraglen);
+size_t	ft_buffprocess(int fd, char **buff, size_t *bufflen);
+char	*ft_fragfetch(int *nlflag, char **buff);
 char	*ft_fragconglomerator(int fd, char **buff);
 char	*get_next_line(int fd);
 void	*ft_bcalloc(size_t count, size_t size);

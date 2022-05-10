@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 19:53:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/10 17:55:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,28 @@
 
 // If the content of the buffer is NULL it has already been completely
 // processed and it should be read on again if possible.
-int	ft_buffprocess(int fd, char **buff, size_t bufflen)
+size_t	ft_buffprocess(int fd, char **buff, size_t *bufflen)
 {
-	*buff -= bufflen;
-	if (!read(fd, *buff, BUFFER_SIZE))
+	*buff -= *bufflen;
+	*bufflen = read(fd, *buff, BUFFER_SIZE);
+	if (!*bufflen)
 		return (0);
-	return (1);
+	buff[0][*bufflen] = 0;
+	return (*bufflen);
 }
 
-char	*ft_fragfetch(int *nlflag, char **buff, size_t *fraglen)
+char	*ft_fragfetch(int *nlflag, char **buff)
 {
 	char	*linfrag;
 	size_t	i;
+	size_t	fraglen;
 
-	*fraglen = ft_linelen(*buff, nlflag);
-	linfrag = malloc(sizeof(char) * (*fraglen + 1));
+	fraglen = ft_linelen(*buff, nlflag);
+	linfrag = malloc(sizeof(char) * (fraglen + 1));
 	if (!linfrag)
 		return (NULL);
 	i = 0;
-	while (i < *fraglen)
+	while (i < fraglen)
 	{
 		linfrag[i] = buff[0][i];
 		i++;
@@ -47,22 +50,24 @@ char	*ft_fragfetch(int *nlflag, char **buff, size_t *fraglen)
 char	*ft_fragconglomerator(int fd, char **buff)
 {
 	int		nlflag;
-	int		eoflag;
-	size_t	bufflen;
+	size_t	eoflag;
 	char	*ret;
 	char	*temp;
 
 	nlflag = 0;
-	ret = ft_fragfetch(&nlflag, buff, &bufflen);
+	eoflag = ft_strlen(*buff);
+	ret = ft_fragfetch(&nlflag, buff);
 	if (!ret)
 		return (NULL);
 	while (!nlflag)
 	{
-		eoflag = ft_buffprocess(fd, buff, bufflen);
-		temp = ft_fragfetch(&nlflag, buff, &bufflen);
+		eoflag = ft_buffprocess(fd, buff, &eoflag);
+		temp = ft_fragfetch(&nlflag, buff);
 		ret = ft_strjoin(ret, temp);
 		if (!eoflag)
 			break ;
+		if (ft_strlen(ret) == eoflag && eoflag < BUFFER_SIZE)
+			return (ret);
 	}
 	return (ret);
 }
@@ -71,9 +76,7 @@ char	*get_next_line(int fd)
 {
 	char		*ret;
 	static char	*buff = NULL;
-	int			eoflag;
 
-	eoflag = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
 		return (NULL);
 	if (!buff)
@@ -81,21 +84,23 @@ char	*get_next_line(int fd)
 		buff = ft_bcalloc(BUFFER_SIZE + 1, sizeof(char));
 		if (!buff)
 			return (NULL);
-		eoflag = read(fd, buff, BUFFER_SIZE);
+		if (!read(fd, buff, BUFFER_SIZE))
+			return (NULL);
 	}
-	if (!eoflag)
-		return (NULL);
 	ret = ft_fragconglomerator(fd, &buff);
 	return (ret);
 }
-
-/*int	main(){
-	int fd = open("coso.txt", O_RDONLY);
-	char *line;
-
-	for (int i = 0; i < 6; i++)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-	}
-}*/
+/** 
+  * int	main(){
+  *     int fd = open("coso.txt", O_RDONLY);
+  *     char *line;
+  *
+  * //	line = get_next_line(fd);
+  *     for (int i = 0; i < 12; i++)
+  *     {
+  *         line = get_next_line(fd);
+  *         printf("%s", line);
+  *         free(line);
+  *     }
+  *     system("leaks a.out");
+  * } */
