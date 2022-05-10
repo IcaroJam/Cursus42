@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/10 17:55:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:40:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-//#include <stdio.h>
-//#include <fcntl.h>
+#include <stdio.h>
+#include <fcntl.h>
 
 // If the content of the buffer is NULL it has already been completely
 // processed and it should be read on again if possible.
@@ -90,17 +90,17 @@ char	*get_next_line(int fd)
 	ret = ft_fragconglomerator(fd, &buff);
 	return (ret);
 }
-/** 
-  * int	main(){
-  *     int fd = open("coso.txt", O_RDONLY);
-  *     char *line;
-  *
-  * //	line = get_next_line(fd);
-  *     for (int i = 0; i < 12; i++)
-  *     {
-  *         line = get_next_line(fd);
-  *         printf("%s", line);
-  *         free(line);
-  *     }
-  *     system("leaks a.out");
-  * } */
+
+int	main(){
+	int fd = open("coso.txt", O_RDONLY);
+	char *line;
+
+//	line = get_next_line(fd);
+	for (int i = 0; i < 12; i++)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+		free(line);
+	}
+	system("leaks a.out");
+}
