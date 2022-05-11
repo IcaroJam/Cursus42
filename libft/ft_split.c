@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 14:51:55 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/11 09:32:34 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
 	{
 		while (*s == c)
 			s++;
-		ret[retindex++] = ft_stralloc(s, c, &i);
+		ret[retindex++] = ft_stringalloc(s, c, &i);
 		s += i;
 		wsplit++;
 		if (!ret[retindex - 1])
