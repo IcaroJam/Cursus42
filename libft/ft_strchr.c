@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:57:55 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:51:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/11 10:51:43 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s || !c)
+	unsigned char	temp;
+
+	temp = c;
+	while (*s || !temp)
 	{
-		if (*s == c)
+		if (*s == temp)
 			return ((char *)s);
 		s++;
 	}
