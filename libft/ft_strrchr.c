@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:58:15 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:53:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/11 10:55:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*revs;
+	const char		*revs;
+	unsigned char	temp;
 
+	temp = c;
 	revs = s + ft_strlen(s);
 	while (revs >= s)
 	{
-		if (*revs == c)
+		if (*revs == temp)
 			return ((char *)revs);
 		revs--;
 	}
