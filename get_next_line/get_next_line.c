@@ -6,23 +6,23 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/10 19:40:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:21:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
+//#include <stdio.h>
+//#include <fcntl.h>
 
 // If the content of the buffer is NULL it has already been completely
 // processed and it should be read on again if possible.
 size_t	ft_buffprocess(int fd, char **buff, size_t *bufflen)
 {
-	*buff -= *bufflen;
+	*buff -= BUFFER_SIZE - *bufflen;
 	*bufflen = read(fd, *buff, BUFFER_SIZE);
 	if (!*bufflen)
 		return (0);
-	buff[0][*bufflen] = 0;
+	buff[0][*bufflen - 1] = 0;
 	return (*bufflen);
 }
 
@@ -59,15 +59,13 @@ char	*ft_fragconglomerator(int fd, char **buff)
 	ret = ft_fragfetch(&nlflag, buff);
 	if (!ret)
 		return (NULL);
-	while (!nlflag)
+	while (!nlflag || eoflag < BUFFER_SIZE)
 	{
 		eoflag = ft_buffprocess(fd, buff, &eoflag);
 		temp = ft_fragfetch(&nlflag, buff);
 		ret = ft_strjoin(ret, temp);
 		if (!eoflag)
 			break ;
-		if (ft_strlen(ret) == eoflag && eoflag < BUFFER_SIZE)
-			return (ret);
 	}
 	return (ret);
 }
@@ -90,17 +88,17 @@ char	*get_next_line(int fd)
 	ret = ft_fragconglomerator(fd, &buff);
 	return (ret);
 }
-
-int	main(){
-	int fd = open("coso.txt", O_RDONLY);
-	char *line;
-
-//	line = get_next_line(fd);
-	for (int i = 0; i < 12; i++)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		free(line);
-	}
-	system("leaks a.out");
-}
+/** 
+  * int	main(){
+  *     int fd = open("coso.txt", O_RDONLY);
+  *     char *line;
+  *
+  * //	line = get_next_line(fd);
+  *     for (int i = 0; i < 12; i++)
+  *     {
+  *         line = get_next_line(fd);
+  *         printf("%s", line);
+  *         free(line);
+  *     }
+  *     system("leaks a.out");
+  * } */
