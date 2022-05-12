@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/12 12:59:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:06:32 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*get_next_line(int fd)
 	static char	*time_machine[4096] = {0};
 	char		*ret;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || fd > 4095 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (lecture_master(fd, &time_machine[fd]) < 0)
 	{
