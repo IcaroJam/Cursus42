@@ -6,99 +6,80 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/11 17:21:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:05:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-//#include <stdio.h>
-//#include <fcntl.h>
 
-// If the content of the buffer is NULL it has already been completely
-// processed and it should be read on again if possible.
-size_t	ft_buffprocess(int fd, char **buff, size_t *bufflen)
+int	lecture_master(int fd, char **time_machine)
 {
-	*buff -= BUFFER_SIZE - *bufflen;
-	*bufflen = read(fd, *buff, BUFFER_SIZE);
-	if (!*bufflen)
-		return (0);
-	buff[0][*bufflen - 1] = 0;
-	return (*bufflen);
-}
-
-char	*ft_fragfetch(int *nlflag, char **buff)
-{
-	char	*linfrag;
-	size_t	i;
-	size_t	fraglen;
-
-	fraglen = ft_linelen(*buff, nlflag);
-	linfrag = malloc(sizeof(char) * (fraglen + 1));
-	if (!linfrag)
-		return (NULL);
-	i = 0;
-	while (i < fraglen)
-	{
-		linfrag[i] = buff[0][i];
-		i++;
-	}
-	linfrag[i] = 0;
-	*buff += i;
-	return (linfrag);
-}
-
-char	*ft_fragconglomerator(int fd, char **buff)
-{
-	int		nlflag;
-	size_t	eoflag;
-	char	*ret;
+	int		eoflag;
+	char	buffer[BUFFER_SIZE + 1];
 	char	*temp;
 
-	nlflag = 0;
-	eoflag = ft_strlen(*buff);
-	ret = ft_fragfetch(&nlflag, buff);
-	if (!ret)
-		return (NULL);
-	while (!nlflag || eoflag < BUFFER_SIZE)
+	if (!*time_machine)
 	{
-		eoflag = ft_buffprocess(fd, buff, &eoflag);
-		temp = ft_fragfetch(&nlflag, buff);
-		ret = ft_strjoin(ret, temp);
-		if (!eoflag)
-			break ;
+		*time_machine = malloc(sizeof(char));
+		if (!*time_machine)
+			return (-1);
+		**time_machine = 0;
 	}
-	return (ret);
+	eoflag = 1;
+	while (!gnl_strchr(*time_machine, '\n') && eoflag)
+	{
+		eoflag = read(fd, buffer, BUFFER_SIZE);
+		if (eoflag < 1)
+			return (eoflag);
+		buffer[eoflag] = 0;
+		temp = *time_machine;
+		*time_machine = gnl_strjoin(*time_machine, buffer);
+	}
+	return (eoflag);
+}
+
+char	*the_line_maker(char **time_machine)
+{
+	int		len;
+	int		temporal_distortion;
+	char	*tmach2;
+	char	*retline;
+
+	len = gnl_linelen(*time_machine);
+	if (!len)
+		return (NULL);
+	retline = malloc(sizeof(char) * (len + 1));
+	if (!retline)
+		return (NULL);
+	gnl_strlcpy(retline, *time_machine, len);
+	temporal_distortion = gnl_strlen(&time_machine[0][len]);
+	tmach2 = malloc(sizeof(char) * (temporal_distortion + 1));
+	if (!tmach2)
+		return (NULL);
+	gnl_strlcpy(tmach2, &time_machine[0][len], temporal_distortion);
+	free(*time_machine);
+	*time_machine = tmach2;
+	return (retline);
 }
 
 char	*get_next_line(int fd)
 {
+	static char	*time_machine = NULL;
 	char		*ret;
-	static char	*buff = NULL;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	if (!buff)
+	if (lecture_master(fd, &time_machine) < 0)
 	{
-		buff = ft_bcalloc(BUFFER_SIZE + 1, sizeof(char));
-		if (!buff)
-			return (NULL);
-		if (!read(fd, buff, BUFFER_SIZE))
-			return (NULL);
+		free(time_machine);
+		time_machine = NULL;
+		return (NULL);
 	}
-	ret = ft_fragconglomerator(fd, &buff);
+	ret = the_line_maker(&time_machine);
+	if (!ret)
+	{
+		free(time_machine);
+		time_machine = NULL;
+	}
 	return (ret);
 }
-/** 
-  * int	main(){
-  *     int fd = open("coso.txt", O_RDONLY);
-  *     char *line;
-  *
-  * //	line = get_next_line(fd);
-  *     for (int i = 0; i < 12; i++)
-  *     {
-  *         line = get_next_line(fd);
-  *         printf("%s", line);
-  *         free(line);
-  *     }
-  *     system("leaks a.out");
-  * } */

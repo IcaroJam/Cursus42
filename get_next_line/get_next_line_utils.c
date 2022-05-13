@@ -6,28 +6,15 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 12:33:23 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/09 18:16:14 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:03:56 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_linelen(const char *buff, int *nlflag)
+int	gnl_strlen(char *s)
 {
-	size_t	ret;
-
-	*nlflag = 0;
-	ret = 0;
-	while (buff[ret] && buff[ret] != '\n')
-		ret++;
-	if (buff[ret] == '\n')
-		*nlflag = 1;
-	return (ret + *nlflag);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	ret;
+	int	ret;
 
 	ret = 0;
 	while (s[ret])
@@ -35,30 +22,54 @@ size_t	ft_strlen(const char *s)
 	return (ret);
 }
 
-void	*ft_bcalloc(size_t count, size_t size)
+int	gnl_linelen(char *mem)
 {
-	char	*start;
-	char	*temp;
+	int	ret;
 
-	start = malloc(count * size);
-	if (!start)
-		return (0);
-	temp = start;
-	while (count--)
-		*temp++ = 0;
-	return (start);
+	ret = 0;
+	while (mem[ret] && mem[ret] != '\n')
+		ret++;
+	if (mem[ret] == '\n')
+		ret++;
+	return (ret);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+void	gnl_strlcpy(char *dst, char *src, int size)
 {
-	size_t	s1len;
-	size_t	s2len;
+	if (!dst || !src)
+		return ;
+	while (size)
+	{
+		*dst++ = *src++;
+		size--;
+	}
+	*dst = 0;
+}
+
+char	*gnl_strchr(char *s, int c)
+{
+	unsigned char	temp;
+
+	temp = c;
+	while (*s || !temp)
+	{
+		if (*s == temp)
+			return ((char *)s);
+		s++;
+	}
+	return (0);
+}
+
+char	*gnl_strjoin(char *s1, char *s2)
+{
+	int		s1len;
+	int		s2len;
 	char	*ret;
 
 	if (!s1 || !s2)
 		return (0);
-	s1len = ft_strlen(s1);
-	s2len = ft_strlen(s2);
+	s1len = gnl_strlen(s1);
+	s2len = gnl_strlen(s2);
 	ret = (char *) malloc((s1len + s2len + 1) * sizeof(char));
 	if (!ret)
 		return (0);
@@ -68,6 +79,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		*ret++ = *s2++;
 	*ret = 0;
 	free(s1 - s1len);
-	free(s2 - s2len);
 	return (ret - s1len - s2len);
 }

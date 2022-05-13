@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:47:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/10 16:32:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:04:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-size_t	ft_buffprocess(int fd, char **buff, size_t *bufflen);
-char	*ft_fragfetch(int *nlflag, char **buff);
-char	*ft_fragconglomerator(int fd, char **buff);
+char	*gnl_strjoin(char *s1, char *s2);
+char	*gnl_strchr(char *s, int c);
+void	gnl_strlcpy(char *dst, char *src, int size);
+int		gnl_linelen(char *mem);
+int		gnl_strlen(char *s);
+int		lecture_master(int fd, char **time_machine);
+char	*the_line_maker(char **time_machine);
 char	*get_next_line(int fd);
-void	*ft_bcalloc(size_t count, size_t size);
-size_t	ft_strlen(const char *s);
-size_t	ft_linelen(const char *buff, int *nlflag);
-char	*ft_strjoin(char *s1, char *s2);
 
 #endif
