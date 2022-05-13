@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 12:33:23 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/12 12:56:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:04:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-int	ft_strlen(char *s)
+int	gnl_strlen(char *s)
 {
 	int	ret;
 
@@ -22,7 +22,7 @@ int	ft_strlen(char *s)
 	return (ret);
 }
 
-int	ft_linelen(char *mem)
+int	gnl_linelen(char *mem)
 {
 	int	ret;
 
@@ -34,7 +34,7 @@ int	ft_linelen(char *mem)
 	return (ret);
 }
 
-void	ft_strlcpy(char *dst, char *src, int size)
+void	gnl_strlcpy(char *dst, char *src, int size)
 {
 	if (!dst || !src)
 		return ;
@@ -46,7 +46,7 @@ void	ft_strlcpy(char *dst, char *src, int size)
 	*dst = 0;
 }
 
-char	*ft_strchr(char *s, int c)
+char	*gnl_strchr(char *s, int c)
 {
 	unsigned char	temp;
 
@@ -60,7 +60,7 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	int		s1len;
 	int		s2len;
@@ -68,8 +68,8 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (0);
-	s1len = ft_strlen(s1);
-	s2len = ft_strlen(s2);
+	s1len = gnl_strlen(s1);
+	s2len = gnl_strlen(s2);
 	ret = (char *) malloc((s1len + s2len + 1) * sizeof(char));
 	if (!ret)
 		return (0);
