@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/13 13:05:17 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:41:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	lecture_master(int fd, char **time_machine)
 {
 	int		eoflag;
 	char	buffer[BUFFER_SIZE + 1];
-	char	*temp;
 
 	if (!*time_machine)
 	{
@@ -32,7 +31,6 @@ int	lecture_master(int fd, char **time_machine)
 		if (eoflag < 1)
 			return (eoflag);
 		buffer[eoflag] = 0;
-		temp = *time_machine;
 		*time_machine = gnl_strjoin(*time_machine, buffer);
 	}
 	return (eoflag);
