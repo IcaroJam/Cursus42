@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/20 15:40:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/22 18:12:40 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <stdlib.h>
 # include <stdarg.h>
+
+typedef struct	s_flags
+{
+	va_list	args;
+
+}	t_flags;
 
 int	ft_printf(char const *, ...);
 
