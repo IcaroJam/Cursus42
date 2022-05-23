@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/23 10:33:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:55:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ typedef struct s_flags
 	int	plus;
 }	t_flags;
 
-int	ft_printf(char const *str, ...);
+int		ft_printf(char const *str, ...);
+int		ptf_sectlen(char const *str);
+int		ft_strlen(char *str);
+char	*ft_concsection(char *finalstr, char const **str);
 
 #endif
