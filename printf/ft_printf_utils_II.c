@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_utils_II.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/23 16:34:11 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/05/23 16:27:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-
-typedef struct s_flags
+int	ft_isflag(char const c)
 {
-	int	dash;
-	int	zero;
-	int	dot;
-	int	minfw;
-	int	hash;
-	int	spc;
-	int	plus;
-}	t_flags;
-
-int		ft_printf(char const *str, ...);
-int		ptf_sectlen(char const *str);
-int		ft_strlen(char *str);
-char	*ft_concsection(char *finalstr, char const **str);
-int		ptf_atoi(char const **str);
-
-#endif
+	if (c == '-' || c == '0' || c == '.')
+		return (1);
+	if (c >= '1' && c <= '9')
+		return (1);
+	if (c == '#' || c == ' ' || c == '+')
+		return (1);
+	return (0);
+}

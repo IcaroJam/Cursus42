@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/23 15:55:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:33:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ int	ptf_sectlen(char const *str)
 	ret = 0;
 	while (str[ret] && str[ret] != '%')
 		ret++;
+	return (ret);
+}
+
+int	ptf_atoi(char const **str)
+{
+	int	ret;
+
+	ret = 0;
+	while (**str >= '0' && **str <= '9')
+	{
+		ret *= 10;
+		ret += *(*str)++ - '0';
+	}
 	return (ret);
 }
 
