@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/25 15:42:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:27:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 
 
-int static	omniparser(char const **str, va_list list)
+int static	omniparser(char const **str, va_list list, char **finalstr)
 {
 	t_flags	flags;
+	char	*argumentstr;
 
 	deflager(&flags);
 	str[0]++;
 	if (flager(str, &flags))
 		return (1);
-
+	// Tomar el valor del fragmento correspondiente al argumento
+	*finalstr = ft_concsection(*finalstr, &argumentstr);
+	free(argumentstr);
 	return (0);
 }
 
@@ -43,7 +46,7 @@ int	ft_printf(char const *str, ...)
 			return (-1);
 		if (*str == '%')
 		{
-			if (omniparser(&str, list))
+			if (omniparser(&str, list, &finalstr))
 			{
 				free(finalstr);
 				return (-1);
