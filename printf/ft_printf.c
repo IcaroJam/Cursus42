@@ -6,13 +6,23 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 15:50:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:01:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
+
+void static	prepbuff(t_pbuff *buffer)
+{
+	buffer->buff = malloc(sizeof(char));
+	if (!buffer->buff)
+		return ;
+	buffer->buff = 0;
+	buffer->nulls = 0;
+	buffer->len = 0;
+}
 
 char static	*argumentor(t_flags flags, va_list list)
 {
@@ -53,7 +63,13 @@ int static	omniparser(char const **str, va_list list, t_pbuff *buffer)
 	if (flager(str, &flags))
 		return (1);
 	argumentstr = argumentor(flags, list);
-	buffer->buff = ptf_strjoin(buffer->buff, argumentstr);
+	if (flags.conv == 'c' && argumentstr == 0)
+	{
+		buffer->nulls++;
+		buffer->buff = ft_addchr(buffer->buff, 0, ptf_truelen(buffer->buff));
+	}
+	else
+		buffer->buff = ptf_strjoin(buffer->buff, argumentstr);
 	free(argumentstr);
 	return (0);
 }
@@ -63,10 +79,9 @@ int	ft_printf(char const *str, ...)
 	va_list	list;
 	t_pbuff	buffer;
 
-	buffer.buff = malloc(sizeof(char));
+	prepbuff(&buffer);
 	if (!buffer.buff || !str)
 		return (-1);
-	*(buffer.buff) = 0;
 	va_start(list, str);
 	while (*str)
 	{
@@ -84,9 +99,6 @@ int	ft_printf(char const *str, ...)
 	}
 	va_end(list);
 	ptf_putstr(&buffer);
-
-	buffer.len = 0;
-
 	return (buffer.len);
 }
 
