@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 13:04:15 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:17:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,29 @@ int	ptf_atoi(char const **str)
 	return (ret);
 }
 
-void	ptf_putstr(char const *str)
+char	*ptf_strjoin(char *finalstr, char *str)
 {
+	int		fslen;
+	int		slen;
+	char	*ret;
+
+	if (!finalstr || !str)
+		return (NULL);
+	fslen = ft_strlen(finalstr);
+	slen = ft_strlen(str);
+	ret = malloc(sizeof(char) * (fslen + slen + 1));
+	if (!ret)
+		return (NULL);
+	while (*finalstr)
+		*ret++ = *finalstr++;
 	while (*str)
-		write(1, str++, 1);
+		*ret++ = *str++;
+	*ret = 0;
+	free(finalstr - fslen);
+	return (ret - fslen - slen);
 }
 
-char	*ft_concsection(char *finalstr, char **str)
+char	*ft_concsection(char *finalstr, char const **str)
 {
 	int		fslen;
 	int		slen;
