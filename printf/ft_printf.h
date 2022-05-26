@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/25 15:19:55 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:13:56 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	deflager(t_flags *flags);
 int		flager(char const **str, t_flags *flags);
 int		ptf_sectlen(char const *str);
 int		ft_strlen(char const *str);
-char	*ft_concsection(char *finalstr, char const **str);
+void	ptf_putstr(char const *str);
+char	*ft_concsection(char *finalstr, char **str);
+char	*ft_addchr(char *str, char const c, int currlen);
 int		ptf_atoi(char const **str);
-void	ptf_putchr(char c);
+char	*ptf_chars(t_flags flags, va_list list);
 
 #endif

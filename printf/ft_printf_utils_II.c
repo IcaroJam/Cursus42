@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/25 15:40:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:13:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,21 @@ int	flager(char const **str, t_flags *flags)
 		str[0]++;
 	}
 	return (converser(str, flags));
+}
+
+char	*ft_addchr(char *str, char const c, int currlen)
+{
+	char	*ret;
+
+	if (!str)
+		return (NULL);
+	ret = malloc(sizeof(char) * (currlen + 1));
+	if (!ret)
+		return (NULL);
+	while (*str)
+		*ret++ = *str++;
+	*ret++ = c;
+	*ret = 0;
+	free(str - currlen);
+	return (ret - currlen - 1);
 }

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/25 15:01:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:04:15 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,13 @@ int	ptf_atoi(char const **str)
 	return (ret);
 }
 
-char	*ft_concsection(char *finalstr, char const **str)
+void	ptf_putstr(char const *str)
+{
+	while (*str)
+		write(1, str++, 1);
+}
+
+char	*ft_concsection(char *finalstr, char **str)
 {
 	int		fslen;
 	int		slen;

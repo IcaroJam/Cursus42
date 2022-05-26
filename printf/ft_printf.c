@@ -1,75 +1,83 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   sectionsImp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/23 11:59:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:07:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
 
-char static	*ft_addchr(char *str, char const c, int currlen)
+char static	*argumentor(t_flags flags, va_list list)
 {
 	char	*ret;
 
-	if (!str)
+	if (flags.conv == '%')
+		return ("%");
+	else if (flags.conv == 'c')
+		ret = ptf_chars(flags, list);
+	else if (flags.conv == 's')
+		ret = 
+	else if (flags.conv == 'd')
+		ret = 
+	else if (flags.conv == 'i')
+		ret = 
+	else if (flags.conv == 'u')
+		ret = 
+	else if (flags.conv == 'p')
+		ret = 
+	else if (flags.conv == 'x' || conv == 'X')
+		ret = 
+	else
 		return (NULL);
-	ret = malloc(sizeof(char) * (currlen + 1));
-	if (!ret)
-		return (NULL);
-	while (*str)
-		*ret++ = *str++;
-	*ret++ = c;
-	*ret = 0;
-	free(str - currlen);
-	return (ret - currlen - 1);
+	return (ret);
 }
 
-int static	ft_omniparser(char const *str, va_list list)
+int static	omniparser(char const **str, va_list list, char **finalstr)
 {
-	int		errflag;
-	int		currlen;
-	char	*finalstr;
+	t_flags	flags;
+	char	*argumentstr;
 
-	finalstr = malloc(sizeof(char));
-	if (!finalstr)
-		return (-1);
-	*finalstr = 0;
-	errflag = 1;
-	currlen = 0;
-	while (*str && errflag)
-	{
-		if (*str == '%')
-		{
-		}
-		else
-		{
-			finalstr = ft_addchr(finalstr, *str, currlen);
-			if (!finalstr)
-				return (-1);
-			currlen++;
-		}
-		str++;
-	}
-	ft_putstr(finalstr);
-	return (currlen);
+	deflager(&flags);
+	str[0]++;
+	if (flager(str, &flags))
+		return (1);
+	argumentstr = argumentor(flags, list);
+	*finalstr = ft_concsection(*finalstr, &argumentstr);
+	free(argumentstr);
+	return (0);
 }
 
 int	ft_printf(char const *str, ...)
 {
 	va_list	list;
-	int		printdchrs;
 	char	*finalstr;
 
-	if (!str || !*str)
+	finalstr = malloc(sizeof(char));
+	if (!finalstr || !str)
 		return (-1);
+	*finalstr = 0;
 	va_start(list, str);
-	printdchrs = ft_omniparser(str, list);
+	while (*str)
+	{
+		finalstr = ft_concsection(finalstr, &str);
+		if (!finalstr)
+			return (-1);
+		if (*str == '%')
+		{
+			if (omniparser(&str, list, &finalstr))
+			{
+				free(finalstr);
+				return (-1);
+			}
+		}
+	}
 	va_end(list);
-	return (printdchrs);
+	ptf_putstr(finalstr);
+	return (ft_strlen(finalstr));
 }
