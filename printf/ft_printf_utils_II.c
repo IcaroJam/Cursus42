@@ -96,22 +96,22 @@ int	ptf_truelen(t_pbuff *buffer)
 {
 	int		nullnum;
 	int		ret;
-	char	*temp;
+	//char	*temp;
 
 	nullnum = buffer->nulls;
 	ret = 0;
-	temp = buffer->buff;
+	//temp = buffer->buff;
 	while (nullnum)
 	{
-		while (*temp)
+		while (buffer->buff[ret])
 		{
 			ret++;
-			temp++;
+	//		temp++;
 		}
 		ret++;
-		temp++;
+	//	temp++;
 		nullnum--;
 	}
-	ret += ft_strlen(temp);
+	ret += ft_strlen(&buffer->buff[ret]);
 	return (ret);
 }
