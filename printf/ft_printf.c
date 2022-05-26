@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 15:20:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:50:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char static	*argumentor(t_flags flags, va_list list)
 	return (ret);
 }
 
-int static	omniparser(char const **str, va_list list, char **finalstr)
+int static	omniparser(char const **str, va_list list, t_pbuff *buffer)
 {
 	t_flags	flags;
 	char	*argumentstr;
@@ -53,7 +53,7 @@ int static	omniparser(char const **str, va_list list, char **finalstr)
 	if (flager(str, &flags))
 		return (1);
 	argumentstr = argumentor(flags, list);
-	*finalstr = ptf_strjoin(*finalstr, argumentstr);
+	buffer->buff = ptf_strjoin(buffer->buff, argumentstr);
 	free(argumentstr);
 	return (0);
 }
@@ -61,28 +61,40 @@ int static	omniparser(char const **str, va_list list, char **finalstr)
 int	ft_printf(char const *str, ...)
 {
 	va_list	list;
-	char	*finalstr;
+	t_pbuff	buffer;
 
-	finalstr = malloc(sizeof(char));
-	if (!finalstr || !str)
+	buffer.buff = malloc(sizeof(char));
+	if (!buffer.buff || !str)
 		return (-1);
-	*finalstr = 0;
+	*(buffer.buff) = 0;
 	va_start(list, str);
 	while (*str)
 	{
-		finalstr = ft_concsection(finalstr, &str);
-		if (!finalstr)
+		buffer.buff = ft_concsection(buffer.buff, &str);
+		if (!buffer.buff)
 			return (-1);
 		if (*str == '%')
 		{
-			if (omniparser(&str, list, &finalstr))
+			if (omniparser(&str, list, &buffer))
 			{
-				free(finalstr);
+				free(buffer.buff);
 				return (-1);
 			}
 		}
 	}
 	va_end(list);
-	ptf_putstr(&finalstr);
-	return (ft_strlen(finalstr));
+	ptf_putstr(&buffer);
+
+	buffer.len = 0;
+
+	return (buffer.len);
+}
+
+#include <stdio.h>
+
+int	main(void)
+{
+	ft_printf(" %c %c %c ", '0', 0, '1');
+	printf("\n %c %c %c ", '0', 0, '1');
+	return (0);
 }

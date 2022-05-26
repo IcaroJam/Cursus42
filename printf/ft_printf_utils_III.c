@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 15:22:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:42:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ char	*ptf_chars(t_flags flags, va_list list)
 	return (ret);
 }
 
-void	ptf_putstr(char **str)
+void	ptf_putstr(t_pbuff *buffer)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (str[0][i])
+	while (buffer->buff[i])
 	{
-		write(1, &str[0][i], 1);
+		write(1, &buffer->buff[i], 1);
 		i++;
 	}
-	free(*str);
+	free(buffer->buff);
 }

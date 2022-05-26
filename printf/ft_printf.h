@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 15:20:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:44:15 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,19 @@ typedef struct s_flags
 	int		plus;
 }	t_flags;
 
+typedef struct s_pbuff
+{
+	char	*buff;
+	int		nulls;
+	int		len;
+}	t_pbuff;
+
 int		ft_printf(char const *str, ...);
 void	deflager(t_flags *flags);
 int		flager(char const **str, t_flags *flags);
 int		ptf_sectlen(char const *str);
 int		ft_strlen(char const *str);
-void	ptf_putstr(char **str);
+void	ptf_putstr(t_pbuff *buffer);
 char	*ft_concsection(char *finalstr, char const **str);
 char	*ptf_strjoin(char *finalstr, char *str);
 char	*ft_addchr(char *str, char const c, int currlen);
