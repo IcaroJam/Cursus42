@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 16:16:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/28 15:39:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,14 @@ int	ptf_truelen(t_pbuff *buffer)
 {
 	int		nullnum;
 	int		ret;
-	//char	*temp;
 
 	nullnum = buffer->nulls;
 	ret = 0;
-	//temp = buffer->buff;
 	while (nullnum)
 	{
 		while (buffer->buff[ret])
-		{
 			ret++;
-	//		temp++;
-		}
 		ret++;
-	//	temp++;
 		nullnum--;
 	}
 	ret += ft_strlen(&buffer->buff[ret]);

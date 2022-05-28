@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 15:44:15 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/28 15:43:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		flager(char const **str, t_flags *flags);
 int		ptf_sectlen(char const *str);
 int		ft_strlen(char const *str);
 void	ptf_putstr(t_pbuff *buffer);
+int		ptf_truelen(t_pbuff *buffer);
 char	*ft_concsection(char *finalstr, char const **str);
 char	*ptf_strjoin(char *finalstr, char *str);
 char	*ft_addchr(char *str, char const c, int currlen);
