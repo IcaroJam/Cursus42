@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 15:42:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/28 16:38:34 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ void	ptf_putstr(t_pbuff *buffer)
 	unsigned int	i;
 
 	i = 0;
-	while (buffer->buff[i])
+	buffer->len = ptf_truelen(buffer);
+	while (buffer->len)
 	{
 		write(1, &buffer->buff[i], 1);
 		i++;
+		buffer->len--;
 	}
 	free(buffer->buff);
 }
