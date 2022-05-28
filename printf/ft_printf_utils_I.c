@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/26 15:17:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/28 16:13:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ char	*ft_concsection(char *finalstr, char const **str)
 	int		slen;
 	char	*ret;
 
-	if (!finalstr || !*str)
-		return (NULL);
 	fslen = ft_strlen(finalstr);
 	slen = ptf_sectlen(*str);
 	ret = malloc(sizeof(char) * (fslen + slen + 1));

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/28 15:42:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/28 16:21:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void static	prepbuff(t_pbuff *buffer)
 	buffer->buff = malloc(sizeof(char));
 	if (!buffer->buff)
 		return ;
-	buffer->buff = 0;
+	buffer->buff[0] = 0;
 	buffer->nulls = 0;
 	buffer->len = 0;
 }
@@ -66,11 +66,12 @@ int static	omniparser(char const **str, va_list list, t_pbuff *buffer)
 	if (!argumentstr)
 	{
 		buffer->nulls++;
-		buffer->buff = ft_addchr(buffer->buff, 0, ptf_truelen(buffer->buff));
+		buffer->buff = ft_addchr(buffer->buff, 0, ptf_truelen(buffer));
 	}
 	else
 		buffer->buff = ptf_strjoin(buffer->buff, argumentstr);
 	free(argumentstr);
+	argumentstr = NULL;
 	return (0);
 }
 
@@ -80,8 +81,6 @@ int	ft_printf(char const *str, ...)
 	t_pbuff	buffer;
 
 	prepbuff(&buffer);
-	if (!buffer.buff || !str)
-		return (-1);
 	va_start(list, str);
 	while (*str)
 	{
