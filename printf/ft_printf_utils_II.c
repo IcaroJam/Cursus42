@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/28 15:39:59 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/28 16:33:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,20 @@ int	flager(char const **str, t_flags *flags)
 char	*ft_addchr(char *str, char const c, int currlen)
 {
 	char	*ret;
+	int		i;
 
+	i = 0;
 	if (!str)
 		return (NULL);
 	ret = malloc(sizeof(char) * (currlen + 1));
 	if (!ret)
 		return (NULL);
-	while (*str)
-		*ret++ = *str++;
+	while (str[i])
+		*ret++ = str[i++];
 	*ret++ = c;
 	*ret = 0;
-	free(str - currlen);
-	return (ret - currlen - 1);
+	free(str);
+	return (ret - i - 1);
 }
 
 int	ptf_truelen(t_pbuff *buffer)
