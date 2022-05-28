@@ -6,14 +6,14 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 17:29:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/28 17:46:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/28 17:54:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
 
-int	argumentator(char const **str)
+int	argumentator(char const **str, va_list list)
 {
 	int		ret;
 	t_flags	flags;
@@ -23,7 +23,8 @@ int	argumentator(char const **str)
 	deflager(&flags);
 	if (flager(str, &flags))
 		return (-1);
-
+	
+	return (ret);
 }
 
 int	ft_printf(char const *str, ...)
@@ -38,7 +39,7 @@ int	ft_printf(char const *str, ...)
 	{
 		if (*str == '%')
 		{
-			temp = argumentator(&str);
+			temp = argumentator(&str, list);
 			if (temp < 0)
 				return (-1);
 			else

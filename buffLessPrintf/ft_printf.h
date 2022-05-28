@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/28 17:44:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/28 17:51:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_flags
 }	t_flags;
 
 int		ft_printf(char const *str, ...);
-int		argumentator(char const **str);
+int		argumentator(char const **str, va_list list);
 void	deflager(t_flags *flags);
 int	flager(char const **str, t_flags *flags);
 
