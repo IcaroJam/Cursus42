@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 14:59:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 19:56:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ptf_strjoin(t_pbuff *buffer, char *str)
 		*ret++ = buffer->buff[i++];
 		templen--;
 	}
-	while (*str && *str != '%')
+	while (*str)
 		*ret++ = *str++;
 	*ret = 0;
 	free(buffer->buff);
