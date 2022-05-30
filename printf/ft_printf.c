@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 14:49:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 19:44:01 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	ft_printf(char const *str, ...)
 
 int	main(void)
 {
-	ft_printf(" %c %c %c ", '0', 0, '1');
-	printf("\n %c %c %c ", '0', 0, '1');
+	ft_printf("%c", '0');
+	printf("\n%c", '0');
 	return (0);
 }

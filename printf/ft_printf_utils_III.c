@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 14:36:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 19:47:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ptf_putstr(t_pbuff *buffer)
 	int	templen;
 
 	i = 0;
+	buffer->len = ptf_truelen(buffer);
 	templen = buffer->len;
 	while (templen)
 	{
