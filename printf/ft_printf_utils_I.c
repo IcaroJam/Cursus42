@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 14:23:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 14:59:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*ptf_strjoin(t_pbuff *buffer, char *str)
 {
 	int		slen;
 	int		i;
+	int		templen;
 	char	*ret;
 
 	i = 0;
@@ -57,8 +58,12 @@ char	*ptf_strjoin(t_pbuff *buffer, char *str)
 	ret = malloc(sizeof(char) * (buffer->len + slen + 1));
 	if (!ret)
 		return (NULL);
-	while (buffer->buff[i])
+	templen = buffer->len;
+	while (templen)
+	{
 		*ret++ = buffer->buff[i++];
+		templen--;
+	}
 	while (*str && *str != '%')
 		*ret++ = *str++;
 	*ret = 0;
@@ -70,6 +75,7 @@ char	*ft_concsection(t_pbuff *buffer, char const **str)
 {
 	int		slen;
 	int		i;
+	int		templen;
 	char	*ret;
 
 	i = 0;
@@ -78,8 +84,12 @@ char	*ft_concsection(t_pbuff *buffer, char const **str)
 	ret = malloc(sizeof(char) * (buffer->len + slen + 1));
 	if (!ret)
 		return (NULL);
-	while (buffer->buff[i])
+	templen = buffer->len;
+	while (templen)
+	{
 		*ret++ = buffer->buff[i++];
+		templen--;
+	}
 	while (**str && **str != '%')
 		*ret++ = *(*str)++;
 	*ret = 0;

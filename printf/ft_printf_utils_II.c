@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 14:36:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:01:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*ft_addchr(char *str, char const c, int currlen)
 	i = 0;
 	if (!str)
 		return (NULL);
-	ret = malloc(sizeof(char) * (currlen + 1));
+	ret = malloc(sizeof(char) * (currlen + 2));
 	if (!ret)
 		return (NULL);
 	while (str[i])

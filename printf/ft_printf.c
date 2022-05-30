@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 14:22:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 14:49:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int static	omniparser(char const **str, va_list list, t_pbuff *buffer)
 	if (!*argumentstr)
 	{
 		buffer->nulls++;
-		buffer->len++;
 		buffer->buff = ft_addchr(buffer->buff, 0, buffer->len);
 	}
 	else
@@ -86,6 +85,7 @@ int	ft_printf(char const *str, ...)
 	while (*str)
 	{
 		buffer.buff = ft_concsection(&buffer, &str);
+		buffer.len = ptf_truelen(&buffer);
 		if (!buffer.buff)
 			return (-1);
 		if (*str == '%')
