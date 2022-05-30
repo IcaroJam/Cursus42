@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/28 16:38:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 14:36:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,16 @@ char	*ptf_chars(t_flags flags, va_list list)
 
 void	ptf_putstr(t_pbuff *buffer)
 {
-	unsigned int	i;
+	int	i;
+	int	templen;
 
 	i = 0;
-	buffer->len = ptf_truelen(buffer);
-	while (buffer->len)
+	templen = buffer->len;
+	while (templen)
 	{
 		write(1, &buffer->buff[i], 1);
 		i++;
-		buffer->len--;
+		templen--;
 	}
 	free(buffer->buff);
 }

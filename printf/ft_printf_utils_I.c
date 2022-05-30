@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/28 16:13:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 14:23:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,44 +45,44 @@ int	ptf_atoi(char const **str)
 	return (ret);
 }
 
-char	*ptf_strjoin(char *finalstr, char *str)
+char	*ptf_strjoin(t_pbuff *buffer, char *str)
 {
-	int		fslen;
 	int		slen;
+	int		i;
 	char	*ret;
 
-	if (!finalstr || !str)
-		return (NULL);
-	fslen = ft_strlen(finalstr);
+	i = 0;
+	buffer->len = ptf_truelen(buffer);
 	slen = ft_strlen(str);
-	ret = malloc(sizeof(char) * (fslen + slen + 1));
+	ret = malloc(sizeof(char) * (buffer->len + slen + 1));
 	if (!ret)
 		return (NULL);
-	while (*finalstr)
-		*ret++ = *finalstr++;
-	while (*str)
+	while (buffer->buff[i])
+		*ret++ = buffer->buff[i++];
+	while (*str && *str != '%')
 		*ret++ = *str++;
 	*ret = 0;
-	free(finalstr - fslen);
-	return (ret - fslen - slen);
+	free(buffer->buff);
+	return (ret - buffer->len - slen);
 }
 
-char	*ft_concsection(char *finalstr, char const **str)
+char	*ft_concsection(t_pbuff *buffer, char const **str)
 {
-	int		fslen;
 	int		slen;
+	int		i;
 	char	*ret;
 
-	fslen = ft_strlen(finalstr);
+	i = 0;
+	buffer->len = ptf_truelen(buffer);
 	slen = ptf_sectlen(*str);
-	ret = malloc(sizeof(char) * (fslen + slen + 1));
+	ret = malloc(sizeof(char) * (buffer->len + slen + 1));
 	if (!ret)
 		return (NULL);
-	while (*finalstr)
-		*ret++ = *finalstr++;
+	while (buffer->buff[i])
+		*ret++ = buffer->buff[i++];
 	while (**str && **str != '%')
 		*ret++ = *(*str)++;
 	*ret = 0;
-	free(finalstr - fslen);
-	return (ret - fslen - slen);
+	free(buffer->buff);
+	return (ret - buffer->len - slen);
 }

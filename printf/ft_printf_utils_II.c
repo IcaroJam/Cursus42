@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/28 17:10:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 14:36:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int	ptf_truelen(t_pbuff *buffer)
 		ret++;
 		nullnum--;
 	}
-	ret--;
 	ret += ft_strlen(&buffer->buff[ret]);
 	return (ret);
 }
