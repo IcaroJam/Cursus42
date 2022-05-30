@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 19:47:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/30 20:00:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ char	*ptf_chars(t_flags flags, va_list list)
 	int		c;
 
 	flags.zero = 0;
-	ret = malloc(sizeof(char));
+	ret = malloc(sizeof(char) * 2);
 	if (!ret)
 		return (NULL);
-	*ret = 0;
 	c = va_arg(list, int);
-	ret = ft_addchr(ret, c, 0);
+	ret[0] = c;
+	ret[1] = 0;
 	return (ret);
 }
 
