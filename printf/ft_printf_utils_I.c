@@ -6,31 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 17:03:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:10:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	ft_strlen(char const *str)
-{
-	int	ret;
-
-	ret = 0;
-	while (str[ret])
-		ret++;
-	return (ret);
-}
-
-int	ptf_sectlen(char const *str)
-{
-	int	ret;
-
-	ret = 0;
-	while (str[ret] && str[ret] != '%')
-		ret++;
-	return (ret);
-}
 
 int	ptf_atoi(char const **str)
 {
@@ -42,7 +22,29 @@ int	ptf_atoi(char const **str)
 		ret *= 10;
 		ret += *(*str)++ - '0';
 	}
-		return (ret);
+	return (ret);
+}
+
+char	*ft_addchr(char *str, char const c, int currlen)
+{
+	char	*ret;
+	int		i;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	ret = malloc(sizeof(char) * (currlen + 2));
+	if (!ret)
+		return (NULL);
+	while (currlen)
+	{
+		*ret++ = str[i++];
+		currlen--;
+	}
+	*ret++ = c;
+	*ret = 0;
+	free(str);
+	return (ret - i - 1);
 }
 
 char	*ptf_strjoin(t_pbuff *buffer, char *str)
@@ -54,7 +56,7 @@ char	*ptf_strjoin(t_pbuff *buffer, char *str)
 
 	i = 0;
 	buffer->len = ptf_truelen(buffer);
-	slen = ft_strlen(str);
+	slen = ptf_strlen(str);
 	ret = malloc(sizeof(char) * (buffer->len + slen + 1));
 	if (!ret)
 		return (NULL);

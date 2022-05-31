@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 16:45:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:55:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ptf_chars(t_flags flags, va_list list)
 	char	*ret;
 	int		c;
 
+	if (flags.dot)
+		flags.minfw = 0;
 	ret = malloc(sizeof(char) * (2 + flags.minfw));
 	if (!ret)
 		return (NULL);

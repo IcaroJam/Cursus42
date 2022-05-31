@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 17:02:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:09:52 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,4 @@ char	*ft_addchr(char *str, char const c, int currlen)
 	*ret = 0;
 	free(str);
 	return (ret - i - 1);
-}
-
-int	ptf_truelen(t_pbuff *buffer)
-{
-	int		nullnum;
-	int		ret;
-
-	nullnum = buffer->nulls;
-	ret = 0;
-	while (nullnum)
-	{
-		while (buffer->buff[ret])
-			ret++;
-		ret++;
-		nullnum--;
-	}
-	ret += ft_strlen(&buffer->buff[ret]);
-	return (ret);
 }
