@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 19:49:12 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:43:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ char static	*argumentor(t_flags flags, va_list list)
 	}
 	else if (flags.conv == 'c')
 		ret = ptf_chars(flags, list);
-	/** else if (flags.conv == 's')
-	  *     ret =
-	  * else if (flags.conv == 'd')
+	else if (flags.conv == 's')
+		ret = ptf_string(flags, list);
+	/** else if (flags.conv == 'd')
 	  *     ret =
 	  * else if (flags.conv == 'i')
 	  *     ret =
@@ -47,7 +47,7 @@ char static	*argumentor(t_flags flags, va_list list)
 	  * else if (flags.conv == 'p')
 	  *     ret =
 	  * else if (flags.conv == 'x' || conv == 'X')
-	  *     ret =  */
+	  *     ret = */
 	else
 		return (NULL);
 	return (ret);
@@ -63,6 +63,8 @@ int static	omniparser(char const **str, va_list list, t_pbuff *buffer)
 	if (flager(str, &flags))
 		return (1);
 	argumentstr = argumentor(flags, list);
+	if (!argumentstr)
+		return (1);
 	if (!*argumentstr)
 	{
 		buffer->nulls++;

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 20:00:12 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:45:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,21 @@ char	*ptf_chars(t_flags flags, va_list list)
 	char	*ret;
 	int		c;
 
-	flags.zero = 0;
-	ret = malloc(sizeof(char) * 2);
+	ret = malloc(sizeof(char) * (2 + flags.minfw));
 	if (!ret)
 		return (NULL);
 	c = va_arg(list, int);
 	ret[0] = c;
 	ret[1] = 0;
 	return (ret);
+}
+
+char	*ptf_string(t_flags flags, va_list list)
+{
+	char	*ret;
+	char	*str;
+
+	str = va_arg(list, char *);
 }
 
 void	ptf_putstr(t_pbuff *buffer)

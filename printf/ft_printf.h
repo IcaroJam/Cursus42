@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 14:22:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:34:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 
 typedef struct s_flags
 {
-	char	conv;
-	int		dash;
-	int		zero;
-	int		dot;
-	int		minfw;
-	int		hash;
-	int		spc;
-	int		plus;
+	char			conv;
+	int				dash;
+	int				zero;
+	int				dot;
+	unsigned int	minfw;
+	int				hash;
+	int				spc;
+	int				plus;
 }	t_flags;
 
 typedef struct s_pbuff
@@ -48,5 +48,6 @@ char	*ptf_strjoin(t_pbuff *buffer, char *str);
 char	*ft_addchr(char *str, char const c, int currlen);
 int		ptf_atoi(char const **str);
 char	*ptf_chars(t_flags flags, va_list list);
+char	*ptf_string(t_flags flags, va_list list);
 
 #endif
