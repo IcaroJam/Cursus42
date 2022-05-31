@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/30 15:06:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:02:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	deflager(t_flags *flags)
 	flags->zero = 0;
 	flags->dot = 0;
 	flags->minfw = 0;
+	flags->pcsn = 0;
 	flags->hash = 0;
 	flags->spc = 0;
 	flags->plus = 0;

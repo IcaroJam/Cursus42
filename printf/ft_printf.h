@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 16:34:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:01:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_flags
 	int				zero;
 	int				dot;
 	unsigned int	minfw;
+	unsigned int	pcsn;
 	int				hash;
 	int				spc;
 	int				plus;
