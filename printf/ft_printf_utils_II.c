@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 17:25:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 19:21:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void static	precisioner(char const **str, t_flags *flags)
 		flags->pcsn = ptf_atoi(str);
 	else
 		str[0]--;
+	str[0]--;
 }
 
 int	flager(char const **str, t_flags *flags)

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 16:43:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 19:23:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,16 @@ int	ft_printf(char const *str, ...)
 	ptf_putstr(&buffer);
 	return (buffer.len);
 }
-/** 
-  * #include <stdio.h>
+
+/** #include <stdio.h>
   *
   * int	main(void)
   * {
-  *     ft_printf("%c", '0');
-  *     printf("\n%c", '0');
+  *     int	i;
+  *
+  *     i = ft_printf("%1c, %1c, %1c\n", '5', 'x', '\n');
+  *     printf("Devuelve: %d\n", i);
+  *     i = printf("%1c, %1c, %1c\n", '5', 'x', '\n');
+  *     printf("Devuelve: %d", i);
   *     return (0);
   * } */

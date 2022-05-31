@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 15:29:38 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/05/31 17:09:32 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/05/31 19:03:04 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,10 @@ CFLAGS		=	-Wall -Werror -Wextra
 SRC			=	ft_printf.c ft_printf_utils_I.c ft_printf_utils_II.c ft_printf_utils_III.c ptf_lenghts.c
 
 OBJS		=	$(SRC:.c=.o)
+
+BONUS_SRC	=	$(SRC)
+
+BONUS_OBJS	=	$(BONUS_SRC:.c=.o)
 
 
 
@@ -32,6 +36,12 @@ all:	$(NAME)
 $(NAME):	$(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 	@echo "Librerida fiquinitada ^^"
+
+bonus:		$(SRC) $(BONUS_SRC)
+	@gcc $(CFLAGS) -c $(SRC) $(BONUS_SRC)
+	@echo "Objetitos con una pizca de sal ;)"
+	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+	@echo "Bonus-ación completada B)"
 
 clean:
 	@rm -f $(OBJS) $(BONUS_OBJS)

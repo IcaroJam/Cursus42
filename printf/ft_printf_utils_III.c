@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 18:49:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 18:53:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ char	*ptf_chars(t_flags flags, va_list list)
 	return (ret);
 }
 
-/** char	*ptf_string(t_flags flags, va_list list)
-  * {
-  *     char	*ret;
-  *     char	*str;
-  *
-  *     str = va_arg(list, char *);
-  * } */
+char	*ptf_string(t_flags flags, va_list list)
+{
+	char	*ret;
+	char	*str;
+
+	str = va_arg(list, char *);
+	flags.dash = flags.dash;
+	ret = NULL;
+	return (ret);
+}
 
 void	ptf_putstr(t_pbuff *buffer)
 {

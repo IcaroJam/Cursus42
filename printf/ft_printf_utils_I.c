@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 17:10:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 19:21:53 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ptf_atoi(char const **str)
 		ret *= 10;
 		ret += *(*str)++ - '0';
 	}
+	str[0]--;
 	return (ret);
 }
 
