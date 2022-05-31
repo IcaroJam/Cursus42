@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:13:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 17:09:52 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:25:34 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ int static	converser(char const **str, t_flags *flags)
 	return (0);
 }
 
+void static	precisioner(char const **str, t_flags *flags)
+{
+	flags->dot = 1;
+	str[0]++;
+	if (**str >= '1' && **str <= '9')
+		flags->pcsn = ptf_atoi(str);
+	else
+		str[0]--;
+}
+
 int	flager(char const **str, t_flags *flags)
 {
 	while (1)
@@ -60,7 +70,7 @@ int	flager(char const **str, t_flags *flags)
 		else if (**str == '0')
 			flags->zero = 1;
 		else if (**str == '.')
-			flags->dot = 1;
+			precisioner(str, flags);
 		else if (**str >= '1' && **str <= '9')
 			flags->minfw = ptf_atoi(str);
 		else if (**str == '#')
@@ -74,26 +84,4 @@ int	flager(char const **str, t_flags *flags)
 		str[0]++;
 	}
 	return (converser(str, flags));
-}
-
-char	*ft_addchr(char *str, char const c, int currlen)
-{
-	char	*ret;
-	int		i;
-
-	i = 0;
-	if (!str)
-		return (NULL);
-	ret = malloc(sizeof(char) * (currlen + 2));
-	if (!ret)
-		return (NULL);
-	while (currlen)
-	{
-		*ret++ = str[i++];
-		currlen--;
-	}
-	*ret++ = c;
-	*ret = 0;
-	free(str);
-	return (ret - i - 1);
 }
