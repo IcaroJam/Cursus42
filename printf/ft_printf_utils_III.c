@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 17:12:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:25:10 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,6 @@ void static	stringassist(char *ret, char **str, int count, int *i)
 		ret[(*i)++] = *(*str)++;
 }
 
-char static	*nullstring(void)
-{
-	char	*ret;
-
-	ret = malloc(sizeof(char) * 7);
-	ret[0] = '(';
-	ret[1] = 'n';
-	ret[2] = 'u';
-	ret[3] = 'l';
-	ret[4] = 'l';
-	ret[5] = ')';
-	ret[6] = 0;
-	return (ret);
-}
-
 char	*ptf_string(t_flags flags, va_list list)
 {
 	char	*ret;
@@ -69,11 +54,11 @@ char	*ptf_string(t_flags flags, va_list list)
 
 	str = va_arg(list, char *);
 	if (!str)
-		return (nullstring());
+		str = "(null)";
 	inplen = ptf_strlen(str);
 	if (flags.dot)
 		inplen = flags.pcsn;
-	if (!flags.minfw)
+	if (flags.minfw < (unsigned int) inplen)
 		flags.minfw = inplen;
 	ret = ptf_zalloc(flags.minfw);
 	if (!ret)
