@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 16:36:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:53:22 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ int	ft_printf(char const *str, ...)
   * {
   *     int	i;
   *
-  *     i = ft_printf("!%10c!", 0);
+  *     i = ft_printf(" %.4s", "abc");
   *     printf("\nDevuelve: %d\n", i);
-  *     i = printf("!%10c!", 0);
+  *     i = printf(" %.4s", "abc");
   *     printf("\nDevuelve: %d", i);
   *     return (0);
   * } */
