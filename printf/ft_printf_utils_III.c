@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 16:32:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:12:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ char	*ptf_string(t_flags flags, va_list list)
 	if (!str)
 		return (nullstring());
 	inplen = ptf_strlen(str);
+	if (flags.dot)
+		inplen = flags.pcsn;
 	if (!flags.minfw)
 		flags.minfw = inplen;
 	ret = ptf_zalloc(flags.minfw);
 	if (!ret)
 		return (NULL);
-	if (flags.dot)
-		inplen = flags.pcsn;
 	i = 0;
 	flags.minfw -= inplen;
 	if (flags.dash)
