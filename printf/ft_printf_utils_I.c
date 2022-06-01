@@ -6,11 +6,24 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 19:21:53 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:32:07 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	*ptf_zalloc(int len)
+{
+	char	*ret;
+	int		i;
+
+	ret = malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		return (0);
+	while (i <= len)
+		ret[i++] = 0;
+	return (ret);
+}
 
 int	ptf_atoi(char const **str)
 {

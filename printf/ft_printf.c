@@ -6,13 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 19:23:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:34:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <stdlib.h>
 
 void static	prepbuff(t_pbuff *buffer)
 {
@@ -103,16 +101,16 @@ int	ft_printf(char const *str, ...)
 	ptf_putstr(&buffer);
 	return (buffer.len);
 }
-
-/** #include <stdio.h>
+/** 
+  * #include <stdio.h>
   *
   * int	main(void)
   * {
   *     int	i;
   *
-  *     i = ft_printf("%1c, %1c, %1c\n", '5', 'x', '\n');
-  *     printf("Devuelve: %d\n", i);
-  *     i = printf("%1c, %1c, %1c\n", '5', 'x', '\n');
-  *     printf("Devuelve: %d", i);
+  *     i = ft_printf(" %c %c %c ", '2', '1', 0);
+  *     printf("\nDevuelve: %d\n", i);
+  *     i = printf(" %c %c %c ", '2', '1', 0);
+  *     printf("\nDevuelve: %d", i);
   *     return (0);
   * } */

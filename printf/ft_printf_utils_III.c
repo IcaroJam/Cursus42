@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 18:53:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:34:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
 
 char	*ptf_chars(t_flags flags, va_list list)
 {
@@ -20,7 +19,7 @@ char	*ptf_chars(t_flags flags, va_list list)
 
 	if (!flags.minfw)
 		flags.minfw = 1;
-	ret = malloc(sizeof(char) * (1 + flags.minfw));
+	ret = ptf_zalloc(flags.minfw);
 	if (!ret)
 		return (NULL);
 	i = 0;
@@ -32,7 +31,6 @@ char	*ptf_chars(t_flags flags, va_list list)
 		ret[i++] = ' ';
 	if (!flags.dash)
 		ret[i++] = va_arg(list, int);
-	ret[i] = 0;
 	return (ret);
 }
 
@@ -40,10 +38,28 @@ char	*ptf_string(t_flags flags, va_list list)
 {
 	char	*ret;
 	char	*str;
+	int		inplen;
+	int		i;
 
 	str = va_arg(list, char *);
-	flags.dash = flags.dash;
-	ret = NULL;
+	inplen = ptf_strlen(str);
+	if (!flags.minfw)
+		flags.minfw = inplen;
+	ret = ptf_zalloc(flags.minfw);
+	if (!ret)
+		return (NULL);
+	if (flags.dot)
+		inplen = flags.pcsn;
+	i = 0;
+	flags.minfw -= inplen;
+	if (flags.dash)
+		while (inplen--)
+			ret[i++] = *str++;
+	while (flags.minfw--)
+		ret[i++] = ' ';
+	if (!flags.dash)
+		while (inplen--)
+			ret[i++] = *str++;
 	return (ret);
 }
 
