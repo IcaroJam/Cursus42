@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 15:39:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:17:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ int	ft_printf(char const *str, ...)
   * {
   *     int	i;
   *
-  *     i = ft_printf(" %c %c %c ", '2', '1', 0);
+  *     i = ft_printf("%s", NULL);
   *     printf("\nDevuelve: %d\n", i);
-  *     i = printf(" %c %c %c ", '2', '1', 0);
+  *     i = printf("%s", NULL);
   *     printf("\nDevuelve: %d", i);
   *     return (0);
   * } */

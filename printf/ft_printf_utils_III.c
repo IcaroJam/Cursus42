@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 15:53:01 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:17:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,25 @@ char	*ptf_chars(t_flags flags, va_list list)
 	return (ret);
 }
 
-void static	stringAssist(char *ret, char **str, int count, int *i)
+void static	stringassist(char *ret, char **str, int count, int *i)
 {
 	while (count--)
 		ret[(*i)++] = *(*str)++;
+}
+
+char static	*nullstring(void)
+{
+	char	*ret;
+
+	ret = malloc(sizeof(char) * 7);
+	ret[0] = '(';
+	ret[1] = 'n';
+	ret[2] = 'u';
+	ret[3] = 'l';
+	ret[4] = 'l';
+	ret[5] = ')';
+	ret[6] = 0;
+	return (ret);
 }
 
 char	*ptf_string(t_flags flags, va_list list)
@@ -49,7 +64,7 @@ char	*ptf_string(t_flags flags, va_list list)
 
 	str = va_arg(list, char *);
 	if (!str)
-		return (NULL);
+		return (nullstring());
 	inplen = ptf_strlen(str);
 	if (!flags.minfw)
 		flags.minfw = inplen;
@@ -61,11 +76,11 @@ char	*ptf_string(t_flags flags, va_list list)
 	i = 0;
 	flags.minfw -= inplen;
 	if (flags.dash)
-		stringAssist(ret, &str, inplen, &i);
+		stringassist(ret, &str, inplen, &i);
 	while (flags.minfw--)
 		ret[i++] = ' ';
 	if (!flags.dash)
-		stringAssist(ret, &str, inplen, &i);
+		stringassist(ret, &str, inplen, &i);
 	return (ret);
 }
 
