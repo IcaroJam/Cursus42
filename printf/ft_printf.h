@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/31 17:07:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:32:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_pbuff
 int		ft_printf(char const *str, ...);
 void	deflager(t_flags *flags);
 int		flager(char const **str, t_flags *flags);
+void	*ptf_zalloc(int len);
 int		ptf_sectlen(char const *str);
 int		ptf_strlen(char const *str);
 void	ptf_putstr(t_pbuff *buffer);
