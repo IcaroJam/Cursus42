@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 15:34:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:53:01 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ char	*ptf_chars(t_flags flags, va_list list)
 	return (ret);
 }
 
+void static	stringAssist(char *ret, char **str, int count, int *i)
+{
+	while (count--)
+		ret[(*i)++] = *(*str)++;
+}
+
 char	*ptf_string(t_flags flags, va_list list)
 {
 	char	*ret;
@@ -42,6 +48,8 @@ char	*ptf_string(t_flags flags, va_list list)
 	int		i;
 
 	str = va_arg(list, char *);
+	if (!str)
+		return (NULL);
 	inplen = ptf_strlen(str);
 	if (!flags.minfw)
 		flags.minfw = inplen;
@@ -53,13 +61,11 @@ char	*ptf_string(t_flags flags, va_list list)
 	i = 0;
 	flags.minfw -= inplen;
 	if (flags.dash)
-		while (inplen--)
-			ret[i++] = *str++;
+		stringAssist(ret, &str, inplen, &i);
 	while (flags.minfw--)
 		ret[i++] = ' ';
 	if (!flags.dash)
-		while (inplen--)
-			ret[i++] = *str++;
+		stringAssist(ret, &str, inplen, &i);
 	return (ret);
 }
 
