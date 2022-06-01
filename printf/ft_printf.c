@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 16:17:58 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:36:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void static	prepbuff(t_pbuff *buffer)
 	buffer->len = 0;
 }
 
-char static	*argumentor(t_flags flags, va_list list)
+char static	*argumentor(t_flags flags, va_list list, t_pbuff *buffer)
 {
 	char	*ret;
 
@@ -33,7 +33,7 @@ char static	*argumentor(t_flags flags, va_list list)
 		ret[1] = 0;
 	}
 	else if (flags.conv == 'c')
-		ret = ptf_chars(flags, list);
+		ret = ptf_chars(flags, list, buffer);
 	else if (flags.conv == 's')
 		ret = ptf_string(flags, list);
 	/** else if (flags.conv == 'd')
@@ -60,16 +60,10 @@ int static	omniparser(char const **str, va_list list, t_pbuff *buffer)
 	str[0]++;
 	if (flager(str, &flags))
 		return (1);
-	argumentstr = argumentor(flags, list);
+	argumentstr = argumentor(flags, list, buffer);
 	if (!argumentstr)
 		return (1);
-	if (flags.conv == 'c' && !*argumentstr)
-	{
-		buffer->nulls++;
-		buffer->buff = ft_addchr(buffer->buff, 0, buffer->len);
-	}
-	else
-		buffer->buff = ptf_strjoin(buffer, argumentstr);
+	buffer->buff = ptf_strjoin(buffer, argumentstr);
 	free(argumentstr);
 	argumentstr = NULL;
 	return (0);
@@ -108,9 +102,9 @@ int	ft_printf(char const *str, ...)
   * {
   *     int	i;
   *
-  *     i = ft_printf("%s", NULL);
+  *     i = ft_printf("!%10c!", 0);
   *     printf("\nDevuelve: %d\n", i);
-  *     i = printf("%s", NULL);
+  *     i = printf("!%10c!", 0);
   *     printf("\nDevuelve: %d", i);
   *     return (0);
   * } */

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 15:35:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:36:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,6 @@ int	ptf_atoi(char const **str)
 	}
 	str[0]--;
 	return (ret);
-}
-
-char	*ft_addchr(char *str, char const c, int currlen)
-{
-	char	*ret;
-	int		i;
-
-	i = 0;
-	if (!str)
-		return (NULL);
-	ret = malloc(sizeof(char) * (currlen + 2));
-	if (!ret)
-		return (NULL);
-	while (currlen)
-	{
-		*ret++ = str[i++];
-		currlen--;
-	}
-	*ret++ = c;
-	*ret = 0;
-	free(str);
-	return (ret - i - 1);
 }
 
 char	*ptf_strjoin(t_pbuff *buffer, char *str)

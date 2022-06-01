@@ -6,31 +6,36 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 16:17:25 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:32:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdarg.h>
 
-char	*ptf_chars(t_flags flags, va_list list)
+char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer)
 {
-	char				*ret;
-	unsigned int		i;
+	int				c;
+	char			*ret;
+	unsigned int	i;
 
 	if (!flags.minfw)
 		flags.minfw = 1;
 	ret = ptf_zalloc(flags.minfw);
 	if (!ret)
 		return (NULL);
+	c = va_arg(list, int);
+	if (!c)
+		buffer->nulls++;
 	i = 0;
 	if (flags.dash)
-		ret[i++] = va_arg(list, int);
+		ret[i++] = c;
 	else
 		flags.minfw--;
 	while (i < flags.minfw)
 		ret[i++] = ' ';
 	if (!flags.dash)
-		ret[i++] = va_arg(list, int);
+		ret[i++] = c;
 	return (ret);
 }
 

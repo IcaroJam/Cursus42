@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 15:32:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:36:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ void	ptf_putstr(t_pbuff *buffer);
 int		ptf_truelen(t_pbuff *buffer);
 char	*ft_concsection(t_pbuff *buffer, char const **str);
 char	*ptf_strjoin(t_pbuff *buffer, char *str);
-char	*ft_addchr(char *str, char const c, int currlen);
 int		ptf_atoi(char const **str);
-char	*ptf_chars(t_flags flags, va_list list);
+char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer);
 char	*ptf_string(t_flags flags, va_list list);
 
 #endif
