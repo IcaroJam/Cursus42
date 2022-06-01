@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 15:34:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:39:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int static	omniparser(char const **str, va_list list, t_pbuff *buffer)
 	argumentstr = argumentor(flags, list);
 	if (!argumentstr)
 		return (1);
-	if (!*argumentstr)
+	if (flags.conv == 'c' && !*argumentstr)
 	{
 		buffer->nulls++;
 		buffer->buff = ft_addchr(buffer->buff, 0, buffer->len);
