@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 15:32:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:35:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*ptf_zalloc(int len)
 	ret = malloc(sizeof(char) * (len + 1));
 	if (!ret)
 		return (0);
+	i = 0;
 	while (i <= len)
 		ret[i++] = 0;
 	return (ret);
