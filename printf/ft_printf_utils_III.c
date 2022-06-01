@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 17:25:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:50:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer)
 	return (ret);
 }
 
-void static	stringassist(char *ret, char **str, int count, int *i)
+void static	stringassist(char *ret, char *str, int count, int *i)
 {
 	while (count--)
-		ret[(*i)++] = *(*str)++;
+		ret[(*i)++] = *str++;
 }
 
 char	*ptf_string(t_flags flags, va_list list)
@@ -66,11 +66,11 @@ char	*ptf_string(t_flags flags, va_list list)
 	i = 0;
 	flags.minfw -= inplen;
 	if (flags.dash)
-		stringassist(ret, &str, inplen, &i);
+		stringassist(ret, str, inplen, &i);
 	while (flags.minfw--)
 		ret[i++] = ' ';
 	if (!flags.dash)
-		stringassist(ret, &str, inplen, &i);
+		stringassist(ret, str, inplen, &i);
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 17:19:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:00:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,17 @@ int	ft_printf(char const *str, ...)
 	ptf_putstr(&buffer);
 	return (buffer.len);
 }
-/** 
-  * #include <stdio.h>
-  *
-  * int	main(void)
-  * {
-  *     int	i;
-  *
-  *     i = ft_printf(" %-2s %-3s %-4s %-5s ", " - ", "", "4", "");
-  *     printf("\nDevuelve: %d\n", i);
-  *     i = printf(" %-2s %-3s %-4s %-5s ", " - ", "", "4", "");
-  *     printf("\nDevuelve: %d", i);
-  *     return (0);
-  * } */
+
+#include <stdio.h>
+
+int	main(void)
+{
+	int	i;
+
+	i = ft_printf("%.5s, %.5s, %.5s, %.5s", NULL, "", "test", "joihwhhgsdkhksdgsdg\t\v\n\r\f\a25252\b6");
+	printf("\nDevuelve: %d\n", i);
+	i = printf("%.5s, %.5s, %.5s, %.5s", NULL, "", "test", "joihwhhgsdkhksdgsdg\t\v\n\r\f\a25252\b6");
+	printf("\nDevuelve: %d", i);
+//	system("leaks a.out");
+	return (0);
+}
