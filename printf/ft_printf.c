@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 18:00:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:23:10 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ char static	*argumentor(t_flags flags, va_list list, t_pbuff *buffer)
 		ret = ptf_chars(flags, list, buffer);
 	else if (flags.conv == 's')
 		ret = ptf_string(flags, list);
-	/** else if (flags.conv == 'd')
-	  *     ret =
-	  * else if (flags.conv == 'i')
-	  *     ret =
-	  * else if (flags.conv == 'u')
+	else if (flags.conv == 'd')
+		ret = ptf_digit(flags, list);
+	else if (flags.conv == 'i')
+		ret = ptf_digit(flags, list);
+	/** else if (flags.conv == 'u')
 	  *     ret =
 	  * else if (flags.conv == 'p')
 	  *     ret =
@@ -95,17 +95,17 @@ int	ft_printf(char const *str, ...)
 	ptf_putstr(&buffer);
 	return (buffer.len);
 }
-
-#include <stdio.h>
-
-int	main(void)
-{
-	int	i;
-
-	i = ft_printf("%.5s, %.5s, %.5s, %.5s", NULL, "", "test", "joihwhhgsdkhksdgsdg\t\v\n\r\f\a25252\b6");
-	printf("\nDevuelve: %d\n", i);
-	i = printf("%.5s, %.5s, %.5s, %.5s", NULL, "", "test", "joihwhhgsdkhksdgsdg\t\v\n\r\f\a25252\b6");
-	printf("\nDevuelve: %d", i);
-//	system("leaks a.out");
-	return (0);
-}
+/** 
+  * #include <stdio.h>
+  *
+  * int	main(void)
+  * {
+  *     int	i;
+  *
+  *     i = ft_printf("%.5s, %.5s, %.5s, %.5s", NULL, "", "test", "joihwhhgsdkhksdgsdg\t\v\n\r\f\a25252\b6");
+  *     printf("\nDevuelve: %d\n", i);
+  *     i = printf("%.5s, %.5s, %.5s, %.5s", NULL, "", "test", "joihwhhgsdkhksdgsdg\t\v\n\r\f\a25252\b6");
+  *     printf("\nDevuelve: %d", i);
+  *     //system("leaks a.out");
+  *     return (0);
+  * } */
