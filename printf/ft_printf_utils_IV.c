@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/03 16:50:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:17:43 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
 
 static unsigned int	ptf_prepnum(int n, int *isneg)
 {
@@ -30,10 +29,10 @@ static unsigned int	ptf_prepnum(int n, int *isneg)
 
 char static	*ptf_itoa(int n)
 {
-	char				*ret;
-	int					numlen;
-	unsigned int		temp;
-	int					isneg;
+	char			*ret;
+	int				numlen;
+	unsigned int	temp;
+	int				isneg;
 
 	numlen = 0;
 	if (!n)
@@ -60,8 +59,20 @@ char static	*ptf_itoa(int n)
 char	*ptf_digit(t_flags flags, va_list list)
 {
 	char	*ret;
+	char	*temp;
+	int		inplen;
+	int		isneg;
 
-	flags.conv = 'd';
-	ret = ptf_itoa(va_arg(list, int));
+	temp = ptf_itoa(va_arg(list, int));
+	if (!temp)
+		return (NULL);
+	inplen = ptf_strlen(ret);
+	isneg = 0;
+	if (*ret == '-')
+		isneg = 1;
+	if (flags.minfw < (unsigned int) inplen)
+		flags.minfw = inplen;
 	return (ret);
 }
+
+// SEPARADOR // SIGNO/ESPACIO // RELLENO DE PCS // NUM // SEPARADOR
