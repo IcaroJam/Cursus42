@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/03 16:49:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:50:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*ptf_digit(t_flags flags, va_list list)
 {
 	char	*ret;
 
+	flags.conv = 'd';
 	ret = ptf_itoa(va_arg(list, int));
 	return (ret);
 }
