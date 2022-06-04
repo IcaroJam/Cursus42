@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/04 18:08:30 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/04 18:52:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int static	separator(char *ret, t_flags flags, int inplen)
+int static	separator(char *ret, t_flags flags, int seplen)
 {
 	int		i;
 	char	padding;
@@ -21,7 +21,7 @@ int static	separator(char *ret, t_flags flags, int inplen)
 	padding = ' ';
 	if (flags.zero && !flags.dash)
 		padding = '0';
-	while (flags.minfw-- > (unsigned int) inplen)
+	while (--seplen > 0)
 		ret[i++] = padding;
 	return (i);
 }
@@ -39,7 +39,10 @@ int static	signature(char *ret, char c, t_flags flags)
 		return (1);
 	}
 	if (c == '-')
-		return (1);
+	{
+		*ret = '-';
+		return (0);
+	}
 	return (0);
 }
 
@@ -65,14 +68,14 @@ char	*ptf_digit(t_flags flags, va_list list)
 		return (NULL);
 	i = 0;
 	if (!flags.dash)
-		i = separator(ret, flags, inplen);
+		i = separator(ret, flags, flags.minfw - inplen - hassign);
 	i += signature(&ret[i], *temp, flags);
 	while (flags.pcsn-- > (unsigned int) inplen)
 		ret[i++] = '0';
 	while (*temp)
 		ret[i++] = *temp++;
 	if (flags.dash)
-		separator(&ret[i], flags, inplen);
+		separator(&ret[i], flags, flags.minfw - inplen - hassign);
 	free (temp - inplen);
 	return (ret);
 }
