@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 15:29:38 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/03 16:49:28 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/04 17:45:41 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 		=	libftprintf.a
 
 CFLAGS		=	-Wall -Werror -Wextra
 
-SRC			=	ft_printf.c ft_printf_utils_I.c ft_printf_utils_II.c ft_printf_utils_III.c ft_printf_utils_IV.c ptf_lenghts.c
+SRC			=	ft_printf.c ft_printf_utils_I.c ft_printf_utils_II.c char_string_conv.c digit_conv.c ptf_itoa.c ptf_lenghts.c
 
 OBJS		=	$(SRC:.c=.o)
 

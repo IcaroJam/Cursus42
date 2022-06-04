@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils_IV.c                               :+:      :+:    :+:   */
+/*   ptf_itoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/03 18:17:43 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/06/04 17:43:16 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/06/04 17:43:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static unsigned int	ptf_prepnum(int n, int *isneg)
 	return (temp);
 }
 
-char static	*ptf_itoa(int n)
+char	*ptf_itoa(int n)
 {
 	char			*ret;
 	int				numlen;
@@ -43,7 +43,7 @@ char static	*ptf_itoa(int n)
 		n /= 10;
 		numlen++;
 	}
-	ret = ptf_zalloc(sizeof(char) * (numlen + isneg + 1));
+	ret = ptf_zalloc(sizeof(char) * (numlen + isneg));
 	if (!ret)
 		return (NULL);
 	if (isneg)
@@ -55,24 +55,3 @@ char static	*ptf_itoa(int n)
 	}
 	return (ret);
 }
-
-char	*ptf_digit(t_flags flags, va_list list)
-{
-	char	*ret;
-	char	*temp;
-	int		inplen;
-	int		isneg;
-
-	temp = ptf_itoa(va_arg(list, int));
-	if (!temp)
-		return (NULL);
-	inplen = ptf_strlen(ret);
-	isneg = 0;
-	if (*ret == '-')
-		isneg = 1;
-	if (flags.minfw < (unsigned int) inplen)
-		flags.minfw = inplen;
-	return (ret);
-}
-
-// SEPARADOR // SIGNO/ESPACIO // RELLENO DE PCS // NUM // SEPARADOR
