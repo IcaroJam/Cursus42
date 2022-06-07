@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/07 11:25:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/07 11:47:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ char	*ptf_digit(t_flags flags, va_list list)
 	if (!ret)
 		return (NULL);
 	i = 0;
-	if (!flags.dash)
+	if (!flags.dash && !flags.zero)
 		i = separator(ret, flags, flags.minfw - inplen - hassign);
 	i += signature(&ret[i], *temp, flags);
+	if (flags.zero)
+		i += separator(&ret[i], flags, flags.minfw - inplen -hassign);
 	while (flags.pcsn-- > undashedlen(temp, inplen))
 		ret[i++] = '0';
 	if (*temp == '-')
