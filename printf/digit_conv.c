@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/04 18:52:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/07 10:52:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int static	separator(char *ret, t_flags flags, int seplen)
 	padding = ' ';
 	if (flags.zero && !flags.dash)
 		padding = '0';
-	while (--seplen > 0)
+	while (seplen-- > 0)
 		ret[i++] = padding;
 	return (i);
 }
