@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/07 10:58:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/07 10:59:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int static	signature(char *ret, char c, t_flags flags)
 	if (c == '-')
 	{
 		*ret = '-';
-		return (1);
+		return (0);
 	}
 	return (0);
 }
@@ -72,8 +72,6 @@ char	*ptf_digit(t_flags flags, va_list list)
 	i += signature(&ret[i], *temp, flags);
 	while (flags.pcsn-- > (unsigned int) inplen)
 		ret[i++] = '0';
-	if (*temp == '-')
-		temp++;
 	while (*temp)
 		ret[i++] = *temp++;
 	if (flags.dash)
