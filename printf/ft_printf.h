@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/04 17:43:52 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:02:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ typedef struct s_pbuff
 	int		nulls;
 	int		len;
 }	t_pbuff;
+
+typedef struct s_digitlens
+{
+	unsigned int	spaces;
+	unsigned int	sign;
+	int				isneg;
+	unsigned int	prec;
+	unsigned int	num;
+	unsigned int	total;
+}	t_digitlens;
 
 int		ft_printf(char const *str, ...);
 void	deflager(t_flags *flags);

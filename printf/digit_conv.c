@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/07 15:04:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:40:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,69 +46,61 @@ int static	signature(char *ret, char c, t_flags flags)
 	return (0);
 }
 
-unsigned int static	undashedlen(char const *str, int inplen)
+void static	getthatlength(t_digitlens *lens, t_flags flags, char *temp)
 {
-	if (*str == '-')
-		return (inplen - 1);
-	return (inplen);
-}
-
-unsigned int static	alloclen(t_flags flags, char *temp)
-{
-	unsigned int	spaces;
-	unsigned int	sign;
-	unsigned int	precision;
-	unsigned int	num;
-
-	sign = 0;
-	if (*temp == '-' || flags.plus || flags.spc)
-		sign = 1;
+	lens->isneg = 0;
+	lens->num = 0;
+	lens->sign = 0;
+	lens->prec = 0;
+	lens->spaces = 0;
+	if (flags.dot && !flags.pcsn && *temp == '0')
+		return ;
 	if (*temp == '-')
-		num = ptf_strlen(temp) - 1;
+	{
+		lens->num = ptf_strlen(temp) - 1;
+		lens->isneg = 1;
+	}
 	else
-		num = ptf_strlen(temp);
-	precision = 0;
-	if (flags.pcsn > num)
-		precision = flags.pcsn - num;
-	spaces = 0;
-	if (flags.minfw > sign + precision + num)
-		spaces = flags.minfw - sign - precision - num;
-	return (spaces + sign + precision + num);
+		lens->num = ptf_strlen(temp);
+	if (*temp == '-' || flags.plus || flags.spc)
+		lens->sign = 1;
+	if (flags.pcsn > lens->num)
+		lens->prec = flags.pcsn - lens->num;
+	if (flags.minfw > lens->sign + lens->prec + lens->num)
+		lens->spaces = flags.minfw - lens->sign - lens->prec - lens->num;
+	lens->total = lens->spaces + lens->sign + lens->prec + lens->num;
 }
 
 char	*ptf_digit(t_flags flags, va_list list)
 {
-	char	*ret;
-	char	*temp;
-	int		inplen;
-	int		hassign;
-	int		i;
+	t_digitlens	lengths;
+	char		*ret;
+	char		*temp;
+	int			i;
 
-	hassign = 0;
-	if (flags.plus || flags.spc)
-		hassign = 1;
 	temp = ptf_itoa(va_arg(list, int));
 	if (!temp)
 		return (NULL);
-	inplen = ptf_strlen(temp);
-	ret = ptf_zalloc(alloclen(flags, temp));
+	getthatlength(&lengths, flags, temp);
+	ret = ptf_zalloc(lengths.total);
 	if (!ret)
 		return (NULL);
 	i = 0;
 	if (!flags.dash && !flags.zero)
-		i = separator(ret, flags, flags.minfw - inplen - hassign);
+		i += separator(ret, flags, lengths.spaces);
 	i += signature(&ret[i], *temp, flags);
 	if (flags.zero)
-		i += separator(&ret[i], flags, flags.minfw - inplen - hassign);
-	while (flags.pcsn-- > undashedlen(temp, inplen))
+		i += separator(&ret[i], flags, lengths.spaces);
+	while (flags.pcsn-- > lengths.num)
 		ret[i++] = '0';
 	if (*temp == '-')
 		temp++;
-	while (*temp)
-		ret[i++] = *temp++;
+	if (lengths.num)
+		while (*temp)
+			ret[i++] = *temp++;
 	if (flags.dash)
-		separator(&ret[i], flags, flags.minfw - inplen - hassign);
-	free (temp - inplen);
+		separator(&ret[i], flags, lengths.spaces);
+	free (temp - lengths.num - lengths.isneg);
 	return (ret);
 }
 
