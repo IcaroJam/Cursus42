@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/07 11:47:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:04:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,29 @@ unsigned int static	undashedlen(char const *str, int inplen)
 	return (inplen);
 }
 
+unsigned int static	alloclen(t_flags flags, char *temp)
+{
+	unsigned int	spaces;
+	unsigned int	sign;
+	unsigned int	precision;
+	unsigned int	num;
+
+	sign = 0;
+	if (*temp == '-' || flags.plus || flags.spc)
+		sign = 1;
+	if (*temp == '-')
+		num = ptf_strlen(temp) - 1;
+	else
+		num = ptf_strlen(temp);
+	precision = 0;
+	if (flags.pcsn > num)
+		precision = flags.pcsn - num;
+	spaces = 0;
+	if (flags.minfw > sign + precision + num)
+		spaces = flags.minfw - sign - precision - num;
+	return (spaces + sign + precision + num);
+}
+
 char	*ptf_digit(t_flags flags, va_list list)
 {
 	char	*ret;
@@ -61,16 +84,14 @@ char	*ptf_digit(t_flags flags, va_list list)
 	int		hassign;
 	int		i;
 
+	hassign = 0;
+	if (flags.plus || flags.spc)
+		hassign = 1;
 	temp = ptf_itoa(va_arg(list, int));
 	if (!temp)
 		return (NULL);
 	inplen = ptf_strlen(temp);
-	hassign = 0;
-	if (flags.spc || flags.plus)
-		hassign = 1;
-	if (flags.minfw < (unsigned int) inplen + hassign)
-		flags.minfw = inplen;
-	ret = ptf_zalloc(flags.minfw + hassign);
+	ret = ptf_zalloc(alloclen(flags, temp));
 	if (!ret)
 		return (NULL);
 	i = 0;
@@ -78,7 +99,7 @@ char	*ptf_digit(t_flags flags, va_list list)
 		i = separator(ret, flags, flags.minfw - inplen - hassign);
 	i += signature(&ret[i], *temp, flags);
 	if (flags.zero)
-		i += separator(&ret[i], flags, flags.minfw - inplen -hassign);
+		i += separator(&ret[i], flags, flags.minfw - inplen - hassign);
 	while (flags.pcsn-- > undashedlen(temp, inplen))
 		ret[i++] = '0';
 	if (*temp == '-')
