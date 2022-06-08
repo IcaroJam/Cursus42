@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/08 12:25:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:39:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int static	separator(char *ret, t_flags flags, int seplen)
 
 	i = 0;
 	padding = ' ';
-	if (flags.zero && !flags.dash)
+	if (flags.zero && !flags.dash && !flags.dot)
 		padding = '0';
 	while (seplen-- > 0)
 		ret[i++] = padding;
@@ -55,7 +55,6 @@ void static	getthatlength(t_digitlens *lens, t_flags flags, char *temp)
 	lens->spaces = 0;
 	if (!(flags.dot && !flags.pcsn && *temp == '0'))
 	{
-		//return ;
 		if (*temp == '-')
 		{
 			lens->num = ptf_strlen(temp) - 1;
@@ -88,6 +87,8 @@ char	*ptf_digit(t_flags flags, va_list list)
 	if (!ret)
 		return (NULL);
 	i = 0;
+	if (flags.zero && flags.dot)
+		flags.zero = 0;
 	if (!flags.dash && !flags.zero)
 		i += separator(ret, flags, lengths.spaces);
 	i += signature(&ret[i], *temp, flags);
