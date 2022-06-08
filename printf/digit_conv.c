@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/07 17:40:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:25:22 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,17 @@ void static	getthatlength(t_digitlens *lens, t_flags flags, char *temp)
 	lens->sign = 0;
 	lens->prec = 0;
 	lens->spaces = 0;
-	if (flags.dot && !flags.pcsn && *temp == '0')
-		return ;
-	if (*temp == '-')
+	if (!(flags.dot && !flags.pcsn && *temp == '0'))
 	{
-		lens->num = ptf_strlen(temp) - 1;
-		lens->isneg = 1;
+		//return ;
+		if (*temp == '-')
+		{
+			lens->num = ptf_strlen(temp) - 1;
+			lens->isneg = 1;
+		}
+		else
+			lens->num = ptf_strlen(temp);
 	}
-	else
-		lens->num = ptf_strlen(temp);
 	if (*temp == '-' || flags.plus || flags.spc)
 		lens->sign = 1;
 	if (flags.pcsn > lens->num)
