@@ -55,7 +55,7 @@ char	*ptf_itoa(int n)
 	}
 	return (ret);
 }
-
+/* EN PRINCIPIO NO HARÍA FALTA NADA DE ESTO
 static long	ptf_prepuns(unsigned int n, int *isneg)
 {
 	long	temp;
@@ -70,31 +70,33 @@ static long	ptf_prepuns(unsigned int n, int *isneg)
 		temp = n;
 	return (temp);
 }
-
+*/
 char	*ptf_utoa(unsigned int n)
 {
 	char	*ret;
 	int		numlen;
-	long	temp;
-	int		isneg;
+//	long	temp;
+unsigned int temp;
+//	int		isneg;
 
 	numlen = 0;
 	if (!n)
 		numlen = 1;
-	temp = ptf_prepuns(n, &isneg);
+//	temp = ptf_prepuns(n, &isneg);
+temp = n;
 	while (n)
 	{
 		n /= 10;
 		numlen++;
 	}
-	ret = ptf_zalloc(sizeof(char) * (numlen + isneg));
+//	ret = ptf_zalloc(sizeof(char) * (numlen + isneg));
+ret = ptf_zalloc(sizeof(char) * numlen);
 	if (!ret)
 		return (NULL);
-	if (isneg)
-		*ret = '-';
 	while (numlen)
 	{
-		ret[numlen-- - !isneg] = temp % 10 + '0';
+//		ret[numlen-- - !isneg] = temp % 10 + '0';
+ret[numlen--] = temp % 10 + '0';
 		temp /= 10;
 	}
 	return (ret);
