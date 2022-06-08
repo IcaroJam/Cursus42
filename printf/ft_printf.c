@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/08 13:12:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:55:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ char static	*argumentor(t_flags flags, va_list list, t_pbuff *buffer)
 		ret = ptf_digit(flags, list);
 	else if (flags.conv == 'i')
 		ret = ptf_digit(flags, list);
-	/** else if (flags.conv == 'u')
-	  *     ret =
-	  * else if (flags.conv == 'p')
+	else if (flags.conv == 'u')
+		ret = ptf_unsigned(flags, list);
+	/** else if (flags.conv == 'p')
 	  *     ret =
 	  * else if (flags.conv == 'x' || conv == 'X')
 	  *     ret = */
@@ -102,7 +102,7 @@ int	ft_printf(char const *str, ...)
   * {
   *     int	i;
   *
-  *     i = ft_printf("%01.d, %.d, %.d, %.d, %.d, %.d, %.d, %.d", 0, 5, -1, -10, 100, -1862, -2147483648, 2147483647);
+  *     i = ft_printf(" %u ", -1);
   *     printf("\nDevuelve: %d\n", i);
   *     //i = printf("%.5s, %.5s, %.5s, %.5s", NULL, "", "test", "joihwhhgsdkhksdgsdg\t\v\n\r\f\a25252\b6");
   *     //printf("\nDevuelve: %d", i);

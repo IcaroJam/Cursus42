@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/07 17:02:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:03:10 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ char	*ft_concsection(t_pbuff *buffer, char const **str);
 char	*ptf_strjoin(t_pbuff *buffer, char *str);
 int		ptf_atoi(char const **str);
 char	*ptf_itoa(int n);
+char	*ptf_utoa(unsigned int n);
 char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer);
 char	*ptf_string(t_flags flags, va_list list);
 char	*ptf_digit(t_flags flags, va_list list);
+char	*ptf_unsigned(t_flags flags, va_list list);
 
 #endif
