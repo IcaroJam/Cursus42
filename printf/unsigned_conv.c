@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/08 18:54:56 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/08 19:12:50 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ char	*ptf_unsigned(t_flags flags, va_list list)
 	i = 0;
 	if (flags.zero && flags.dot)
 		flags.zero = 0;
-	i += separator(&ret[i], flags, lengths.spaces);
+	if (!flags.dash)
+		i += separator(&ret[i], flags, lengths.spaces);
 	while (flags.pcsn-- > lengths.num)
 		ret[i++] = '0';
 	if (lengths.num)
