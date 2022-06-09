@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/08 19:13:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/09 10:55:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_printf(char const *str, ...)
 	va_start(list, str);
 	while (*str)
 	{
-		buffer.buff = ft_concsection(&buffer, &str);
+		buffer.buff = ptf_concsection(&buffer, &str);
 		buffer.len = ptf_truelen(&buffer);
 		if (!buffer.buff)
 			return (-1);

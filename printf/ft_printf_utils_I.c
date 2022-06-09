@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/01 16:36:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/09 10:55:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ptf_strjoin(t_pbuff *buffer, char *str)
 	return (ret - buffer->len - slen);
 }
 
-char	*ft_concsection(t_pbuff *buffer, char const **str)
+char	*ptf_concsection(t_pbuff *buffer, char const **str)
 {
 	int		slen;
 	int		i;
