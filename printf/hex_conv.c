@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 10:49:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/09 14:08:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:12:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ void static	hexlen(t_flags flags, t_digitlens *lens, char *num)
 	lens->num = 8 - i;
 	lens->sign = 0;
 	lens->spaces = 0;
+	lens->prec = 0;
 	if (flags.hash)
 		if (!(lens->num == 1 && num[7] == '0'))
 			lens->sign = 2;
+	if (flags.dot && flags.pcsn > lens->num)
+		lens->prec = flags.pcsn - lens->num;
 	if (flags.minfw > lens->num + lens->sign)
 		lens->spaces = flags.minfw - lens->num - lens->spaces;
-	lens->total = lens->spaces + lens->sign + lens->num;
+	lens->total = lens->spaces + lens->sign + lens->prec + lens->num;
 }
 
 char static	*hexnum(unsigned int num, char *base)
@@ -64,28 +67,33 @@ char static	*hexnum(unsigned int num, char *base)
 	return (ret);
 }
 
-void static	hexbuilder(t_flags flags, t_digitlens lens, char **ret, char **temp)
+void static	hexbuilder(t_flags flags, t_digitlens lens, char *ret, char **temp)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 8 - lens.num;
-	if (!flags.dash)
+	if (!flags.dash && !flags.zero)
 		while (lens.spaces--)
-			ret[0][i++] = ' ';
+			ret[i++] = ' ';
 	if (lens.sign)
 	{
-		ret[0][i++] = '0';
-		ret[0][i++] = 'x';
+		ret[i++] = '0';
+		ret[i++] = 'x';
 	}
+	if (flags.zero && !flags.dash)
+		while (lens.spaces--)
+			ret[i++] = '0';
+	while (lens.prec--)
+		ret[i++] = '0';
 	while (lens.num--)
-		ret[0][i++] = temp[0][j++];
+		ret[i++] = temp[0][j++];
 	free(temp[0]);
 	temp[0] = NULL;
 	if (flags.dash)
 		while (lens.spaces--)
-			ret[0][i++] = ' ';
+			ret[i++] = ' ';
 }
 
 char	*ptf_hex(t_flags flags, va_list list)
@@ -101,7 +109,7 @@ char	*ptf_hex(t_flags flags, va_list list)
 	ret = ptf_zalloc(lens.total);
 	if (!ret)
 		return (NULL);
-	hexbuilder(flags, lens, &ret, &temp);
+	hexbuilder(flags, lens, ret, &temp);
 	if (flags.conv == 'X')
 		ptf_toupper(ret);
 	return (ret);
