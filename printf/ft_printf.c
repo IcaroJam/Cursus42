@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/09 10:55:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/09 13:59:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ char static	*argumentor(t_flags flags, va_list list, t_pbuff *buffer)
 	else if (flags.conv == 'u')
 		ret = ptf_unsigned(flags, list);
 	/** else if (flags.conv == 'p')
-	  *     ret =
-	  * else if (flags.conv == 'x' || conv == 'X')
 	  *     ret = */
+	else if (flags.conv == 'x' || flags.conv == 'X')
+	    ret = ptf_hex(flags, list);
 	else
 		return (NULL);
 	return (ret);
@@ -102,9 +102,9 @@ int	ft_printf(char const *str, ...)
   * {
   *     int	i;
   *
-  *     i = ft_printf(" %-4u ", 9);
+  *     i = ft_printf(" %x ", 1);
   *     printf("\nDevuelve: %d\n", i);
-  *     i = printf(" %-4u ", 9);
+  *     i = printf(" %x ", 1);
   *     printf("\nDevuelve: %d", i);
   *     //system("leaks a.out");
   *     return (0);
