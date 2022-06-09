@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 10:49:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/09 18:17:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:35:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ void static	hexlen(t_flags flags, t_digitlens *lens, char *num)
 			break ;
 		i++;
 	}
-	lens->num = 8 - i;
+	if (flags.dot && !flags.pcsn && num[i] == '0')
+		lens->num = 0;
+	else
+		lens->num = 8 - i;
 	lens->sign = 0;
 	lens->spaces = 0;
 	lens->prec = 0;
-	if (flags.hash)
+	if (flags.hash && lens->num)
 		if (!(lens->num == 1 && num[7] == '0'))
 			lens->sign = 2;
 	if (flags.dot && flags.pcsn > lens->num)
@@ -109,6 +112,8 @@ char	*ptf_hex(t_flags flags, va_list list)
 	ret = ptf_zalloc(lens.total);
 	if (!ret)
 		return (NULL);
+	if (flags.zero && flags.dot)
+		flags.zero = 0;
 	hexbuilder(flags, lens, ret, &temp);
 	if (flags.conv == 'X')
 		ptf_toupper(ret);
