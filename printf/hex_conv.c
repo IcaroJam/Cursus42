@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 10:49:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/09 14:00:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:08:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void static	hexlen(t_flags flags, t_digitlens *lens, char *num)
 	lens->sign = 0;
 	lens->spaces = 0;
 	if (flags.hash)
-		lens->sign = 2;
+		if (!(lens->num == 1 && num[7] == '0'))
+			lens->sign = 2;
 	if (flags.minfw > lens->num + lens->sign)
 		lens->spaces = flags.minfw - lens->num - lens->spaces;
 	lens->total = lens->spaces + lens->sign + lens->num;
@@ -73,7 +74,7 @@ void static	hexbuilder(t_flags flags, t_digitlens lens, char **ret, char **temp)
 	if (!flags.dash)
 		while (lens.spaces--)
 			ret[0][i++] = ' ';
-	if (flags.hash)
+	if (lens.sign)
 	{
 		ret[0][i++] = '0';
 		ret[0][i++] = 'x';
