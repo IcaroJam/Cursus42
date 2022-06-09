@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 10:49:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/09 18:12:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:17:50 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void static	hexlen(t_flags flags, t_digitlens *lens, char *num)
 			lens->sign = 2;
 	if (flags.dot && flags.pcsn > lens->num)
 		lens->prec = flags.pcsn - lens->num;
-	if (flags.minfw > lens->num + lens->sign)
-		lens->spaces = flags.minfw - lens->num - lens->spaces;
+	if (flags.minfw > lens->num + lens->sign + lens->prec)
+		lens->spaces = flags.minfw - lens->num - lens->prec - lens->sign;
 	lens->total = lens->spaces + lens->sign + lens->prec + lens->num;
 }
 
