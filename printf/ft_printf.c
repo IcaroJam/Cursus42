@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/10 12:32:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/10 16:12:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ int	ft_printf(char const *str, ...)
   * {
   *     int	i;
   *
-  *     i = ft_printf(" %p ", 1);
+  *     i = ft_printf(" %-1c %-2c %-3c ", '2', '1', 0);
   *     printf("\nDevuelve: %d\n", i);
-  *     i = printf(" %p ", 1);
+  *     i = printf(" %-1c %-2c %-3c ", '2', '1', 0);
   *     printf("\nDevuelve: %d", i);
   *     //system("leaks a.out");
   *     return (0);

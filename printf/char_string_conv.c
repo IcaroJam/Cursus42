@@ -1,75 +1,84 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils_III.c                              :+:      :+:    :+:   */
+/*   char_string_conv.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/03 16:14:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/10 16:28:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void static	chrstrlens(t_flags flags, t_digitlens *lens, char *str)
+{
+	lens->spaces = 0;
+	lens->prec = 0;
+	if (flags.conv == 'c')
+		lens->num = 1;
+	else
+	{
+		lens->num = ptf_strlen(str);
+		if (flags.dot && lens->num > flags.pcsn)
+			lens->num = flags.pcsn;
+	}
+	if (flags.minfw > lens->num)
+		lens->spaces = flags.minfw - lens->num;
+	lens->total = lens->spaces + lens->num;
+}
+
 char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer)
 {
-	int				c;
-	char			*ret;
-	unsigned int	i;
+	char		c;
+	int			i;
+	char		*ret;
+	t_digitlens	lens;
 
-	if (!flags.minfw)
-		flags.minfw = 1;
-	ret = ptf_zalloc(flags.minfw);
-	if (!ret)
-		return (NULL);
 	c = va_arg(list, int);
 	if (!c)
 		buffer->nulls++;
+	chrstrlens(flags, &lens, &c);
+	ret = ptf_zalloc(lens.total);
+	if (!ret)
+		return (NULL);
 	i = 0;
-	if (flags.dash)
-		ret[i++] = c;
-	else
-		flags.minfw--;
-	while (i < flags.minfw)
-		ret[i++] = ' ';
+	if (flags.dash && !c)
+		flags.dash = 0;
 	if (!flags.dash)
-		ret[i++] = c;
+		while (lens.spaces--)
+			ret[i++] = ' ';
+	ret[i++] = c;
+	if (flags.dash)
+		while (lens.spaces--)
+			ret[i++] = ' ';
 	return (ret);
-}
-
-void static	stringassist(char *ret, char *str, int count, int *i)
-{
-	while (count--)
-		ret[(*i)++] = *str++;
 }
 
 char	*ptf_string(t_flags flags, va_list list)
 {
-	char	*ret;
-	char	*str;
-	int		inplen;
-	int		i;
+	char		*ret;
+	char		*str;
+	int			i;
+	t_digitlens	lens;
 
 	str = va_arg(list, char *);
 	if (!str)
 		str = "(null)";
-	inplen = ptf_strlen(str);
-	if (flags.dot)
-		inplen = flags.pcsn;
-	if (flags.minfw < (unsigned int) inplen)
-		flags.minfw = inplen;
-	ret = ptf_zalloc(flags.minfw);
+	chrstrlens(flags, &lens, str);
+	ret = ptf_zalloc(lens.total);
 	if (!ret)
 		return (NULL);
 	i = 0;
-	flags.minfw -= inplen;
-	if (flags.dash)
-		stringassist(ret, str, inplen, &i);
-	while (flags.minfw--)
-		ret[i++] = ' ';
 	if (!flags.dash)
-		stringassist(ret, str, inplen, &i);
+		while (lens.spaces--)
+			ret[i++] = ' ';
+	while (lens.num--)
+		ret[i++] = *str++;
+	if (flags.dash)
+		while (lens.spaces--)
+			ret[i++] = ' ';
 	return (ret);
 }
 
