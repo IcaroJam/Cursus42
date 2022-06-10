@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:38:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/10 12:30:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/10 13:13:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ char static	*ptrnum(unsigned long num, char *base)
 	char	*ret;
 	int		i;
 
-	ret = malloc(sizeof(char) * 13);
+	ret = malloc(sizeof(char) * 17);
 	if (!ret)
 		return (NULL);
 	i = 0;
-	ret[12] = 0;
-	while (i < 12)
+	ret[16] = 0;
+	while (i < 16)
 		ret[i++] = '0';
 	while (num > 0)
 	{
@@ -42,7 +42,7 @@ void static	ptrlen(t_flags flags, t_digitlens *lens, char *num)
 		num++;
 		lens->num++;
 	}
-	lens->num = 12 - lens->num;
+	lens->num = 16 - lens->num;
 	lens->sign = 2;
 	lens->spaces = 0;
 	if (flags.minfw > lens->num + lens->sign)
@@ -50,13 +50,13 @@ void static	ptrlen(t_flags flags, t_digitlens *lens, char *num)
 	lens->total = lens->spaces + lens->num + lens->sign;
 }
 
-void static ptrbuilder(t_flags flags, t_digitlens lens, char *ret, char *temp)
+void static	ptrbuilder(t_flags flags, t_digitlens lens, char *ret, char *temp)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 12 - lens.num;
+	j = 16 - lens.num;
 	if (!flags.dash)
 		while (lens.spaces--)
 			ret[i++] = ' ';
