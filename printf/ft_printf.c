@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/10 16:12:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/10 16:37:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,33 @@ void static	prepbuff(t_pbuff *buffer)
 	buffer->len = 0;
 }
 
+char static	*percent(t_flags flags)
+{
+	char	*ret;
+	int		i;
+
+	if (!flags.minfw)
+		flags.minfw = 1;
+	ret = ptf_zalloc(flags.minfw);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	if (!flags.dash)
+		while (flags.minfw-- > 1)
+			ret[i++] = ' ';
+	ret[i++] = '%';
+	if (flags.dash)
+		while (flags.minfw-- > 1)
+			ret[i++] = ' ';
+	return (ret);
+}
+
 char static	*argumentor(t_flags flags, va_list list, t_pbuff *buffer)
 {
 	char	*ret;
 
 	if (flags.conv == '%')
-	{
-		ret = malloc(sizeof(char) * 2);
-		ret[0] = '%';
-		ret[1] = 0;
-	}
+		ret = percent(flags);
 	else if (flags.conv == 'c')
 		ret = ptf_chars(flags, list, buffer);
 	else if (flags.conv == 's')
