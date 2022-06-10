@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:38:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/10 13:13:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/10 13:30:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void static	ptrlen(t_flags flags, t_digitlens *lens, char *num)
 		num++;
 		lens->num++;
 	}
-	lens->num = 16 - lens->num;
+	if (lens->num == 16)
+		lens->num = 1;
+	else
+		lens->num = 16 - lens->num;
 	lens->sign = 2;
 	lens->spaces = 0;
 	if (flags.minfw > lens->num + lens->sign)
@@ -74,8 +77,10 @@ char	*ptf_pointer(t_flags flags, va_list list)
 	char		*ret;
 	char		*temp;
 	t_digitlens	lens;
+	void		*conv;
 
-	temp = ptrnum(va_arg(list, unsigned long), "0123456789abcdef");
+	conv = va_arg(list, void *);
+	temp = ptrnum((unsigned long) conv, "0123456789abcdef");
 	if (!temp)
 		return (NULL);
 	ptrlen(flags, &lens, temp);
