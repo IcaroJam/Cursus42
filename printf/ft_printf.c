@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/09 13:59:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/10 12:04:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char static	*argumentor(t_flags flags, va_list list, t_pbuff *buffer)
 		ret = ptf_digit(flags, list);
 	else if (flags.conv == 'u')
 		ret = ptf_unsigned(flags, list);
-	/** else if (flags.conv == 'p')
-	  *     ret = */
+	else if (flags.conv == 'p')
+		ret = ptf_pointer(flags, list);
 	else if (flags.conv == 'x' || flags.conv == 'X')
-	    ret = ptf_hex(flags, list);
+		ret = ptf_hex(flags, list);
 	else
 		return (NULL);
 	return (ret);

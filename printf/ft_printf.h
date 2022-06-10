@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/09 10:54:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/10 11:40:39 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ char	*ptf_string(t_flags flags, va_list list);
 char	*ptf_digit(t_flags flags, va_list list);
 char	*ptf_unsigned(t_flags flags, va_list list);
 char	*ptf_hex(t_flags flags, va_list list);
+char	*ptf_pointer(t_flags flags, va_list list);
 
 #endif
