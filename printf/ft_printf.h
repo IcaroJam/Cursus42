@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:20:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/10 11:40:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/11 15:45:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_pbuff
 	char	*buff;
 	int		nulls;
 	int		len;
+	int		nflag;
 }	t_pbuff;
 
 typedef struct s_digitlens

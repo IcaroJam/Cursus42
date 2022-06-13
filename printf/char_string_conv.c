@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/10 16:28:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/13 12:54:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ void static	chrstrlens(t_flags flags, t_digitlens *lens, char *str)
 	lens->total = lens->spaces + lens->num;
 }
 
+void static	nullidentify(t_pbuff *buffer, char c)
+{
+	buffer->nflag = 0;
+	if (!c)
+		buffer->nflag = 1;
+}
+
 char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer)
 {
 	char		c;
@@ -37,8 +44,7 @@ char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer)
 	t_digitlens	lens;
 
 	c = va_arg(list, int);
-	if (!c)
-		buffer->nulls++;
+	nullidentify(buffer, c);
 	chrstrlens(flags, &lens, &c);
 	ret = ptf_zalloc(lens.total);
 	if (!ret)
@@ -84,17 +90,7 @@ char	*ptf_string(t_flags flags, va_list list)
 
 void	ptf_putstr(t_pbuff *buffer)
 {
-	int	i;
-	int	templen;
-
-	i = 0;
 	buffer->len = ptf_truelen(buffer);
-	templen = buffer->len;
-	while (templen)
-	{
-		write(1, &buffer->buff[i], 1);
-		i++;
-		templen--;
-	}
+	write(1, buffer->buff, buffer->len);
 	free(buffer->buff);
 }
