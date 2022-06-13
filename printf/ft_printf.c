@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/13 13:00:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:33:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	ft_printf(char const *str, ...)
 	while (*str)
 	{
 		buffer.buff = ptf_concsection(&buffer, &str);
-		buffer.len = ptf_truelen(&buffer);
 		if (!buffer.buff)
 			return (-1);
 		if (*str == '%')
@@ -113,17 +112,3 @@ int	ft_printf(char const *str, ...)
 	ptf_putstr(&buffer);
 	return (buffer.len);
 }
-/** 
-  * #include <stdio.h>
-  *
-  * int	main(void)
-  * {
-  *     int	i;
-  *
-  *     i = ft_printf(" %-1c %-2c %-3c ", '0', 0, '1');
-  *     printf("\nDevuelve: %d\n", i);
-  *     i = printf(" %-1c %-2c %-3c ", '0', 0, '1');
-  *     printf("\nDevuelve: %d", i);
-  *     //system("leaks a.out");
-  *     return (0);
-  * } */
