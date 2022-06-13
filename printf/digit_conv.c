@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:19:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/09 17:09:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:10:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,34 @@ void static	getthatlength(t_digitlens *lens, t_flags flags, char *temp)
 	lens->total = lens->spaces + lens->sign + lens->prec + lens->num;
 }
 
+void static	digitalizer(t_flags flags, t_digitlens lens, char *ret, char *temp)
+{
+	int	i;
+
+	i = 0;
+	if (flags.zero && flags.dot)
+		flags.zero = 0;
+	if (!flags.dash && !flags.zero)
+		i += separator(ret, flags, lens.spaces);
+	i += signature(&ret[i], *temp, flags);
+	if (flags.zero)
+		i += separator(&ret[i], flags, lens.spaces);
+	while (flags.pcsn-- > lens.num)
+		ret[i++] = '0';
+	if (*temp == '-')
+		temp++;
+	if (lens.num)
+		while (*temp)
+			ret[i++] = *temp++;
+	if (flags.dash)
+		separator(&ret[i], flags, lens.spaces);
+}
+
 char	*ptf_digit(t_flags flags, va_list list)
 {
 	t_digitlens	lengths;
 	char		*ret;
 	char		*temp;
-	int			i;
 
 	temp = ptf_itoa(va_arg(list, int));
 	if (!temp)
@@ -86,25 +108,7 @@ char	*ptf_digit(t_flags flags, va_list list)
 	ret = ptf_zalloc(lengths.total);
 	if (!ret)
 		return (NULL);
-	i = 0;
-	if (flags.zero && flags.dot)
-		flags.zero = 0;
-	if (!flags.dash && !flags.zero)
-		i += separator(ret, flags, lengths.spaces);
-	i += signature(&ret[i], *temp, flags);
-	if (flags.zero)
-		i += separator(&ret[i], flags, lengths.spaces);
-	while (flags.pcsn-- > lengths.num)
-		ret[i++] = '0';
-	if (*temp == '-')
-		temp++;
-	if (lengths.num)
-		while (*temp)
-			ret[i++] = *temp++;
-	if (flags.dash)
-		separator(&ret[i], flags, lengths.spaces);
-	free (temp - lengths.num - lengths.isneg);
+	digitalizer(flags, lengths, ret, temp);
+	free (temp);
 	return (ret);
 }
-
-// SEPARADOR // SIGNO/ESPACIO // RELLENO DE PCS // NUM // SEPARADOR
