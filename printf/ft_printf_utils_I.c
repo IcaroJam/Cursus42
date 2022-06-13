@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:50:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/13 12:53:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/13 12:59:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ptf_strjoin(t_pbuff *buffer, char *str)
 	i = 0;
 	slen = joinassist(buffer, str);
 	buffer->len = ptf_truelen(buffer);
-	ret = malloc(sizeof(char) * (buffer->len + slen + 1));
+	ret = ptf_zalloc(buffer->len + slen);
 	if (!ret)
 		return (NULL);
 	templen = buffer->len;
@@ -79,7 +79,6 @@ char	*ptf_strjoin(t_pbuff *buffer, char *str)
 	tempslen = slen;
 	while (tempslen--)
 		*ret++ = *str++;
-	*ret = 0;
 	free(buffer->buff);
 	buffer->nulls += buffer->nflag;
 	buffer->nflag = 0;

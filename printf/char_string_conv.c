@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:11:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/13 12:54:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/13 13:01:39 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer)
 	if (!ret)
 		return (NULL);
 	i = 0;
-	if (flags.dash && !c)
-		flags.dash = 0;
 	if (!flags.dash)
 		while (lens.spaces--)
 			ret[i++] = ' ';
