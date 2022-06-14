@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:19:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/13 15:40:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:07:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,3 @@ int	ft_printf(char const *str, ...)
 	ptf_putstr(&buffer);
 	return (buffer.len);
 }
-/** 
-  * #include <stdio.h>
-  * #include <limits.h>
-  *
-  * int	main(void)
-  * {
-  *     int	i;
-  *
-  *     i = ft_printf("%-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d", 0, 5, -1, -10, 100, -1862, INT_MIN, INT_MAX);
-  *     printf("\nDevuelve: %d\n", i);
-  *     i = printf("%-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d, %-+1.10d", 0, 5, -1, -10, 100, -1862, INT_MIN, INT_MAX);
-  *     printf("\nDevuelve: %d", i);
-  * } */
