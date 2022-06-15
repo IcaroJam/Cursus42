@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/05/03 17:31:28 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/15 15:32:00 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BONUS_OBJS	= $(BONUS_SRC:.c=.o)
 
 
 
-all:	$(NAME)
+all:	bonus
 
 # This action isn't really needed since make has it built-in when calling $(OBJS), but I like the msg :)
 ###################################
@@ -39,14 +39,18 @@ $(NAME):	$(OBJS)
 bonus:		$(SRC) $(BONUS_SRC)
 	@gcc $(CFLAGS) -c $(SRC) $(BONUS_SRC)
 	@echo "Objetitos con una pizca de sal ;)"
-	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+	@make -C printf
+	@echo "F's printeadas"
+	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS) printf/*.o
 	@echo "Bonus-ación completada B)"
 
 clean:
+	@make -C printf clean
 	@rm -f $(OBJS) $(BONUS_OBJS)
 	@echo "Limpieza profunda..."
 
 fclean:	clean
+	@rm -f printf/libftprintf.a
 	@rm -f $(NAME)
 
 re:		fclean all
