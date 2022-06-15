@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:31:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/15 15:38:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:45:56 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,37 +67,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *));
 
 # include <unistd.h>
 # include <stdarg.h>
-
-typedef struct s_flags
-{
-	char			conv;
-	int				dash;
-	int				zero;
-	int				dot;
-	unsigned int	minfw;
-	unsigned int	pcsn;
-	int				hash;
-	int				spc;
-	int				plus;
-}	t_flags;
-
-typedef struct s_pbuff
-{
-	char	*buff;
-	int		nulls;
-	int		len;
-	int		nflag;
-}	t_pbuff;
-
-typedef struct s_digitlens
-{
-	unsigned int	spaces;
-	unsigned int	sign;
-	int				isneg;
-	unsigned int	prec;
-	unsigned int	num;
-	unsigned int	total;
-}	t_digitlens;
 
 int		ft_printf(char const *str, ...);
 
