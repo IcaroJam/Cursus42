@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:31:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/15 15:27:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:38:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,23 +100,5 @@ typedef struct s_digitlens
 }	t_digitlens;
 
 int		ft_printf(char const *str, ...);
-/* void	deflager(t_flags *flags);
- * int		flager(char const **str, t_flags *flags);
- * void	*ptf_zalloc(int len);
- * int		ptf_sectlen(char const *str);
- * int		ptf_strlen(char const *str);
- * void	ptf_putstr(t_pbuff *buffer);
- * int		ptf_truelen(t_pbuff *buffer);
- * char	*ptf_concsection(t_pbuff *buffer, char const **str);
- * char	*ptf_strjoin(t_pbuff *buffer, char *str);
- * int		ptf_atoi(char const **str);
- * char	*ptf_itoa(int n);
- * char	*ptf_utoa(unsigned int n);
- * char	*ptf_chars(t_flags flags, va_list list, t_pbuff *buffer);
- * char	*ptf_string(t_flags flags, va_list list);
- * char	*ptf_digit(t_flags flags, va_list list);
- * char	*ptf_unsigned(t_flags flags, va_list list);
- * char	*ptf_hex(t_flags flags, va_list list);
- * char	*ptf_pointer(t_flags flags, va_list list); */
 
 #endif
