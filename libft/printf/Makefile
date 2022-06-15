@@ -6,11 +6,9 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 15:29:38 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/15 15:33:12 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/15 15:37:44 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-NAME 		=	libftprintf.a
 
 CFLAGS		=	-Wall -Werror -Wextra
 
@@ -28,9 +26,6 @@ all:	$(OBJS)
 clean:
 	@rm -f $(OBJS) $(BONUS_OBJS)
 
-fclean:	clean
-	@rm -f $(NAME)
+re:		clean all
 
-re:		fclean all
-
-.PHONY:	all clean fclean re
+.PHONY:	all clean re
