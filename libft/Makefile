@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/15 15:32:00 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/15 15:37:10 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ clean:
 	@echo "Limpieza profunda..."
 
 fclean:	clean
-	@rm -f printf/libftprintf.a
 	@rm -f $(NAME)
 
 re:		fclean all
