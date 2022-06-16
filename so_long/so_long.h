@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 15:46:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:30:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ typedef struct s_map
 
 void	ft_pxlp(t_image *img, int x, int y, int color);
 void	printerror(char *msg);
+void	premap(char *file, t_map *map);
 
 #endif
