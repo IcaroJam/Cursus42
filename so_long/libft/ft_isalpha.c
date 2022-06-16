@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 13:33:40 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/04/25 15:35:07 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/04/25 15:36:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-
-# include "libft/libft.h"
-# include <stdio.h>
-# include "mlx/mlx.h"
-
-typedef struct s_program
+int	ft_isalpha(int c)
 {
-	void	*mlxptr;
-	void	*winptr;
-}	t_program;
-
-typedef struct s_image
-{
-	void	*imgptr;
-	char	*addr;
-	int		bpp;
-	int		line_size;
-	int		endian;
-}	t_image;
-
-void	ft_pxlp(t_image *img, int x, int y, int color);
-void	printerror(char *msg);
-
-#endif
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
+}

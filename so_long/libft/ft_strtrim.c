@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 13:33:40 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/04/26 16:53:27 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/05/03 09:53:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include "mlx/mlx.h"
-
-typedef struct s_program
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	void	*mlxptr;
-	void	*winptr;
-}	t_program;
+	size_t	roff;
+	size_t	loff;
+	char	*ret;
 
-typedef struct s_image
-{
-	void	*imgptr;
-	char	*addr;
-	int		bpp;
-	int		line_size;
-	int		endian;
-}	t_image;
-
-void	ft_pxlp(t_image *img, int x, int y, int color);
-void	printerror(char *msg);
-
-#endif
+	if (!set || !s1)
+		return (0);
+	loff = 0;
+	while (s1[loff] && ft_strchr(set, s1[loff]))
+		loff++;
+	roff = ft_strlen(s1);
+	while (roff && ft_strchr(set, s1[roff - 1]))
+		roff--;
+	ret = ft_substr(s1, loff, roff - loff);
+	return (ret);
+}

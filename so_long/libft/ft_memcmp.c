@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 13:33:40 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/04/25 19:06:35 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/05/03 09:46:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include "mlx/mlx.h"
-
-typedef struct s_program
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	void	*mlxptr;
-	void	*winptr;
-}	t_program;
+	const unsigned char	*st1 = (const unsigned char *)s1;
+	const unsigned char	*st2 = (const unsigned char *)s2;
 
-typedef struct s_image
-{
-	void	*imgptr;
-	char	*addr;
-	int		bpp;
-	int		line_size;
-	int		endian;
-}	t_image;
-
-void	ft_pxlp(t_image *img, int x, int y, int color);
-void	printerror(char *msg);
-
-#endif
+	while (n--)
+	{
+		if (*st1 != *st2)
+			return (*st1 - *st2);
+		st1++;
+		st2++;
+	}
+	return (0);
+}

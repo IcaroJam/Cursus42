@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 13:33:40 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/04/26 13:18:30 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/05/03 09:51:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include "mlx/mlx.h"
-
-typedef struct s_program
+char	*ft_strdup(const char *s1)
 {
-	void	*mlxptr;
-	void	*winptr;
-}	t_program;
+	char	*start;
+	size_t	len;
 
-typedef struct s_image
-{
-	void	*imgptr;
-	char	*addr;
-	int		bpp;
-	int		line_size;
-	int		endian;
-}	t_image;
-
-void	ft_pxlp(t_image *img, int x, int y, int color);
-void	printerror(char *msg);
-
-#endif
+	len = ft_strlen(s1);
+	start = (char *) malloc((len + 1) * sizeof(char));
+	if (!start)
+		return (0);
+	ft_strlcpy(start, s1, len + 1);
+	return (start);
+}

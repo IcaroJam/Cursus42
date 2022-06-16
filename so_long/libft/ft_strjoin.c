@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 13:33:40 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/04/26 16:40:52 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/05/03 09:51:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include "mlx/mlx.h"
-
-typedef struct s_program
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	void	*mlxptr;
-	void	*winptr;
-}	t_program;
+	size_t	len;
+	char	*ret;
 
-typedef struct s_image
-{
-	void	*imgptr;
-	char	*addr;
-	int		bpp;
-	int		line_size;
-	int		endian;
-}	t_image;
-
-void	ft_pxlp(t_image *img, int x, int y, int color);
-void	printerror(char *msg);
-
-#endif
+	if (!s1 || !s2)
+		return (0);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	ret = (char *) malloc((len + 1) * sizeof(char));
+	if (!ret)
+		return (0);
+	while (*s1)
+		*ret++ = *s1++;
+	while (*s2)
+		*ret++ = *s2++;
+	*ret = 0;
+	return (ret - len);
+}

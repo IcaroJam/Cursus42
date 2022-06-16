@@ -6,31 +6,37 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/16 11:00:45 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/16 11:57:15 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/16 13:31:36 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
-SRCS	= prueba.c render_utils.c
+SRCS	= main.c render_utils.c errors.c
 
 OBJS	= $(SRCS:.c=.o)
 
 CFLAGS	= -Wall -Werror -Wextra -Imlx -c
 
-MLX		= mlx/libmlx.a
+MLX		= ./mlx/libmlx.a
+
+LIBFT	= ./libft/libft.a
 
 
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(MLX)
-	@gcc $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME):	$(OBJS) $(MLX) $(LIBFT)
+	@gcc $(OBJS) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "Ejecutable finiquitado! A jugar :)"
 
 $(MLX):
 	@make -C ./mlx
 	@echo "Libreriosa tortuosa"
+
+$(LIBFT):
+	@make -C ./libft
+	@echo "Libft-ación"
 
 .c.o:		$(SRCS)
 	@gcc $(CFLAGS) -c $(SRCS)
@@ -42,6 +48,7 @@ clean:
 
 libclean:
 	@make -C ./mlx clean
+	@make -C ./libft fclean
 
 fclean:		clean
 	@rm -rf $(NAME)
