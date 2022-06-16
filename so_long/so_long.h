@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 11:52:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/16 12:09:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
-void	ft_mlx_pixel_put(t_image *img, int x, int y, int color);
+void	ft_pxlp(t_image *img, int x, int y, int color);
 
 #endif
