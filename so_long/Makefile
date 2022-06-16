@@ -6,13 +6,13 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/16 11:00:45 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/16 11:18:16 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/16 11:57:15 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
-SRCS	= prueba.c
+SRCS	= prueba.c render_utils.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -37,13 +37,15 @@ $(MLX):
 	@echo "Objetos objetacionados"
 
 clean:
-	@make -C ./mlx clean
 	@rm -rf $(OBJS)
 	@echo "Limpiando la habitación..."
+
+libclean:
+	@make -C ./mlx clean
 
 fclean:		clean
 	@rm -rf $(NAME)
 
 re:			fclean all
 
-.PHONY: clean fclean re all
+.PHONY: clean fclean re all libclean
