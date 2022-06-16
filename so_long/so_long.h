@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 13:33:40 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/16 15:46:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+# include <fcntl.h>
 # include <stdio.h>
 # include "mlx/mlx.h"
+
+# define WINHEIGHT 1080
+# define WINWIDTH 1920
 
 typedef struct s_program
 {
@@ -31,6 +35,14 @@ typedef struct s_image
 	int		line_size;
 	int		endian;
 }	t_image;
+
+typedef struct s_map
+{
+	char	*str;
+	int		rows;
+	int		clms;
+	int		len;
+}	t_map;
 
 void	ft_pxlp(t_image *img, int x, int y, int color);
 void	printerror(char *msg);
