@@ -6,13 +6,13 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/16 11:00:45 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/17 11:30:49 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/17 12:00:23 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
-SRCS	= main.c render_utils.c errors.c mapcheck.c
+SRCS	= main.c render_utils.c errors.c mapcheck.c mapcheckII.c
 
 OBJS	= $(SRCS:.c=.o)
 
