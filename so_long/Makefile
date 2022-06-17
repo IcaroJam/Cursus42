@@ -6,15 +6,15 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/16 11:00:45 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/17 18:56:41 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/17 20:43:29 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
-SRCS	= main.c render_utils.c errors.c ./mapstuff/mapcheck.c .mapcstuff/mapcheckII.c
+SRCS	= main.c render_utils.c errors.c ./mapstuff/mapcheck.c ./mapstuff/mapcheckII.c
 
-OBJS	= $(SRCS:.c=.o)
+OBJS	= ./*.o
 
 CFLAGS	= -Wall -Werror -Wextra -Imlx -c
 
