@@ -6,11 +6,21 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:58:14 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/17 12:25:52 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/17 12:39:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void static	stuffcount(t_map *map, char c)
+{
+	if (c == 'C')
+		map->collec++;
+	else if (c == 'E')
+		map->egress++;
+	else if (c == 'P')
+		map->plpos++;
+}
 
 void static	top(t_map *map)
 {
@@ -43,6 +53,7 @@ void static	midrows(t_map *map, int	*irows, int *iclms)
 			printerror("Map error: LEFT WALL BREACH!!!");
 		while (*map->str != '\n')
 		{
+			stuffcount(map, *map->str);
 			map->str++;
 			(*iclms)++;
 		}
@@ -66,6 +77,14 @@ void	mapprocess(t_map *map)
 	map->str++;
 	irows = 2;
 	midrows(map, &irows, &iclms);
+	if (map->plpos == 0)
+		printerror("Map error: Player not found!");
+	if (map->plpos > 1)
+		printerror("Map error: No doppelgangers allowed!");
+	if (map->collec == 0)
+		printerror("Map error: It's a sad world without collectibles...");
+	if (map->egress == 0)
+		printerror("Map error: There is no escape...");
 	iclms = 0;
 	bottom(map, &iclms);
 	if (iclms != map->clms)

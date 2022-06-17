@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/17 12:00:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/17 12:37:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct s_map
 	int		rows;
 	int		clms;
 	int		len;
+	int		collec;
+	int		egress;
+	int		plpos;
 }	t_map;
 
 void	ft_pxlp(t_image *img, int x, int y, int color);
