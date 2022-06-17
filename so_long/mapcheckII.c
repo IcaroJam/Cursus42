@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:58:14 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/17 12:39:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:35:15 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ void	mapprocess(t_map *map)
 	map->str++;
 	irows = 2;
 	midrows(map, &irows, &iclms);
+	iclms = 0;
+	bottom(map, &iclms);
+	if (iclms != map->clms)
+		printerror("Map error: Wall shift???");
 	if (map->plpos == 0)
 		printerror("Map error: Player not found!");
 	if (map->plpos > 1)
@@ -85,9 +89,5 @@ void	mapprocess(t_map *map)
 		printerror("Map error: It's a sad world without collectibles...");
 	if (map->egress == 0)
 		printerror("Map error: There is no escape...");
-	iclms = 0;
-	bottom(map, &iclms);
-	if (iclms != map->clms)
-		printerror("Map error: Wall shift???");
 	map->str = originalstr;
 }

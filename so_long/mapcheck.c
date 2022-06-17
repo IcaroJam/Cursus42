@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/17 12:29:25 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:33:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void static	initialparse(int fd, t_map *map)
 	map->clms = 0;
 	map->rows = 0;
 	map->collec = 0;
-	map->entry = 0;
+	map->egress = 0;
 	map->plpos = 0;
 	while (read(fd, &temp, 1) > 0)
 	{
