@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/17 20:41:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:21:47 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void static	charcheck(char c)
 {
 	if (!(c == '1' || c == '0' || c == 'C' || c == 'E'
-			|| c == 'P' || c == '\n'))
+			|| c == 'P' || c == 'B' || c == '\n'))
 		printerror("Map error: Illegal tile.");
 }
 
@@ -40,6 +40,42 @@ void static	initialparse(int fd, t_map *map)
 	}
 }
 
+void static	tilealloc(t_map *map)
+{
+	int	y;
+
+	map->tile = malloc(sizeof(t_image *) * (map->rows));
+	if (!map->tile)
+		printerror("Failed to allocate memory for a row of tiles.");
+	y = 0;
+	while (y < map->rows)
+	{
+		map->tile[y] = malloc(sizeof(t_image) * (map->clms));
+		if (!map->tile[y])
+			printerror("Failed to allocate memory for the tiles of a row.");
+		y++;
+	}
+}
+
+void static	tiler(t_map *map)
+{
+	int	i;
+	int	x;
+	int	y;
+
+	i = 0;
+	y = 0;
+	tilealloc(map);
+	while (map->str[i])
+	{
+		x = 0;
+		while (map->str[i] != '\n')
+			map->tile[y][x++].type = map->str[i++];
+		i++;
+		y++;
+	}
+}
+
 void	premap(char *file, t_map *map)
 {
 	int		fd;
@@ -54,6 +90,8 @@ void	premap(char *file, t_map *map)
 	if (fd == -1)
 		printerror("Error while reopening map file.");
 	read(fd, map->str, map->len);
+	map->str[map->len] = 0;
 	close(fd);
 	mapprocess(map);
+	tiler(map);
 }

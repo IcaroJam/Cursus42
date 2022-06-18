@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:47:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/16 16:31:30 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:26:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ void static	inputhandler(int argc, char *argv)
 
 int	main(int argc, char **argv)
 {
-	//t_program	mlx;
-	t_map	map;
+	t_program	mlx;
 
 	inputhandler(argc, argv[1]);
-	premap(argv[1], &map);
-	//mlx.mlxptr = mlx_init();
-	//if (!mlx.mlxptr)
-	//	return (1);
-	//mlx.winptr = mlx_new_window(mlx.mlxptr, WINWIDTH, WINHEIGHT, "ThisIsATest B)");
-	//mlx_loop(mlx.mlxptr);
+	premap(argv[1], &mlx.map);
+	mlx.mlxptr = mlx_init();
+	if (!mlx.mlxptr)
+		return (1);
+	mlx.winptr = mlx_new_window(mlx.mlxptr, mlx.map.clms * 80,
+			mlx.map.rows * 80, "ThisIsATest B)");
+	rendermap(&mlx);
+	mlx_loop(mlx.mlxptr);
 	return (0);
 }
