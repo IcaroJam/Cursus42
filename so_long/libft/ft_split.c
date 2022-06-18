@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/11 09:32:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/18 15:19:22 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@ static char	*ft_stringalloc(char const *str, char c, size_t *newoff)
 	wlen = 0;
 	while (str[wlen] && str[wlen] != c)
 		wlen++;
-	ret = (char *) malloc((wlen + 1) * sizeof(char));
-	*newoff = wlen;
+	ret = malloc(sizeof(char) * (wlen + 1));
 	if (!ret)
-	{
-		free(ret);
 		return (NULL);
-	}
+	*newoff = wlen;
 	ft_strlcpy(ret, str, wlen + 1);
 	return (ret);
 }
@@ -45,7 +42,7 @@ static size_t	ft_wordcount(char const *s, char c)
 	return (words);
 }
 
-static void	*ft_destroyer(char **arr, size_t words)
+static void	ft_destroyer(char **arr, size_t words)
 {
 	size_t	i;
 
@@ -53,7 +50,6 @@ static void	*ft_destroyer(char **arr, size_t words)
 	while (i < words)
 		free(arr[i++]);
 	free(arr);
-	return (NULL);
 }
 
 static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
@@ -68,14 +64,15 @@ static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
 	{
 		while (*s == c)
 			s++;
-		ret[retindex++] = ft_stringalloc(s, c, &i);
+		ret[retindex] = ft_stringalloc(s, c, &i);
 		s += i;
 		wsplit++;
-		if (!ret[retindex - 1])
+		if (!ret[retindex])
 		{
 			ft_destroyer(ret, wsplit);
-			break ;
+			return (NULL);
 		}
+		retindex++;
 	}
 	if (wsplit == words)
 		ret[retindex] = NULL;

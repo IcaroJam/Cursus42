@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 15:35:34 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:53:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/18 15:47:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*ret;
-	size_t	slen;
+	char			*ret;
+	unsigned int	slen;
 
 	if (!s)
 		return (0);
@@ -23,6 +23,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (slen <= start)
 	{
 		ret = (char *) malloc(sizeof(char));
+		if (!ret)
+			return (NULL);
 		*ret = 0;
 		return (ret);
 	}
@@ -30,7 +32,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = slen - start;
 	ret = (char *) malloc((len + 1) * sizeof(char));
 	if (!ret)
-		return (0);
+		return (NULL);
 	ft_strlcpy(ret, &s[start], len + 1);
 	return (ret);
 }
