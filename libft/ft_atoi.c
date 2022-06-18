@@ -6,12 +6,14 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 21:34:53 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/11 11:06:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/18 15:34:40 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 static const char	*ft_prep(const char *str, int *isneg)
 {
-	while ((*str >= 8 && *str <= 13) || *str == ' ')
+	while (*str == '\t' || *str == '\v' || *str == ' '
+		|| *str == '\n' || *str == '\r' || *str == '\f')
 		str++;
 	if (*str == '-')
 	{
