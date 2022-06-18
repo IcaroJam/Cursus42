@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:31:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/15 15:45:56 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:57:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *));
 # include <stdarg.h>
 
 int		ft_printf(char const *str, ...);
+
+// Math extras:
+
+int		ft_abs(int n);
+int		ft_ipow(int x, int n);
 
 #endif
