@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 17:21:47 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:40:10 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void static	initialparse(int fd, t_map *map)
 void static	tilealloc(t_map *map)
 {
 	int	y;
+	int	errvar;
 
 	map->tile = malloc(sizeof(t_image *) * (map->rows));
 	if (!map->tile)
@@ -52,7 +53,13 @@ void static	tilealloc(t_map *map)
 	{
 		map->tile[y] = malloc(sizeof(t_image) * (map->clms));
 		if (!map->tile[y])
+		{
+			errvar = 0;
+			while (errvar++ < y)
+				free(map->tile[errvar]);
+			free(map->tile);
 			printerror("Failed to allocate memory for the tiles of a row.");
+		}
 		y++;
 	}
 }

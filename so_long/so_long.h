@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 16:20:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:43:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	printerror(char *msg);
 void	premap(char *file, t_map *map);
 void	mapprocess(t_map *map);
 void	rendermap(t_program *mlx);
+void	vanish_tiles(t_map *map);
 
 #endif
