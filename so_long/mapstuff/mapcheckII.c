@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:58:14 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 12:59:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:13:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void static	midrows(t_map *map, int	*irows, int *iclms, int *i)
 			maperror(map, "Map error: LEFT WALL BREACH!!!");
 		while (map->str[*i] != '\n')
 		{
-			stuffcount(map, *map->str);
+			stuffcount(map, map->str[*i]);
 			(*i)++;
 			(*iclms)++;
 		}
