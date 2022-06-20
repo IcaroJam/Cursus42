@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 18:14:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:07:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_program
 	void	*winptr;
 	t_map	map;
 	t_image	wllsprt;
+	t_image	bgsprt;
 	t_anim	coinsprt;
 	t_anim	exitsprt;
 	t_anim	playsprt;

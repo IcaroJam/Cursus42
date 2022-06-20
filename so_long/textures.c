@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:52:46 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 18:58:52 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:08:56 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void static	texerror(t_program *mlx)
 {
-	if (!mlx->wllsprt.imptr
+	if (!mlx->wllsprt.imptr || !mlx->bgsprt.imptr
 		|| !mlx->coinsprt.frame0 || !mlx->coinsprt.frame1
 		|| !mlx->exitsprt.frame0 || !mlx->exitsprt.frame1
 		|| !mlx->playsprt.frame0 || !mlx->playsprt.frame1)
@@ -26,6 +26,8 @@ void	textureinit(t_program *mlx)
 	mlx->xspsz = 80;
 	mlx->yspsz = 80;
 	mlx->wllsprt.imptr = mlx_xpm_file_to_image(mlx, "./sprites/Wall.xpm",
+			&mlx->xspsz, &mlx->yspsz);
+	mlx->bgsprt.imptr = mlx_xpm_file_to_image(mlx, "./sprites/Back.xpm",
 			&mlx->xspsz, &mlx->yspsz);
 	mlx->coinsprt.frame0 = mlx_xpm_file_to_image(mlx, "./sprites/Collect.xpm",
 			&mlx->xspsz, &mlx->yspsz);
