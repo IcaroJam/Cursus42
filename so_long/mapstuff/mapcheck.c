@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 16:59:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:14:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void static	tilealloc(t_map *map)
 	int	y;
 	int	errvar;
 
-	map->tile = malloc(sizeof(t_image *) * (map->rows));
+	map->tile = malloc(sizeof(t_tile *) * (map->rows));
 	if (!map->tile)
 		printerror("Failed to allocate memory for a row of tiles.");
 	y = 0;
 	while (y < map->rows)
 	{
-		map->tile[y] = malloc(sizeof(t_image) * (map->clms));
+		map->tile[y] = malloc(sizeof(t_tile) * (map->clms));
 		if (!map->tile[y])
 		{
 			errvar = 0;
