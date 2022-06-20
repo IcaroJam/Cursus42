@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:47:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 20:04:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 17:51:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 		return (1);
 	mlx.winptr = mlx_new_window(mlx.mlxptr, mlx.map.clms * 80,
 			mlx.map.rows * 80, "ThisIsATest B)");
-	rendermap(&mlx);
+	textureinit(&mlx);
 	mlx_hook(mlx.winptr, 17, 0, closer, &mlx);
 	mlx_loop(mlx.mlxptr);
 	return (0);
