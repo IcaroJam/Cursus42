@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:52:46 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 18:48:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:58:52 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	textureinit(t_program *mlx)
 	mlx->playsprt.frame1 = mlx_xpm_file_to_image(mlx, "./sprites/Player.xpm",
 			&mlx->xspsz, &mlx->yspsz);
 	texerror(mlx);
+	rendermap(mlx);
 }

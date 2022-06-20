@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:31:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 13:13:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:00:32 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdlib.h>
 
 void	vanish_tiles(t_map *map)
 {
@@ -27,6 +26,16 @@ void	vanish_tiles(t_map *map)
 
 int	closer(void *program)
 {
-	vanish_tiles(&((t_program *)program)->map);
+	t_program	*mlx;
+
+	mlx = program;
+	mlx_destroy_image(mlx->mlxptr, mlx->wllsprt.imptr);
+	mlx_destroy_image(mlx->mlxptr, mlx->coinsprt.frame0);
+	mlx_destroy_image(mlx->mlxptr, mlx->coinsprt.frame1);
+	mlx_destroy_image(mlx->mlxptr, mlx->exitsprt.frame0);
+	mlx_destroy_image(mlx->mlxptr, mlx->exitsprt.frame1);
+	mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame0);
+	mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame1);
+	vanish_tiles(&mlx->map);
 	return (0);
 }

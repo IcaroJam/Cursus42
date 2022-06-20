@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 12:53:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:59:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void static	tiler(t_map *map)
 	{
 		x = 0;
 		while (map->str[i] != '\n')
-			map->tile[y][x++].type = map->str[i++];
+		{
+			map->tile[y][x].type = map->str[i++];
+			map->tile[y][x++].update = 1;
+		}
 		i++;
 		y++;
 	}

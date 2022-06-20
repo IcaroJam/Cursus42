@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:45:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 17:27:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:58:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,24 @@
   *		// ESTO ES PA QUE DE ERROR DE NORMA LOL. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   * } */
 
-void static	rendertile(t_program *mlx, int x, int y, char *spritedir)
+void static	spritecompass(t_program *mlx, int x, int y)
 {
-	mlx->map.tile[y][x].imptr = mlx_xpm_file_to_image(mlx->mlxptr, spritedir,
-			&mlx->xspsz, &mlx->yspsz);
-	mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->map.tile[y][x].imptr,
-		80 * x, 80 * y);
+	if (mlx->map.tile[y][x].type == '1')
+		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->wllsprt.imptr,
+			80 * x, 80 * y);
+	else if (mlx->map.tile[y][x].type == 'P')
+		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->playsprt.frame0,
+			80 * x, 80 * y);
+	else if (mlx->map.tile[y][x].type == 'C')
+		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->coinsprt.frame0,
+			80 * x, 80 * y);
+	else if (mlx->map.tile[y][x].type == 'B')
+		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->playsprt.frame0,
+			80 * x, 80 * y);
+	else if (mlx->map.tile[y][x].type == 'E')
+		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->exitsprt.frame0,
+			80 * x, 80 * y);
+	mlx->map.tile[y][x].update = 0;
 }
 
 void	rendermap(t_program *mlx)
@@ -35,23 +47,13 @@ void	rendermap(t_program *mlx)
 	int	x;
 
 	y = 0;
-	mlx->xspsz = 80;
-	mlx->yspsz = 80;
 	while (y < mlx->map.rows)
 	{
 		x = 0;
 		while (x < mlx->map.clms)
 		{
-			if (mlx->map.tile[y][x].type == '1')
-				rendertile(mlx, x, y, "./sprites/Wall.xpm");
-			else if (mlx->map.tile[y][x].type == 'P')
-				rendertile(mlx, x, y, "./sprites/Player.xpm");
-			else if (mlx->map.tile[y][x].type == 'C')
-				rendertile(mlx, x, y, "./sprites/Collect.xpm");
-			else if (mlx->map.tile[y][x].type == 'B')
-				rendertile(mlx, x, y, "");
-			else if (mlx->map.tile[y][x].type == 'E')
-				rendertile(mlx, x, y, "./sprites/Egress.xpm");
+			if (mlx->map.tile[y][x].update)
+				spritecompass(mlx, x, y);
 			x++;
 		}
 		y++;
