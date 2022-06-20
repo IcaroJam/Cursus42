@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:31:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 20:08:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:32:50 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	vanish_tiles(t_map *map)
 	while (y < map->rows)
 		free(map->tile[y++]);
 	free(map->tile);
+	free(map->str);
 	exit(0);
 }
 

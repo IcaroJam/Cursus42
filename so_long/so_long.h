@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 20:08:08 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:49:47 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_program
 
 void	ft_pxlp(t_image *img, int x, int y, int color);
 void	printerror(char *msg);
+void	maperror(t_map *map, char *msg);
 void	premap(char *file, t_map *map);
 void	mapprocess(t_map *map);
 void	rendermap(t_program *mlx);

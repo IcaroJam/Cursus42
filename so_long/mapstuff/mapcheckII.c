@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:58:14 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 16:40:32 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:59:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,72 +22,71 @@ void static	stuffcount(t_map *map, char c)
 		map->plpos++;
 }
 
-void static	top(t_map *map)
+void static	top(t_map *map, int *i)
 {
-	while (*map->str != '\n')
+	while (map->str[*i] != '\n')
 	{
-		if (*map->str != '1')
-			printerror("Map error: UPPER WALL BREACH!!!");
-		map->str++;
+		if (map->str[*i] != '1')
+			maperror(map, "Map error: UPPER WALL BREACH!!!");
+		(*i)++;
 		map->clms++;
 	}
 }
 
-void static	bottom(t_map *map, int	*iclms)
+void static	bottom(t_map *map, int	*iclms, int *i)
 {
-	while (*map->str != '\n')
+	while (map->str[*i] != '\n')
 	{
-		if (*map->str != '1')
-			printerror("Map error: LOWER WALL BREACH!!!");
-		map->str++;
+		if (map->str[*i] != '1')
+			maperror(map, "Map error: LOWER WALL BREACH!!!");
+		(*i)++;
 		(*iclms)++;
 	}
 }
 
-void static	midrows(t_map *map, int	*irows, int *iclms)
+void static	midrows(t_map *map, int	*irows, int *iclms, int *i)
 {
 	while (*irows < map->rows)
 	{
 		*iclms = 0;
-		if (*map->str != '1')
-			printerror("Map error: LEFT WALL BREACH!!!");
-		while (*map->str != '\n')
+		if (map->str[*i] != '1')
+			maperror(map, "Map error: LEFT WALL BREACH!!!");
+		while (map->str[*i] != '\n')
 		{
 			stuffcount(map, *map->str);
-			map->str++;
+			(*i)++;
 			(*iclms)++;
 		}
-		if (map->str[-1] != '1')
-			printerror("Map error: RIGHT WALL BREACH!!!");
+		if (map->str[*i - 1] != '1')
+			maperror(map, "Map error: RIGHT WALL BREACH!!!");
 		if (*iclms != map->clms)
-			printerror("Map error: Wall shift???");
-		map->str++;
+			maperror(map, "Map error: Wall shift???");
+		(*i)++;
 		(*irows)++;
 	}
 }
 
 void	mapprocess(t_map *map)
 {
-	int		irows;
-	int		iclms;
-	char	*originalstr;
+	int	irows;
+	int	iclms;
+	int	i;
 
-	originalstr = map->str;
-	top(map);
-	map->str++;
+	i = 0;
+	top(map, &i);
+	i++;
 	irows = 2;
-	midrows(map, &irows, &iclms);
+	midrows(map, &irows, &iclms, &i);
 	iclms = 0;
-	bottom(map, &iclms);
+	bottom(map, &iclms, &i);
 	if (iclms != map->clms)
-		printerror("Map error: Wall shift???");
+		maperror(map, "Map error: Wall shift???");
 	if (map->plpos == 0)
-		printerror("Map error: Player not found!");
+		maperror(map, "Map error: Player not found!");
 	if (map->plpos > 1)
-		printerror("Map error: No doppelgangers allowed!");
+		maperror(map, "Map error: No doppelgangers allowed!");
 	if (map->collec == 0)
-		printerror("Map error: It's a sad world without collectibles...");
+		maperror(map, "Map error: It's a sad world without collectibles...");
 	if (map->egress == 0)
-		printerror("Map error: There is no escape...");
-	map->str = originalstr;
+		maperror(map, "Map error: There is no escape...");
 }

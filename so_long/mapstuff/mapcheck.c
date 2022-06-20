@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 17:40:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:53:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void static	tilealloc(t_map *map)
 			while (errvar++ < y)
 				free(map->tile[errvar]);
 			free(map->tile);
+			free(map->str);
 			printerror("Failed to allocate memory for the tiles of a row.");
 		}
 		y++;
@@ -95,7 +96,7 @@ void	premap(char *file, t_map *map)
 		printerror("Failed to allocate memory for map->str.");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		printerror("Error while reopening map file.");
+		maperror(map, "Error while reopening map file.");
 	read(fd, map->str, map->len);
 	map->str[map->len] = 0;
 	close(fd);
