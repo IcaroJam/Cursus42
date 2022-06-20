@@ -6,11 +6,12 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:58:14 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 13:13:23 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:47:22 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+#include <stdio.h>
 
 void static	stuffcount(t_map *map, char c)
 {

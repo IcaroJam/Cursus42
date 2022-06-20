@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:52:46 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 19:08:56 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:58:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,21 @@ void	textureinit(t_program *mlx)
 {
 	mlx->xspsz = 80;
 	mlx->yspsz = 80;
-	mlx->wllsprt.imptr = mlx_xpm_file_to_image(mlx, "./sprites/Wall.xpm",
+	mlx->wllsprt.imptr = mlx_xpm_file_to_image(mlx->mlxptr, "./sprites/Wall.xpm",
 			&mlx->xspsz, &mlx->yspsz);
-	mlx->bgsprt.imptr = mlx_xpm_file_to_image(mlx, "./sprites/Back.xpm",
+	mlx->bgsprt.imptr = mlx_xpm_file_to_image(mlx->mlxptr, "./sprites/Back.xpm",
 			&mlx->xspsz, &mlx->yspsz);
-	mlx->coinsprt.frame0 = mlx_xpm_file_to_image(mlx, "./sprites/Collect.xpm",
+	mlx->coinsprt.frame0 = mlx_xpm_file_to_image(mlx->mlxptr, "./sprites/Collect.xpm",
 			&mlx->xspsz, &mlx->yspsz);
-	mlx->coinsprt.frame1 = mlx_xpm_file_to_image(mlx, "./sprites/Collect.xpm",
+	mlx->coinsprt.frame1 = mlx_xpm_file_to_image(mlx->mlxptr, "./sprites/Collect.xpm",
 			&mlx->xspsz, &mlx->yspsz);
-	mlx->exitsprt.frame0 = mlx_xpm_file_to_image(mlx, "./sprites/Egress.xpm",
+	mlx->exitsprt.frame0 = mlx_xpm_file_to_image(mlx->mlxptr, "./sprites/Egress.xpm",
 			&mlx->xspsz, &mlx->yspsz);
-	mlx->exitsprt.frame1 = mlx_xpm_file_to_image(mlx, "./sprites/Egress.xpm",
+	mlx->exitsprt.frame1 = mlx_xpm_file_to_image(mlx->mlxptr, "./sprites/Egress.xpm",
 			&mlx->xspsz, &mlx->yspsz);
-	mlx->playsprt.frame0 = mlx_xpm_file_to_image(mlx, "./sprites/Player.xpm",
+	mlx->playsprt.frame0 = mlx_xpm_file_to_image(mlx->mlxptr, "./sprites/Player.xpm",
 			&mlx->xspsz, &mlx->yspsz);
-	mlx->playsprt.frame1 = mlx_xpm_file_to_image(mlx, "./sprites/Player.xpm",
+	mlx->playsprt.frame1 = mlx_xpm_file_to_image(mlx->mlxptr, "./sprites/Player.xpm",
 			&mlx->xspsz, &mlx->yspsz);
 	texerror(mlx);
 	rendermap(mlx);

@@ -6,11 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:31:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 19:20:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/20 20:01:52 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
 #include "so_long.h"
 
 void	vanish_tiles(t_map *map)
@@ -33,11 +32,11 @@ int	closer(void *program)
 	mlx_destroy_image(mlx->mlxptr, mlx->wllsprt.imptr);
 	mlx_destroy_image(mlx->mlxptr, mlx->bgsprt.imptr);
 	mlx_destroy_image(mlx->mlxptr, mlx->coinsprt.frame0);
-	mlx_destroy_image(mlx->mlxptr, mlx->coinsprt.frame1);
+	//mlx_destroy_image(mlx->mlxptr, mlx->coinsprt.frame1);
 	mlx_destroy_image(mlx->mlxptr, mlx->exitsprt.frame0);
-	mlx_destroy_image(mlx->mlxptr, mlx->exitsprt.frame1);
+	//mlx_destroy_image(mlx->mlxptr, mlx->exitsprt.frame1);
 	mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame0);
-	mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame1);
+	//mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame1);
 	vanish_tiles(&mlx->map);
 	return (0);
 }
