@@ -6,13 +6,13 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/16 11:00:45 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/22 12:16:46 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/22 13:07:41 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
-SRCS	= main.c render_utils.c errors.c ./mapstuff/mapcheck.c ./mapstuff/mapcheckII.c exit.c textures.c keystroked.c
+SRCS	= main.c render_utils.c errors.c ./mapstuff/mapcheck.c ./mapstuff/mapcheckII.c exit.c textures.c keystroked.c animation.c
 
 OBJS	= $(addsuffix .o, $(notdir $(basename $(SRCS))))
 

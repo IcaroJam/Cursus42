@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 12:27:59 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:15:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int	xpos;
-	int	ypos;
+	int		xpos;
+	int		ypos;
+	void	*currsprite;
 }	t_player;
 
 typedef struct s_program
@@ -72,6 +73,7 @@ typedef struct s_program
 	t_anim		coinsprt;
 	t_anim		exitsprt;
 	t_anim		playsprt;
+	int			frame;
 	int			xspsz;
 	int			yspsz;
 }	t_program;
@@ -88,5 +90,6 @@ void	textureerror(t_program *mlx, char *msg);
 void	imagedel(t_program *mlx);
 int		closer(void *program);
 int		keystroked(int key, void *program);
+int		animate(void *program);
 
 #endif

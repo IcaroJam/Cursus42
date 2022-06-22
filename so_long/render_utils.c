@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:45:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 19:12:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:03:32 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void static	spritecompass(t_program *mlx, int x, int y)
 		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->wllsprt.imptr,
 			80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'P')
-		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->playsprt.frame0,
+		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->player.currsprite,
 			80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'C')
 		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->coinsprt.frame0,
