@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 12:37:59 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:52:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void static	tilealloc(t_program *mlx)
 
 	mlx->map.tile = malloc(sizeof(t_tile *) * (mlx->map.rows));
 	if (!mlx->map.tile)
-		printerror(mlx, "Failed to allocate memory for a row of tiles.");
+		printerror(mlx, "Failed to allocate memory for rows of tiles.");
 	y = 0;
 	while (y < mlx->map.rows)
 	{
@@ -59,7 +59,7 @@ void static	tilealloc(t_program *mlx)
 				free(mlx->map.tile[errvar]);
 			free(mlx->map.tile);
 			free(mlx->map.str);
-			printerror(mlx, "Failed to allocate memory for the tiles of a row.");
+			printerror(mlx, "Failed to allocate memory for tiles.");
 		}
 		y++;
 	}

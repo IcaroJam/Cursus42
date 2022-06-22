@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 13:15:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:47:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_player
 {
 	int		xpos;
 	int		ypos;
-	void	*currsprite;
+	void	*cursprt;
 }	t_player;
 
 typedef struct s_program

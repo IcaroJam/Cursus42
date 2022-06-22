@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:48:35 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 13:26:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:50:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	animate(void *program)
 	mlx = program;
 	if (mlx->frame == 3599)
 	{
-		if (mlx->player.currsprite == mlx->playsprt.frame0)
-			mlx->player.currsprite = mlx->playsprt.frame1;
+		if (mlx->player.cursprt == mlx->playsprt.frame0)
+			mlx->player.cursprt = mlx->playsprt.frame1;
 		else
-			mlx->player.currsprite = mlx->playsprt.frame0;
+			mlx->player.cursprt = mlx->playsprt.frame0;
 		mlx->map.tile[mlx->player.ypos][mlx->player.xpos].update = 1;
 		rendermap(mlx);
 	}
