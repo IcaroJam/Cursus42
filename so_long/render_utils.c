@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:45:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 19:03:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:20:37 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void static	textupdate(t_program *mlx)
 	char	*text;
 
 	text = ft_itoa(mlx->player.moves);
-	mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->black.imptr, 
+	mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->black.imptr,
 		80 * (mlx->map.clms - 1), 80 * (mlx->map.rows - 1));
 	mlx_string_put(mlx->mlxptr, mlx->winptr, 80 * (mlx->map.clms - 0.55),
 		80 * (mlx->map.rows - 0.45), 0x00c0a682, text);
