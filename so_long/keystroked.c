@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:13:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 16:27:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:52:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,18 @@ void static	playermove(int xto, int yto, t_program *mlx)
 		{
 			mlx->map.tile[yto][xto].interacted = 1;
 			mlx->map.tile[yto][xto].update = 1;
+			mlx->player.collectedcoins++;
 		}
+	}
+	else if (mlx->map.tile[yto][xto].type == 'E'
+			&& mlx->player.collectedcoins == mlx->map.collec)
+	{
+			mlx->map.tile[mlx->player.ypos][mlx->player.xpos].type = '0';
+			mlx->map.tile[yto][xto].interacted = 1;
+			mlx->map.tile[yto][xto].update = 1;
+			mlx->map.tile[mlx->player.ypos][mlx->player.xpos].update = 1;
+			mlx->player.xpos = 0;
+			mlx->player.ypos = 0;
 	}
 	rendermap(mlx);
 }
