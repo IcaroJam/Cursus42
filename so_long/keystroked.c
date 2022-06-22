@@ -6,10 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:13:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 16:55:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:04:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "so_long.h"
 
 void static	playerupdate(t_program *mlx, int xto, int yto)
@@ -20,6 +21,7 @@ void static	playerupdate(t_program *mlx, int xto, int yto)
 	mlx->map.tile[yto][xto].update = 1;
 	mlx->player.xpos = xto;
 	mlx->player.ypos = yto;
+	ft_printf("Moves: %d\n", ++mlx->player.moves);
 }
 
 void static	playermove(int xto, int yto, t_program *mlx)
@@ -40,12 +42,13 @@ void static	playermove(int xto, int yto, t_program *mlx)
 	else if (mlx->map.tile[yto][xto].type == 'E'
 			&& mlx->player.collectedcoins == mlx->map.collec)
 	{
-			mlx->map.tile[mlx->player.ypos][mlx->player.xpos].type = '0';
-			mlx->map.tile[yto][xto].interacted = 1;
-			mlx->map.tile[yto][xto].update = 1;
-			mlx->map.tile[mlx->player.ypos][mlx->player.xpos].update = 1;
-			mlx->player.xpos = 0;
-			mlx->player.ypos = 0;
+		mlx->map.tile[mlx->player.ypos][mlx->player.xpos].type = '0';
+		mlx->map.tile[yto][xto].interacted = 1;
+		mlx->map.tile[yto][xto].update = 1;
+		mlx->map.tile[mlx->player.ypos][mlx->player.xpos].update = 1;
+		mlx->player.xpos = 0;
+		mlx->player.ypos = 0;
+		ft_printf("Moves: %d\n", ++mlx->player.moves);
 	}
 	rendermap(mlx);
 }
