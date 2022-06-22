@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:47:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 17:01:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:00:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void static	secureinit(t_program *mlx)
 	mlx->frame = 0;
 	mlx->player.collectedcoins = 0;
 	mlx->player.moves = 0;
+	mlx->player.isdead = 0;
 }
 
 int	main(int argc, char **argv)

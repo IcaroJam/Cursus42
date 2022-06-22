@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 17:00:47 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:58:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_player
 	int		ypos;
 	int		collectedcoins;
 	int		moves;
+	int		isdead;
 	void	*cursprt;
 }	t_player;
 

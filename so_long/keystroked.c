@@ -6,11 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:13:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 17:04:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:02:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "so_long.h"
 
 void static	playerupdate(t_program *mlx, int xto, int yto)
@@ -46,8 +45,7 @@ void static	playermove(int xto, int yto, t_program *mlx)
 		mlx->map.tile[yto][xto].interacted = 1;
 		mlx->map.tile[yto][xto].update = 1;
 		mlx->map.tile[mlx->player.ypos][mlx->player.xpos].update = 1;
-		mlx->player.xpos = 0;
-		mlx->player.ypos = 0;
+		mlx->player.isdead = 1;
 		ft_printf("Moves: %d\n", ++mlx->player.moves);
 	}
 	rendermap(mlx);
@@ -60,6 +58,8 @@ int	keystroked(int key, void *program)
 	mlx = program;
 	if (key == 53)
 		closer(program);
+	else if (mlx->player.isdead)
+		return (1);
 	else if (key == 0)
 		playermove(mlx->player.xpos - 1, mlx->player.ypos, mlx);
 	else if (key == 1)
