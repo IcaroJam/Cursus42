@@ -6,14 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:47:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 16:39:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:55:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
 #include "so_long.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int static	check_extension(char *argv)
 {

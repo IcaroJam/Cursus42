@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:13:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 16:52:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:55:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	keystroked(int key, void *program)
 	t_program	*mlx;
 
 	mlx = program;
-	printf("Key pressed: %d\n", key);
 	if (key == 53)
 		closer(program);
 	else if (key == 0)
