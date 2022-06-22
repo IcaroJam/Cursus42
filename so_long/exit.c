@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:31:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 20:01:52 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:16:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ void	vanish_tiles(t_map *map)
 	exit(0);
 }
 
-int	closer(void *program)
+void	imagedel(t_program *mlx)
 {
-	t_program	*mlx;
-
-	mlx = program;
 	mlx_destroy_image(mlx->mlxptr, mlx->wllsprt.imptr);
 	mlx_destroy_image(mlx->mlxptr, mlx->bgsprt.imptr);
 	mlx_destroy_image(mlx->mlxptr, mlx->coinsprt.frame0);
@@ -37,6 +34,14 @@ int	closer(void *program)
 	//mlx_destroy_image(mlx->mlxptr, mlx->exitsprt.frame1);
 	mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame0);
 	//mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame1);
+}
+
+int	closer(void *program)
+{
+	t_program	*mlx;
+
+	mlx = program;
+	imagedel(mlx);
 	vanish_tiles(&mlx->map);
 	return (0);
 }

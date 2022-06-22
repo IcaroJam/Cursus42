@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 19:07:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:19:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	mapprocess(t_map *map);
 void	textureinit(t_program *mlx);
 void	rendermap(t_program *mlx);
 void	vanish_tiles(t_map *map);
-void	textureerror(t_map *map, char *msg);
+void	textureerror(t_program *mlx, char *msg);
+void	imagedel(t_program *mlx);
 int		closer(void *program);
 
 #endif
