@@ -6,10 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:13:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 18:02:17 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:36:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "so_long.h"
 
 void static	playerupdate(t_program *mlx, int xto, int yto)
@@ -48,7 +49,6 @@ void static	playermove(int xto, int yto, t_program *mlx)
 		mlx->player.isdead = 1;
 		ft_printf("Moves: %d\n", ++mlx->player.moves);
 	}
-	rendermap(mlx);
 }
 
 int	keystroked(int key, void *program)
@@ -68,5 +68,6 @@ int	keystroked(int key, void *program)
 		playermove(mlx->player.xpos + 1, mlx->player.ypos, mlx);
 	else if (key == 13)
 		playermove(mlx->player.xpos, mlx->player.ypos - 1, mlx);
+	rendermap(mlx);
 	return (0);
 }

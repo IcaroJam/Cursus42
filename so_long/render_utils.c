@@ -6,20 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:45:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 16:57:59 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:03:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/** void	ft_pxlp(t_image *img, int x, int y, int color)
-  * {
-  *     char	*dst;
-  *
-  *     dst = img->addr + (y * img->linsz + x * (img->bpp / 8));
-  *     *(unsigned int *) dst = color;
-  *		// ESTO ES PA QUE DE ERROR DE NORMA LOL. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-  * } */
 
 void static	spritecompass(t_program *mlx, int x, int y)
 {
@@ -49,6 +40,18 @@ void static	spritecompass(t_program *mlx, int x, int y)
 	mlx->map.tile[y][x].update = 0;
 }
 
+void static	textupdate(t_program *mlx)
+{
+	char	*text;
+
+	text = ft_itoa(mlx->player.moves);
+	mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->black.imptr, 
+		80 * (mlx->map.clms - 1), 80 * (mlx->map.rows - 1));
+	mlx_string_put(mlx->mlxptr, mlx->winptr, 80 * (mlx->map.clms - 0.55),
+		80 * (mlx->map.rows - 0.45), 0x00c0a682, text);
+	free(text);
+}
+
 void	rendermap(t_program *mlx)
 {
 	int	y;
@@ -66,4 +69,5 @@ void	rendermap(t_program *mlx)
 		}
 		y++;
 	}
+	textupdate(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 17:58:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:49:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_program
 	t_map		map;
 	t_image		wllsprt;
 	t_image		bgsprt;
+	t_image		black;
 	t_anim		coinsprt;
 	t_anim		exitsprt;
 	t_anim		playsprt;
@@ -81,7 +82,6 @@ typedef struct s_program
 	int			yspsz;
 }	t_program;
 
-void	ft_pxlp(t_image *img, int x, int y, int color);
 void	printerror(t_program *mlx, char *msg);
 void	maperror(t_program *mlx, char *msg);
 void	premap(char *file, t_program *mlx);
