@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:31:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 11:50:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:59:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ void	vanish_tiles(t_map *map)
 
 	y = 0;
 	while (y < map->rows)
-		free(map->tile[y++]);
+	{
+		free(map->tile[y]);
+		map->tile[y++] = NULL;
+	}
 	free(map->tile);
+	map->tile = NULL;
 	free(map->str);
-	exit(0);
+	map->str = NULL;
 }
 
 void	imagedel(t_program *mlx)
@@ -45,5 +49,6 @@ int	closer(void *program)
 	vanish_tiles(&mlx->map);
 	mlx_destroy_window(mlx->mlxptr, mlx->winptr);
 	free(mlx->mlxptr);
+	exit(0);
 	return (0);
 }

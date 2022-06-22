@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:50:35 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 11:48:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:59:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	printerror(t_program *mlx, char *msg)
 void	maperror(t_program *mlx, char *msg)
 {
 	free(mlx->map.str);
+	mlx->map.str = NULL;
 	printerror(mlx, msg);
 }
 
@@ -32,4 +33,5 @@ void	textureerror(t_program *mlx, char *msg)
 	printf("Error\n%s", msg);
 	imagedel(mlx);
 	vanish_tiles(&mlx->map);
+	exit(1);
 }
