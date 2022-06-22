@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:58:14 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 19:47:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:41:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-#include <stdio.h>
 
 void static	stuffcount(t_map *map, char c)
 {
@@ -23,71 +22,71 @@ void static	stuffcount(t_map *map, char c)
 		map->plpos++;
 }
 
-void static	top(t_map *map, int *i)
+void static	top(t_program *mlx, int *i)
 {
-	while (map->str[*i] != '\n')
+	while (mlx->map.str[*i] != '\n')
 	{
-		if (map->str[*i] != '1')
-			maperror(map, "Map error: UPPER WALL BREACH!!!");
+		if (mlx->map.str[*i] != '1')
+			maperror(mlx, "Map error: UPPER WALL BREACH!!!");
 		(*i)++;
-		map->clms++;
+		mlx->map.clms++;
 	}
 }
 
-void static	bottom(t_map *map, int	*iclms, int *i)
+void static	bottom(t_program *mlx, int	*iclms, int *i)
 {
-	while (map->str[*i] != '\n')
+	while (mlx->map.str[*i] != '\n')
 	{
-		if (map->str[*i] != '1')
-			maperror(map, "Map error: LOWER WALL BREACH!!!");
+		if (mlx->map.str[*i] != '1')
+			maperror(mlx, "Map error: LOWER WALL BREACH!!!");
 		(*i)++;
 		(*iclms)++;
 	}
 }
 
-void static	midrows(t_map *map, int	*irows, int *iclms, int *i)
+void static	midrows(t_program *mlx, int	*irows, int *iclms, int *i)
 {
-	while (*irows < map->rows)
+	while (*irows < mlx->map.rows)
 	{
 		*iclms = 0;
-		if (map->str[*i] != '1')
-			maperror(map, "Map error: LEFT WALL BREACH!!!");
-		while (map->str[*i] != '\n')
+		if (mlx->map.str[*i] != '1')
+			maperror(mlx, "Map error: LEFT WALL BREACH!!!");
+		while (mlx->map.str[*i] != '\n')
 		{
-			stuffcount(map, map->str[*i]);
+			stuffcount(&mlx->map, mlx->map.str[*i]);
 			(*i)++;
 			(*iclms)++;
 		}
-		if (map->str[*i - 1] != '1')
-			maperror(map, "Map error: RIGHT WALL BREACH!!!");
-		if (*iclms != map->clms)
-			maperror(map, "Map error: Wall shift???");
+		if (mlx->map.str[*i - 1] != '1')
+			maperror(mlx, "Map error: RIGHT WALL BREACH!!!");
+		if (*iclms != mlx->map.clms)
+			maperror(mlx, "Map error: Wall shift???");
 		(*i)++;
 		(*irows)++;
 	}
 }
 
-void	mapprocess(t_map *map)
+void	mapprocess(t_program *mlx)
 {
 	int	irows;
 	int	iclms;
 	int	i;
 
 	i = 0;
-	top(map, &i);
+	top(mlx, &i);
 	i++;
 	irows = 2;
-	midrows(map, &irows, &iclms, &i);
+	midrows(mlx, &irows, &iclms, &i);
 	iclms = 0;
-	bottom(map, &iclms, &i);
-	if (iclms != map->clms)
-		maperror(map, "Map error: Wall shift???");
-	if (map->plpos == 0)
-		maperror(map, "Map error: Player not found!");
-	if (map->plpos > 1)
-		maperror(map, "Map error: No doppelgangers allowed!");
-	if (map->collec == 0)
-		maperror(map, "Map error: It's a sad world without collectibles...");
-	if (map->egress == 0)
-		maperror(map, "Map error: There is no escape...");
+	bottom(mlx, &iclms, &i);
+	if (iclms != mlx->map.clms)
+		maperror(mlx, "Map error: Wall shift???");
+	if (mlx->map.plpos == 0)
+		maperror(mlx, "Map error: Player not found!");
+	if (mlx->map.plpos > 1)
+		maperror(mlx, "Map error: No doppelgangers allowed!");
+	if (mlx->map.collec == 0)
+		maperror(mlx, "Map error: It's a sad world without collectibles...");
+	if (mlx->map.egress == 0)
+		maperror(mlx, "Map error: There is no escape...");
 }

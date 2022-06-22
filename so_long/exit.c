@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:31:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 11:16:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:50:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int	closer(void *program)
 	mlx = program;
 	imagedel(mlx);
 	vanish_tiles(&mlx->map);
+	mlx_destroy_window(mlx->mlxptr, mlx->winptr);
+	free(mlx->mlxptr);
 	return (0);
 }
