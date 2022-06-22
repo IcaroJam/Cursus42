@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:52:46 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/20 19:58:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:21:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void static	texerror(t_program *mlx)
 		|| !mlx->coinsprt.frame0 || !mlx->coinsprt.frame1
 		|| !mlx->exitsprt.frame0 || !mlx->exitsprt.frame1
 		|| !mlx->playsprt.frame0 || !mlx->playsprt.frame1)
-		textureerror(&mlx->map, "Failed to load sprites.");
+		textureerror(mlx, "Failed to load sprites.");
 }
 
 void	textureinit(t_program *mlx)
