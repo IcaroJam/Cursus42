@@ -6,22 +6,35 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:13:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 12:42:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:27:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void static	playerupdate(t_program *mlx, int xto, int yto)
+{
+	mlx->map.tile[mlx->player.ypos][mlx->player.xpos].type = '0';
+	mlx->map.tile[yto][xto].type = 'P';
+	mlx->map.tile[mlx->player.ypos][mlx->player.xpos].update = 1;
+	mlx->map.tile[yto][xto].update = 1;
+	mlx->player.xpos = xto;
+	mlx->player.ypos = yto;
+}
+
 void static	playermove(int xto, int yto, t_program *mlx)
 {
 	if (mlx->map.tile[yto][xto].type == '0')
+		playerupdate(mlx, xto, yto);
+	else if (mlx->map.tile[yto][xto].type == 'C')
 	{
-		mlx->map.tile[mlx->player.ypos][mlx->player.xpos].type = '0';
-		mlx->map.tile[yto][xto].type = 'P';
-		mlx->map.tile[mlx->player.ypos][mlx->player.xpos].update = 1;
-		mlx->map.tile[yto][xto].update = 1;
-		mlx->player.xpos = xto;
-		mlx->player.ypos = yto;
+		if (mlx->map.tile[yto][xto].interacted)
+			playerupdate(mlx, xto, yto);
+		else
+		{
+			mlx->map.tile[yto][xto].interacted = 1;
+			mlx->map.tile[yto][xto].update = 1;
+		}
 	}
 	rendermap(mlx);
 }

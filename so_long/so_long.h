@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 15:47:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:09:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_tile
 {
 	char	type;
 	int		update;
+	int		interacted;
 }	t_tile;
 
 typedef struct s_map
@@ -83,6 +84,7 @@ void	printerror(t_program *mlx, char *msg);
 void	maperror(t_program *mlx, char *msg);
 void	premap(char *file, t_program *mlx);
 void	mapprocess(t_program *mlx);
+void	interactivity(t_program *mlx, int i, int x, int y);
 void	textureinit(t_program *mlx);
 void	rendermap(t_program *mlx);
 void	vanish_tiles(t_map *map);

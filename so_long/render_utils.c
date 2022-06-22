@@ -6,10 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:45:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 15:51:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:23:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mlx/mlx.h"
 #include "so_long.h"
 
 /** void	ft_pxlp(t_image *img, int x, int y, int color)
@@ -23,14 +24,19 @@
 
 void static	spritecompass(t_program *mlx, int x, int y)
 {
+	mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->bgsprt.imptr,
+		80 * x, 80 * y);
 	if (mlx->map.tile[y][x].type == '1')
 		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->wllsprt.imptr,
 			80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'P')
 		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->player.cursprt,
 			80 * x, 80 * y);
-	else if (mlx->map.tile[y][x].type == 'C')
+	else if (mlx->map.tile[y][x].type == 'C' && !mlx->map.tile[y][x].interacted)
 		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->coinsprt.frame0,
+			80 * x, 80 * y);
+	else if (mlx->map.tile[y][x].type == 'C' && mlx->map.tile[y][x].interacted)
+		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->coinsprt.frame1,
 			80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'B')
 		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->playsprt.frame0,

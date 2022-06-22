@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 15:52:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:09:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,7 @@ void static	tiler(t_program *mlx)
 		x = 0;
 		while (mlx->map.str[i] != '\n')
 		{
-			if (mlx->map.str[i] == 'P')
-			{
-				mlx->player.xpos = x;
-				mlx->player.ypos = y;
-			}
+			interactivity(mlx, i, x, y);
 			mlx->map.tile[y][x].type = mlx->map.str[i++];
 			mlx->map.tile[y][x++].update = 1;
 		}
