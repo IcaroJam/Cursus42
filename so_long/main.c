@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:47:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 11:44:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 12:41:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv)
 			mlx.map.rows * 80, "ThisIsATest B)");
 	textureinit(&mlx);
 	mlx_hook(mlx.winptr, 17, 0, closer, &mlx);
+	mlx_hook(mlx.winptr, 2, 0, keystroked, &mlx);
 	mlx_loop(mlx.mlxptr);
 	return (0);
 }

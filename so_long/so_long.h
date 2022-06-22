@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 11:38:36 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/22 12:27:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,25 @@ typedef struct s_map
 	int		plpos;
 }	t_map;
 
+typedef struct s_player
+{
+	int	xpos;
+	int	ypos;
+}	t_player;
+
 typedef struct s_program
 {
-	void	*mlxptr;
-	void	*winptr;
-	t_map	map;
-	t_image	wllsprt;
-	t_image	bgsprt;
-	t_anim	coinsprt;
-	t_anim	exitsprt;
-	t_anim	playsprt;
-	int		xspsz;
-	int		yspsz;
+	void		*mlxptr;
+	void		*winptr;
+	t_player	player;
+	t_map		map;
+	t_image		wllsprt;
+	t_image		bgsprt;
+	t_anim		coinsprt;
+	t_anim		exitsprt;
+	t_anim		playsprt;
+	int			xspsz;
+	int			yspsz;
 }	t_program;
 
 void	ft_pxlp(t_image *img, int x, int y, int color);
@@ -80,5 +87,6 @@ void	vanish_tiles(t_map *map);
 void	textureerror(t_program *mlx, char *msg);
 void	imagedel(t_program *mlx);
 int		closer(void *program);
+int		keystroked(int key, void *program);
 
 #endif
