@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:58:14 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 11:41:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:26:15 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void static	stuffcount(t_map *map, char c)
 		map->egress++;
 	else if (c == 'P')
 		map->plpos++;
+	else if (c == 'B')
+		map->foes++;
 }
 
 void static	top(t_program *mlx, int *i)

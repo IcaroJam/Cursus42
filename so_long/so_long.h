@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 13:17:23 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:24:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_map
 	int		len;
 	int		collec;
 	int		egress;
+	int		foes;
 	int		plpos;
 }	t_map;
 

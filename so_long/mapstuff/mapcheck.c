@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 16:09:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:25:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void static	initialparse(int fd, t_program *mlx)
 	mlx->map.collec = 0;
 	mlx->map.egress = 0;
 	mlx->map.plpos = 0;
+	mlx->map.foes = 0;
 	while (read(fd, &temp, 1) > 0)
 	{
 		charcheck(mlx, temp);

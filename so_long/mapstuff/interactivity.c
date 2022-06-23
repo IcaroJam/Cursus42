@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 16:07:47 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 16:08:58 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:23:46 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	interactivity(t_program *mlx, int i, int x, int y)
 	{
 		mlx->player.xpos = x;
 		mlx->player.ypos = y;
+	}
+	else if (mlx->map.str[i] == 'B')
+	{
+		
 	}
 	else if (mlx->map.str[i] == 'C')
 		mlx->map.tile[y][x].interacted = 0;
