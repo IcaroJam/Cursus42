@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/16 11:00:45 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/22 16:10:04 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/23 10:05:03 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ LIBFT	= ./libft/libft.a
 
 
 
-all:		$(NAME)
+all:		bonus
+
+bonus:		$(NAME)
 
 $(NAME):	$(OBJS) $(MLX) $(LIBFT)
 	@gcc $(OBJS) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
@@ -55,4 +57,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY: clean fclean re all libclean
+.PHONY: clean fclean re all libclean .c.o bonus
