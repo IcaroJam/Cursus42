@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:13:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 11:23:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:47:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@ void static	playerupdate(t_program *mlx, int xto, int yto)
 {
 	mlx->map.tile[mlx->player.ypos][mlx->player.xpos].type = '0';
 	mlx->map.tile[mlx->player.ypos][mlx->player.xpos].update = 1;
-	if (mlx->map.tile[yto][xto].type != 'E')
+	if (mlx->map.tile[yto][xto].type != 'E'
+		&& mlx->map.tile[yto][xto].type != 'B')
 	{
 		mlx->map.tile[yto][xto].type = 'P';
 		mlx->player.xpos = xto;
 		mlx->player.ypos = yto;
 	}
-	else
+	else if (mlx->map.tile[yto][xto].type == 'E')
 		mlx->player.won = 1;
+	else
+		mlx->player.isdead = 1;
 	mlx->map.tile[yto][xto].interacted = 1;
 	mlx->map.tile[yto][xto].update = 1;
 	ft_printf("Moves: %d\n", ++mlx->player.moves);
@@ -47,6 +50,9 @@ void static	playermove(int xto, int yto, t_program *mlx)
 	else if (mlx->map.tile[yto][xto].type == 'E'
 			&& mlx->player.collectedcoins == mlx->map.collec)
 		playerupdate(mlx, xto, yto);
+	else if (mlx->map.tile[yto][xto].type == 'B')
+		playerupdate(mlx, xto, yto);
+	// Optimizar esta basura redundante
 }
 
 int	keystroked(int key, void *program)

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 15:17:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:03:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void	imagedel(t_program *mlx);
 int		closer(void *program);
 int		keystroked(int key, void *program);
 int		animate(void *program);
+void	foeia(t_program *mlx);
 
 #endif

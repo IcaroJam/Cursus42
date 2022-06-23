@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:48:35 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 15:33:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:29:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	animate(void *program)
 	{
 		playeranim(mlx);
 		foeanim(mlx);
+		if (mlx->player.cursprt == mlx->playsprt.frame0)
+			foeia(mlx);
 		rendermap(mlx);
 	}
 	mlx->frame++;
