@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:48:35 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 15:50:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:32:52 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	animate(void *program)
 	t_program	*mlx;
 
 	mlx = program;
+	if (mlx->player.isdead)
+		return (1);
 	if (mlx->frame == 3599)
 	{
 		if (mlx->player.cursprt == mlx->playsprt.frame0)
@@ -29,5 +31,5 @@ int	animate(void *program)
 	mlx->frame++;
 	if (mlx->frame == 3600)
 		mlx->frame = 0;
-	return (1);
+	return (0);
 }
