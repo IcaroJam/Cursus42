@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:31:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 11:04:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:21:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	imagedel(t_program *mlx)
 	mlx_destroy_image(mlx->mlxptr, mlx->exitsprt.frame1);
 	mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame0);
 	mlx_destroy_image(mlx->mlxptr, mlx->playsprt.frame1);
+	mlx_destroy_image(mlx->mlxptr, mlx->foesprt.frame0);
+	mlx_destroy_image(mlx->mlxptr, mlx->foesprt.frame1);
 }
 
 int	closer(void *program)
