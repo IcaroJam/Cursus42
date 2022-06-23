@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:45:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 14:03:45 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:21:01 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void static	spritecompass(t_program *mlx, int x, int y)
 	else if (mlx->map.tile[y][x].type == 'P')
 		rendertile(mlx, mlx->player.cursprt, 80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'B')
-		rendertile(mlx, (mlx->foelst++)->cursprt, 80 * x, 80 * y);
+		rendertile(mlx, mlx->foelst[mlx->foecount++].cursprt, 80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'C' && !mlx->map.tile[y][x].interacted)
 		rendertile(mlx, mlx->coinsprt.frame0, 80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'C' && mlx->map.tile[y][x].interacted)
@@ -62,6 +62,7 @@ void	rendermap(t_program *mlx)
 	int	x;
 
 	y = 0;
+	mlx->foecount = 0;
 	while (y < mlx->map.rows)
 	{
 		x = 0;
@@ -73,7 +74,6 @@ void	rendermap(t_program *mlx)
 		}
 		y++;
 	}
-	mlx->foelst -= mlx->map.foes;
 	textupdate(mlx);
 	if (mlx->player.won)
 		renderscreen(mlx, mlx->winscreen.imptr);

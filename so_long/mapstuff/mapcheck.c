@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 13:43:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:19:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void static	tiler(t_program *mlx)
 		i++;
 		y++;
 	}
-	mlx->foelst -= mlx->map.foes;
 }
 
 void	premap(char *file, t_program *mlx)

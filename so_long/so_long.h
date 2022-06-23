@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 13:31:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:17:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_program
 	void		*winptr;
 	t_player	player;
 	t_foe		*foelst;
+	int			foecount;
 	t_map		map;
 	t_image		wllsprt;
 	t_image		bgsprt;
