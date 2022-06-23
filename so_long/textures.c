@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:52:46 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 18:49:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:04:01 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,25 @@ void static	texerror(t_program *mlx)
 		textureerror(mlx, "Failed to load sprites.");
 }
 
-void	textureinit(t_program *mlx)
+void static	solids(t_program *mlx)
 {
 	mlx->xspsz = 80;
 	mlx->yspsz = 80;
-	mlx->wllsprt.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
-			"./sprites/Wall.xpm", &mlx->xspsz, &mlx->yspsz);
+	mlx->winscreen.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
+			"./sprites/Winscreen.xpm", &mlx->xspsz, &mlx->yspsz);
+	mlx->deathscreen.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
+			"./sprites/Deathscreen.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->bgsprt.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
 			"./sprites/Back.xpm", &mlx->xspsz, &mlx->yspsz);
+	mlx->black.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
+			"./sprites/Black.xpm", &mlx->xspsz, &mlx->yspsz);
+}
+
+void	textureinit(t_program *mlx)
+{
+	solids(mlx);
+	mlx->wllsprt.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
+			"./sprites/Wall.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->coinsprt.frame0 = mlx_xpm_file_to_image(mlx->mlxptr,
 			"./sprites/Collect.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->coinsprt.frame1 = mlx_xpm_file_to_image(mlx->mlxptr,
@@ -41,8 +52,6 @@ void	textureinit(t_program *mlx)
 			"./sprites/Player.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->playsprt.frame1 = mlx_xpm_file_to_image(mlx->mlxptr,
 			"./sprites/Player1.xpm", &mlx->xspsz, &mlx->yspsz);
-	mlx->black.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
-			"./sprites/Black.xpm", &mlx->xspsz, &mlx->yspsz);
 	texerror(mlx);
 	mlx->player.cursprt = mlx->playsprt.frame0;
 	rendermap(mlx);
