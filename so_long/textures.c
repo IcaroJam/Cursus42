@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:52:46 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 11:32:08 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:20:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 void static	texerror(t_program *mlx)
 {
 	if (!mlx->wllsprt.imptr || !mlx->bgsprt.imptr
+		|| !mlx->winscreen.imptr || !mlx->deathscreen.imptr
+		|| !mlx->black.imptr
+		|| !mlx->foesprt.frame0 || !mlx->foesprt.frame1
 		|| !mlx->coinsprt.frame0 || !mlx->coinsprt.frame1
 		|| !mlx->exitsprt.frame0 || !mlx->exitsprt.frame1
 		|| !mlx->playsprt.frame0 || !mlx->playsprt.frame1)
@@ -27,6 +30,8 @@ void static	solids(t_program *mlx)
 	mlx->yspsz = 80;
 	mlx->xscsz = 400;
 	mlx->yscsz = 240;
+	mlx->wllsprt.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
+			"./sprites/Wall.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->winscreen.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
 			"./sprites/Winscreen.xpm", &mlx->xscsz, &mlx->yscsz);
 	mlx->deathscreen.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
@@ -40,8 +45,6 @@ void static	solids(t_program *mlx)
 void	textureinit(t_program *mlx)
 {
 	solids(mlx);
-	mlx->wllsprt.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
-			"./sprites/Wall.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->coinsprt.frame0 = mlx_xpm_file_to_image(mlx->mlxptr,
 			"./sprites/Collect.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->coinsprt.frame1 = mlx_xpm_file_to_image(mlx->mlxptr,
@@ -54,6 +57,10 @@ void	textureinit(t_program *mlx)
 			"./sprites/Player.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->playsprt.frame1 = mlx_xpm_file_to_image(mlx->mlxptr,
 			"./sprites/Player1.xpm", &mlx->xspsz, &mlx->yspsz);
+	mlx->foesprt.frame0 = mlx_xpm_file_to_image(mlx->mlxptr,
+			"./sprites/Foe.xpm", &mlx->xspsz, &mlx->yspsz);
+	mlx->foesprt.frame1 = mlx_xpm_file_to_image(mlx->mlxptr,
+			"./sprites/Foe1.xpm", &mlx->xspsz, &mlx->yspsz);
 	texerror(mlx);
 	mlx->player.cursprt = mlx->playsprt.frame0;
 	rendermap(mlx);

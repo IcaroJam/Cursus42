@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 11:25:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:17:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_program
 	t_anim		coinsprt;
 	t_anim		exitsprt;
 	t_anim		playsprt;
+	t_anim		foesprt;
 	int			frame;
 	int			xspsz;
 	int			yspsz;
