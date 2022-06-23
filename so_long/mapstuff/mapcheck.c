@@ -6,11 +6,12 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 13:25:17 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:43:07 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+#include <stdlib.h>
 
 void static	charcheck(t_program *mlx, char c)
 {
@@ -48,7 +49,7 @@ void static	tilealloc(t_program *mlx)
 
 	mlx->map.tile = malloc(sizeof(t_tile *) * (mlx->map.rows));
 	if (!mlx->map.tile)
-		printerror(mlx, "Failed to allocate memory for rows of tiles.");
+		maperror(mlx, "Failed to allocate memory for rows of tiles.");
 	y = 0;
 	while (y < mlx->map.rows)
 	{
@@ -60,7 +61,7 @@ void static	tilealloc(t_program *mlx)
 				free(mlx->map.tile[errvar]);
 			free(mlx->map.tile);
 			free(mlx->map.str);
-			printerror(mlx, "Failed to allocate memory for tiles.");
+			maperror(mlx, "Failed to allocate memory for tiles.");
 		}
 		y++;
 	}
@@ -87,6 +88,7 @@ void static	tiler(t_program *mlx)
 		i++;
 		y++;
 	}
+	mlx->foelst -= mlx->map.foes;
 }
 
 void	premap(char *file, t_program *mlx)
@@ -106,5 +108,8 @@ void	premap(char *file, t_program *mlx)
 	mlx->map.str[mlx->map.len] = 0;
 	close(fd);
 	mapprocess(mlx);
+	mlx->foelst = malloc(sizeof(t_foe) * mlx->map.foes);
+	if (!mlx->foelst)
+		maperror(mlx, "Failed to allocate memory for the enemies.");
 	tiler(mlx);
 }

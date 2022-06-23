@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:52:46 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 13:20:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:59:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void static	solids(t_program *mlx)
 
 void	textureinit(t_program *mlx)
 {
+	int	i;
+
+	i = 0;
 	solids(mlx);
 	mlx->coinsprt.frame0 = mlx_xpm_file_to_image(mlx->mlxptr,
 			"./sprites/Collect.xpm", &mlx->xspsz, &mlx->yspsz);
@@ -63,5 +66,7 @@ void	textureinit(t_program *mlx)
 			"./sprites/Foe1.xpm", &mlx->xspsz, &mlx->yspsz);
 	texerror(mlx);
 	mlx->player.cursprt = mlx->playsprt.frame0;
+	while (i < mlx->map.foes)
+		mlx->foelst[i++].cursprt = mlx->foesprt.frame0;
 	rendermap(mlx);
 }

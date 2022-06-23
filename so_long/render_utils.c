@@ -6,39 +6,34 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:45:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 11:54:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:03:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "mlx/mlx.h"
 #include "so_long.h"
+
+void static	rendertile(t_program *mlx, void *ptr, int x, int y)
+{
+	mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, ptr, x, y);
+}
 
 void static	spritecompass(t_program *mlx, int x, int y)
 {
-	mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->bgsprt.imptr,
-		80 * x, 80 * y);
+	rendertile(mlx, mlx->bgsprt.imptr, 80 * x, 80 * y);
 	if (mlx->map.tile[y][x].type == '1')
-		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->wllsprt.imptr,
-			80 * x, 80 * y);
+		rendertile(mlx, mlx->wllsprt.imptr, 80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'P')
-		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->player.cursprt,
-			80 * x, 80 * y);
-	else if (mlx->map.tile[y][x].type == 'C' && !mlx->map.tile[y][x].interacted)
-		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->coinsprt.frame0,
-			80 * x, 80 * y);
-	else if (mlx->map.tile[y][x].type == 'C' && mlx->map.tile[y][x].interacted)
-		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->coinsprt.frame1,
-			80 * x, 80 * y);
+		rendertile(mlx, mlx->player.cursprt, 80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'B')
-		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->playsprt.frame0,
-			80 * x, 80 * y);
+		rendertile(mlx, (mlx->foelst++)->cursprt, 80 * x, 80 * y);
+	else if (mlx->map.tile[y][x].type == 'C' && !mlx->map.tile[y][x].interacted)
+		rendertile(mlx, mlx->coinsprt.frame0, 80 * x, 80 * y);
+	else if (mlx->map.tile[y][x].type == 'C' && mlx->map.tile[y][x].interacted)
+		rendertile(mlx, mlx->coinsprt.frame1, 80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'E' && !mlx->map.tile[y][x].interacted)
-		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->exitsprt.frame0,
-			80 * x, 80 * y);
+		rendertile(mlx, mlx->exitsprt.frame0, 80 * x, 80 * y);
 	else if (mlx->map.tile[y][x].type == 'E' && mlx->map.tile[y][x].interacted)
-		mlx_put_image_to_window(mlx->mlxptr, mlx->winptr, mlx->exitsprt.frame1,
-			80 * x, 80 * y);
+		rendertile(mlx, mlx->exitsprt.frame1, 80 * x, 80 * y);
 	mlx->map.tile[y][x].update = 0;
 }
 
@@ -78,6 +73,7 @@ void	rendermap(t_program *mlx)
 		}
 		y++;
 	}
+	mlx->foelst -= mlx->map.foes;
 	textupdate(mlx);
 	if (mlx->player.won)
 		renderscreen(mlx, mlx->winscreen.imptr);

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:31:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 13:21:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:47:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	closer(void *program)
 	mlx = program;
 	imagedel(mlx);
 	vanish_tiles(&mlx->map);
+	free(mlx->foelst);
+	mlx->foelst = NULL;
 	mlx_destroy_window(mlx->mlxptr, mlx->winptr);
 	free(mlx->mlxptr);
 	exit(0);
