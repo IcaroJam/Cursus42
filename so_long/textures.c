@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:52:46 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 11:04:01 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:32:08 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void static	solids(t_program *mlx)
 {
 	mlx->xspsz = 80;
 	mlx->yspsz = 80;
+	mlx->xscsz = 400;
+	mlx->yscsz = 240;
 	mlx->winscreen.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
-			"./sprites/Winscreen.xpm", &mlx->xspsz, &mlx->yspsz);
+			"./sprites/Winscreen.xpm", &mlx->xscsz, &mlx->yscsz);
 	mlx->deathscreen.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
-			"./sprites/Deathscreen.xpm", &mlx->xspsz, &mlx->yspsz);
+			"./sprites/Deathscreen.xpm", &mlx->xscsz, &mlx->yscsz);
 	mlx->bgsprt.imptr = mlx_xpm_file_to_image(mlx->mlxptr,
 			"./sprites/Back.xpm", &mlx->xspsz, &mlx->yspsz);
 	mlx->black.imptr = mlx_xpm_file_to_image(mlx->mlxptr,

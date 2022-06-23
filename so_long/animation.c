@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:48:35 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 10:32:52 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:23:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	animate(void *program)
 	t_program	*mlx;
 
 	mlx = program;
-	if (mlx->player.isdead)
+	if (mlx->player.isdead || mlx->player.won)
 		return (1);
 	if (mlx->frame == 3599)
 	{

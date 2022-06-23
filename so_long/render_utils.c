@@ -6,10 +6,12 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:45:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/22 19:20:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:54:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
+#include "mlx/mlx.h"
 #include "so_long.h"
 
 void static	spritecompass(t_program *mlx, int x, int y)
@@ -52,6 +54,13 @@ void static	textupdate(t_program *mlx)
 	free(text);
 }
 
+void static	renderscreen(t_program *mlx, void *ptr)
+{
+	mlx_put_image_to_window(mlx->mlxptr, mlx->winptr,
+		ptr, ((mlx->map.clms * 80) - 400) / 2,
+		((mlx->map.rows * 80) - 240) / 2);
+}
+
 void	rendermap(t_program *mlx)
 {
 	int	y;
@@ -70,4 +79,8 @@ void	rendermap(t_program *mlx)
 		y++;
 	}
 	textupdate(mlx);
+	if (mlx->player.won)
+		renderscreen(mlx, mlx->winscreen.imptr);
+	else if (mlx->player.isdead)
+		renderscreen(mlx, mlx->deathscreen.imptr);
 }

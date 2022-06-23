@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 11:02:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:25:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_player
 	int		collectedcoins;
 	int		moves;
 	int		isdead;
+	int		won;
 	void	*cursprt;
 }	t_player;
 
@@ -82,6 +83,8 @@ typedef struct s_program
 	int			frame;
 	int			xspsz;
 	int			yspsz;
+	int			xscsz;
+	int			yscsz;
 }	t_program;
 
 void	printerror(t_program *mlx, char *msg);
