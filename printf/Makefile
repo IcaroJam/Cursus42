@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 15:29:38 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/10 12:03:08 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/06/30 17:26:59 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,4 +52,4 @@ fclean:	clean
 
 re:		fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re bonus
