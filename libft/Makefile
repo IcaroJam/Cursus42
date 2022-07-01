@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/01 16:45:17 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/01 16:51:20 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ $(NAME):	$(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 	@echo "Librerida fiquinitada ^^"
 
-bonus:		$(SRC) $(BONUS_SRC)
+bonus:		$(SRC) $(BONUS_SRC) $(EXTRA_SRC)
 	@gcc $(CFLAGS) -c $(SRC) $(BONUS_SRC) $(EXTRA_SRC)
 	@echo "Objetitos con una pizca de sal ;)"
 	@make -C printf
