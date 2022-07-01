@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:31:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 15:10:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/01 16:47:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int		ft_printf(char const *str, ...);
 
 int		ft_abs(int n);
 int		ft_ipow(int x, int n);
+void	ft_free(void **ptr);
 
 #endif

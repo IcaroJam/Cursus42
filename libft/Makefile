@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/06/18 11:57:54 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/01 16:45:17 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ BONUS_OBJS	=	$(BONUS_SRC:.c=.o)
 
 PRINTF_OBJS	=	$(addprefix printf/, ft_printf.o ft_printf_utils_I.o ptf_itoa.o ptf_lenghts.o flags_and_conversions.o char_string_conv.o digit_conv.o unsigned_conv.o hex_conv.o pointer_conv.o)
 
-EXTRA_SRC	=	ft_abs.c ft_ipow.c
+EXTRA_SRC	=	ft_abs.c ft_ipow.c ft_free.c
 
 EXTRA_OBJS	=	$(EXTRA_SRC:.c=.o)
 
