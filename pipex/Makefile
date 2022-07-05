@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/01 17:11:07 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/05 16:53:39 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 		=	pipex
 
 CFLAGS		=	-Wall -Werror -Wextra
 
-SRC			=	
+SRC			=	pipex.c
 
 OBJS		=	$(SRC:.c=.o)
 
@@ -39,21 +39,25 @@ $(NAME):	$(OBJS) $(LIBFT)
 	@gcc $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
 	@echo "Ready para pipear B)"
 
-bonus:		
+bonus:		$(BONUS_OBJS) $(LIBFT)
+	@gcc $(CFLAGS) $(BONUS_OBJS) -Llibft -lft -o $(NAME)
+	@echo "Múltiple pipeación B)"
 
 $(LIBFT):
 	@make -C ./libft
 	@echo "Libftización..."
 
+libclean:
+	@make -C ./libft fclean
+	@echo "Limpiando las estanterías libreras..."
+
 clean:
-	@make -C ./libft clean
 	@rm -f $(OBJS) $(BONUS_OBJS)
 	@echo "Limpieza profunda..."
 
 fclean:		clean
-	@rm -f ./libft/libft.a
 	@rm -f $(NAME)
 
 re:			fclean all
 
-.PHONY:	all clean fclean re bonus .c.o
+.PHONY:	all clean fclean libclean re bonus .c.o
