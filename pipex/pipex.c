@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/07 15:56:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:00:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	**pathmaker(char **envp)
 			return (NULL);
 		envp++;
 	}
-	temp = ft_substr(*envp, 5, ft_strlen(*envp));
+	temp = ft_substr(*envp, 5, ft_strlen(&envp[0][5]));
 	if (!temp)
 		return (NULL);
 	ret = ft_split(temp, ':');
