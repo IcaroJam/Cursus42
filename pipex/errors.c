@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 17:28:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/07 15:50:03 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/07/07 15:47:10 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/07/07 15:49:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# include "libft/libft.h"
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-
-typedef struct s_piper
+void	errxit(char const *msg)
 {
-	char	**paths;
-	int		infd;
-	int		outfd;
-	int		fd[2];
-}	t_piper;
-
-void	errxit(char const *msg);
-
-#endif
+	write(2, msg, ft_strlen(msg));
+	exit(1);
+}

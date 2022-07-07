@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/07 11:34:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/07 15:51:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,16 @@ static char	**pathmaker(char **envp)
 static void	inerrors(int argc, char **argv, char **envp, t_piper *piper)
 {
 	if (argc != 5)
-	{
-		write(2, "No. of args error.", 18);
-		exit(1);
-	}
+		errxit("No. of args error.");
 	piper->infd = open(argv[1], O_RDONLY);
 	if (piper->infd < 0)
-	{
-		write(2, "Couldn't open infile.", 21);
-		exit(1);
-	}
+		errxit("Couldn't open infile.");
 	piper->outfd = open(argv[4], O_TRUNC | O_CREAT | O_RDWR | 0000644);
 	if (piper->outfd < 0)
-	{
-		write(2, "Couldn't open outfile.", 22);
-		exit(1);
-	}
+		errxit("Couldn't open outfile.");
 	piper->paths = pathmaker(envp);
 	if (!piper->paths)
-	{
-		write(2, "Unable to create path array.", 28);
-		exit(1);
-	}
+		errxit("Unable to create path array.");
 }
 
 int	main(int argc, char **argv, char **envp)
