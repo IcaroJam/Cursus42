@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/07 15:51:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/07 15:56:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	**pathmaker(char **envp)
 	char	**ret;
 	char	*temp;
 
-	while (ft_strncmp("PATH", *envp, 4))
+	while (ft_strncmp("PATH=", *envp, 5))
 	{
 		if (!*envp)
 			return (NULL);
