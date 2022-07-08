@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/07 16:00:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:00:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ int	main(int argc, char **argv, char **envp)
 	//Llamada a pipex, donde se harán los forks con una función que se encargue
 	//de la separación entre procesos y llame a la función correspondiente.
 	//Comprobación de errores del fork.
+	//Errores de read y write.
 	t_piper	piper;
 
 	inerrors(argc, argv, envp, &piper);
+	if (pipe(piper.fd) < 0)
+		errxit("Failed to create the pipe.");
+	pipex(&piper, argv, argc);
 	return (0);
 }
