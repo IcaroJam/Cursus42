@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 12:30:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/10 13:18:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	inerrors(int argc, char **argv, char **envp, t_piper *piper)
 	piper->infd = open(argv[1], O_RDONLY);
 	if (piper->infd < 0)
 		errxit("Couldn't open infile.");
-	piper->outfd = open(argv[4], O_TRUNC | O_CREAT | O_RDWR | 0644);
+	piper->outfd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (piper->outfd < 0)
 		errxit("Couldn't open outfile.");
 	piper->paths = pathmaker(envp);
