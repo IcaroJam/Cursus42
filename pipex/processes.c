@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 13:34:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:23:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char static	*commander(t_piper *piper, char **argv, int childpos)
 	return (NULL);
 }
 
-void static	firstchild(t_piper *piper, char **argv)
+void static	firstchild(t_piper *piper, char **argv, char **envp)
 {
 	piper->cmdpath = commander(piper, argv, 2);
 	if (!piper->cmdpath)
@@ -45,14 +45,14 @@ void static	firstchild(t_piper *piper, char **argv)
 	close(piper->fd[1]);
 	dup2(piper->infd, 0);
 	close(piper->infd);
-	if (execve(piper->cmdpath, piper->currcmd, NULL) < 0)
+	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
 	{
 		dup2(1, piper->bustdout);
 		errxit("Couldn't execute/find the command.\n");
 	}
 }
 
-void static	lastchild(t_piper *piper, char **argv)
+void static	lastchild(t_piper *piper, char **argv, char **envp)
 {
 	waitpid(piper->childid[0], NULL, 0);
 	piper->cmdpath = commander(piper, argv, 3);
@@ -63,7 +63,7 @@ void static	lastchild(t_piper *piper, char **argv)
 	close(piper->fd[0]);
 	dup2(piper->outfd, 1);
 	close(piper->outfd);
-	if (execve(piper->cmdpath, piper->currcmd, NULL) < 0)
+	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
 	{
 		dup2(1, piper->bustdout);
 		errxit("Couldn't execute/find the command.\n");
@@ -78,7 +78,7 @@ void static	parent(t_piper *piper)
 	waitpid(piper->childid[1], NULL, 0);
 }
 
-void	pipex(t_piper *piper, char **argv)
+void	pipex(t_piper *piper, char **argv, char **envp)
 {
 	piper->bustdin = dup(0);
 	piper->bustdout = dup(1);
@@ -86,11 +86,11 @@ void	pipex(t_piper *piper, char **argv)
 	if (piper->childid[0] < 0)
 		errxit("Failed to child up :(\n");
 	if (!piper->childid[0])
-		firstchild(piper, argv);
+		firstchild(piper, argv, envp);
 	piper->childid[1] = fork();
 	if (piper->childid[1] < 0)
 		errxit("Failed to have a second kid D:\n");
 	if (!piper->childid[1])
-		lastchild(piper, argv);
+		lastchild(piper, argv, envp);
 	parent(piper);
 }

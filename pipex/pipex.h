@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 17:28:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 11:55:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:23:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ typedef struct s_piper
 }	t_piper;
 
 void	errxit(char const *msg);
-void	pipex(t_piper *piper, char **argv);
+void	pipex(t_piper *piper, char **argv, char **envp);
 
 #endif
