@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 15:23:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:36:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void static	firstchild(t_piper *piper, char **argv, char **envp)
 {
 	piper->cmdpath = commander(piper, argv, 2);
 	if (!piper->cmdpath)
-		errxit("Couldn't build command path.\n");
+		errxit("Couldn't build command path: command not found.\n");
 	close(piper->fd[0]);
 	dup2(piper->fd[1], 1);
 	close(piper->fd[1]);
@@ -48,7 +48,7 @@ void static	firstchild(t_piper *piper, char **argv, char **envp)
 	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
 	{
 		dup2(1, piper->bustdout);
-		errxit("Couldn't execute/find the command.\n");
+		errxit("Execve error: command not found.\n");
 	}
 }
 
@@ -57,7 +57,7 @@ void static	lastchild(t_piper *piper, char **argv, char **envp)
 	waitpid(piper->childid[0], NULL, 0);
 	piper->cmdpath = commander(piper, argv, 3);
 	if (!piper->cmdpath)
-		errxit("Couldn't build command path.\n");
+		errxit("Couldn't build command path: command not found.\n");
 	close(piper->fd[1]);
 	dup2(piper->fd[0], 0);
 	close(piper->fd[0]);
@@ -66,7 +66,7 @@ void static	lastchild(t_piper *piper, char **argv, char **envp)
 	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
 	{
 		dup2(1, piper->bustdout);
-		errxit("Couldn't execute/find the command.\n");
+		errxit("Execve error: command not found.\n");
 	}
 }
 
