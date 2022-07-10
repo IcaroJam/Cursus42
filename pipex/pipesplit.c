@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 16:55:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/10 18:16:53 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ static char	*ft_stringalloc(char const *str, char c, size_t *newoff)
 	if (str[wlen] == 34 || str[wlen] == 39)
 	{
 		flag = str[wlen];
-		wlen++;
+		str++;
 		while (str[wlen] && str[wlen] != flag)
 			wlen++;
-		if (str[wlen] == flag)
-			wlen++;
-		else
+		if (str[wlen] != flag)
 			return (NULL);
 	}
 	else
