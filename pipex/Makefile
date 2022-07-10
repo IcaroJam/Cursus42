@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/10 12:15:11 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/10 16:31:42 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 		=	pipex
 
 CFLAGS		=	-Wall -Werror -Wextra
 
-SRC			=	pipex.c errors.c processes.c
+SRC			=	pipex.c errors.c processes.c commandparser.c pipesplit.c
 
 OBJS		=	$(SRC:.c=.o)
 

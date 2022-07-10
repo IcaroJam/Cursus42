@@ -6,34 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 15:36:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:56:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-char static	*commander(t_piper *piper, char **argv, int childpos)
-{
-	char	*temp;
-	char	*ret;
-
-	piper->currcmd = ft_split(argv[childpos], ' ');
-	if (!piper->currcmd)
-		errxit("Error while retrieving command arguments.\n");
-	while (*piper->paths)
-	{
-		temp = ft_strjoin(*piper->paths, "/");
-		ret = ft_strjoin(temp, piper->currcmd[0]);
-		if (!ret)
-			return (NULL);
-		if (!access(ret, 0))
-			return (ret);
-		free(temp);
-		free(ret);
-		piper->paths++;
-	}
-	return (NULL);
-}
 
 void static	firstchild(t_piper *piper, char **argv, char **envp)
 {
