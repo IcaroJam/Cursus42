@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 13:23:01 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/10 13:34:10 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void static	firstchild(t_piper *piper, char **argv)
 	close(piper->fd[1]);
 	dup2(piper->infd, 0);
 	close(piper->infd);
-	if (execve(piper->cmdpath, argv, NULL) < 0)
+	if (execve(piper->cmdpath, piper->currcmd, NULL) < 0)
 	{
 		dup2(1, piper->bustdout);
 		errxit("Couldn't execute/find the command.\n");
@@ -63,7 +63,7 @@ void static	lastchild(t_piper *piper, char **argv)
 	close(piper->fd[0]);
 	dup2(piper->outfd, 1);
 	close(piper->outfd);
-	if (execve(piper->cmdpath, argv, NULL) < 0)
+	if (execve(piper->cmdpath, piper->currcmd, NULL) < 0)
 	{
 		dup2(1, piper->bustdout);
 		errxit("Couldn't execute/find the command.\n");
