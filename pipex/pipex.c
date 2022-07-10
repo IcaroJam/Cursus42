@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/08 12:03:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/10 12:30:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,11 @@ static void	inerrors(int argc, char **argv, char **envp, t_piper *piper)
 
 int	main(int argc, char **argv, char **envp)
 {
-	//Comprobación de los parámetros de entrada. Gestión de error inicial.
-	//Llamada a pipex, donde se harán los forks con una función que se encargue
-	//de la separación entre procesos y llame a la función correspondiente.
-	//Comprobación de errores del fork.
-	//Errores de read y write.
 	t_piper	piper;
 
 	inerrors(argc, argv, envp, &piper);
 	if (pipe(piper.fd) < 0)
 		errxit("Failed to create the pipe.");
-	pipex(&piper, argv, argc);
+	pipex(&piper, argv);
 	return (0);
 }
