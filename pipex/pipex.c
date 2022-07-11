@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/11 11:30:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:54:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	**pathmaker(char **envp)
 	char	**ret;
 	char	*temp;
 
+	if (!envp || !*envp)
+		return (NULL);
 	while (ft_strncmp("PATH=", *envp, 5))
 	{
 		if (!*envp)
@@ -45,8 +47,6 @@ static void	inerrors(int argc, char **argv, char **envp, t_piper *piper)
 	if (piper->outfd < 0)
 		errxit("Couldn't open outfile.\n");
 	piper->paths = pathmaker(envp);
-	if (!piper->paths)
-		errxit("Unable to create path array.\n");
 }
 
 int	main(int argc, char **argv, char **envp)

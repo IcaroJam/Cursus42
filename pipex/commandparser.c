@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 15:55:27 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 16:57:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:22:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*commander(t_piper *piper, char **argv, int childpos)
 	piper->currcmd = pipesplit(argv[childpos], ' ');
 	if (!piper->currcmd)
 		errxit("Error while retrieving command arguments.\n");
+	if (!piper->paths)
+		return (piper->currcmd[0]);
 	while (*piper->paths)
 	{
 		temp = ft_strjoin(*piper->paths, "/");
