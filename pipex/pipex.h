@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 17:28:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 16:31:32 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:30:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_piper
 	int		bustdout;
 	int		infd;
 	int		outfd;
+	int		inflag;
 	int		fd[2];
 	int		childid[2];
 }	t_piper;

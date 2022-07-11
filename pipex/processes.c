@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 15:56:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:30:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void static	firstchild(t_piper *piper, char **argv, char **envp)
 {
+	if (piper->inflag)
+		exit(1);
 	piper->cmdpath = commander(piper, argv, 2);
 	if (!piper->cmdpath)
 		errxit("Couldn't build command path: command not found.\n");
@@ -53,6 +55,7 @@ void static	parent(t_piper *piper)
 	close(piper->fd[1]);
 	waitpid(piper->childid[0], NULL, 0);
 	waitpid(piper->childid[1], NULL, 0);
+	exit(0);
 }
 
 void	pipex(t_piper *piper, char **argv, char **envp)
