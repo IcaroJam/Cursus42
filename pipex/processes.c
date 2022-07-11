@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/11 11:30:25 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:39:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void static	firstchild(t_piper *piper, char **argv, char **envp)
 	dup2(piper->infd, 0);
 	close(piper->infd);
 	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
-	{
-		dup2(1, piper->bustdout);
 		errxit("Execve error: command not found.\n");
-	}
 }
 
 void static	lastchild(t_piper *piper, char **argv, char **envp)
@@ -43,10 +40,7 @@ void static	lastchild(t_piper *piper, char **argv, char **envp)
 	dup2(piper->outfd, 1);
 	close(piper->outfd);
 	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
-	{
-		dup2(1, piper->bustdout);
 		errxit("Execve error: command not found.\n");
-	}
 }
 
 void static	parent(t_piper *piper)
