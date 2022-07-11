@@ -6,36 +6,36 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/10 18:16:53 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/11 09:53:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*ft_stringalloc(char const *str, char c, size_t *newoff)
+static char	*ft_stringalloc(char const **str, char c, size_t *newoff)
 {
 	char	*ret;
 	char	flag;
 	size_t	wlen;
 
 	wlen = 0;
-	if (str[wlen] == 34 || str[wlen] == 39)
+	if (str[0][wlen] == 34 || str[0][wlen] == 39)
 	{
-		flag = str[wlen];
-		str++;
-		while (str[wlen] && str[wlen] != flag)
+		flag = str[0][wlen];
+		str[0]++;
+		while (str[0][wlen] && str[0][wlen] != flag)
 			wlen++;
-		if (str[wlen] != flag)
+		if (str[0][wlen] != flag)
 			return (NULL);
 	}
 	else
-		while (str[wlen] && str[wlen] != c)
+		while (str[0][wlen] && str[0][wlen] != c)
 			wlen++;
 	ret = malloc(sizeof(char) * (wlen + 1));
 	if (!ret)
 		return (NULL);
 	*newoff = wlen;
-	ft_strlcpy(ret, str, wlen + 1);
+	ft_strlcpy(ret, *str, wlen + 1);
 	return (ret);
 }
 
@@ -89,7 +89,7 @@ static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
 	{
 		while (*s == c)
 			s++;
-		ret[retindex] = ft_stringalloc(s, c, &i);
+		ret[retindex] = ft_stringalloc(&s, c, &i);
 		s += i;
 		wsplit++;
 		if (!ret[retindex])
