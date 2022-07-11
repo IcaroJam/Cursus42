@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/11 11:54:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/11 12:36:51 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <sys/wait.h>
 
 void static	firstchild(t_piper *piper, char **argv, char **envp)
 {
@@ -19,7 +18,13 @@ void static	firstchild(t_piper *piper, char **argv, char **envp)
 		exit(1);
 	piper->cmdpath = commander(piper, argv, 2);
 	if (!piper->cmdpath)
-		errxit("Couldn't build command path: command not found.\n");
+	{
+		ft_putstr_fd("pipex: ", 2);
+		ft_putstr_fd(argv[2], 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd("command not found\n", 2);
+		exit(127);
+	}
 	close(piper->fd[0]);
 	dup2(piper->fd[1], 1);
 	close(piper->fd[1]);
@@ -34,7 +39,13 @@ void static	lastchild(t_piper *piper, char **argv, char **envp)
 	waitpid(piper->childid[0], NULL, 0);
 	piper->cmdpath = commander(piper, argv, 3);
 	if (!piper->cmdpath)
-		errxit("Couldn't build command path: command not found.\n");
+	{
+		ft_putstr_fd("pipex: ", 2);
+		ft_putstr_fd(argv[3], 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd("command not found\n", 2);
+		exit(127);
+	}
 	close(piper->fd[1]);
 	dup2(piper->fd[0], 0);
 	close(piper->fd[0]);
