@@ -6,11 +6,12 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/11 11:39:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:54:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <sys/wait.h>
 
 void static	firstchild(t_piper *piper, char **argv, char **envp)
 {
@@ -45,11 +46,15 @@ void static	lastchild(t_piper *piper, char **argv, char **envp)
 
 void static	parent(t_piper *piper)
 {
+	int	exitstatus;
+
 	close(piper->fd[0]);
 	close(piper->fd[1]);
 	waitpid(piper->childid[0], NULL, 0);
-	waitpid(piper->childid[1], NULL, 0);
-	exit(0);
+	waitpid(piper->childid[1], &exitstatus, 0);
+	if (WIFEXITED(exitstatus))
+		exit(WEXITSTATUS(exitstatus));
+	exit(1);
 }
 
 void	pipex(t_piper *piper, char **argv, char **envp)
