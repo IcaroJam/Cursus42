@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/11 09:53:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:14:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,24 @@ static char	*ft_stringalloc(char const **str, char c, size_t *newoff)
 {
 	char	*ret;
 	char	flag;
-	size_t	wlen;
+	size_t	i;
 
-	wlen = 0;
-	if (str[0][wlen] == 34 || str[0][wlen] == 39)
+	i = 0;
+	if (**str == 34 || **str == 39)
 	{
-		flag = str[0][wlen];
 		str[0]++;
-		while (str[0][wlen] && str[0][wlen] != flag)
-			wlen++;
-		if (str[0][wlen] != flag)
-			return (NULL);
+		flag = *(*str - 1);
+		while (str[0][i] && str[0][i] != flag)
+			i++;
 	}
 	else
-		while (str[0][wlen] && str[0][wlen] != c)
-			wlen++;
-	ret = malloc(sizeof(char) * (wlen + 1));
+		while (str[0][i] && str[0][i] != c)
+			i++;
+	ret = malloc(sizeof(char) * (i + 1));
 	if (!ret)
 		return (NULL);
-	*newoff = wlen;
-	ft_strlcpy(ret, *str, wlen + 1);
+	ft_strlcpy(ret, *str, i + 1);
+	*newoff = i;
 	return (ret);
 }
 
@@ -50,15 +48,13 @@ static size_t	ft_wordcount(char const *s, char c)
 	{
 		if (*s == 34 || *s == 39)
 		{
-			if (flag)
-				flag = 0;
-			else
-				flag = *s;
-		}
-		if (flag)
-		{
-			s++;
-			continue ;
+			if (*s == 39)
+				s++;
+			if (*s == 34)
+				s++;
+			flag = *s - 1;
+			while (*s != flag && *s)
+				s++;
 		}
 		else if ((*s != c && *(s + 1) == c) || (*s != c && !*(s + 1)))
 			words++;
