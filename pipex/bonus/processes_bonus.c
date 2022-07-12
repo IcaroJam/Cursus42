@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/12 16:44:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:41:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,17 @@ void static	firstchild(t_piper *piper, char **argv, char **envp)
 {
 	if (piper->inflag)
 		exit(1);
-	piper->cmdpath = commander(piper, argv, 2);
+	close(piper->fd[0]);
+	dup2(piper->fd[1], 1);
+	close(piper->fd[1]);
+	if (!piper->hereflag)
+	{
+		dup2(piper->infd, 0);
+		close(piper->infd);
+		piper->cmdpath = commander(piper, argv, 2);
+	}
+	else
+		piper->cmdpath = commander(piper, argv, 3);
 	if (!piper->cmdpath)
 	{
 		ft_putstr_fd("pipex: ", 2);
@@ -25,14 +35,6 @@ void static	firstchild(t_piper *piper, char **argv, char **envp)
 		ft_putstr_fd("command not found\n", 2);
 		exit(127);
 	}
-	close(piper->fd[0]);
-	dup2(piper->fd[1], 1);
-	close(piper->fd[1]);
-	if (!piper->hereflag)
-	{
-		dup2(piper->infd, 0);
-		close(piper->infd);
-	}
 	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
 		errxit("Execve error: command not found.\n");
 }
@@ -40,7 +42,7 @@ void static	firstchild(t_piper *piper, char **argv, char **envp)
 void static	lastchild(t_piper *piper, char **argv, char **envp)
 {
 	waitpid(piper->childid[0], NULL, 0);
-	piper->cmdpath = commander(piper, argv, 3);
+	piper->cmdpath = commander(piper, argv, 4);
 	if (!piper->cmdpath)
 	{
 		ft_putstr_fd("pipex: ", 2);
