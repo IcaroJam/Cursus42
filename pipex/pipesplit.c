@@ -6,11 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/12 14:14:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:34:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "./mandatory/pipex.h"
 
 static char	*ft_stringalloc(char const **str, char c, size_t *newoff)
 {

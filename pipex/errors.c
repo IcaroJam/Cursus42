@@ -6,11 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:47:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/07 15:49:14 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:33:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "./mandatory/pipex.h"
 
 void	errxit(char const *msg)
 {

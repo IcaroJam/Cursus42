@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/10 16:31:42 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/12 15:55:08 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME 		=	pipex
 
 CFLAGS		=	-Wall -Werror -Wextra
 
-SRC			=	pipex.c errors.c processes.c commandparser.c pipesplit.c
+SRC			=	./mandatory/pipex.c errors.c ./mandatory/processes.c ./mandatory/commandparser.c pipesplit.c
 
-OBJS		=	$(SRC:.c=.o)
+OBJS		=	$(addsuffix .o, $(notdir $(basename $(SRC))))
 
 BONUS_SRC	=	
 
@@ -30,7 +30,7 @@ all:		$(NAME)
 
 # This action isn't really needed since make has it built-in when calling $(OBJS), but I like the msg :)
 ###################################
-.c.o:		$(SRC)
+$(OBJS):	$(SRC)
 	@gcc $(CFLAGS) -c $(SRC)
 	@echo "Objetos creacionados :)"
 ###################################
