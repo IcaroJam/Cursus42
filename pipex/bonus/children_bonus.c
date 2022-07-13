@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 11:01:07 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/13 14:53:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:56:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,8 @@ void	firstchild(t_piper *piper, char **argv, char **envp)
 	close(piper->fd[0]);
 	dup2(piper->fd[1], 1);
 	close(piper->fd[1]);
-	if (!piper->hereflag)
-	{
-		dup2(piper->infd, 0);
-		close(piper->infd);
-	}
+	dup2(piper->infd, 0);
+	close(piper->infd);
 	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
 		errxit("Execve error: command not found.\n");
 }

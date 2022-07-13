@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/13 13:23:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:56:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	inerrors(int argc, char **argv, char **envp, t_piper *piper)
 		piper->hereflag = 1;
 	if (piper->hereflag)
 	{
-		piper->infd = 0;
+		piper->infd = open("here_doc.tmp", O_CREAT | O_WRONLY | O_APPEND, 0644);
 		piper->outfd = open(argv[argc - 1], O_CREAT | O_RDWR | O_APPEND, 0644);
 		piper->herelim = argv[2];
 	}
@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_piper	piper;
 
-	piper.inflag = 0;
+	unlink("here_doc.tmp");
 	inerrors(argc, argv, envp, &piper);
 	if (pipe(piper.fd) < 0)
 		errxit("Failed to create a pipe.\n");
