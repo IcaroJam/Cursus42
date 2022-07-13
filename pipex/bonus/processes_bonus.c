@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/13 16:55:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:08:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-#include <sys/fcntl.h>
 
 void static	parent(t_piper *piper)
 {
@@ -62,10 +61,10 @@ void static	dochere(t_piper *piper)
 	{
 		write(1, "pipex heredoc> ", 15);
 		readflag = read(0, temp, 4096);
-		write(piper->infd, temp, readflag);
-		temp[readflag - 1] = 0;
-		if (!ft_strncmp(piper->herelim, temp, ft_strlen(piper->herelim) + 1))
+		if (!ft_strncmp(piper->herelim, temp, ft_strlen(piper->herelim))
+			&& temp[ft_strlen(piper->herelim)] == '\n')
 			break ;
+		write(piper->infd, temp, readflag);
 	}
 	close(piper->infd);
 	piper->infd = open("here_doc.tmp", O_RDONLY);
