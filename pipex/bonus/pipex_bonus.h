@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 17:28:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/12 17:40:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:22:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,16 @@ typedef struct s_piper
 	int		inflag;
 	int		hereflag;
 	int		fd[2];
-	int		childid[2];
+	int		oldpipe;
+	int		currchildpos;
+	int		*childid;
 }	t_piper;
 
 void	errxit(char const *msg);
-void	pipex(t_piper *piper, char **argv, char **envp);
+void	pipex(t_piper *piper, int argc, char **argv, char **envp);
+void	firstchild(t_piper *piper, char **argv, char **envp);
+void	middlechild(t_piper *piper, char **argv, char **envp);
+void	lastchild(t_piper *piper, char **argv, char **envp);
 char	*commander(t_piper *piper, char **argv, int childpos);
 char	**pipesplit(char const *s, char c);
 

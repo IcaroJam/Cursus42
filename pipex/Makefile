@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/12 17:35:13 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/13 11:03:19 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC			=	./mandatory/pipex.c ./mandatory/processes.c
 
 OBJS		=	$(addsuffix .o, $(notdir $(basename $(SRC))))
 
-BONUS_SRC	=	./bonus/pipex_bonus.c ./bonus/processes_bonus.c
+BONUS_SRC	=	./bonus/pipex_bonus.c ./bonus/processes_bonus.c ./bonus/children_bonus.c
 
 BONUS_OBJS	=	$(addsuffix .o, $(notdir $(basename $(BONUS_SRC))))
 

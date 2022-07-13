@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 16:57:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/12 17:53:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:23:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 	piper.inflag = 0;
 	inerrors(argc, argv, envp, &piper);
 	if (pipe(piper.fd) < 0)
-		errxit("Failed to create the pipe.\n");
-	pipex(&piper, argv, envp);
+		errxit("Failed to create a pipe.\n");
+	pipex(&piper, argc, argv, envp);
 	return (0);
 }
