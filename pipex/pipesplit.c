@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/12 14:34:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:36:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static size_t	ft_wordcount(char const *s, char c)
 				s++;
 			if (*s == 34)
 				s++;
-			flag = *s - 1;
+			flag = *(s - 1);
 			while (*s != flag && *s)
 				s++;
 		}
-		else if ((*s != c && *(s + 1) == c) || (*s != c && !*(s + 1)))
+		if ((*s != c && s[1] == c) || (*s != c && !s[1]))
 			words++;
 		s++;
 	}
