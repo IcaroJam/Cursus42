@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 11:01:07 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/13 13:28:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/13 14:53:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,8 @@
 
 void	firstchild(t_piper *piper, char **argv, char **envp)
 {
-	ft_printf("First pair of pipes: fd[0] = %d, fd[1] = %d\n", piper->fd[0], piper->fd[1]);
 	if (piper->inflag)
 		exit(1);
-	close(piper->fd[0]);
-	dup2(piper->fd[1], 1);
-	close(piper->fd[1]);
-	if (!piper->hereflag)
-	{
-		dup2(piper->infd, 0);
-		close(piper->infd);
-	}
 	piper->cmdpath = commander(piper, argv,
 			piper->currchildpos + piper->hereflag + 2);
 	if (!piper->cmdpath)
@@ -35,13 +26,21 @@ void	firstchild(t_piper *piper, char **argv, char **envp)
 		ft_putstr_fd("command not found\n", 2);
 		exit(127);
 	}
+	close(piper->fd[0]);
+	dup2(piper->fd[1], 1);
+	close(piper->fd[1]);
+	if (!piper->hereflag)
+	{
+		dup2(piper->infd, 0);
+		close(piper->infd);
+	}
 	if (execve(piper->cmdpath, piper->currcmd, envp) < 0)
 		errxit("Execve error: command not found.\n");
 }
 
 void	middlechild(t_piper *piper, char **argv, char **envp)
 {
-	ft_printf("Middle pipes: oldpipe = %d, fd[0] = %d, fd[1] = %d\n", piper->oldpipe, piper->fd[0], piper->fd[1]);
+	waitpid(piper->childid[piper->currchildpos - 1], NULL, 0);
 	piper->cmdpath = commander(piper, argv,
 			piper->currchildpos + piper->hereflag + 2);
 	if (!piper->cmdpath)
@@ -63,7 +62,7 @@ void	middlechild(t_piper *piper, char **argv, char **envp)
 
 void	lastchild(t_piper *piper, char **argv, char **envp)
 {
-	ft_printf("Last pipes: oldpipe = %d, fd[0] = %d, fd[1] = %d\n", piper->oldpipe, piper->fd[0], piper->fd[1]);
+	waitpid(piper->childid[piper->currchildpos - 1], NULL, 0);
 	piper->cmdpath = commander(piper, argv,
 			piper->currchildpos + piper->hereflag + 2);
 	if (!piper->cmdpath)

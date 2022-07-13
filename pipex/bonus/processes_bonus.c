@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:56:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/13 13:31:15 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/13 14:52:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	pipex(t_piper *piper, int argc, char **argv, char **envp)
 	piper->currchildpos = 0;
 	argc -= 4 + piper->hereflag;
 	forker(piper, -1, argv, envp);
-	waitpid(piper->childid[piper->currchildpos - 1], NULL, 0);
 	while (argc-- > 1)
 	{
 		close(piper->fd[1]);
@@ -64,8 +63,6 @@ void	pipex(t_piper *piper, int argc, char **argv, char **envp)
 		if (pipe(piper->fd) < 0)
 			errxit("Failed to create a pipe.\n");
 		forker(piper, 0, argv, envp);
-		waitpid(piper->childid[piper->currchildpos - 1], NULL, 0);
-		unlink("middlechild.tmp");
 	}
 	forker(piper, 1, argv, envp);
 	parent(piper);
