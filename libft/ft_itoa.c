@@ -6,16 +6,19 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:09:47 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:45:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/16 12:41:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned int	ft_prepnum(int n, int *isneg)
+static unsigned int	ft_prepnum(int n, int *isneg, int *numlen)
 {
 	unsigned int	temp;
 
+	*numlen = 0;
+	if (!n)
+		*numlen = 1;
 	*isneg = 0;
 	if (n < 0)
 	{
@@ -29,15 +32,12 @@ static unsigned int	ft_prepnum(int n, int *isneg)
 
 char	*ft_itoa(int n)
 {
-	char				*ret;
-	int					numlen;
-	unsigned int		temp;
-	int					isneg;
+	char			*ret;
+	int				numlen;
+	int				isneg;
+	unsigned int	temp;
 
-	numlen = 0;
-	if (!n)
-		numlen = 1;
-	temp = ft_prepnum(n, &isneg);
+	temp = ft_prepnum(n, &isneg, &numlen);
 	while (n)
 	{
 		n /= 10;
@@ -48,9 +48,10 @@ char	*ft_itoa(int n)
 		return (NULL);
 	if (isneg)
 		*ret = '-';
+	isneg = !isneg;
 	while (numlen)
 	{
-		ret[numlen-- - !isneg] = temp % 10 + '0';
+		ret[numlen-- - isneg] = temp % 10 + '0';
 		temp /= 10;
 	}
 	return (ret);
