@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:01:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:45:47 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/16 13:23:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*temp;
-	unsigned char		val;
+	unsigned char	*temp;
+	unsigned char	val;
 
-	temp = s;
+	temp = (unsigned char *) s;
 	val = c;
 	while (n--)
 	{
 		if (*temp == val)
-			return ((unsigned char *)temp);
+			return (temp);
 		temp++;
 	}
-	return (0);
+	return (NULL);
 }
