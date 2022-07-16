@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 11:04:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 11:08:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/16 12:58:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_lstdelone(t_list *lst, void (*del) (void *))
 {
-	del((*lst).content);
+	del(lst->content);
 	free(lst);
 }
