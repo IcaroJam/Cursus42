@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:49:54 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:48:32 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/16 13:29:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char		*d;
-	const unsigned char	*s;
+	const unsigned char	*s = src;
 
 	d = dst;
-	s = src;
 	if (!d && !s)
-		return (0);
+		return (NULL);
 	while (n--)
 		*d++ = *s++;
 	return (dst);
