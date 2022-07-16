@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:22:45 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 12:25:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/16 13:00:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstiter(t_list *lst, void (*f) (void *))
 {
 	while (lst)
 	{
-		f((*lst).content);
-		lst = (*lst).next;
+		f(lst->content);
+		lst = lst->next;
 	}
 }
