@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:53:14 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:43:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/14 18:30:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char	*start;
+	void	*start;
 
-	start = (char *) malloc(count * size);
+	start = malloc(count * size);
 	if (!start)
-		return (0);
+		return (NULL);
 	ft_bzero(start, count * size);
-	return ((void *)start);
+	return (start);
 }
