@@ -6,11 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 11:34:23 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/04/30 11:39:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/16 14:31:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
