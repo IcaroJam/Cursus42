@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 16:53:27 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:53:36 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/18 13:12:32 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*ret;
 
 	if (!set || !s1)
-		return (0);
+		return (NULL);
 	loff = 0;
 	while (s1[loff] && ft_strchr(set, s1[loff]))
 		loff++;
