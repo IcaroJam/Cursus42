@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 11:10:01 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:52:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/18 12:55:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*ft_strmapi(char const *s, char (*f) (unsigned int, char))
 	unsigned int	i;
 
 	if (!s)
-		return (0);
+		return (NULL);
 	ret = ft_strdup(s);
 	if (!ret)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (ret[i])
 	{
