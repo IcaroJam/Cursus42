@@ -6,25 +6,25 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:35:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 15:19:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/18 12:23:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_stringalloc(char const *str, char c, size_t *newoff)
+static char	*ft_stringalloc(char const **str, char c)
 {
 	char	*ret;
 	size_t	wlen;
 
 	wlen = 0;
-	while (str[wlen] && str[wlen] != c)
+	while (str[0][wlen] && str[0][wlen] != c)
 		wlen++;
 	ret = malloc(sizeof(char) * (wlen + 1));
 	if (!ret)
 		return (NULL);
-	*newoff = wlen;
-	ft_strlcpy(ret, str, wlen + 1);
+	ft_strlcpy(ret, *str, wlen + 1);
+	*str += wlen;
 	return (ret);
 }
 
@@ -48,35 +48,32 @@ static void	ft_destroyer(char **arr, size_t words)
 
 	i = 0;
 	while (i < words)
-		free(arr[i++]);
+	{
+		free(arr[i]);
+		arr[i++] = NULL;
+	}
 	free(arr);
 }
 
-static char	**ft_strstringer(char **ret, size_t words, char c, char const *s)
+static int	ft_strstringer(char **ret, size_t words, char c, char const *s)
 {
-	size_t	i;
 	size_t	retindex;
-	size_t	wsplit;
 
-	wsplit = 0;
 	retindex = 0;
-	while (wsplit < words)
+	while (retindex < words)
 	{
 		while (*s == c)
 			s++;
-		ret[retindex] = ft_stringalloc(s, c, &i);
-		s += i;
-		wsplit++;
+		ret[retindex] = ft_stringalloc(&s, c);
 		if (!ret[retindex])
 		{
-			ft_destroyer(ret, wsplit);
-			return (NULL);
+			ft_destroyer(ret, retindex);
+			return (1);
 		}
 		retindex++;
 	}
-	if (wsplit == words)
-		ret[retindex] = NULL;
-	return (ret);
+	ret[retindex] = NULL;
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
@@ -85,11 +82,12 @@ char	**ft_split(char const *s, char c)
 	size_t	words;
 
 	if (!s)
-		return (0);
+		return (NULL);
 	words = ft_wordcount(s, c);
-	ret = (char **) malloc((words + 1) * sizeof(char *));
+	ret = malloc(sizeof(char *) * (words + 1));
 	if (!ret)
 		return (NULL);
-	ret = ft_strstringer(ret, words, c, s);
+	if (ft_strstringer(ret, words, c, s))
+		return (NULL);
 	return (ret);
 }
