@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:18:30 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:51:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/18 12:45:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*ft_strdup(const char *s1)
 	size_t	len;
 
 	len = ft_strlen(s1);
-	start = (char *) malloc((len + 1) * sizeof(char));
+	start = malloc(sizeof(char) * (len + 1));
 	if (!start)
-		return (0);
+		return (NULL);
 	ft_strlcpy(start, s1, len + 1);
 	return (start);
 }
