@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 12:10:23 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/19 15:34:16 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/19 15:59:26 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS	= -Wall -Werror -Wextra
 
 
 
-GLOBSRC	= errxit.c push_swap.c
+GLOBSRC	= errxit.c main.c
 #------------------------------------------------------------------------------#
 SRCS	= $(GLOBSRC)
 
