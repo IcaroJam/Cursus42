@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:14:37 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/19 13:28:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/19 14:40:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	errmsg(char *msg)
 {
+	ft_putendl_fd("Error", 2);
 	ft_putendl_fd(msg, 2);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:19:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/19 13:32:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/19 14:41:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int static	inputhandler(int argc, char **argv)
 		while (argv[0][i])
 		{
 			if (!ft_isdigit(argv[0][i++]))
-				errmsg("Error");
+				errmsg("Input contains invalid characters.");
 		}
 		argv++;
 	}
