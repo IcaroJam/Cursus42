@@ -6,15 +6,16 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 12:10:23 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/19 13:35:25 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/19 15:34:16 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
 
-LIBFT	= libft.a
+LIBFT	= ./libft/libft.a
 
 CFLAGS	= -Wall -Werror -Wextra
+
 
 
 GLOBSRC	= errxit.c push_swap.c
@@ -32,16 +33,16 @@ OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRCS) $(LIBFT)
+$(OBJS): $(SRCS)
 	@gcc $(CFLAGS) -c $(SRCS)
 	@echo "Objects objected."
-	@gcc $(CFLAGS) -Llibft -lft $(OBJS) -o $(NAME)
+
+$(NAME): $(OBJS) $(LIBFT)
+	@gcc $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
 	@echo "Executable executableble :)"
 
-bonus:
-
 $(LIBFT):
-	@make -C libft
+	@make -C ./libft
 	@echo "Bookcases restocked."
 
 clean:
@@ -49,7 +50,7 @@ clean:
 	@echo "Cleaning up..."
 
 libclean:
-	@make -C libft fclean
+	@make -C ./libft fclean
 	@echo "Library reduced to ashes."
 
 fclean: clean
@@ -58,4 +59,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean libclean fclean re bonus
+.PHONY: all clean libclean fclean re
