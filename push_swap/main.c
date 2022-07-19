@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:19:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/19 15:00:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/19 16:27:22 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void static	stackinit(int n, char **argv, t_stack *a, t_stack *b)
+{
+	a->stk = malloc(sizeof(int) * n);
+	b->stk = malloc(sizeof(int) * n);
+	if (!a->stk || !b->stk)
+		errmsg("Stack allocation failed.");
+	a->size = n;
+	b->size = n;
+	a->top = n;
+	b->top = n;
+}
 
 void static	checkdups(char **argv)
 {
@@ -56,9 +68,12 @@ int static	inputhandler(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
+	t_stack	a;
+	t_stack	b;
+
 	if (!inputhandler(argc, argv))
 	{
-		return (1);
+		stackinit(argc - 1, argv, &a, &b);
 	}
 	return (0);
 }
