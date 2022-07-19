@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 12:10:23 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/19 13:16:56 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/19 13:35:25 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ $(LIBFT):
 
 clean:
 	@rm -f $(OBJS)
-	echo "Cleaning up..."
+	@echo "Cleaning up..."
 
 libclean:
 	@make -C libft fclean
