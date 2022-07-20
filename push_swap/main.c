@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:19:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/19 16:27:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/20 12:09:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void static	stackinit(int n, char **argv, t_stack *a, t_stack *b)
 		errmsg("Stack allocation failed.");
 	a->size = n;
 	b->size = n;
-	a->top = n;
-	b->top = n;
+	a->top = 0;
+	b->top = 0;
+	while (a->top < n)
+		a->stk[a->top++] = ft_atoi(argv[a->top]);
 }
 
 void static	checkdups(char **argv)
@@ -73,7 +75,7 @@ int	main(int argc, char **argv)
 
 	if (!inputhandler(argc, argv))
 	{
-		stackinit(argc - 1, argv, &a, &b);
+		stackinit(argc - 1, argv + 1, &a, &b);
 	}
 	return (0);
 }
