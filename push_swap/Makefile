@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 12:10:23 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/07/19 15:59:26 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/07/20 18:11:42 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,15 +17,16 @@ LIBFT	= ./libft/libft.a
 CFLAGS	= -Wall -Werror -Wextra
 
 
-
+INSTSRC	= $(addprefix ./instructions/, swap.c push.c rotate.c)
 GLOBSRC	= errxit.c main.c
 #------------------------------------------------------------------------------#
-SRCS	= $(GLOBSRC)
+SRCS	= $(GLOBSRC) $(INSTSRC)
 
 
-
+INSTOBJ	= $(addsuffix .o, $(notdir $(basename $(INSTSRC))))
+GLOBOBJ	= $(GLOBSRC:.c=.o)
 #------------------------------------------------------------------------------#
-OBJS	= $(SRCS:.c=.o)
+OBJS	= $(GLOBOBJ) $(INSTOBJ)
 
 
 ################################################################################
