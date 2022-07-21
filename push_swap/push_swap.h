@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/21 10:17:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/21 10:50:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ void	ps_pb(t_stack *a, t_stack *b);
 void	ps_sa(t_stack *a);
 void	ps_sb(t_stack *b);
 void	ps_ss(t_stack *a, t_stack *b);
+void	ps_ra(t_stack *a);
+void	ps_rb(t_stack *b);
+void	ps_rr(t_stack *a, t_stack *b);
 
 #endif

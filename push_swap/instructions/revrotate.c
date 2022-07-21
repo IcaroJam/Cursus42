@@ -1,49 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   revrotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 18:12:38 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/21 10:53:29 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/07/21 10:54:15 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/07/21 11:01:08 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void static	ps_rotate(t_stack *stack)
+void static	ps_revrotate(t_stack *stack)
 {
 	int	temp;
-	int	lim;
 	int	i;
 
-	i = 0;
-	lim = stack->top - 1;
-	temp = stack->stk[0];
-	while (i < lim)
+	i = stack->top - 1;
+	temp = stack->stk[i];
+	while (i > 0)
 	{
-		stack->stk[i] = stack->stk[i + 1];
-		i++;
+		stack->stk[i] = stack->stk[i - 1];
+		i--;
 	}
 	stack->stk[i] = temp;
 }
 
-void	ps_ra(t_stack *a)
+void	ps_rra(t_stack *a)
 {
-	ps_rotate(a);
-	write(1, "ra\n", 3);
+	ps_revrotate(a);
+	write(1, "rra\n", 4);
 }
 
-void	ps_rb(t_stack *b)
+void	ps_rrb(t_stack *b)
 {
-	ps_rotate(b);
-	write(1, "rb\n", 3);
+	ps_revrotate(b);
+	write(1, "rrb\n", 4);
 }
 
-void	ps_rr(t_stack *a, t_stack *b)
+void	ps_rrr(t_stack *a, t_stack *b)
 {
-	ps_rotate(a);
-	ps_rotate(b);
-	write(1, "rr\n", 3);
+	ps_revrotate(a);
+	ps_revrotate(b);
+	write(1, "rrr\n", 4);
 }
