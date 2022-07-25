@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:19:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/21 15:39:12 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:43:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void static	stackinit(int n, char **argv, t_stack *a, t_stack *b)
 {
 	int	i;
 	
-	a->stk = malloc(sizeof(int) * n);
-	b->stk = malloc(sizeof(int) * n);
+	a->stk = malloc(sizeof(t_num) * n);
+	b->stk = malloc(sizeof(t_num) * n);
 	if (!a->stk || !b->stk)
 		errmsg("Stack allocation failed.");
 	a->size = n;
@@ -26,7 +26,11 @@ void static	stackinit(int n, char **argv, t_stack *a, t_stack *b)
 	b->top = 0;
 	i = n - 1;
 	while (a->top < n)
-		a->stk[a->top++] = ft_atoi(argv[i--]);
+	{
+		a->stk[a->top].flg = 0;
+		b->stk[a->top].flg = 0;
+		a->stk[a->top++].num = ft_atoi(argv[i--]);
+	}
 }
 
 void static	checkdups(char **argv)

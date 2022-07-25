@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 18:12:25 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/21 10:12:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:44:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void static	ps_push(t_stack *p_from, t_stack *p_to)
 {
 	if (!p_from->top)
 		return ;
-	p_to->stk[p_to->top++] = p_from->stk[--p_from->top];
+	p_to->stk[p_to->top++].num = p_from->stk[--p_from->top].num;
 }
 
 void	ps_pa(t_stack *a, t_stack *b)

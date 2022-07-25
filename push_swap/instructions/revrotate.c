@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 10:54:15 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/25 10:40:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:45:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void static	ps_revrotate(t_stack *stack)
 
 	i = 0;
 	lim = stack->top - 1;
-	temp = stack->stk[0];
+	temp = stack->stk[0].num;
 	while (i < lim)
 	{
-		stack->stk[i] = stack->stk[i + 1];
+		stack->stk[i].num = stack->stk[i + 1].num;
 		i++;
 	}
-	stack->stk[i] = temp;
+	stack->stk[i].num = temp;
 }
 
 void	ps_rra(t_stack *a)

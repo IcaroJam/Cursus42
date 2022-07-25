@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/21 10:50:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:41:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 
 # include "libft/libft.h"
 
+typedef struct s_num
+{
+	int	num;
+	int	flg;
+}	t_num;
+
 typedef struct s_stack
 {
-	int	*stk;
-	int	top;
-	int	size;
+	t_num	*stk;
+	int		top;
+	int		size;
 }	t_stack;
 
 // Error and exit functions.

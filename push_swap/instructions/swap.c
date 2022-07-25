@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 18:11:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/21 10:16:12 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:46:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void static	ps_swap(t_stack *stack)
 
 	if (stack->top <= 1)
 		return ;
-	temp = stack->stk[stack->top - 1];
-	stack->stk[stack->top - 1] = stack->stk[stack->top - 2];
-	stack->stk[stack->top - 2] = temp;
+	temp = stack->stk[stack->top - 1].num;
+	stack->stk[stack->top - 1].num = stack->stk[stack->top - 2].num;
+	stack->stk[stack->top - 2].num = temp;
 }
 
 void	ps_sa(t_stack *a)
