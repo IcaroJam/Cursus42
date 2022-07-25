@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 18:12:38 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/21 10:53:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/25 10:40:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 void static	ps_rotate(t_stack *stack)
 {
 	int	temp;
-	int	lim;
 	int	i;
 
-	i = 0;
-	lim = stack->top - 1;
-	temp = stack->stk[0];
-	while (i < lim)
+	i = stack->top - 1;
+	temp = stack->stk[i];
+	while (i > 0)
 	{
-		stack->stk[i] = stack->stk[i + 1];
-		i++;
+		stack->stk[i] = stack->stk[i - 1];
+		i--;
 	}
 	stack->stk[i] = temp;
 }
