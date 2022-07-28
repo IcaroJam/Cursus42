@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:28:20 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/28 15:20:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:32:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	threesolve(t_stack *a, t_stack *b)
 {
 	if (ispartsorted(*a))
 		return ;
-	if (a->top == 2)
+	if (a->top == 3)
 		emptystksolve(a);
 	else
 		filledstksolve(a, b);
