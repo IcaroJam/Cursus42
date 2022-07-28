@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/25 13:41:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/28 10:48:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ void	ps_ss(t_stack *a, t_stack *b);
 void	ps_ra(t_stack *a);
 void	ps_rb(t_stack *b);
 void	ps_rr(t_stack *a, t_stack *b);
+
+// Median stuff.
+int		medianget(t_stack stack);
 
 #endif
