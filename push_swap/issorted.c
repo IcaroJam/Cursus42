@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:19:38 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/28 12:48:12 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:59:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	getsmol(t_stack *stack)
 {
-	int	temp;
 	int	i;
+	int	temp;
 	int	ret;
 
-	i = 0;
+	i = stack->top - 1;
 	ret = i;
-	temp = stack->stk[i++].num;
-	while (i < stack->top)
+	temp = stack->stk[i--].num;
+	while (!stack->stk[i].flg && i > -1)
 	{
 		if (stack->stk[i].num < temp)
 		{
 			ret = i;
 			temp = stack->stk[i].num;
 		}
-		i++;
+		i--;
 	}
 	return (ret);
 }
