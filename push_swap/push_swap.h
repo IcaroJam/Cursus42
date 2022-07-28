@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/28 12:31:36 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:51:51 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	ps_ss(t_stack *a, t_stack *b);
 void	ps_ra(t_stack *a);
 void	ps_rb(t_stack *b);
 void	ps_rr(t_stack *a, t_stack *b);
+void	ps_rra(t_stack *a);
+void	ps_rrb(t_stack *b);
+void	ps_rrr(t_stack *a, t_stack *b);
 
 // Median stuff.
 int		medianget(t_stack stack);
@@ -50,5 +53,6 @@ void	threesolve(t_stack *a, t_stack *b);
 // Misc.
 int		ispartsorted(t_stack stack);
 int		issorted(t_stack stack);
+int		getsmol(t_stack *stack);
 
 #endif
