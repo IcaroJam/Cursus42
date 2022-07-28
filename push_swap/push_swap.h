@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/28 10:48:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:31:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,12 @@ void	ps_rr(t_stack *a, t_stack *b);
 
 // Median stuff.
 int		medianget(t_stack stack);
+
+// Solving.
+void	threesolve(t_stack *a, t_stack *b);
+
+// Misc.
+int		ispartsorted(t_stack stack);
+int		issorted(t_stack stack);
 
 #endif
