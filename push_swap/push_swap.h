@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/02 15:19:47 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:40:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void	fivesolve(t_stack *a, t_stack *b);
 int		ispartsorted(t_stack stack);
 int		issorted(t_stack stack);
 int		getsmol(t_stack *stack);
+int		getsmolish(t_stack *stack);
 
 #endif
