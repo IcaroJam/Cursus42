@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:19:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/28 11:12:47 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:20:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	main(int argc, char **argv)
 	if (!inputhandler(argc, argv))
 	{
 		stackinit(argc - 1, argv + 1, &a, &b);
+		fivesolve(&a, &b);
 	}
 	return (0);
 }
