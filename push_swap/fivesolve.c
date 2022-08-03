@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/03 10:44:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/03 16:09:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void static	movethem(t_stack *a, t_stack *b, t_num *tiny)
 	tiny[0].flg = 0;
 	tiny[1].flg = 0;
 	tiny[2].num = 0;
+	if (tiny[0].num == tiny[1].num)
+		return ;
 	while (!tiny[0].flg || !tiny[1].flg)
 	{
 		if (a->stk[a->top - 1].num == tiny[0].num

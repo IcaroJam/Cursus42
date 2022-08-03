@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:11:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/03 13:59:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/03 18:37:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int static	arrase(t_stack *a, t_stack *b)
 	int	median;
 	int	i;
 
-	i = numsinpartition(a) - 1;
+	i = a->top - 1;
 	if (i < 5)
 	{
 		fivesolve(a, b);
@@ -36,10 +36,13 @@ int static	arrase(t_stack *a, t_stack *b)
 	median = medianget(*a);
 	while (i > -1 && !a->stk[a->top - 1].flg)
 	{
-		if (a->stk[a->top - 1].num > median)
-			ps_ra(a);
-		else
-			ps_pb(a, b);
+		if (numsinpartition(a) > 5)
+		{
+			if (a->stk[a->top - 1].num > median)
+				ps_ra(a);
+			else
+				ps_pb(a, b);
+		}
 		i--;
 	}
 	b->stk[b->top - 1].flg = 1;
@@ -74,15 +77,25 @@ int static	brrase(t_stack *a, t_stack *b)
 
 void	solveit(t_stack *a, t_stack *b)
 {
+	int	i = 0;
+
 	if (a->top < 6)
 		fivesolve(a, b);
 	while (!issorted(*a) || b->top)
 	{
+		if (i > 100)
+			break ;
 		if (arrase(a, b))
 		{
 			while (brrase(a, b) < 6)
+			{
 				fivesolve(a, b);
-			a->stk[a->top - 1].flg = 1;
+				if (i++ > 100)
+					break ;
+			}
+			if (issorted(*a))
+				a->stk[a->top - 1].flg = 1;
 		}
+		i++;
 	}
 }
