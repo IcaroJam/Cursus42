@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:19:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/03 12:40:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:09:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,13 @@ int	main(int argc, char **argv)
 	if (!inputhandler(argc, argv))
 	{
 		stackinit(argc - 1, argv + 1, &a, &b);
+		if (issorted(a))
+		{
+			freestacks(&a, &b);
+			return (0);
+		}
 		solveit(&a, &b);
 	}
+	freestacks(&a, &b);
 	return (0);
 }

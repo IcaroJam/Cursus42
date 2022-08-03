@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/03 11:12:45 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:08:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_stack
 
 // Error and exit functions.
 void	errmsg(char *msg);
+void	freestacks(t_stack *a, t_stack *b);
 
 // Instructions.
 void	ps_pa(t_stack *a, t_stack *b);
