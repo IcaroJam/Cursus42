@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:28:20 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/02 15:46:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:38:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	threesolve(t_stack *a, t_stack *b)
 		return ;
 	if (a->top == 3)
 		emptystksolve(a);
+	else if (a->top < 3)
+		ps_sa(a);
 	else
 		filledstksolve(a, b);
 }

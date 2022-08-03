@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/02 18:29:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:44:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void static	get_to_top(t_stack *a, int i, int useRev)
 void static	emptystksolve(t_stack *a, t_stack *b)
 {
 	int	smolindex;
+	int	safeval;
 
+	safeval = a->top;
 	while (a->top > 3)
 	{
 		smolindex = getsmol(a);
@@ -39,7 +41,7 @@ void static	emptystksolve(t_stack *a, t_stack *b)
 			break ;
 	}
 	threesolve(a, b);
-	while (a->top < 5)
+	while (a->top < safeval)
 		ps_pa(a, b);
 }
 
@@ -87,7 +89,7 @@ void	fivesolve(t_stack *a, t_stack *b)
 {
 	if (ispartsorted(*a))
 		return ;
-	if (a->top == 5)
+	if (a->top <= 5)
 		emptystksolve(a, b);
 	else
 		filledstksolve(a, b);
