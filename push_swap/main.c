@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:19:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/02 17:55:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:40:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ void static	stackinit(int n, char **argv, t_stack *a, t_stack *b)
 void static	checkdups(char **argv)
 {
 	int	head;
-	int	search;
+	int	srch;
 
 	head = 1;
 	while (argv[head])
 	{
-		search = 0;
-		while (search < head)
+		srch = 0;
+		while (srch < head)
 		{
-			if (!ft_strncmp(argv[head], argv[search], ft_strlen(argv[head])))
+			if (!ft_strncmp(argv[head], argv[srch], ft_strlen(argv[head]) + 1))
 				errmsg("Duplicates present.");
-			search++;
+			srch++;
 		}
 		head++;
 	}
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 	if (!inputhandler(argc, argv))
 	{
 		stackinit(argc - 1, argv + 1, &a, &b);
-		fivesolve(&a, &b);
+		solveit(&a, &b);
 	}
 	return (0);
 }
