@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:11:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/04 18:51:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:16:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int static	numsinpartition(t_stack *a)
 	return (a->top - 1 - i);
 }
 
-int static	arrase(t_stack *a, t_stack *b)
+int static	arrase(t_stack *a, t_stack *b, int firstround)
 {
 	int	median;
 	int	i;
@@ -46,8 +46,9 @@ int static	arrase(t_stack *a, t_stack *b)
 			ps_pb(a, b);
 		i--;
 	}
-	while (i++ < rotated)
-		ps_rra(a);
+	if (!firstround)
+		while (i++ < rotated)
+			ps_rra(a);
 	b->stk[b->top - 1].flg = 1;
 	return (0);
 }
@@ -92,12 +93,16 @@ int static	brrase(t_stack *a, t_stack *b)
 
 void	solveit(t_stack *a, t_stack *b)
 {
+	int	firstround;
+
+	firstround = 1;
 	if (a->top < 6)
 		fivesolve(a, b);
 	while (!issorted(*a) || b->top)
 	{
-		if (arrase(a, b))
+		if (arrase(a, b, firstround))
 		{
+			firstround = 0;
 			fivesolve(a, b);
 			while (brrase(a, b) < 6)
 			{
