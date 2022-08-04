@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 14:45:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/28 11:12:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:24:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,14 @@ int	medianget(t_stack stack)
 	ret = ordstk[(stack.top - temp) / 2];
 	free (ordstk);
 	return (ret);
+}
+
+int	partlen(t_stack *stack)
+{
+	int	i;
+
+	i = stack->top - 1;
+	while (!stack->stk[i].flg && i > -1)
+		i--;
+	return (stack->top - 1 - i);
 }

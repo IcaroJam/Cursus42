@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:11:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/04 16:12:36 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:28:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int static	arrase(t_stack *a, t_stack *b)
 	int	rotated;
 
 	rotated = 0;
-	i = a->top - 1;
-	if (i < 5)
+	i = numsinpartition(a);
+	if (i < 6)
 		return (1);
 	median = medianget(*a);
 	while (i > -1 && !a->stk[a->top - 1].flg)
