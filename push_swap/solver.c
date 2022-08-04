@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:11:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/04 18:43:55 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:51:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int static	arrase(t_stack *a, t_stack *b)
 		i--;
 	}
 	while (i++ < rotated)
-	    ps_rra(a);
+		ps_rra(a);
 	b->stk[b->top - 1].flg = 1;
 	return (0);
 }
@@ -63,9 +63,10 @@ int static	brrase(t_stack *a, t_stack *b)
 	i[1] = 0;
 	if (!i[0])
 		return (6);
-	else if (i[0] == 1)
+	if (i[0] < 6)
 	{
-		ps_pa(a, b);
+		while (i[0]--)
+			ps_pa(a, b);
 		return (1);
 	}
 	pushedto = 0;
@@ -91,27 +92,20 @@ int static	brrase(t_stack *a, t_stack *b)
 
 void	solveit(t_stack *a, t_stack *b)
 {
-	int	i = 0;
-
 	if (a->top < 6)
 		fivesolve(a, b);
 	while (!issorted(*a) || b->top)
 	{
-		if (i > 100000)
-			break ;
 		if (arrase(a, b))
 		{
 			fivesolve(a, b);
 			while (brrase(a, b) < 6)
 			{
 				fivesolve(a, b);
-				if (i++ > 100000)
-					break ;
 				if (issorted(*a))
 					a->stk[a->top - 1].flg = 1;
 			}
 			b->stk[b->top - 1].flg = 1;
 		}
-		i++;
 	}
 }
