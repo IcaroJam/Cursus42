@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:11:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/04 12:20:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:46:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ int static	brrase(t_stack *a, t_stack *b)
 	i = numsinpartition(b) - 1;
 	if (i < 0)
 		return (6);
+	else if (!i)
+	{
+		ps_pa(a, b);
+		return (1);
+	}
 	pushedto = 0;
 	median = medianget(*b);
 	while (i > -1 && !b->stk[b->top - 1].flg)
