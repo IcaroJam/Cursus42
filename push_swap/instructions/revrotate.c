@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 10:54:15 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/25 13:45:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/04 13:34:01 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 void static	ps_revrotate(t_stack *stack)
 {
-	int	temp;
-	int	lim;
-	int	i;
+	t_num	temp;
+	int		lim;
+	int		i;
 
 	i = 0;
 	lim = stack->top - 1;
-	temp = stack->stk[0].num;
+	temp.num = stack->stk[0].num;
+	temp.flg = stack->stk[0].flg;
 	while (i < lim)
 	{
 		stack->stk[i].num = stack->stk[i + 1].num;
+		stack->stk[i].flg = stack->stk[i + 1].flg;
 		i++;
 	}
-	stack->stk[i].num = temp;
+	stack->stk[i].flg = temp.flg;
+	stack->stk[i].num = temp.num;
 }
 
 void	ps_rra(t_stack *a)
