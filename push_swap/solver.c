@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:11:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/04 18:28:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:43:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int static	arrase(t_stack *a, t_stack *b)
 	if (i < 6)
 		return (1);
 	median = medianget(*a);
-	while (i > -1 && !a->stk[a->top - 1].flg)
+	while (i && !a->stk[a->top - 1].flg)
 	{
 		if (a->top < 6)
 			return (1);
@@ -46,7 +46,6 @@ int static	arrase(t_stack *a, t_stack *b)
 			ps_pb(a, b);
 		i--;
 	}
-	i = 0;
 	while (i++ < rotated)
 	    ps_rra(a);
 	b->stk[b->top - 1].flg = 1;
@@ -60,18 +59,18 @@ int static	brrase(t_stack *a, t_stack *b)
 	int	i[2];
 
 	b->stk[b->top - 1].flg = 0;
-	i[0] = numsinpartition(b) - 1;
+	i[0] = numsinpartition(b);
 	i[1] = 0;
-	if (i[0] < 0)
+	if (!i[0])
 		return (6);
-	else if (!i[0])
+	else if (i[0] == 1)
 	{
 		ps_pa(a, b);
 		return (1);
 	}
 	pushedto = 0;
 	median = medianget(*b);
-	while (i[0] > -1 && !b->stk[b->top - 1].flg)
+	while (i[0] && !b->stk[b->top - 1].flg)
 	{
 		if (b->stk[b->top - 1].num < median)
 		{
@@ -85,7 +84,6 @@ int static	brrase(t_stack *a, t_stack *b)
 		}
 		i[0]--;
 	}
-	i[0] = 0;
 	while (i[0]++ < i[1])
 		ps_rrb(b);
 	return (pushedto);
