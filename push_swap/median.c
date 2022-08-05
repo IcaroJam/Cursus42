@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 14:45:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/04 18:24:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/05 13:47:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	medianget(t_stack stack)
 		errmsg("Couldn't allocate the memory needed to look for the median.");
 	copypartition(ordstk, stack, temp);
 	orderstack(ordstk, stack.top - temp);
-	ret = ordstk[(stack.top - temp) / 2];
+	ret = ordstk[(stack.top - 1 - temp) / 2];
 	free (ordstk);
 	return (ret);
 }
