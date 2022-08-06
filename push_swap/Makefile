@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 12:10:23 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/06 12:39:35 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/08/06 19:02:14 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,19 +18,25 @@ CFLAGS	= -Wall -Werror -Wextra
 
 
 INSTSRC	= $(addprefix ./instructions/, swap.c push.c rotate.c revrotate.c)
-STCKSRC	= $(addprefix ./stacks/, a_ops.c b_ops.c)
+STCKSRC	= $(addprefix ./stacks/, a_ops.c b_ops.c median.c)
 SOLVSRC	= $(addprefix ./solving/, threesolve.c fivesolve.c solver.c)
-GLOBSRC	= errxit.c main.c median.c issorted.c input.c
+PSMVSRC	= $(addprefix ./maindir/, main.c)
+GLOBSRC	= errxit.c issorted.c input.c
+BNUSSRC	= $(addprefix ./checkerdir/, bonus_main.c)
 #------------------------------------------------------------------------------#
-SRCS	= $(GLOBSRC) $(INSTSRC) $(STCKSRC) $(SOLVSRC)
+GLOBALS	= $(INSTSRC) $(GLOBSRC)
+SRCS	= $(STCKSRC) $(SOLVSRC) $(PSMVSRC)
 
 
 INSTOBJ	= $(addsuffix .o, $(notdir $(basename $(INSTSRC))))
 STCKOBJ	= $(addsuffix .o, $(notdir $(basename $(STCKSRC))))
 SOLVOBJ	= $(addsuffix .o, $(notdir $(basename $(SOLVSRC))))
+PSMVOBJ	= $(addsuffix .o, $(notdir $(basename $(PSMVSRC))))
 GLOBOBJ	= $(GLOBSRC:.c=.o)
+BNUSOBJ	= $(addsuffix .o, $(notdir $(basename $(BNUSSRC))))
 #------------------------------------------------------------------------------#
-OBJS	= $(GLOBOBJ) $(INSTOBJ) $(STCKOBJ) $(SOLVOBJ)
+GLOBALO	= $(INSTOBJ) $(GLOBOBJ)
+OBJS	= $(STCKOBJ) $(SOLVOBJ) $(PSMVOBJ)
 
 
 ################################################################################
@@ -38,20 +44,32 @@ OBJS	= $(GLOBOBJ) $(INSTOBJ) $(STCKOBJ) $(SOLVOBJ)
 
 all: $(NAME)
 
+$(GLOBALO): $(GLOBALS)
+	@gcc $(CFLAGS) -c $(GLOBALS)
+	@echo "Global objs."
+
 $(OBJS): $(SRCS)
 	@gcc $(CFLAGS) -c $(SRCS)
 	@echo "Objects objected."
 
-$(NAME): $(OBJS) $(LIBFT)
-	@gcc $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
+$(BNUSOBJ): $(BNUSSRC)
+	@gcc $(CFLAGS) -c $(BNUSSRC)
+	@echo "Checker objs."
+
+$(NAME): $(OBJS) $(GLOBALO) $(LIBFT)
+	@gcc $(CFLAGS) $(OBJS) $(GLOBALO) -Llibft -lft -o $(NAME)
 	@echo "Executable executableble :)"
 
 $(LIBFT):
 	@make -C ./libft
 	@echo "Bookcases restocked."
 
+bonus: $(BNUSOBJ) $(GLOBALO) $(LIBFT)
+	@gcc $(CFLAGS) $(BNUSOBJ) $(GLOBALO) -Llibft -lft -o checker
+	@echo "Checked the cheeky chekering."
+
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(BNUSOBJ) $(GLOBALO)
 	@echo "Cleaning up..."
 
 libclean:
@@ -59,9 +77,9 @@ libclean:
 	@echo "Library reduced to ashes."
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) checker
 	@echo "REALLY cleaning up..."
 
 re: fclean all
 
-.PHONY: all clean libclean fclean re
+.PHONY: all clean libclean fclean re bonus

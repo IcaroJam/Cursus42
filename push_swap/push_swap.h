@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 12:39:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 16:01:43 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	a_begin(t_stack *a, t_stack *b);
 void	b_divide(t_stack *a, t_stack *b);
 
 // Misc.
+void	stackinit(int n, char **argv, t_stack *a, t_stack *b);
 int		inputhandler(int argc, char **argv);
 int		ispartsorted(t_stack stack);
 int		issorted(t_stack stack);

@@ -6,11 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 14:45:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/05 13:47:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 15:46:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void static	copypartition(int *ordstk, t_stack stack, int temp)
 {
