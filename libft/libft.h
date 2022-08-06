@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:31:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/01 16:47:30 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 16:07:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	ft_lstiter(t_list *lst, void (*f) (void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *));
 
 int		ft_printf(char const *str, ...);
+
+char	*get_next_line(int fd);
 
 // Math extras:
 
