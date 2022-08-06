@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bonus_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:50:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 17:21:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 19:30:53 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 int static	checkcommand(t_stack *a, t_stack *b, char *cmnd)
 {
-	if (ft_strncmp("sa", cmnd, 3))
-		ps_sa(a);
-	else if (ft_strncmp("sb", cmnd, 3))
-		ps_sb(b);
-	else if (ft_strncmp("ss", cmnd, 3))
+	if (!ft_strncmp("sa\n", cmnd, 3))
+		ps_swap(a);
+	else if (!ft_strncmp("sb\n", cmnd, 3))
+		ps_swap(b);
+	else if (!ft_strncmp("ss\n", cmnd, 3))
 		ps_ss(a, b);
-	else if (ft_strncmp("pa", cmnd, 3))
-		ps_pa(a, b);
-	else if (ft_strncmp("pb", cmnd, 3))
-		ps_pb(a, b);
-	else if (ft_strncmp("ra", cmnd, 3))
-		ps_ra(a);
-	else if (ft_strncmp("rb", cmnd, 3))
-		ps_rb(b);
-	else if (ft_strncmp("rr", cmnd, 3))
+	else if (!ft_strncmp("pa\n", cmnd, 3))
+		ps_push(b, a);
+	else if (!ft_strncmp("pb\n", cmnd, 3))
+		ps_push(a, b);
+	else if (!ft_strncmp("ra\n", cmnd, 3))
+		ps_rotate(a);
+	else if (!ft_strncmp("rb\n", cmnd, 3))
+		ps_rotate(b);
+	else if (!ft_strncmp("rr\n", cmnd, 3))
 		ps_rr(a, b);
-	else if (ft_strncmp("rra", cmnd, 4))
-		ps_rra(a);
-	else if (ft_strncmp("rrb", cmnd, 4))
-		ps_rrb(b);
-	else if (ft_strncmp("rrr", cmnd, 4))
+	else if (!ft_strncmp("rra\n", cmnd, 4))
+		ps_revrotate(a);
+	else if (!ft_strncmp("rrb\n", cmnd, 4))
+		ps_revrotate(b);
+	else if (!ft_strncmp("rrr\n", cmnd, 4))
 		ps_rrr(a, b);
 	else
 		return (1);
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 	b.stk = NULL;
 	if (!inputhandler(argc, argv))
 	{
-		stackinit(argc - 1, argv, &a, &b);
+		stackinit(argc - 1, argv + 1, &a, &b);
 		command_gen(&a, &b);
 		if (issorted(a) && !b.top)
 			ft_putendl_fd("OK", 1);

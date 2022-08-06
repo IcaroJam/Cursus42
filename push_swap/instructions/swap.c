@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 18:11:56 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/25 13:46:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 19:24:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void static	ps_swap(t_stack *stack)
+void	ps_swap(t_stack *stack)
 {
 	int	temp;
 
@@ -39,5 +39,4 @@ void	ps_ss(t_stack *a, t_stack *b)
 {
 	ps_swap(a);
 	ps_swap(b);
-	write(1, "ss\n", 3);
 }

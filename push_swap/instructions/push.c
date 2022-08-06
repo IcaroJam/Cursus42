@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 18:12:25 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/25 13:44:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 19:20:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void static	ps_push(t_stack *p_from, t_stack *p_to)
+void	ps_push(t_stack *p_from, t_stack *p_to)
 {
 	if (!p_from->top)
 		return ;

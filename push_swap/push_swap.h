@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 16:01:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 19:21:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,18 @@ void	errmsg(char *msg);
 void	freestacks(t_stack *a, t_stack *b);
 
 // Instructions.
+void	ps_push(t_stack *p_from, t_stack *p_to);
 void	ps_pa(t_stack *a, t_stack *b);
 void	ps_pb(t_stack *a, t_stack *b);
+void	ps_swap(t_stack *stack);
 void	ps_sa(t_stack *a);
 void	ps_sb(t_stack *b);
 void	ps_ss(t_stack *a, t_stack *b);
+void	ps_rotate(t_stack *stack);
 void	ps_ra(t_stack *a);
 void	ps_rb(t_stack *b);
 void	ps_rr(t_stack *a, t_stack *b);
+void	ps_revrotate(t_stack *stack);
 void	ps_rra(t_stack *a);
 void	ps_rrb(t_stack *b);
 void	ps_rrr(t_stack *a, t_stack *b);

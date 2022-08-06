@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 10:54:15 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/04 13:34:01 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 19:24:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void static	ps_revrotate(t_stack *stack)
+void	ps_revrotate(t_stack *stack)
 {
 	t_num	temp;
 	int		lim;
@@ -48,5 +48,4 @@ void	ps_rrr(t_stack *a, t_stack *b)
 {
 	ps_revrotate(a);
 	ps_revrotate(b);
-	write(1, "rrr\n", 4);
 }
