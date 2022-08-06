@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:37:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 13:10:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 13:31:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,20 @@ void static	checkdups(char **argv)
 
 int static	overflowcheck(char *argv)
 {
-	if (*argv == '-' && !ft_atoi(argv))
-		return (1);
-	if (*argv != '-' && ft_atoi(argv) == -1)
-		return (1);
-	if (ft_strlen(argv) > 11)
-		return (1);
+	if (*argv == '-')
+	{
+		if (!ft_atoi(argv))
+			return (1);
+		if (ft_strlen(argv) > 11 || (ft_strlen(argv) == 11 && argv[1] != '2'))
+			return (1);
+	}
+	if (*argv != '-')
+	{
+		if (ft_atoi(argv) == -1)
+			return (1);
+		if (ft_strlen(argv) > 10 || (ft_strlen(argv) == 10 && argv[0] != '2'))
+			return (1);
+	}
 	return (0);
 }
 
@@ -64,4 +72,3 @@ int	inputhandler(int argc, char **argv)
 	}
 	return (0);
 }
-
