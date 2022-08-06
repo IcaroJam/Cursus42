@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 10:48:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 11:11:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ void static	emptystksolve(t_stack *a, t_stack *b)
 
 void static	movethem(t_stack *a, t_stack *b, t_num *tiny)
 {
-	tiny[0].num = a->stk[getsmol(a)].num;
-	tiny[1].num = a->stk[getsmolish(a)].num;
-	tiny[0].flg = 0;
-	tiny[1].flg = 0;
-	tiny[2].num = 0;
 	if (tiny[0].num == tiny[1].num)
 		return ;
 	while (!tiny[0].flg || !tiny[1].flg)
@@ -70,6 +65,9 @@ void static	movethem(t_stack *a, t_stack *b, t_num *tiny)
 				tiny[1].flg = 1;
 			ps_pb(a, b);
 		}
+		else if (a->stk[a->top - 2].num == tiny[0].num
+			|| a->stk[a->top - 2].num == tiny[1].num)
+			ps_sa(a);
 		else
 		{
 			ps_ra(a);
@@ -87,6 +85,11 @@ void static	filledstksolve(t_stack *a, t_stack *b)
 		threesolve(a, b);
 		return ;
 	}
+	tiny[0].num = a->stk[getsmol(a)].num;
+	tiny[1].num = a->stk[getsmolish(a)].num;
+	tiny[0].flg = 0;
+	tiny[1].flg = 0;
+	tiny[2].num = 0;
 	movethem(a, b, &tiny[0]);
 	while (tiny[2].num--)
 		ps_rra(a);
