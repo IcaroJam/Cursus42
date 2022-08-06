@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:15:03 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/04 18:24:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 11:25:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,18 @@ void	threesolve(t_stack *a, t_stack *b);
 void	fivesolve(t_stack *a, t_stack *b);
 void	solveit(t_stack *a, t_stack *b);
 
+// A stack thangs
+int		a_split(t_stack *a, t_stack *b);
+void	a_begin(t_stack *a, t_stack *b);
+
+// B stack thangs
+void	b_divide(t_stack *a, t_stack *b);
+
 // Misc.
 int		ispartsorted(t_stack stack);
 int		issorted(t_stack stack);
 int		getsmol(t_stack *stack);
 int		getsmolish(t_stack *stack);
+void	rev(t_stack *stack, int qtty, int flag);
 
 #endif
