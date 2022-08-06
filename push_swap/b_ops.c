@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:20:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 11:24:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 11:52:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int static	b_deal(t_stack *a, t_stack *b, int len)
 		}
 		len--;
 	}
-	rev(b, numsfliped, 0);
+	if (partlen(b) < b->top)
+		rev(b, numsfliped, 0);
 	return (pushedto);
 }
 
