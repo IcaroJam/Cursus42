@@ -6,11 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:16:53 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 11:18:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 12:22:01 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	a_split(t_stack *a, t_stack *b)
 {

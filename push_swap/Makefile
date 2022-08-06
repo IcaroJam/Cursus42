@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 12:10:23 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/06 11:27:24 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/08/06 12:21:12 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,19 @@ CFLAGS	= -Wall -Werror -Wextra
 
 
 INSTSRC	= $(addprefix ./instructions/, swap.c push.c rotate.c revrotate.c)
-GLOBSRC	= errxit.c main.c median.c threesolve.c fivesolve.c issorted.c solver.c a_ops.c b_ops.c
+STCKSRC	= $(addprefix ./stacks/, a_ops.c b_ops.c)
+SOLVSRC	= $(addprefix ./solving/, threesolve.c fivesolve.c solver.c)
+GLOBSRC	= errxit.c main.c median.c issorted.c
 #------------------------------------------------------------------------------#
-SRCS	= $(GLOBSRC) $(INSTSRC)
+SRCS	= $(GLOBSRC) $(INSTSRC) $(STCKSRC) $(SOLVSRC)
 
 
 INSTOBJ	= $(addsuffix .o, $(notdir $(basename $(INSTSRC))))
+STCKOBJ	= $(addsuffix .o, $(notdir $(basename $(STCKSRC))))
+SOLVOBJ	= $(addsuffix .o, $(notdir $(basename $(SOLVSRC))))
 GLOBOBJ	= $(GLOBSRC:.c=.o)
 #------------------------------------------------------------------------------#
-OBJS	= $(GLOBOBJ) $(INSTOBJ)
+OBJS	= $(GLOBOBJ) $(INSTOBJ) $(STCKOBJ) $(SOLVOBJ)
 
 
 ################################################################################

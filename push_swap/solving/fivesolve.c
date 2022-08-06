@@ -6,11 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 11:11:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 12:21:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void static	get_to_top(t_stack *a, int i, int useRev)
 {

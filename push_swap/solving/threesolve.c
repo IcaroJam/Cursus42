@@ -6,11 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:28:20 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/03 10:38:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 12:21:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void static	emptystksolve(t_stack *a)
 {

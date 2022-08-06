@@ -6,11 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 11:20:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 11:52:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 12:22:07 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int static	b_check(t_stack *a, t_stack *b, int i)
 {
