@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:11:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/05 17:53:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 10:54:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int static	arrase(t_stack *a, t_stack *b, int firstround)
 	if (i < 6)
 		return (1);
 	median = medianget(*a);
-	ft_printf("Median: %d, Len: %d\n", median, i);
 	while (i && !a->stk[a->top - 1].flg)
 	{
 		if (a->top < 6)
