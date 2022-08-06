@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:11:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/05 18:03:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 10:52:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int static	a_split(t_stack *a, t_stack *b)
 	int	numsfliped;
 
 	i = partlen(a);
+	if (i < 6)
+		return (-1);
 	median = medianget(*a);
 	numsfliped = 0;
 	while (i && !a->stk[a->top - 1].flg)
@@ -60,21 +62,16 @@ int static	b_check(t_stack *a, t_stack *b, int i)
 	return (0);
 }
 
-int static	b_split(t_stack *a, t_stack *b)
+int static	b_deal(t_stack *a, t_stack *b, int len)
 {
-	int	median;
 	int	pushedto;
-	int	i;
+	int	median;
 	int	numsfliped;
 
-	b->stk[b->top - 1].flg = 0;
-	i = partlen(b);
-	if (b_check(a, b, i))
-		return (1);
-	numsfliped = 0;
 	pushedto = 0;
+	numsfliped = 0;
 	median = medianget(*b);
-	while (i && !b->stk[b->top - 1].flg)
+	while (len && !b->stk[b->top - 1].flg)
 	{
 		if (b->stk[b->top - 1].num < median)
 		{
@@ -86,34 +83,54 @@ int static	b_split(t_stack *a, t_stack *b)
 			ps_pa(a, b);
 			pushedto++;
 		}
-		i--;
+		len--;
 	}
 	rev(b, numsfliped, 0);
 	return (pushedto);
 }
 
-void	solveit(t_stack *a, t_stack *b)
+int static	b_split(t_stack *a, t_stack *b)
 {
-	if (a->top < 6)
-		fivesolve(a, b);
+	int	pushedto;
+	int	i;
+
+	b->stk[b->top - 1].flg = 0;
+	i = partlen(b);
+	if (!i)
+		return (6);
+	if (b_check(a, b, i))
+		return (1);
+	pushedto = b_deal(a, b, i);
+	return (pushedto);
+}
+
+void static	a_begin(t_stack *a, t_stack *b)
+{
 	while (a->top > 5)
 		a_split(a, b);
 	fivesolve(a, b);
 	a->stk[a->top - 1].flg = 1;
+}
+
+void	solveit(t_stack *a, t_stack *b)
+{
+	if (a->top < 6)
+	{
+		fivesolve(a, b);
+		return ;
+	}
+	a_begin(a, b);
 	while (!issorted(*a) || b->top)
 	{
-		if (partlen(a) < 6 && issorted(*a))
+		while (b_split(a, b) < 6)
 		{
-			while (b_split(a, b) < 6)
-			{
-				fivesolve(a, b);
-				if (issorted(*a) && !b->top)
-					break ;
-				if (issorted(*a))
-					a->stk[a->top - 1].flg = 1;
-			}
-			b->stk[b->top - 1].flg = 1;
+			fivesolve(a, b);
+			if (issorted(*a))
+				a->stk[a->top - 1].flg = 1;
 		}
-		rev(a, a_split(a, b), 1);
+		b->stk[b->top - 1].flg = 1;
+		while (partlen(a) > 5)
+			rev(a, a_split(a, b), 1);
+		fivesolve(a, b);
 	}
 }

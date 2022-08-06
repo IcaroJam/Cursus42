@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/03 16:09:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/06 10:48:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void static	emptystksolve(t_stack *a, t_stack *b)
 	int	smolindex;
 	int	safeval;
 
+	if (partlen(a) < 4)
+	{
+		threesolve(a, b);
+		return ;
+	}
 	safeval = a->top;
 	while (a->top > 3)
 	{
@@ -77,6 +82,11 @@ void static	filledstksolve(t_stack *a, t_stack *b)
 {
 	t_num	tiny[3];
 
+	if (partlen(a) < 4)
+	{
+		threesolve(a, b);
+		return ;
+	}
 	movethem(a, b, &tiny[0]);
 	while (tiny[2].num--)
 		ps_rra(a);
