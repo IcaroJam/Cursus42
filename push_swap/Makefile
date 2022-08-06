@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 12:10:23 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/06 12:21:12 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/08/06 12:39:35 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS	= -Wall -Werror -Wextra
 INSTSRC	= $(addprefix ./instructions/, swap.c push.c rotate.c revrotate.c)
 STCKSRC	= $(addprefix ./stacks/, a_ops.c b_ops.c)
 SOLVSRC	= $(addprefix ./solving/, threesolve.c fivesolve.c solver.c)
-GLOBSRC	= errxit.c main.c median.c issorted.c
+GLOBSRC	= errxit.c main.c median.c issorted.c input.c
 #------------------------------------------------------------------------------#
 SRCS	= $(GLOBSRC) $(INSTSRC) $(STCKSRC) $(SOLVSRC)
 
