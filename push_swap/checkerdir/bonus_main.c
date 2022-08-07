@@ -14,27 +14,27 @@
 
 int static	checkcommand(t_stack *a, t_stack *b, char *cmnd)
 {
-	if (!ft_strncmp("sa\n", cmnd, 3))
+	if (!ft_strncmp("sa\n", cmnd, 4))
 		ps_swap(a);
-	else if (!ft_strncmp("sb\n", cmnd, 3))
+	else if (!ft_strncmp("sb\n", cmnd, 4))
 		ps_swap(b);
-	else if (!ft_strncmp("ss\n", cmnd, 3))
+	else if (!ft_strncmp("ss\n", cmnd, 4))
 		ps_ss(a, b);
-	else if (!ft_strncmp("pa\n", cmnd, 3))
+	else if (!ft_strncmp("pa\n", cmnd, 4))
 		ps_push(b, a);
-	else if (!ft_strncmp("pb\n", cmnd, 3))
+	else if (!ft_strncmp("pb\n", cmnd, 4))
 		ps_push(a, b);
-	else if (!ft_strncmp("ra\n", cmnd, 3))
+	else if (!ft_strncmp("ra\n", cmnd, 4))
 		ps_rotate(a);
-	else if (!ft_strncmp("rb\n", cmnd, 3))
+	else if (!ft_strncmp("rb\n", cmnd, 4))
 		ps_rotate(b);
-	else if (!ft_strncmp("rr\n", cmnd, 3))
+	else if (!ft_strncmp("rr\n", cmnd, 4))
 		ps_rr(a, b);
-	else if (!ft_strncmp("rra\n", cmnd, 4))
+	else if (!ft_strncmp("rra\n", cmnd, 5))
 		ps_revrotate(a);
-	else if (!ft_strncmp("rrb\n", cmnd, 4))
+	else if (!ft_strncmp("rrb\n", cmnd, 5))
 		ps_revrotate(b);
-	else if (!ft_strncmp("rrr\n", cmnd, 4))
+	else if (!ft_strncmp("rrr\n", cmnd, 5))
 		ps_rrr(a, b);
 	else
 		return (1);
