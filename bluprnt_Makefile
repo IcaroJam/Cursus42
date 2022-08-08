@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/08 23:39:06 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/08/08 23:44:13 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,13 @@ FTFLGS	= -Llibft -lft
 
 SHRDSRC	=
 #------------------------------------------------------------------------------#
-SRCS	=
-BNSSRCS	=
+SRCS	= $(SHRDSRC)
+BNSSRCS	= $(SHRDSRC)
 
 SHRDOBJ	=
 #------------------------------------------------------------------------------#
-OBJS	=
-BNSOBJS	=
+OBJS	= $(SHRDOBJ)
+BNSOBJS	= $(SHRDOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -45,10 +45,12 @@ all:		$(NAME)
 #bonus:		$(BONUS)
 
 $(NAME):	$(OBJS) $(LIBFT)
+	@echo "Material stuff in a material world."
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
 	@echo "Ready to execute the protocol."
 
 #$(BONUS):	$(BNSOBJS) $(LIBFT)
+#	@echo "Bonus objects for ya chief."
 #	@gcc $(CFLAGS) $(BNSOBJS) $(FTFLGS) -o $(BONUS)
 #	@echo "Look at all that extra."
 
