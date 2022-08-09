@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:31:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/06 16:07:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:46:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ char	*get_next_line(int fd);
 int		ft_abs(int n);
 int		ft_ipow(int x, int n);
 void	ft_free(void **ptr);
+int		ft_ioverflw(char *str);
 
 #endif
