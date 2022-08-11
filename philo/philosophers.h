@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:57:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/10 18:44:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/11 10:51:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef struct s_philosopher
 }	t_philosopher;
 
 // Program struct. Index in the fork array of the fork right to a philosopher
-// will always be the same as the philosopher ID.
+// will always be the same as the philosopher ID and 0 for the fork
+// right to the last philosopher.
 typedef struct s_prg
 {
 	int				nop;
@@ -37,6 +38,7 @@ typedef struct s_prg
 	int				notepme;
 	t_philosopher	*phls;
 	pthread_mutex_t	*forks;
+	pthread_t		mstrthrd;
 }	t_prg;
 
 // Input values
