@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:47:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 11:10:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:52:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	second_layer(int argc, char **argv, t_prg *prg)
 	prg->tts = ft_atoi(argv[4]);
 	if (argc == 6)
 		prg->notepme = ft_atoi(argv[5]);
-	else prg->notepme = -1;
+	else
+		prg->notepme = -1;
 	return (0);
 }
 

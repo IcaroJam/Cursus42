@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/10 17:45:03 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/08/11 12:19:24 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CFLAGS	= -Wall -Werror -Wextra
 
 #----                                                                      ----#
 
-SHRDSRC	= basic_utils.c input.c main.c
+SHRDSRC	= basic_utils.c input.c master_fucntions.c clockstuff.c clockstuff.c main.c
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 BNSSRCS	= $(SHRDSRC)

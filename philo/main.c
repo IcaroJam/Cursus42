@@ -6,21 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 11:47:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/11 12:41:46 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-/** void	*prueba(void *a)
-  * {
-  *     t_philosopher	*b;
-  *     b = a;
-  *     sleep(b->id);
-  *     printf("Saludos desde el fisófolo %d\n", b->id);
-  *     sleep(1);
-  *     return (NULL);
-  * } */
 
 int static	utensilgenesis(t_prg *prg)
 {
@@ -54,7 +44,10 @@ int static	philogenesis(t_prg *prg)
 	while (i < prg->nop)
 	{
 		prg->phls[i].ticketback = prg;
-		if (pthread_create(&prg->phls[i].philo, NULL, prueba, &prg->phls[i]))
+		prg->phls[i].timeseaten = 0;
+		prg->phls[i].lstmealtime = -1;
+		if (pthread_create(&prg->phls[i].philo, NULL, sofic_routine,
+				&prg->phls[i]))
 		{
 			printf("Philosopher %d is unborn D:\n", i + 1);
 			return (1);
@@ -77,13 +70,11 @@ int static	philinit(t_prg *prg)
 	}
 	if (philogenesis(prg))
 		return (1);
-	if (pthread_create(&prg->mstrthrd, NULL, , NULL))
+	if (pthread_create(&prg->mstrthrd, NULL, everwatcher, prg))
 	{
 		printf("Master thread failed to be knitted.\n");
 		return (1);
 	}
-	/** for (int i = 0; i < prg->nop; i++)
-	  *     pthread_join(prg->phls[i].philo, NULL); */
 	return (0);
 }
 
@@ -99,6 +90,7 @@ int	main(int argc, char **argv)
 
 	if (inputhandler(argc, argv, &prg))
 		return (1);
+	prg.starttime = mstime();
 	if (philinit(&prg))
 	{
 		worldender(&prg);
