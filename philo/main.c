@@ -6,11 +6,21 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/10 19:34:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:26:08 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+/** void	*prueba(void *a)
+  * {
+  *     t_philosopher	*b;
+  *     b = a;
+  *     sleep(b->id);
+  *     printf("Saludos desde el fisófolo %d\n", b->id);
+  *     sleep(1);
+  *     return (NULL);
+  * } */
 
 int static	utensilgenesis(t_prg *prg)
 {
@@ -26,12 +36,11 @@ int static	utensilgenesis(t_prg *prg)
 	}
 	while (i < prg->nop)
 	{
-		if (!pthread_mutex_init(&prg->forks[i], NULL))
+		if (pthread_mutex_init(&prg->forks[i], NULL))
 		{
-			printf("Philosopher %d is unborn D:\n", i + 1);
+			printf("Fork %d was mind-bended into nothingness.\n", i);
 			return (1);
 		}
-		prg->phls[i].id = i + 1;
 		i++;
 	}
 	return (0);
@@ -44,7 +53,7 @@ int static	philogenesis(t_prg *prg)
 	i = 0;
 	while (i < prg->nop)
 	{
-		if (!pthread_create(&prg->phls[i].philo, NULL, , NULL))
+		if (pthread_create(&prg->phls[i].philo, NULL, prueba, &prg->phls[i]))
 		{
 			printf("Philosopher %d is unborn D:\n", i + 1);
 			return (1);
@@ -72,6 +81,8 @@ int static	philinit(t_prg *prg)
 		printf("Master thread failed to be knitted.\n");
 		return (1);
 	}
+	/** for (int i = 0; i < prg->nop; i++)
+	  *     pthread_join(prg->phls[i].philo, NULL); */
 	return (0);
 }
 
@@ -92,8 +103,10 @@ int	main(int argc, char **argv)
 		worldender(&prg);
 		return (1);
 	}
+	pthread_join(prg.mstrthrd, NULL);
 ////////////////////////////////////////////////////////////////////////////////
 	printf("nop: %d, ttd: %d, tte: %d, tts: %d, notepme: %d\n", prg.nop, prg.ttd, prg.tte, prg.tts, prg.notepme);
 ////////////////////////////////////////////////////////////////////////////////
+	worldender(&prg);
 	return (0);
 }
