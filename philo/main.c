@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 11:26:08 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:47:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int static	philogenesis(t_prg *prg)
 	i = 0;
 	while (i < prg->nop)
 	{
+		prg->phls[i].ticketback = prg;
 		if (pthread_create(&prg->phls[i].philo, NULL, prueba, &prg->phls[i]))
 		{
 			printf("Philosopher %d is unborn D:\n", i + 1);
