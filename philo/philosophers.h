@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:57:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 12:34:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/11 15:21:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		inputhandler(int argc, char **argv, t_prg *prg);
 
 // Time functions
 int		mstime(void);
+int		timesince(t_prg *prg);
 
 // Libft functions
 int		ft_ioverflw(char *str);

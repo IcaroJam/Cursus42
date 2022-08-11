@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:14:47 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 12:19:01 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/11 15:20:43 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ int	mstime(void)
 	gettimeofday(&time, NULL);
 	ret = time.tv_sec * 1000 + time.tv_usec / 1000;
 	return (ret);
+}
+
+int	timesince(t_prg *prg)
+{
+	return (prg->starttime - mstime());
 }
