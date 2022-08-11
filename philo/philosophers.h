@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:57:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 10:51:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:45:22 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 typedef struct s_philosopher
 {
+	void		*ticketback;
 	pthread_t	philo;
 	int			id;
 }	t_philosopher;
