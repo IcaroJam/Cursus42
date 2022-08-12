@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 19:18:07 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/12 19:26:19 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void static	omnichecker(t_prg *prg, int i)
 		consolelog(prg, "%d %d died\n", timesince(prg), prg->phls[i].id);
 		return ;
 	}
-	if (prg->phls[i].timeseaten >= prg->notepme)
+	if (prg->phls[i].timeseaten > prg->notepme)
 		prg->notepmeflag++;
 }
 
