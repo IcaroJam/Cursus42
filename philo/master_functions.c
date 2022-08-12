@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 20:37:00 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/12 20:57:52 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,8 @@ void	*everwatcher(void *wholething)
 			printf("All philobois ate %d times.\n", prg->notepme);
 		}
 	}
+	phildex = 0;
+	while (phildex < prg->nop)
+		pthread_join(prg->phls[phildex++].philo, NULL);
 	return (NULL);
 }
