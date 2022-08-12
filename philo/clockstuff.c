@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:14:47 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 15:20:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/12 12:32:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ int	mstime(void)
 
 int	timesince(t_prg *prg)
 {
-	return (prg->starttime - mstime());
+	return (mstime() - prg->starttime);
 }
