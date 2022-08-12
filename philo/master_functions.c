@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 19:58:40 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/12 20:37:00 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void static	consolelog(t_prg *prg, char *msg, int tstmp, int id)
 {
 	pthread_mutex_lock(&prg->log);
-	printf(msg, tstmp, id);
+	if (!prg->philodeath)
+		printf(msg, tstmp, id);
 	pthread_mutex_unlock(&prg->log);
 }
 
@@ -71,7 +72,7 @@ void static	omnichecker(t_prg *prg, int i)
 	if (timesince(prg) - prg->phls[i].lstmealtime > prg->ttd)
 	{
 		prg->philodeath = 1;
-		consolelog(prg, "%d %d died\n", timesince(prg), prg->phls[i].id);
+		printf("%d %d died\n", timesince(prg), prg->phls[i].id);
 		return ;
 	}
 	if (prg->phls[i].timeseaten > prg->notepme)
@@ -93,7 +94,7 @@ void	*everwatcher(void *wholething)
 		if (prg->notepme > -1 && prg->notepmeflag == prg->nop)
 		{
 			prg->philodeath = 1;
-			consolelog(prg, "Eaten at least %d%d times.\n", 0, prg->notepme);
+			printf("All philobois ate %d times.\n", prg->notepme);
 		}
 	}
 	return (NULL);
