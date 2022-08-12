@@ -6,19 +6,26 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 13:08:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:32:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+void static	consolelog(t_prg *prg, char *msg, int tstmp, int id)
+{
+	pthread_mutex_lock(&prg->log);
+	printf(msg, tstmp, id);
+	pthread_mutex_unlock(&prg->log);
+}
+
 void static	munchtime(t_prg *prg, t_philosopher *cphl)
 {
 	pthread_mutex_lock(&prg->forks[cphl->leftfork]);
-	printf("%d %d has taken a fork\n", timesince(prg), cphl->id);
+	consolelog(prg, "%d %d has taken a fork\n", timesince(prg), cphl->id);
 	pthread_mutex_lock(&prg->forks[cphl->rightfork]);
-	printf("%d %d has taken a fork\n", timesince(prg), cphl->id);
-	printf("%d %d is eating\n", timesince(prg), cphl->id);
+	consolelog(prg, "%d %d has taken a fork\n", timesince(prg), cphl->id);
+	consolelog(prg, "%d %d is eating\n", timesince(prg), cphl->id);
 	cphl->timeseaten++;
 	cphl->lstmealtime = timesince(prg);
 	usleep(1000 * prg->tte);
@@ -38,17 +45,17 @@ void	*sofic_routine(void *thelot)
 	if (cphl->rightfork == prg->nop)
 		cphl->rightfork = 0;
 	if (cphl->id % 2)
-		usleep(250);
+		usleep(1000);
 	while (!prg->philodeath)
 	{
 		if (!prg->philodeath)
 			munchtime(prg, cphl);
 		if (!prg->philodeath)
-		{
-			printf("%d %d is sleeping\n", timesince(prg), cphl->id);
+			consolelog(prg, "%d %d is sleeping\n", timesince(prg), cphl->id);
+		if (!prg->philodeath)
 			usleep(1000 * prg->tts);
-			printf("%d %d is thinking\n", timesince(prg), cphl->id);
-		}
+		if (!prg->philodeath)
+			consolelog(prg, "%d %d is thinking\n", timesince(prg), cphl->id);
 	}
 	return (NULL);
 }
@@ -58,7 +65,7 @@ void static	omnichecker(t_prg *prg, int i)
 	if (timesince(prg) - prg->phls[i].lstmealtime > prg->ttd)
 	{
 		prg->philodeath = 1;
-		printf("%d %d died\n", timesince(prg), prg->phls[i].id);
+		consolelog(prg, "%d %d died\n", timesince(prg), prg->phls[i].id);
 		return ;
 	}
 	if (prg->phls[i].timeseaten >= prg->notepme)
@@ -79,8 +86,8 @@ void	*everwatcher(void *wholething)
 			omnichecker(prg, phildex++);
 		if (prg->notepme > -1 && prg->notepmeflag == prg->nop)
 		{
-			printf("All phils have eaten at least %d times.\n", prg->notepme);
-			break ;
+			prg->philodeath = 1;
+			consolelog(prg, "Eaten at least %d%d times.\n", 0, prg->notepme);
 		}
 	}
 	return (NULL);

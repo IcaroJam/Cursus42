@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:57:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 12:43:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:29:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_prg
 	t_philosopher	*phls;
 	pthread_mutex_t	*forks;
 	pthread_t		mstrthrd;
+	pthread_mutex_t	log;
 }	t_prg;
 
 // Thread functions

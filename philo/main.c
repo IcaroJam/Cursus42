@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 12:31:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:19:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	worldender(t_prg *prg)
 	free(prg->forks);
 	while (i < prg->nop)
 		pthread_mutex_destroy(&prg->forks[i++]);
+	pthread_mutex_destroy(&prg->log);
 }
 
 int	main(int argc, char **argv)
@@ -98,6 +99,11 @@ int	main(int argc, char **argv)
 		return (1);
 	prg.philodeath = 0;
 	prg.starttime = mstime();
+	if (pthread_mutex_init(&prg.log, NULL))
+	{
+		printf("Failed to create log mutex.\n");
+		return (1);
+	}
 	if (utensilgenesis(&prg))
 		return (1);
 	if (philinit(&prg))
