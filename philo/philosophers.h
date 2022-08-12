@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:57:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 12:20:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/12 12:43:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_prg
 	int				notepme;
 	int				starttime;
 	int				philodeath;
+	int				notepmeflag;
 	t_philosopher	*phls;
 	pthread_mutex_t	*forks;
 	pthread_t		mstrthrd;
