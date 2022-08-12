@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 12:41:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/12 12:10:08 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int static	utensilgenesis(t_prg *prg)
 		if (pthread_mutex_init(&prg->forks[i], NULL))
 		{
 			printf("Fork %d was mind-bended into nothingness.\n", i);
+			prg->nop = 0;
+			while (prg->nop < i)
+				pthread_mutex_destroy(&prg->forks[prg->nop++]);
 			return (1);
 		}
 		i++;
@@ -60,8 +63,6 @@ int static	philogenesis(t_prg *prg)
 
 int static	philinit(t_prg *prg)
 {
-	if (utensilgenesis(prg))
-		return (1);
 	prg->phls = malloc(sizeof(t_philosopher) * prg->nop);
 	if (!prg->phls)
 	{
@@ -80,8 +81,13 @@ int static	philinit(t_prg *prg)
 
 void	worldender(t_prg *prg)
 {
+	int	i;
+
+	i = 0;
 	free(prg->phls);
 	free(prg->forks);
+	while (i < prg->nop)
+		pthread_mutex_destroy(&prg->forks[i++]);
 }
 
 int	main(int argc, char **argv)
@@ -91,15 +97,14 @@ int	main(int argc, char **argv)
 	if (inputhandler(argc, argv, &prg))
 		return (1);
 	prg.starttime = mstime();
+	if (utensilgenesis(&prg))
+		return (1);
 	if (philinit(&prg))
 	{
 		worldender(&prg);
 		return (1);
 	}
 	pthread_join(prg.mstrthrd, NULL);
-////////////////////////////////////////////////////////////////////////////////
-	printf("nop: %d, ttd: %d, tte: %d, tts: %d, notepme: %d\n", prg.nop, prg.ttd, prg.tte, prg.tts, prg.notepme);
-////////////////////////////////////////////////////////////////////////////////
 	worldender(&prg);
 	return (0);
 }
