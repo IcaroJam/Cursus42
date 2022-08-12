@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 13:32:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:18:07 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,21 @@ void static	consolelog(t_prg *prg, char *msg, int tstmp, int id)
 void static	munchtime(t_prg *prg, t_philosopher *cphl)
 {
 	pthread_mutex_lock(&prg->forks[cphl->leftfork]);
-	consolelog(prg, "%d %d has taken a fork\n", timesince(prg), cphl->id);
+	if (!prg->philodeath)
+		consolelog(prg, "%d %d has taken a fork\n", timesince(prg), cphl->id);
 	pthread_mutex_lock(&prg->forks[cphl->rightfork]);
-	consolelog(prg, "%d %d has taken a fork\n", timesince(prg), cphl->id);
-	consolelog(prg, "%d %d is eating\n", timesince(prg), cphl->id);
-	cphl->timeseaten++;
-	cphl->lstmealtime = timesince(prg);
-	usleep(1000 * prg->tte);
+	if (!prg->philodeath)
+		consolelog(prg, "%d %d has taken a fork\n", timesince(prg), cphl->id);
+	if (!prg->philodeath)
+	{
+		cphl->timeseaten++;
+		cphl->lstmealtime = timesince(prg);
+	}
+	if (!prg->philodeath)
+	{
+		consolelog(prg, "%d %d is eating\n", timesince(prg), cphl->id);
+		usleep(1000 * prg->tte);
+	}
 	pthread_mutex_unlock(&prg->forks[cphl->leftfork]);
 	pthread_mutex_unlock(&prg->forks[cphl->rightfork]);
 }
