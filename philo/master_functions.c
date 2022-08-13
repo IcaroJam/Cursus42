@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/13 13:30:21 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/13 13:56:51 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void static	munchtime(t_prg *prg, t_philosopher *cphl)
 		cphl->lstmealtime = timesince(prg);
 	}
 	if (!prg->philodeath)
-	{
 		usleep(1000 * prg->tte);
-		cphl->lstmealtime = timesince(prg);
-	}
 	pthread_mutex_unlock(&prg->forks[cphl->leftfork]);
 	pthread_mutex_unlock(&prg->forks[cphl->rightfork]);
 }
