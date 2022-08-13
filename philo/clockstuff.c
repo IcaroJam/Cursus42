@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:14:47 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 12:32:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/13 14:19:20 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,13 @@ int	mstime(void)
 int	timesince(t_prg *prg)
 {
 	return (mstime() - prg->starttime);
+}
+
+void	phisleep(t_prg *prg, int i)
+{
+	int	starttime;
+
+	starttime = timesince(prg);
+	while (!prg->philodeath && timesince(prg) - starttime < i)
+		usleep(50);
 }
