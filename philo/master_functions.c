@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 20:57:52 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/13 13:12:43 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void static	munchtime(t_prg *prg, t_philosopher *cphl)
 {
 	pthread_mutex_lock(&prg->forks[cphl->leftfork]);
 	if (!prg->philodeath)
-		consolelog(prg, "%d %d has taken a fork\n", timesince(prg), cphl->id);
+		consolelog(prg, "%dms %d has taken a fork\n", timesince(prg), cphl->id);
 	pthread_mutex_lock(&prg->forks[cphl->rightfork]);
 	if (!prg->philodeath)
-		consolelog(prg, "%d %d has taken a fork\n", timesince(prg), cphl->id);
+		consolelog(prg, "%dms %d has taken a fork\n", timesince(prg), cphl->id);
 	if (!prg->philodeath)
 	{
-		consolelog(prg, "%d %d is eating\n", timesince(prg), cphl->id);
+		consolelog(prg, "%dms %d is eating\n", timesince(prg), cphl->id);
 		cphl->timeseaten++;
 		cphl->lstmealtime = timesince(prg);
 	}
@@ -58,11 +58,11 @@ void	*sofic_routine(void *thelot)
 		if (!prg->philodeath)
 			munchtime(prg, cphl);
 		if (!prg->philodeath)
-			consolelog(prg, "%d %d is sleeping\n", timesince(prg), cphl->id);
+			consolelog(prg, "%dms %d is sleeping\n", timesince(prg), cphl->id);
 		if (!prg->philodeath)
 			usleep(1000 * prg->tts);
 		if (!prg->philodeath)
-			consolelog(prg, "%d %d is thinking\n", timesince(prg), cphl->id);
+			consolelog(prg, "%dms %d is thinking\n", timesince(prg), cphl->id);
 	}
 	return (NULL);
 }
@@ -72,7 +72,7 @@ void static	omnichecker(t_prg *prg, int i)
 	if (timesince(prg) - prg->phls[i].lstmealtime > prg->ttd)
 	{
 		prg->philodeath = 1;
-		printf("%d %d died\n", timesince(prg), prg->phls[i].id);
+		printf("%dms %d died\n", timesince(prg), prg->phls[i].id);
 		return ;
 	}
 	if (prg->phls[i].timeseaten > prg->notepme)
