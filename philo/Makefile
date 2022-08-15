@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/15 11:23:10 by senari           ###   ########.fr        #
+#    Updated: 2022/08/15 11:34:19 by senari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,13 @@ BONUS	= philo_bonus
 
 CFLAGS	= -Wall -Werror -Wextra -pthread
 
+VPATH	= ./:./mandatorydir:./bonusdir
+
 #----                                                                      ----#
 
 SHRDSRC	= basic_utils.c input.c clockstuff.c
-THRDSRC	= $(addprefix ./philo_mandatory/, main.c master_functions.c)
-PRCSSRC	= $(addprefix ./philo_bonus/, bonus_main.c)
+THRDSRC	= $(addprefix ./mandatorydir/, main.c master_functions.c)
+PRCSSRC	= $(addprefix ./bonusdir/, bonus_main.c)
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC) $(THRDSRC)
 BNSSRCS	= $(SHRDSRC) $(PRCSSRC)
