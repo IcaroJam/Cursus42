@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/08 23:44:13 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/08/15 11:35:41 by senari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ LIBFT	= ./libft/libft.a
 CFLAGS	= -Wall -Werror -Wextra
 
 FTFLGS	= -Llibft -lft
+
+VPATH	= ./:<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
