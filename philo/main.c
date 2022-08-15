@@ -32,6 +32,8 @@ static int	utensilgenesis(t_prg *prg)
 			prg->nop = 0;
 			while (prg->nop < i)
 				pthread_mutex_destroy(&prg->forks[prg->nop++]);
+			free(prg->forks);
+			pthread_mutex_destroy(&prg->log);
 			return (1);
 		}
 		i++;
