@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/15 10:36:05 by senari           ###   ########.fr        #
+#    Updated: 2022/08/15 11:23:10 by senari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,25 @@
 
 NAME	= philo
 
-BONUS	= #<<Your bonus exec here>>
+BONUS	= philo_bonus
 
 CFLAGS	= -Wall -Werror -Wextra -pthread
 
 #----                                                                      ----#
 
-SHRDSRC	= basic_utils.c input.c master_functions.c clockstuff.c main.c
+SHRDSRC	= basic_utils.c input.c clockstuff.c
+THRDSRC	= $(addprefix ./philo_mandatory/, main.c master_functions.c)
+PRCSSRC	= $(addprefix ./philo_bonus/, bonus_main.c)
 #------------------------------------------------------------------------------#
-SRCS	= $(SHRDSRC)
-BNSSRCS	= $(SHRDSRC)
+SRCS	= $(SHRDSRC) $(THRDSRC)
+BNSSRCS	= $(SHRDSRC) $(PRCSSRC)
 
 SHRDOBJ	= $(SHRDSRC:.c=.o)
+THRDOBJ	= $(addsuffix .o, $(notdir $(basename $(THRDSRC))))
+PRCSOBJ	= $(addsuffix .o, $(notdir $(basename $(PRCSSRC))))
 #------------------------------------------------------------------------------#
-OBJS	= $(SHRDOBJ)
-BNSOBJS	= $(SHRDOBJ)
+OBJS	= $(SHRDOBJ) $(THRDOBJ)
+BNSOBJS	= $(SHRDOBJ) $(PRCSOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -38,17 +42,17 @@ BNSOBJS	= $(SHRDOBJ)
 
 all:		$(NAME)
 
-#bonus:		$(BONUS)
+bonus:		$(BONUS)
 
 $(NAME):	$(OBJS)
 	@echo "Material stuff in a material world."
 	@gcc $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "Ready to execute the protocol."
 
-#$(BONUS):	$(BNSOBJS)
-#	@echo "Bonus objects for ya chief."
-#	@gcc $(CFLAGS) $(BNSOBJS) -o $(BONUS)
-#	@echo "Look at all that extra."
+$(BONUS):	$(BNSOBJS)
+	@echo "Bonus objects for ya chief."
+	@gcc $(CFLAGS) $(BNSOBJS) -o $(BONUS)
+	@echo "Look at all that extra."
 
 #----                                                                      ----#
 
