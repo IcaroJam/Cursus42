@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/12 13:19:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/15 10:35:46 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int static	utensilgenesis(t_prg *prg)
+static int	utensilgenesis(t_prg *prg)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ int static	utensilgenesis(t_prg *prg)
 	return (0);
 }
 
-int static	philogenesis(t_prg *prg)
+static int	philogenesis(t_prg *prg)
 {
 	int	i;
 
@@ -61,7 +61,7 @@ int static	philogenesis(t_prg *prg)
 	return (0);
 }
 
-int static	philinit(t_prg *prg)
+static int	philinit(t_prg *prg)
 {
 	prg->phls = malloc(sizeof(t_philosopher) * prg->nop);
 	if (!prg->phls)
@@ -79,7 +79,7 @@ int static	philinit(t_prg *prg)
 	return (0);
 }
 
-void	worldender(t_prg *prg)
+static void	worldender(t_prg *prg)
 {
 	int	i;
 

@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:47:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/11 11:52:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/15 10:34:21 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int static	digitcheck(char *str)
+static int	digitcheck(char *str)
 {
 	while (*str)
 	{
@@ -23,7 +23,7 @@ int static	digitcheck(char *str)
 	return (0);
 }
 
-int static	overflowcheck(char **argv)
+static int	overflowcheck(char **argv)
 {
 	while (*(++argv))
 		if (ft_ioverflw(*argv))

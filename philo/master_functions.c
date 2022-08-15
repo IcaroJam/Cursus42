@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/13 14:33:07 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/15 10:35:06 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void static	consolelog(t_prg *prg, char *msg, int tstmp, int id)
+static void	consolelog(t_prg *prg, char *msg, int tstmp, int id)
 {
 	pthread_mutex_lock(&prg->log);
 	if (!prg->philodeath)
@@ -20,7 +20,7 @@ void static	consolelog(t_prg *prg, char *msg, int tstmp, int id)
 	pthread_mutex_unlock(&prg->log);
 }
 
-void static	munchtime(t_prg *prg, t_philosopher *cphl)
+static void	munchtime(t_prg *prg, t_philosopher *cphl)
 {
 	pthread_mutex_lock(&prg->forks[cphl->leftfork]);
 	if (!prg->philodeath)
@@ -65,7 +65,7 @@ void	*sofic_routine(void *thelot)
 	return (NULL);
 }
 
-void static	omnichecker(t_prg *prg, int i)
+static void	omnichecker(t_prg *prg, int i)
 {
 	if (timesince(prg) - prg->phls[i].lstmealtime > prg->ttd)
 	{
