@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 19:19:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:29:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	philinit(t_prg *prg)
 		return (1);
 	}
 	philogenesis(prg);
+	prg->starttime = mstime();
 	i = 0;
 	while (i < prg->nop)
 		if (philoprocessor(prg, i++))
@@ -63,6 +64,7 @@ static void	worldender(t_prg *prg)
 {
 	free(prg->phls);
 	sem_close(prg->forks);
+	sem_close(prg->log);
 }
 
 int	main(int argc, char **argv)
@@ -71,9 +73,10 @@ int	main(int argc, char **argv)
 
 	if (inputhandler(argc, argv, &prg))
 		return (1);
-	prg.starttime = mstime();
 	sem_unlink("/fork_sem");
+	sem_unlink("/log_sem");
 	prg.forks = sem_open("/fork_sem", O_CREAT, 0644, prg.nop);
+	prg.log = sem_open("/log_sem", O_CREAT, 0644, 1);
 	if (philinit(&prg))
 	{
 		worldender(&prg);

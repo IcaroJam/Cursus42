@@ -6,20 +6,27 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:56:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 19:20:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:34:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus_philosophers.h"
 
+static void	solog(t_prg *prg, const char *msg, int time, int id)
+{
+	sem_wait(prg->log);
+	printf(msg, time, id);
+	sem_post(prg->log);
+}
+
 static void	munchtime(t_prg *prg, t_philosopher *cphl)
 {
 	sem_wait(prg->forks);
-	printf("%dms %d has taken a fork\n", timesince(prg), cphl->id);
+	solog(prg, "%dms %d has taken a fork\n", timesince(prg), cphl->id);
 	sem_wait(prg->forks);
-	printf("%dms %d has taken a fork\n", timesince(prg), cphl->id);
+	solog(prg, "%dms %d has taken a fork\n", timesince(prg), cphl->id);
 	cphl->lstmealtime = timesince(prg);
-	printf("%dms %d is eating\n", cphl->lstmealtime, cphl->id);
+	solog(prg, "%dms %d is eating\n", cphl->lstmealtime, cphl->id);
 	cphl->timeseaten++;
 	phisleep(prg, prg->tte);
 	sem_post(prg->forks);
@@ -40,9 +47,9 @@ void	sophicroutine(t_prg *prg, int phid)
 	while (!prg->phls[phid].isdead)
 	{
 		munchtime(prg, &prg->phls[phid]);
-		printf("%dms %d is sleeping\n", timesince(prg), prg->phls[phid].id);
+		solog(prg, "%dms %d is sleeping\n", timesince(prg), prg->phls[phid].id);
 		phisleep(prg, prg->tts);
-		printf("%dms %d is thinking\n", timesince(prg), prg->phls[phid].id);
+		solog(prg, "%dms %d is thinking\n", timesince(prg), prg->phls[phid].id);
 	}
 	pthread_join(statuschecker, NULL);
 	exit(1);
@@ -59,7 +66,7 @@ void	*overseer(void *everything)
 	{
 		if (timesince(prg) - cphl->lstmealtime > prg->ttd)
 		{
-			printf("%dms %d died\n", timesince(prg), cphl->id);
+			solog(prg, "%dms %d died\n", timesince(prg), cphl->id);
 			cphl->isdead = 1;
 			exit(1);
 		}

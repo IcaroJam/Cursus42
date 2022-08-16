@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:57:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 16:48:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:23:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_prg
 	int				notepmeflag;
 	t_philosopher	*phls;
 	sem_t			*forks;
+	sem_t			*log;
 }	t_prg;
 
 // Input values
