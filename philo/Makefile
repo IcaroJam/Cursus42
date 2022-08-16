@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/15 11:34:19 by senari           ###   ########.fr        #
+#    Updated: 2022/08/16 13:40:48 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ VPATH	= ./:./mandatorydir:./bonusdir
 
 SHRDSRC	= basic_utils.c input.c clockstuff.c
 THRDSRC	= $(addprefix ./mandatorydir/, main.c master_functions.c)
-PRCSSRC	= $(addprefix ./bonusdir/, bonus_main.c)
+PRCSSRC	= $(addprefix ./bonusdir/, bonus_main.c processes.c)
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC) $(THRDSRC)
 BNSSRCS	= $(SHRDSRC) $(PRCSSRC)

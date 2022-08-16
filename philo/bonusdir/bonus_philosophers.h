@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:57:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/15 11:26:02 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/16 13:39:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@
 # include <semaphore.h>
 # include <pthread.h>
 # include <string.h>
+# include <signal.h>
 
 typedef struct s_philosopher
 {
-	void		*ticketback;
+	pid_t		pid;
 	int			id;
-	int			leftfork;
-	int			rightfork;
 	int			lstmealtime;
 	int			timeseaten;
 }	t_philosopher;
@@ -42,13 +41,17 @@ typedef struct s_prg
 	int				tts;
 	int				notepme;
 	int				starttime;
-	int				philodeath;
 	int				notepmeflag;
 	t_philosopher	*phls;
+	sem_t			*forks;
 }	t_prg;
 
 // Input values
 int		inputhandler(int argc, char **argv, t_prg *prg);
+
+// Process functions
+void	sophicroutine(t_prg *prg, int phid);
+void	overseer(t_prg *prg);
 
 // Time functions
 int		mstime(void);
