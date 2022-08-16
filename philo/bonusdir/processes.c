@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:56:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 19:34:45 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:57:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	*overseer(void *everything)
 		if (timesince(prg) - cphl->lstmealtime > prg->ttd)
 		{
 			solog(prg, "%dms %d died\n", timesince(prg), cphl->id);
+			sem_wait(prg->log);
 			cphl->isdead = 1;
 			exit(1);
 		}
