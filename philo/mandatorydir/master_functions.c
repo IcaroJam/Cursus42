@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:27:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/15 11:15:37 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/16 12:13:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static void	munchtime(t_prg *prg, t_philosopher *cphl)
 		consolelog(prg, "%dms %d has taken a fork\n", timesince(prg), cphl->id);
 	if (!prg->philodeath)
 	{
-		consolelog(prg, "%dms %d is eating\n", timesince(prg), cphl->id);
-		cphl->timeseaten++;
 		cphl->lstmealtime = timesince(prg);
+		consolelog(prg, "%dms %d is eating\n", cphl->lstmealtime, cphl->id);
+		cphl->timeseaten++;
 	}
 	phisleep(prg, prg->tte);
 	pthread_mutex_unlock(&prg->forks[cphl->leftfork]);
