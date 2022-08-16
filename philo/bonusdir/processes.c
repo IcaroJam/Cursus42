@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:56:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 19:57:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/16 20:01:51 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ void	*overseer(void *everything)
 			sem_wait(prg->log);
 			cphl->isdead = 1;
 			exit(1);
+		}
+		if (prg->notepme > -1 && cphl->timeseaten == prg->notepme)
+		{
+			sem_wait(prg->log);
+			cphl->isdead = 1;
+			exit(0);
 		}
 	}
 	return (NULL);
