@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:57:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 13:39:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/16 16:48:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@
 
 typedef struct s_philosopher
 {
+	void		*ticketback;
 	pid_t		pid;
 	int			id;
 	int			lstmealtime;
 	int			timeseaten;
+	int			isdead;
 }	t_philosopher;
 
 // Program struct. Index in the fork array of the fork right to a philosopher
@@ -51,7 +53,7 @@ int		inputhandler(int argc, char **argv, t_prg *prg);
 
 // Process functions
 void	sophicroutine(t_prg *prg, int phid);
-void	overseer(t_prg *prg);
+void	*overseer(void *everything);
 
 // Time functions
 int		mstime(void);

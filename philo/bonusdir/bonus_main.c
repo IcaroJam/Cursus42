@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 13:27:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:19:50 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	philogenesis(t_prg *prg)
 	i = 0;
 	while (i < prg->nop)
 	{
+		prg->phls[i].isdead = 0;
+		prg->phls[i].ticketback = prg;
 		prg->phls[i].timeseaten = 0;
 		prg->phls[i].lstmealtime = 0;
 		prg->phls[i].id = i + 1;
@@ -70,13 +72,16 @@ int	main(int argc, char **argv)
 	if (inputhandler(argc, argv, &prg))
 		return (1);
 	prg.starttime = mstime();
-	prg.forks = sem_open("fork_sem", O_CREAT, 0644, prg.nop);
+	sem_unlink("/fork_sem");
+	prg.forks = sem_open("/fork_sem", O_CREAT, 0644, prg.nop);
 	if (philinit(&prg))
 	{
 		worldender(&prg);
 		return (1);
 	}
-	overseer(&prg);
+	waitpid(-1, &prg.notepmeflag, 0);
+	while (--prg.nop > -1)
+		kill(prg.phls[prg.nop].pid, 1);
 	worldender(&prg);
 	return (0);
 }
