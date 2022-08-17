@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:02:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 19:29:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/17 11:32:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ static int	philinit(t_prg *prg)
 {
 	int	i;
 
+	sem_unlink("/fork_sem");
+	sem_unlink("/log_sem");
+	prg->forks = sem_open("/fork_sem", O_CREAT, 0644, prg->nop);
+	prg->log = sem_open("/log_sem", O_CREAT, 0644, 1);
 	prg->phls = malloc(sizeof(t_philosopher) * prg->nop);
 	if (!prg->phls)
 	{
@@ -70,21 +74,28 @@ static void	worldender(t_prg *prg)
 int	main(int argc, char **argv)
 {
 	t_prg	prg;
+	int		i;
 
 	if (inputhandler(argc, argv, &prg))
 		return (1);
-	sem_unlink("/fork_sem");
-	sem_unlink("/log_sem");
-	prg.forks = sem_open("/fork_sem", O_CREAT, 0644, prg.nop);
-	prg.log = sem_open("/log_sem", O_CREAT, 0644, 1);
 	if (philinit(&prg))
 	{
 		worldender(&prg);
 		return (1);
 	}
-	waitpid(-1, &prg.notepmeflag, 0);
-	while (--prg.nop > -1)
-		kill(prg.phls[prg.nop].pid, 1);
+	i = 0;
+	while (i++ < prg.nop)
+	{
+		waitpid(-1, &prg.notepmeflag, 0);
+		if (WEXITSTATUS(prg.notepmeflag))
+		{
+			while (--prg.nop > -1)
+				kill(prg.phls[prg.nop].pid, 1);
+			break ;
+		}
+	}
+	if (!WEXITSTATUS(prg.notepmeflag))
+		printf("All philosophers ate %d times\n", prg.notepme);
 	worldender(&prg);
 	return (0);
 }

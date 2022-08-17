@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:56:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/16 20:01:51 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/17 11:50:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,13 @@ void	sophicroutine(t_prg *prg, int phid)
 	}
 	if (phid % 2)
 		usleep(250);
-	while (!prg->phls[phid].isdead)
+	while (1)
 	{
 		munchtime(prg, &prg->phls[phid]);
 		solog(prg, "%dms %d is sleeping\n", timesince(prg), prg->phls[phid].id);
 		phisleep(prg, prg->tts);
 		solog(prg, "%dms %d is thinking\n", timesince(prg), prg->phls[phid].id);
 	}
-	pthread_join(statuschecker, NULL);
-	exit(1);
 }
 
 void	*overseer(void *everything)
@@ -73,8 +71,9 @@ void	*overseer(void *everything)
 		}
 		if (prg->notepme > -1 && cphl->timeseaten == prg->notepme)
 		{
-			sem_wait(prg->log);
 			cphl->isdead = 1;
+			sem_post(prg->forks);
+			sem_post(prg->forks);
 			exit(0);
 		}
 	}
