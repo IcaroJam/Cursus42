@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:56:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/17 15:07:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:58:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	sophicroutine(t_prg *prg, int phid)
 		printf("Failed to create watcher thread for philo %d\n", phid + 1);
 		exit(1);
 	}
-	if (phid % 2)
-		usleep(250);
 	while (1)
 	{
 		munchtime(prg, &prg->phls[phid]);

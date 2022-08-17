@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:14:47 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/13 14:19:20 by senari           ###   ########.fr       */
+/*   Updated: 2022/08/17 16:52:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	phisleep(t_prg *prg, int i)
 	int	starttime;
 
 	starttime = timesince(prg);
-	while (!prg->philodeath && timesince(prg) - starttime < i)
+	while (timesince(prg) - starttime < i)
 		usleep(50);
 }
