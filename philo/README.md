@@ -51,16 +51,17 @@ We are now running the real deal.
 The philosophers all execute the sofic\_routine function (that should really be called sophic\_routine as it is in the bonus but oh well), which starts out by upgrading the void pointer it receives to the struct of the current philosopher, then store the pointer to the general struct and then initialize the indexes of the forks it will use. As stated in the image above, the index of the fork to the right of a philosopher is the same as the philosopher's id. The last philosopher will have the first fork (index 0) to it's right.
 To avoid deadlocks (picture a situation where all the philosophers grab the fork to their left. None able to eat since all forks are taken, they all perish a starving death... tragic innit? We don't want that), philosophers with an uneven id wait _a minimum_ of 250 microseconds.  
 _A minimum?_ that's weird. Let's go on a bit of a tangent:
+---
 ### The phisleep function
 The only sleep function allowed in this project is usleep which, as it turns out, was deprecated because it is quite bad. If you use it as it comes, your program won't take long to introduce a very noticeable offset in the timestamps.  
 That is why we came with a better alternative here at JamLabs. Conveniently packed into the clockstuff.c source file.  
 Phisleep simply uses a loop using usleep with a small value, checking if the difference between the current timestamp and the one saved at the beginning of the function is greater than the amount of time the thread should sleep and returning if so.
-#### 
+--- 
 Back in sofic\_routine, we enter _the_ loop. A long as all philosophers are alive, each philosopher will lock their forks if they are free or wait for them to be free if they aren't. When a philosopher has taken both forks, it will store the timestamp in lstmealtime and sleep for tte. After that it will unlock both forks and start sleeping. After sleeping it will start thinking and begin again. At pretty much everty step of the process the philosopher checks if someone has died as a security measure so that the threads don't keep doing stuff if someone has died. This way of preventing this is very redundant, but I couldn't come up with a better alternative. Do hit me up on slack or write me an email if you think of a better way. Maybe even fork the project or open a pull request ^^.  
 Whenever a philosopher logs what it is doing, it does so using the consolelog function, which uses it's own mutex and only prints if no philosopher has died.  
 Again, a bit redundant but it is what it is.
 
-Whilethe philosopher threads are doing their thing, the master thread is running on the everwatcher function, iteratively looping through the philo array checking, for each philosopher, if enough time has passed that the philosopher must die, or if the philosopher has eaten enough times.  
+While the philosopher threads are doing their thing, the master thread is running on the everwatcher function, iteratively looping through the philo array checking, for each philosopher, if enough time has passed that the philosopher must die, or if the philosopher has eaten enough times.  
 After each iteration, if the notepme argument was passed to main and the notepmeflag equals nop (meaning all philosophers ate at least notepme times), the death flag is set to true and a message is printed.  
 The same happens when a philosopher dies, which results in the master thread waiting for all other threads to end and then ending itself.
 This results in the termination of the program.
