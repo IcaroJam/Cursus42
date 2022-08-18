@@ -17,7 +17,6 @@ static int	utensilgenesis(t_prg *prg)
 	int	i;
 
 	i = 0;
-	prg->phls = NULL;
 	prg->forks = malloc(sizeof(pthread_mutex_t) * prg->nop);
 	if (!prg->forks)
 	{
