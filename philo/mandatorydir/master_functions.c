@@ -89,7 +89,7 @@ void	*everwatcher(void *wholething)
 		prg->notepmeflag = 0;
 		while (phildex < prg->nop && !prg->philodeath)
 			omnichecker(prg, phildex++);
-		if (prg->notepme > -1 && prg->notepmeflag == prg->nop)
+		if (!prg->philodeath && prg->notepme > -1 && prg->notepmeflag == prg->nop)
 		{
 			prg->philodeath = 1;
 			printf("All philobois ate %d times.\n", prg->notepme);
