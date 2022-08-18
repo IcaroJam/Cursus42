@@ -2,7 +2,7 @@
 #### My approaches to the projects of 42's Common Core.
 
 This repository contains:
-- All of my code for the different projects from 42. Of which I'm currently trying to write documentation so people ~and I myself~ can understand what I've done and why I've done it as I have. Currently documented:
+- All of my code for the different projects from 42. Of which I'm currently trying to write documentation so people ~and I myself~ can understand what I've done and why I've done it as I have. Currently documented (with astounding verbose):
   - Philosophers.
 - A Makefile template that I personally find pretty **_a e s t h e t i c_**.
 
