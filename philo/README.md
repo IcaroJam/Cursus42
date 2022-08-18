@@ -4,7 +4,7 @@
 My approach to projects can be a bit chaotic sometimes, so let's start by taking a look at the header file shall we?
 The header used in the mandatory part is the same one the shared functions use in the bonus part, that's why it is stored in the main directory. Just for clarification.
 
-![Header image here]()
+![Header image here](https://github.com/IcaroJam/Cursus42/blob/master/philo/images/Header.png?raw=true)
 
 The program counts with a main data structure, which holds everything the program needs to run tightly packed in a single pointer ready to be passed down to the functions.
 The struct can be stripped down to:
