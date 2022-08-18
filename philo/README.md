@@ -1,8 +1,11 @@
 # 42 Philosophers
 #### A project to learn about thread syncronization using mutexes (and process syncronization using semaphores in the bonus)
 
+[Note: Files in the root directory are shared between the mandatory and bonus parts. The bonus and mandatory directories each have their main file and source file with the essential runtime functions.]
+
 My approach to projects can be a bit chaotic sometimes, so let's start by taking a look at the header file shall we?
 The header used in the mandatory part is the same one the shared functions use in the bonus part, that's why it is stored in the main directory. Just for clarification.
+Prepare yourself. This may be, as we say here, _mucho texto._
 
 ![Header image here](https://github.com/IcaroJam/Cursus42/blob/master/philo/images/Header.png?raw=true)
 
@@ -25,3 +28,30 @@ We also have the data structure used for each philosopher, composed of the follo
 - rightfork: As above but for the fork to the right.
 - lstmealtime: Timestamp of the last time this philosopher started eating.
 - timeseaten: Amount of times this philosopher has eaten.
+
+Moving on to what the program _actually_ does.
+First things first, we must check if the input values are valid. That's where _input.c_ comes in. The inputhandler function first checks whether main received 5 or 6 arguments and error exits otherwise. Note that when the program ends due to an error, the error message is printed using printf, so it is printed onto the stdout instead of stderr, which isn't the right thing to do. _Don't do that_. I did it out of lazyness.
+After checking the number of arguments, the program iterates through the characters, first checking for non-digit chars (none of the args should be a negative number), then for arguments that would overflow an int.
+If neither of those terrible, terrible things happened, inputhandler stores the arguments as ints in the main struct.
+My implementation considers that a number of philosophers lower than 2 is an error since a single philo can't eat due to having a single fork. This however may be considered bad practice by some hardcore evaluators. I personally think is a better solution since it prevents a program destined to fail from ever running, but that's just me.
+After all of this, the death flag is initialized to 0 and the start time of the program is saved. This is done now for precission purposes, but it really isn't a big deal.
+
+Alright so now we've got all values ready and stored. Time to start doing some real computing. On with the forks!
+A single mutex with the purpose of locking the consolelog function is created first, then the utensilgenesis function is called. This function allocates space for _nop_ forks and creates them.
+A simple loop is in charge of creating the mutexes that fill the fork array. If a mutex init fails, the mutexes created up to this point are destroyed and the fork arroy freed.
+If everything goes according to plan, we are now ready to create the threads.
+
+The philinit function first allocates memory for the philosopher struct array, then iterates the array initializing the variables to some default values and finally, creates the corresponding thread.
+Note than when a thread is created, a function that will act as the thread's main is passed to it. The thread will immediatelly begin doing it's thing, so one may want to implement some starting syncronization so all threads beging at the same time. That isn't the case here though.
+When all threads have been successfully created, the master thread is created.
+If philinit fails at any point, the worldender function is called, which frees all memory and destroys all mutexes, and the program error exits.
+On a successful philinit, main gets blocked waiting for the master thread to end.
+We are now running the real deal.
+
+The philosophers all execute the sofic\_routine function (that should really be called sophic\_routine as it is in the bonus but oh well), which starts out by upgrading the void pointer it receives to the struct of the current philosopher, then store the pointer to the general struct and then initialize the indexes of the forks it will use. As stated in the image above, the index of the fork to the right of a philosopher is the same as the philosopher's id. The last philosopher will have the first fork (index 0) to it's right.
+To avoid deadlocks (picture a situation where all the philosophers grab the fork to their left. None able to eat since all forks are taken, they all perish a starving death... tragic innit? We don't want that), philosophers with an uneven id wait _a minimum_ of 250 microseconds.
+_A minimum?_ that's weird. Let's go on a bit of a tangent:
+### The phisleep function
+The only sleep function allowed in this project is usleep which, as it turns out, was deprecated because it is quite bad. If you use it as it comes, your program won't take long to introduce a very noticeable offset in the timestamps.
+That is why we came with a better alternative here at JamLabs. Conveniently packed into the clockstuff.c source file.
+Phisleep simply uses a loop using usleep with a small value. Checking if the difference between the current timestamp and the one saved at the beginning of the function is greater than the amount of time the thread should sleep and returning if so.
