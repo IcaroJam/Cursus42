@@ -70,3 +70,44 @@ While the philosopher threads are doing their thing, the master thread is runnin
 After each iteration, if the notepme argument was passed to main and the notepmeflag equals nop (meaning all philosophers ate at least notepme times), the death flag is set to true and a message is printed.  
 The same happens when a philosopher dies, which results in the master thread waiting for all other threads to end and then ending itself.
 This results in the termination of the program.
+
+All of this works because threads of the same process run in parallel and all share the same memory space. This allows for all philosophers to read and change variables in the main structure (so that a single death flag can be used for all threads since the program must end on the death of any philosopher), but also carries the risk of a thread changing a variable in between reads of said variable on a different thread. Thats where mutexes come in and that's what the project is all about.
+
+But what if the philosophers weren't threads of the same process, but different processes..?
+## Bonus part
+That is exactly what is goingn on in the bonus part. Instead of threads, the philosophers are processes. Instead of mutexes, we use semaphores. And the forks are all ready for the take in the middle of the table rather than restricted to the inbetween of two philosophers.
+The implications of this differences can be seen if we take a closer look at the bonus header file:
+![Header image here](https://github.com/IcaroJam/Cursus42/blob/master/philo/images/Bonusheader.png?raw=true)
+The main struct has the same input flags, but lacks a death flag; instead of mutex types, we have semaphore types; and there is no master thread.
+The philosopher struct now has a process id (pid) type instead of a thread type. There is no left and right forks, since all forks rest in the middle of the table and each philosopher now has it's own death flag.
+
+While threads share memory space, processes don't. When a process is forked, the child process creates a copy of all the variables of it's parent process in a different place in memory. The copy and the original are both isolated from each other, so when either the parent or child process change a variable's value they do so of the value in _their_ memory space, so the variable of the other process isn't changed at all.  
+This leaves the processes in mutual isolation, but see, thats where semaphores come in.
+### A bit on semaphores
+As opposed to mutexes, named semaphores are a system thing instead of a process thing (talking in technical terms if we must), so they aren't store in any of the memory spaces of the processes. What this means to us here, is that _all_ processes can use the same semaphore, which comes in the handiest.  
+Another thing to note is that, while mutexes are strictly binary locks (either allowing or blocking entrance to a piece of code), semaphores are given a number that represents how many times a piece of code can be accessed. This can result in a semaphore being used as a binary operator or as a kind of security guard that only allows X people in.  
+In-project, this means a single semaphore can represent how many forks are currently free to be taken, so that if a philosopher is holding one but needs another and there aren't any avavailable, it must wait until another philo drops their's.
+### The bonus main
+The handling of the input is exactly the same as in the mandatory part.  
+Since there is no need for a fork array, the philinit function if called directly. This instance of the function begins by unlinking the semaphores names, destroying them as to create them anew in case they existed due to another process or a previous instance of the philo\_bonus. It then creates the two semaphores we'll be using: a binary one for the console and a counting one of count nop to act as the forks.  
+It then allocates space for the philosophers and initializes their variables to a default. After that, the start time of the program is stored and a loop forks the child processes. If the forking fails at some point, the parent process ends, leaving zombie child processes behind. Again: _don't do that_.  
+On a successful philinit, the parent process enters a loop in which it waits for _any_ of it's child processes to end, then checks their exit status and either kills all other child processes (if the exit status means the philosopher has died) or returns to the loop to wait for the next one (if the philosopher has eaten enough times).
+### The processes
+As soon as the parent process is forked, a child process is created. The thing is, as stated before, this child process creates a copy of all variables in the parent process in a different memory space, the return of the fork function, however, is stored _after_ cloning the variables. Now fork returns the process id of the child to the parent process _and 0_ to the child. This allows us to write code that checks with process is running it and doing stuff based on that.  
+In practice this means that as soon as a child is created, it is sent to the sophicroutine function, while the parent stays on the forking loop.
+### Sophicroutine
+The philosophers can't check if they are still breathing while they sleep now can they? In the mandatory part we had a master thread that looped through the philo array checking that, but there is no master thread in the bonus, so each process has _it's very own_ overseer thread to do the checking.  
+Creating said thread is the first thing the child processes do.  
+After that, they enter an infinite loop that takes the philosophers through their routine. This loop is very similar to the one in the mandatory part, with the exception of using semaphores instead of mutexes and without the redundant ifs that check if a mate has died.
+### Overseer
+The thread upgrades the void pointer to the current philosopher, then stores the pinter to the main struct and then enters a loop that, as long as the current philosopher is alive, checks whether it hasn't eaten for too long or it has eaten enough times. The difference here is that in the mandatory part the threads could eat more than notepme times. In the bonus as soon as a philo has eaten that amount, the process exits.  
+The only thing to note here is that, on death, the solog function (same as the consolelog but for the bonus) is blocked, since the semaphore isn't posted if the death flag is true. This results in no message being printed after the death message. On notepme exit, on the other hand, the semaphore isn't blocked despite the death flag becoming true, since no message is printed after setting it, and the flags aren't shared among processes. On notepme exit, how ever, both forks are posted before exiting so that a process doesn't block them forever when it ends. This works because the tte is much much longer than the time it takes for the thread to post the semaphores. A huge amount of processes could result in the thread posting the forks _after_ they've been posted by the process, leaving surplus forks and ruining the project. But that kind of overload handling isn't something I consider important for a project of this scope.
+
+---
+
+As you can see, the bonus requires less code and comes out cleaner. Forking processes, however, takes longer than creating threads, and so, many times an initial delay can be noticed in the first timestamp, that comes out as 1ms instead of 0ms. I don't think this is a code issue, nor has it ever translated to incorrect functioning, at least on my watch.
+
+Anyways, both the mandatory and bonus parts showed great precission during evaluation, being able to work to the millisecond without diying.  
+I hope you found this half-a-novel of a README useful. You can contact me if you find any issues in the code or come up with a better way of doing something. I'm also open to discussing anything really, don't be afraid to hit me up!
+
+Regards, ~Ari.
