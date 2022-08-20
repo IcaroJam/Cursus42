@@ -75,7 +75,7 @@ All of this works because threads of the same process run in parallel and all sh
 
 But what if the philosophers weren't threads of the same process, but different processes..?
 ## Bonus part
-That is exactly what is goingn on in the bonus part. Instead of threads, the philosophers are processes. Instead of mutexes, we use semaphores. And the forks are all ready for the take in the middle of the table rather than restricted to the inbetween of two philosophers.
+That is exactly what is going on in the bonus part. Instead of threads, the philosophers are processes. Instead of mutexes, we use semaphores. And the forks are all ready for the take in the middle of the table rather than restricted to the inbetween of two philosophers.
 The implications of this differences can be seen if we take a closer look at the bonus header file:
 ![Header image here](https://github.com/IcaroJam/Cursus42/blob/master/philo/images/Bonusheader.png?raw=true)
 The main struct has the same input flags, but lacks a death flag; instead of mutex types, we have semaphore types; and there is no master thread.
