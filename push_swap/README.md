@@ -1,7 +1,7 @@
 # Push\_swap
 #### Ordering ints in the most stackable way.
 
-![Results image](https://github.com/IcaroJam/Cursus42/blob/master/push_swap/images/Result.png?raw=true)
+<img src="https://github.com/IcaroJam/Cursus42/blob/master/push_swap/images/Result.png?raw=true" alt="Results image" width="150"/>  
 [Note: This implementation gets _really_ close to the perfect 125, but it doesn't quite get there, so 115 it is. I'm sure some tinkering could be done to bring the movements down to the required minimum for the perfect score, but I can't be bothered with that at the moment.]
 
 This project is based in ordering a given list of ints, with a limited instruction set and only two stacks. Is important when considering everything going on here to take into account we want to minimize the _number of instructions_ and nothing else. Runtime, memory usage and computing power used aren't taken into account.  
