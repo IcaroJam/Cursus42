@@ -4,6 +4,7 @@
 <img src="https://github.com/IcaroJam/Cursus42/blob/master/push_swap/images/Result.png?raw=true" alt="Results image" width="150"/>  
 [Note: This implementation gets _really_ close to the perfect 125, but it doesn't quite get there, so 115 it is. I'm sure some tinkering could be done to bring the movements down to the required minimum for the perfect score, but I can't be bothered with that at the moment.]
 
+
 This project is based in ordering a given list of ints, with a limited instruction set and only two stacks. Is important when considering everything going on here to take into account we want to minimize the _number of instructions_ and nothing else. Runtime, memory usage and computing power used aren't taken into account.  
 This leaves us in a peculiar situation, since we can take as much time as we like in between movements. Meaning we could potentially evaluate _every_ possible case after each movement to take the best next step. This would surely, however, result in timeouts (and great headaches). So let's not do that.
 
@@ -17,7 +18,7 @@ Anyways, what does quicksort do? [This video](https://www.youtube.com/watch?v=e_
 The logic behind this is pretty much the same as [SamLynnEvans' implementation](https://github.com/SamLynnEvans/Push_swap), since I used it as a guide when trying to figure out how to translate the algorithm into code.
 
 I used a version of the algorithm that takes the median of the stack as a pivot. This means we first have to sort the whole stack to look for the number located in it's middle once it is sorted. In my case, a simple (and inefficient) bubblesort does the job. Remember when I said only the number of moves matters? Yup.  
-Now, many versions of this project are based around linkef lists of various types. This didn't seem right to me for some reason, so my implementation makes use of arrays.
+Now, many versions of this project are based around linked lists of various types. This didn't seem right to me for some reason, so my implementation makes use of arrays.
 
 ---
 #### The stacks
@@ -35,7 +36,9 @@ The process goes as follows:
 - Iterate the a-stack. Everything smaller than the pivot goes to the b-stack. Same thing for the pivot itself. When done, mark a partition at the top of b-stack.
 - Repeat until 5 or less numbers are left.
 - Sort the remaining numbers in a-stack with the method of your choice and mark a partition in a-stack. Partitions in this stack mark that it is sorted up until that point.
+
 We now have a sorted a-stack with few numbers and a pseudo-sorted b-stack with clear partitions. The process from this point on is repetitive and similar to the one before:
+
 - Create a sorted copy of the upmost partition of b-stack, get it's median and destroy the copy.
 - Push the numbers bigger than the pivot and the pivot itself to a-stack. Note that, after reaching the end of the partition, it is _essential_ that we bring the elements that weren't pushed back to the top of b-stack.
 - If five or less elements were pushed, we can easily sort them, then mark a partition in a-stack.
