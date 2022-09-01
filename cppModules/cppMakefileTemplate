@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/31 17:53:16 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/01 11:09:51 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME	= <<Your target-file here>>
 
-BONUS	= <<Your bonus exec here>>
+#BONUS	= <<Your bonus exec here>>
 
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
 
