@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/15 11:35:41 by senari           ###   ########.fr        #
+#    Updated: 2022/09/01 15:20:17 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@
 #                                     Vars                                     #
 #######################################/\#######################################
 
-NAME	= <<Your target-file here>>
+NAME	= #<<Your target-file here>>
 
-BONUS	= <<Your bonus exec here>>
+BONUS	= #<<Your bonus exec here>>
 
 LIBFT	= ./libft/libft.a
 
@@ -24,7 +24,7 @@ CFLAGS	= -Wall -Werror -Wextra
 
 FTFLGS	= -Llibft -lft
 
-VPATH	= ./:<<your directories here (separated by :)>>
+VPATH	= ./ #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
