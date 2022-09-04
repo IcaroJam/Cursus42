@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 12:04:57 by senari            #+#    #+#             */
-/*   Updated: 2022/09/04 11:59:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 14:11:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 class PhoneBook {
 	public:
 		void	contact_add();
+		void	book_reorg();
 		void	contact_display() const;
 
 		PhoneBook();
@@ -25,6 +26,7 @@ class PhoneBook {
 
 	private:
 		Contact _contactArray[8];
+		int		_lastContact;
 };
 
 #endif
