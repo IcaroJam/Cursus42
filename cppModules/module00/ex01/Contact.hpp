@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 11:50:14 by senari            #+#    #+#             */
-/*   Updated: 2022/09/04 11:59:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 13:13:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 class Contact {
 	public:
-
 		Contact();
 		~Contact();
 

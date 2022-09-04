@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/02 18:17:36 by senari           ###   ########.fr        #
+#    Updated: 2022/09/04 13:12:17 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #                                     Vars                                     #
 #######################################/\#######################################
 
-NAME	= phonebook #<<Your target-file here>>
+NAME	= phonebook#<<Your target-file here>>
 
 #BONUS	= <<Your bonus exec here>>
 
@@ -24,12 +24,12 @@ VPATH	= ./ #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
-SHRDSRC	=
+SHRDSRC	= main.cpp Contact.cpp PhoneBook.cpp
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 BNSSRCS	= $(SHRDSRC)
 
-SHRDOBJ	=
+SHRDOBJ	= $(SHRDSRC:.cpp=.o)
 #------------------------------------------------------------------------------#
 OBJS	= $(SHRDOBJ)
 BNSOBJS	= $(SHRDOBJ)
