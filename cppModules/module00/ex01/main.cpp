@@ -6,16 +6,18 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 12:53:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 16:26:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 18:36:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <iostream>
 
 void	fail_check() {
 	if (std::cin.eof() || std::cin.fail()) {
 		std::cin.clear();
+		// The line bellow solves alpha input on SEARCH index.
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		// But half-breaks ctrl-D input (trailing \n or something).
 		std::clearerr(stdin);
 	}
 }
