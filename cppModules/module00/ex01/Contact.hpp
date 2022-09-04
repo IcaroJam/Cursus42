@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 11:50:14 by senari            #+#    #+#             */
-/*   Updated: 2022/09/04 16:45:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 17:38:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ class Contact {
 		std::string	_phoneNum;
 		std::string	_darkestSecret;
 };
+
+void	fail_check();
 
 #endif
