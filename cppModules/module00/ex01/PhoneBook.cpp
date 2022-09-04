@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 13:03:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 14:18:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 14:22:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,8 @@ void	PhoneBook::contact_add() {
 	_contactArray[_lastContact] = temp;
 	std::cout << "Contact saved!\n";
 	_lastContact++;
+}
+
+void	PhoneBook::contact_display() const {
+
 }
