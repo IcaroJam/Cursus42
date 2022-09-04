@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 12:52:25 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 15:44:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:26:46 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ Contact::~Contact() {
 }
 
 bool	field_check(std::string str) {
+	if (std::cin.eof() || std::cin.fail()) {
+		std::cin.clear();
+		std::clearerr(stdin);
+		return true;
+	}
 	if (str == "")
 		return true;
 	else

@@ -6,12 +6,19 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 12:53:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 13:44:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:26:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <iostream>
+
+void	fail_check() {
+	if (std::cin.eof() || std::cin.fail()) {
+		std::cin.clear();
+		std::clearerr(stdin);
+	}
+}
 
 int	main() {
 	std::string	cmnd;
@@ -20,7 +27,8 @@ int	main() {
 	std::cout << "Welcome to your Awesome PhoneBook™!\n";
 	while (true) {
 		std::cout << "Enter a command [ADD/SEARCH/EXIT]: ";
-		std::cin >> cmnd;
+		std::getline(std::cin, cmnd);
+		fail_check();
 		if (cmnd == "ADD") {
 			phbook.contact_add();
 		} else if (cmnd == "SEARCH") {

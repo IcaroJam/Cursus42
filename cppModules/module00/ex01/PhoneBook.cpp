@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 13:03:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 14:22:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:27:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	PhoneBook::contact_add() {
 	Contact	temp;
 
 	if (temp.field_stuff()) {
-		std::cout << "Error!\nNo field can be left empty.\n";
+		std::cout << "\nError!\nNo field can be left empty.\n";
 		return;
 	}
 	if (_lastContact == 7)
