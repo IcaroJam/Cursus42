@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 13:03:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 16:27:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 17:15:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,26 @@ void	PhoneBook::contact_add() {
 		std::cout << "\nError!\nNo field can be left empty.\n";
 		return;
 	}
-	if (_lastContact == 7)
+	if (_lastContact == 8)
 		book_reorg();
 	_contactArray[_lastContact] = temp;
 	std::cout << "Contact saved!\n";
 	_lastContact++;
 }
 
-void	PhoneBook::contact_display() const {
+std::string	formatter(std::string str) {
+	if (str.length() > 9) {
+		return str.substr(0, 9) + ".";
+	}
+	return str;
+}
 
+void	PhoneBook::contact_display() const {
+	std::cout << std::setiosflags(std::ios::right);
+	for (int i = 0; i < _lastContact; i++) {
+		std::cout	<< "|" << std::setw(10) << i 
+					<< "|" << std::setw(10) << formatter(_contactArray[i].get_field(0))
+					<< "|" << std::setw(10) << formatter(_contactArray[i].get_field(1))
+					<< "|" << std::setw(10) << formatter(_contactArray[i].get_field(2)) << "|\n";
+	}
 }

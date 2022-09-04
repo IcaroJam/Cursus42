@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 12:04:57 by senari            #+#    #+#             */
-/*   Updated: 2022/09/04 14:11:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:37:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
+# include <iomanip>
 
 class PhoneBook {
 	public:

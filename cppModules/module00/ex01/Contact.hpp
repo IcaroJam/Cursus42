@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 11:50:14 by senari            #+#    #+#             */
-/*   Updated: 2022/09/04 14:03:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:45:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 class Contact {
 	public:
-		bool	field_stuff();
+		bool		field_stuff();
+		std::string	get_field(int i) const;
 
 		Contact();
 		~Contact();

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 12:52:25 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 16:26:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:47:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,17 @@ bool	Contact::field_stuff() {
 	if (field_check(_darkestSecret))
 		return true;
 	return false;
+}
+
+std::string	Contact::get_field(int i) const {
+	if (!i)
+		return _firstname;
+	if (i == 1)
+		return _lastname;
+	if (i == 2)
+		return _nickname;
+	if (i == 3)
+		return _darkestSecret;
+	else
+		return "";
 }
