@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/09 12:45:36 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/05 14:32:13 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,9 @@ all:		$(NAME)
 
 $(NAME):	$(LIBSRCS)
 	@gcc $(CFLAGS) -c $(LIBSRCS)
-	@make -C printf
 	@ar rcs $(NAME) $(LIBOBJS)
 
 clean:
-	@make -C printf clean
 	@rm -f $(LIBOBJS)
 
 fclean:		clean
