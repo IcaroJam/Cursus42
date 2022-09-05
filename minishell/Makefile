@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/05 11:10:25 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/05 17:18:31 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,27 +16,23 @@
 
 NAME	= minishell
 
-BONUS	= #<<Your bonus exec here>>
-
 LIBFT	= ./libft/libft.a
 
 CFLAGS	= -Wall -Werror -Wextra
 
-FTFLGS	= -Llibft -lft
+FTFLGS	= -Llibft -lft -lreadline
 
 VPATH	= ./ #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
-SHRDSRC	=
+SHRDSRC	= main.c
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
-BNSSRCS	= $(SHRDSRC)
 
-SHRDOBJ	=
+SHRDOBJ	= $(SHRDSRC:.c=.o)
 #------------------------------------------------------------------------------#
 OBJS	= $(SHRDOBJ)
-BNSOBJS	= $(SHRDOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -44,17 +40,10 @@ BNSOBJS	= $(SHRDOBJ)
 
 all:		$(NAME)
 
-#bonus:		$(BONUS)
-
 $(NAME):	$(OBJS) $(LIBFT)
 	@echo "Material stuff in a material world."
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
 	@echo "Ready to execute the protocol."
-
-#$(BONUS):	$(BNSOBJS) $(LIBFT)
-#	@echo "Bonus objects for ya chief."
-#	@gcc $(CFLAGS) $(BNSOBJS) $(FTFLGS) -o $(BONUS)
-#	@echo "Look at all that extra."
 
 $(LIBFT):
 	@make -C ./libft
@@ -68,7 +57,7 @@ $(LIBFT):
 #----                                                                      ----#
 
 clean:
-	@rm -f $(OBJS) $(BNSOBJS)
+	@rm -f $(OBJS)
 	@echo "Deobjectifying..."
 
 libclean:
@@ -76,12 +65,12 @@ libclean:
 	@echo "Library reduced to ashes."
 
 fclean:		clean
-	@rm -f $(NAME) $(BONUS)
+	@rm -f $(NAME)
 	@echo "No more $(NAME)."
 
 re:			fclean all
 
-.PHONY: all clean libclean fclean re bonus
+.PHONY: all clean libclean fclean re
 #-------------------------------------Tmpl-------------------------------------#
 
 #TMPLSRC	= $(addprefix ./yourdirhere/, sourcefiles.c)
