@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:31:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/08/09 12:46:17 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/06 12:20:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,9 @@ int		ft_abs(int n);
 int		ft_ipow(int x, int n);
 void	ft_free(void **ptr);
 int		ft_ioverflw(char *str);
+
+// Other extras:
+
+int		ft_isspace(const char c);
 
 #endif
