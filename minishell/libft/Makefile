@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/06 12:20:28 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/06 12:23:50 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,6 @@ OBJS		= $(SRC:.c=.o)
 
 BONUS_OBJS	= $(BONUS_SRC:.c=.o)
 
-PRINTF_OBJS	= $(addprefix printf/, ft_printf.o ft_printf_utils_I.o ptf_itoa.o ptf_lenghts.o flags_and_conversions.o char_string_conv.o digit_conv.o unsigned_conv.o hex_conv.o pointer_conv.o)
-
 EXTRA_OBJS	= $(EXTRA_SRC:.c=.o)
 
 GNL_OBJS	= $(addsuffix .o, $(notdir $(basename $(GNL_SRC))))
@@ -48,11 +46,9 @@ all:		$(NAME)
 
 $(NAME):	$(LIBSRCS)
 	@gcc $(CFLAGS) -c $(LIBSRCS)
-	@make -C printf
 	@ar rcs $(NAME) $(LIBOBJS)
 
 clean:
-	@make -C printf clean
 	@rm -f $(LIBOBJS)
 
 fclean:		clean
