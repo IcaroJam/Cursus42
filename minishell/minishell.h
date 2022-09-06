@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/06 17:14:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:27:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-typedef struct	s_parsing
+typedef struct s_parsing
 {
 	char	***cmndtable;
 	int		*infds;

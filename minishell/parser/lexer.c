@@ -6,26 +6,12 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:57:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/06 17:19:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:25:47 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "msparser.h"
-
-static int	count_words(const char *line)
-{
-	int	numow;
-
-	numow = 0;
-	while (*line)
-	{
-		line += count_isspace(line);
-		line += process_word(line);
-		numow++;
-	}
-	return (numow);
-}
 
 static int	get_quotelen(const char **line)
 {
