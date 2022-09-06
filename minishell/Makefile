@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/05 17:18:31 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/06 12:00:26 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,17 +22,19 @@ CFLAGS	= -Wall -Werror -Wextra
 
 FTFLGS	= -Llibft -lft -lreadline
 
-VPATH	= ./ #<<your directories here (separated by :)>>
+VPATH	= ./:./parser/ #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
 SHRDSRC	= main.c
+PARSSRC	= $(addprefix ./parser/, parsermain.c lexer.c)
 #------------------------------------------------------------------------------#
-SRCS	= $(SHRDSRC)
+SRCS	= $(SHRDSRC) $(PARSSRC)
 
 SHRDOBJ	= $(SHRDSRC:.c=.o)
+PARSOBJ	= $(addsuffix .o, $(notdir $(basename $(PARSSRC))))
 #------------------------------------------------------------------------------#
-OBJS	= $(SHRDOBJ)
+OBJS	= $(SHRDOBJ) $(PARSOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
