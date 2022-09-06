@@ -6,59 +6,85 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:57:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/06 13:07:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:19:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int	count_isspace(const char *line)
-{
-	int	ret;
-
-	ret = 0;
-	while (ft_isspace(line[ret]))
-		ret++;
-	return (ret);
-}
-
-static int	handle_quotes(const char *line, const char flag)
-{
-	int	ret;
-
-	ret = 0;
-	while (line[ret] != flag && line[ret])
-		ret++;
-	if (!line[ret])
-		return (1);
-	return (ret);
-}
-
-static int	process_word(const char *line)
-{
-	int		ret;
-
-	ret = 0;
-	while (line[ret] && !ft_isspace(line[ret]))
-	{
-		if (line[ret] == '\'' || line[ret] == '"')
-			ret += handle_quotes(line, *line);
-		else
-			ret++;
-	}
-	return (ret);
-}
+#include "msparser.h"
 
 static int	count_words(const char *line)
 {
-	int	ret;
+	int	numow;
 
-	ret = 0;
+	numow = 0;
 	while (*line)
 	{
 		line += count_isspace(line);
 		line += process_word(line);
-		ret++;
+		numow++;
+	}
+	return (numow);
+}
+
+static int	get_quotelen(const char **line)
+{
+	int	qlen;
+	int	openquote;
+
+	qlen = 0;
+	openquote = handle_quotes(*line, **line);
+	if (openquote == 1)
+	{
+		while (**line && !ft_isspace(**line) && **line != '<' && **line != '>')
+		{
+			line[0]++;
+			qlen++;
+		}
+		return (qlen);
+	}
+	*line += openquote;
+	return (openquote - 2);
+}
+
+static int	get_tknlen(const char *line)
+{
+	int	tlen;
+
+	tlen = 0;
+	if (line[0] == '<')
+	{
+		if (line [1] == '<')
+			return (8);
+		return (4);
+	}
+	if (line[0] == '>')
+	{
+		if (line[1] == '>')
+			return (10);
+		return (5);
+	}
+	while (*line && !ft_isspace(*line) && *line != '<' && *line != '>')
+	{
+		if (*line == '\'' || *line == '"')
+			tlen += get_quotelen(&line);
+		else if (*line != '<' && *line != '>')
+			tlen++;
+	}
+	return (0);
+}
+
+static char	**tokenstr(const char *line, int numow)
+{
+	char	**ret;
+	int		tknlen;
+	int		i;
+
+	i = 0;
+	while (i++ < numow)
+	{
+		line += count_isspace(line);
+		tknlen = get_tknlen(line);
 	}
 	return (ret);
 }
@@ -66,8 +92,15 @@ static int	count_words(const char *line)
 char	**tokenize_line(char *line)
 {
 	char	**ret;
+	int		numow;
 
 	if (!*line)
 		return (NULL);
+	numow = count_words(line);
+	ret = ft_calloc(numow, sizeof(char *));
+	if (!ret)
+		return (NULL);
+	ret = tokenstr(line, numow);
+	// Parsing errors like <<< here !!!
 	return (ret);
 }
