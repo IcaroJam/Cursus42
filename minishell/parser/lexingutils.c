@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:12:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/07 12:01:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:41:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	handle_quotes(const char *line, const char flag)
 	while (line[ret] != flag && line[ret])
 		ret++;
 	if (!line[ret])
-		return (1);
-	return (ret + 1);
+		return (0);
+	return (ret);
 }
 
-static int	handle_redir(const char *line)
+int	handle_redir(const char *line)
 {
 	if (*line == '<' || *line == '>')
 		if (line[1] == line[0])
@@ -51,7 +51,7 @@ static int	process_word(const char *line)
 			&& line[ret] != '>' && line[ret] != '|')
 	{
 		if (line[ret] == '\'' || line[ret] == '\"')
-			ret += handle_quotes(line, line[ret]);
+			ret += handle_quotes(&line[ret], line[ret]);
 		ret++;
 	}
 	return (ret);
