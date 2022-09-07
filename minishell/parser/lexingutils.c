@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:12:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/06 17:26:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:01:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,25 @@ int	handle_quotes(const char *line, const char flag)
 	return (ret + 1);
 }
 
-static int	handle_arrows(const char *line)
+static int	handle_redir(const char *line)
 {
-	if (line[1] == line[0])
-		return (2);
+	if (*line == '<' || *line == '>')
+		if (line[1] == line[0])
+			return (2);
 	return (1);
 }
 
 static int	process_word(const char *line)
 {
-	int		ret;
+	int	ret;
 
 	ret = 0;
-	while (line[ret] && !ft_isspace(line[ret]))
+	while (line[ret] && !ft_isspace(line[ret]) && line[ret] != '<'
+			&& line[ret] != '>' && line[ret] != '|')
 	{
-		if (line[ret] == '\'' || line[ret] == '"')
+		if (line[ret] == '\'' || line[ret] == '\"')
 			ret += handle_quotes(line, line[ret]);
-		else if (line[ret] == '<' || line[ret] == '>')
-		{
-			ret += handle_arrows(line);
-			return (ret);
-		}
-		else if (line[ret])
-			ret++;
+		ret++;
 	}
 	return (ret);
 }
@@ -69,7 +65,10 @@ int	count_words(const char *line)
 	while (*line)
 	{
 		line += count_isspace(line);
-		line += process_word(line);
+		if (*line == '<' || *line == '>' || *line == '|')
+			line += handle_redir(line);
+		else
+			line += process_word(line);
 		numow++;
 	}
 	return (numow);
