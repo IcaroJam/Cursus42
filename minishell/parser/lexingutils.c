@@ -6,11 +6,12 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:12:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/07 12:41:55 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:47:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "msparser.h"
 
 int	count_isspace(const char *line)
 {
@@ -47,8 +48,7 @@ static int	process_word(const char *line)
 	int	ret;
 
 	ret = 0;
-	while (line[ret] && !ft_isspace(line[ret]) && line[ret] != '<'
-			&& line[ret] != '>' && line[ret] != '|')
+	while (line[ret] && !ft_isspace(line[ret]) && !isredir(line[ret]))
 	{
 		if (line[ret] == '\'' || line[ret] == '\"')
 			ret += handle_quotes(&line[ret], line[ret]);
@@ -65,7 +65,7 @@ int	count_words(const char *line)
 	while (*line)
 	{
 		line += count_isspace(line);
-		if (*line == '<' || *line == '>' || *line == '|')
+		if (isredir(*line))
 			line += handle_redir(line);
 		else
 			line += process_word(line);

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msparser.h                                         :+:      :+:    :+:   */
+/*   lexingutils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 13:09:55 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/07 17:04:18 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/09/07 17:04:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSPARSER_H
-# define MSPARSER_H
+#include "../minishell.h"
+#include "msparser.h"
 
-typedef struct s_lexutil
+int	isredir(const char c)
 {
-	const char	*line;
-	int			lnoff;
-}	t_lexutil;
+	return (c == '<' || c == '>' || c == '|');
+}
 
-// Utilities for the lexing stage:
-int		count_isspace(const char *line);
-int		count_words(const char *line);
-int		handle_quotes(const char *line, const char flag);
-int		handle_redir(const char *line);
-int		isredir(const char c);
-void	free_cmndline(char **cmndline);
+void	free_cmndline(char **cmndline)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (cmndline[i])
+		free(cmndline[i]);
+	free(cmndline);
+}
