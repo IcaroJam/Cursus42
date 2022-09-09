@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:09:55 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/07 17:04:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/09 11:17:34 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int		handle_quotes(const char *line, const char flag);
 int		handle_redir(const char *line);
 int		isredir(const char c);
 void	free_cmndline(char **cmndline);
+int		check_redirerr(const char **tkns);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:12:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/07 15:47:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:05:43 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	count_words(const char *line)
 {
 	int	numow;
 
+	if (!line)
+		return (0);
 	numow = 0;
 	while (*line)
 	{
