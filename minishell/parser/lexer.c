@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:57:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 13:59:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/12 16:56:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,15 @@ char	**tokenize_line(char *line)
 
 	numow = count_words(line);
 	ret = ft_calloc(numow + 1, sizeof(char *));
-	if (!ret)
+	if (!ret || tokenstr(ret, line, numow))
+	{
+		perror("Error");
 		return (NULL);
-	if (tokenstr(ret, line, numow))
-		return (NULL);
+	}
 	if (check_redirerr((const char **)ret))
 	{
 		free_cmndline(ret);
+		ft_putendl_fd("Error: Parsing gone wrong near redirection.", 2);
 		return (NULL);
 	}
 	return (ret);
