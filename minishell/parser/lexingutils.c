@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:12:17 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/09 12:05:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/12 13:42:56 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,16 @@ int	handle_redir(const char *line)
 	return (1);
 }
 
-static int	process_word(const char *line)
+int	process_word(const char *line)
 {
 	int	ret;
 
 	ret = 0;
+	if (isredir(*line))
+	{
+		ret += handle_redir(line);
+		return (ret);
+	}
 	while (line[ret] && !ft_isspace(line[ret]) && !isredir(line[ret]))
 	{
 		if (line[ret] == '\'' || line[ret] == '\"')
@@ -67,10 +72,7 @@ int	count_words(const char *line)
 	while (*line)
 	{
 		line += count_isspace(line);
-		if (isredir(*line))
-			line += handle_redir(line);
-		else
-			line += process_word(line);
+		line += process_word(line);
 		numow++;
 	}
 	return (numow);

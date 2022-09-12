@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/09 16:18:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/12 13:47:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_parsing	*parse_line(char *line)
 		return (ret);
 	}
 	//
-	/** for (int i = 0; tokenarr[i]; i++)
-	  *     printf("%s\n", tokenarr[i]); */
+	for (int i = 0; tokenarr[i]; i++)
+	    printf("%s\n", tokenarr[i]);
 	//
 	free_cmndline(tokenarr);
 	return (ret);
