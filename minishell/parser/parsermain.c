@@ -6,14 +6,14 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 18:18:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:43:22 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "msparser.h"
 
-static int	get_numocmds(const char **tokenarr)
+static int	get_ncmds(const char **tokenarr)
 {
 	int	ret;
 
@@ -48,7 +48,7 @@ t_parsing	*parse_line(char *line)
 	// Allocate space for an array of len (tkns) and type t_parsing.
 	//
 	//printf("You introduced %d commands.\n", get_numocmds((const char **)tokenarr));
-	cts = ft_calloc(get_numocmds((const char **)tokenarr)+1, sizeof(t_parsing));
+	cts = ft_calloc(get_ncmds((const char **)tokenarr) + 1, sizeof(t_parsing));
 	if (cts)
 	{
 		// Do stuff. If calloc returned NULL, jump straight to freeing.
