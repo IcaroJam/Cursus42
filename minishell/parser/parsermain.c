@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 19:43:22 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/12 20:06:47 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_parsing	*parse_line(char *line)
 	if (cts)
 	{
 		// Do stuff. If calloc returned NULL, jump straight to freeing.
+		// Expand $ UNLESS it is inside single quotes. A single $ will always print $.
 	}
 	free_cmndline(tokenarr);
 	return (cts);
