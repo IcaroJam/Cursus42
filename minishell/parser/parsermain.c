@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 18:10:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:18:22 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,23 @@ static int	get_numocmds(const char **tokenarr)
 t_parsing	*parse_line(char *line)
 {
 	char		**tokenarr;
-	t_parsing	*cts = NULL;
+	t_parsing	*cts;
 
 	tokenarr = tokenize_line(line);
 	if (!tokenarr)
 		return (NULL);
 	//
-	for (int i = 0; tokenarr[i]; i++)
-	    printf("%s\n", tokenarr[i]);
+	/** for (int i = 0; tokenarr[i]; i++)
+	  *     printf("%s\n", tokenarr[i]); */
 	//
 	// Allocate space for an array of len (tkns) and type t_parsing.
 	//
-	printf("You introduced %d commands.\n", get_numocmds((const char **)tokenarr));
+	//printf("You introduced %d commands.\n", get_numocmds((const char **)tokenarr));
+	cts = ft_calloc(get_numocmds((const char **)tokenarr)+1, sizeof(t_parsing));
+	if (cts)
+	{
+		// Do stuff. If calloc returned NULL, jump straight to freeing.
+	}
 	free_cmndline(tokenarr);
 	return (cts);
 }
