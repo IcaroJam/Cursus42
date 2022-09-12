@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 13:48:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/12 16:48:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parser/msparser.h"
 
 int	main(void)
 {
@@ -25,7 +24,11 @@ int	main(void)
 		if (!ft_strncmp(cmndline, "EXIT", 5))
 			break ;
 		cts = parse_line(cmndline);
-		//if (!cts)
+		if (!cts)
+		{
+			free(cmndline);
+			break ;
+		}
 		free(cmndline);
 	}
 	//
