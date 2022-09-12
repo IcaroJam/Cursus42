@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/09 11:22:35 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/12 14:00:03 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ VPATH	= ./:./parser/ #<<your directories here (separated by :)>>
 #----                                                                      ----#
 
 SHRDSRC	= main.c
-PARSSRC	= $(addprefix ./parser/, parsermain.c lexingutils.c lexingutils2.c lexer.c)
+PARSSRC	= $(addprefix ./parser/, parsermain.c lexingutils.c lexer.c)
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC) $(PARSSRC)
 

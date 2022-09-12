@@ -6,67 +6,44 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:57:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 13:57:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/12 13:59:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "msparser.h"
 
-/** static int	get_quotelen(t_lexutil *lxu)
-  * {
-  *     int	qlen;
-  *
-  *     qlen = handle_quotes(&lxu->line[lxu->lnoff], lxu->line[lxu->lnoff]);
-  *     if (!qlen)
-  *         return (1);
-  *     lxu->lnoff += qlen;
-  *     return (qlen - 1);
-  * }
-  *
-  * static int	get_tknlen(t_lexutil *lxu)
-  * {
-  *     int	tlen;
-  *
-  *     tlen = 0;
-  *     if (isredir(lxu->line[lxu->lnoff]))
-  *     {
-  *         lxu->lnoff = handle_redir(lxu->line);
-  *         return (lxu->lnoff);
-  *     }
-  *     while (lxu->line[lxu->lnoff] && !ft_isspace(lxu->line[lxu->lnoff])
-  *         && !isredir(lxu->line[lxu->lnoff]))
-  *     {
-  *         if (lxu->line[lxu->lnoff] == '\'' || lxu->line[lxu->lnoff] == '\"')
-  *             tlen += get_quotelen(lxu);
-  *         else
-  *             tlen++;
-  *         lxu->lnoff++;
-  *     }
-  *     return (tlen);
-  * } */
+int	isredir(const char c)
+{
+	return (c == '<' || c == '>' || c == '|');
+}
 
-/** static void	tokencpy(const char *line, int tknlen, char *cmdline)
-  * {
-  *     int		i;
-  *     char	tmp;
-  *
-  *     i = 0;
-  *     while (i < tknlen)
-  *     {
-  *         if ((*line == '\'' || *line == '\"') && handle_quotes(line, *line))
-  *         {
-  *             tmp = *line;
-  *             line++;
-  *             while (*line != tmp)
-  *                 cmdline[i++] = *line++;
-  *         }
-  *         else
-  *         {
-  *             cmdline[i++] = *line++;
-  *         }
-  *     }
-  * } */
+void	free_cmndline(char **cmndline)
+{
+	int	i;
+
+	i = 0;
+	while (cmndline[i])
+		free(cmndline[i++]);
+	free(cmndline);
+}
+
+int	check_redirerr(const char **tkns)
+{
+	if (!tkns[0])
+		return (0);
+	if (isredir(tkns[0][0]) && !tkns[1])
+		return (1);
+	tkns++;
+	while (*tkns)
+	{
+		if ((isredir(tkns[-1][0]) && isredir(tkns[0][0]))
+			|| (isredir(tkns[0][0]) && !tkns[1]))
+			return (1);
+		tkns++;
+	}
+	return (0);
+}
 
 static int	tokenstr(char **cmdline, const char *line, int numow)
 {
@@ -99,8 +76,8 @@ static int	tokenstr(char **cmdline, const char *line, int numow)
 
 char	**tokenize_line(char *line)
 {
-	char		**ret;
-	int			numow;
+	char	**ret;
+	int		numow;
 
 	numow = count_words(line);
 	ret = ft_calloc(numow + 1, sizeof(char *));
