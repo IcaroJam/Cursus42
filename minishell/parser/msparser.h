@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:09:55 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/10 18:05:44 by senari           ###   ########.fr       */
+/*   Updated: 2022/09/12 13:37:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ typedef struct s_lexutil
 	const char	*line;
 	int			lnoff;
 }	t_lexutil;
-
-typedef struct s_tokens
-{
-	char	**tarr;
-	int		*exparr;
-}	t_tokens;
 
 // Utilities for the lexing stage:
 int		count_isspace(const char *line);
