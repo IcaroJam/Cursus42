@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 13:02:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:49:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ typedef struct s_parsing
 
 t_parsing	*parse_line(char *line);
 char		**tokenize_line(char *line);
+void		free_tables(t_parsing *cts);
 
 #endif

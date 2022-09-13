@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 13:19:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:04:56 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,45 @@
   *         }
   *     }
   * } */
+
+int	stuff_outs(t_parsing *cts, const char **tkns, int *qtty)
+{
+	int	len;
+
+	len = ft_strlen(*tkns);
+	cts->outs[*qtty] = ft_calloc(len, sizeof(char));
+	if (!cts->outs[*qtty])
+		return (1);
+	ft_strlcpy(cts->outs[*qtty], *tkns, len);
+	(*qtty)++;
+	return (0);
+}
+
+int	stuff_ins(t_parsing *cts, const char **tkns, int *qtty)
+{
+	int	len;
+
+	len = ft_strlen(*tkns);
+	cts->ins[*qtty] = ft_calloc(len, sizeof(char));
+	if (!cts->ins[*qtty])
+		return (1);
+	ft_strlcpy(cts->ins[*qtty], *tkns, len);
+	(*qtty)++;
+	return (0);
+}
+
+int	stuff_cmnd(t_parsing *cts, const char **tkns, int *qtty)
+{
+	int	len;
+
+	len = ft_strlen(*tkns);
+	cts->cmndtable[*qtty] = ft_calloc(len, sizeof(char));
+	if (!cts->cmndtable[*qtty])
+		return (1);
+	ft_strlcpy(cts->cmndtable[*qtty], *tkns, len);
+	(*qtty)++;
+	return (0);
+}
 
 void	free_tables(t_parsing *cts)
 {

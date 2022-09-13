@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 13:59:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:06:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,53 @@ static int	get_ncmds(const char **tokenarr)
 	return (ret);
 }
 
-static void	tablecount(int arr[3], const char **tkns, int *i)
+static int	tablecount(int arr[3], const char **tkns)
 {
+	int	i;
+
+	i = 0;
 	arr[0] = 0;
 	arr[1] = 0;
 	arr[2] = 0;
-	while (tkns[*i] && tkns[*i][0] != '|')
+	while (tkns[i] && tkns[i][0] != '|')
 	{
-		if (tkns[*i][0] == '<' || tkns[*i][0] == '>')
+		if (tkns[i][0] == '<' || tkns[i][0] == '>')
 		{
-			if (tkns[*i][0] == '<')
+			if (tkns[i][0] == '<')
 				arr[1]++;
 			else
 				arr[2]++;
-			(*i)++;
+			i++;
 		}
 		else
 			arr[0]++;
-		(*i)++;
+		i++;
 	}
-	if (tkns[*i] && tkns[*i][0] == '|')
-		(*i)++;
+	if (tkns[i] && tkns[i][0] == '|')
+		i++;
+	return (i);
 }
 
-/** static int	stuff_rows(t_parsing *cts, const char **tkns)
-  * {
-  *     return (0);
-  * } */
+static int	stuff_rows(t_parsing *cts, const char **tkns, const int cmndend)
+{
+	int	i;
+	int	qtty[3];
+
+	i = 0;
+	qtty[0] = 0;
+	qtty[1] = 0;
+	qtty[2] = 0;
+	while (i < cmndend)
+	{
+		if (tkns[i][0] == '<' && stuff_ins(cts, &tkns[++i], &qtty[1]))
+			return (1);
+		else if (tkns[i][0] == '>' && stuff_outs(cts, &tkns[++i], &qtty[2]))
+			return (1);
+		else if (stuff_cmnd(cts, &tkns[i], &qtty[0]))
+		i++;
+	}
+	return (0);
+}
 
 static int	fill_tables(t_parsing *cts, const int numocmds, const char **tkns)
 {
@@ -67,10 +87,9 @@ static int	fill_tables(t_parsing *cts, const int numocmds, const char **tkns)
 	int	arr[3];
 
 	i = 0;
-	j = 0;
 	while (i < numocmds)
 	{
-		tablecount(arr, tkns, &j);
+		j = tablecount(arr, tkns);
 		cts[i].cmndtable = ft_calloc(arr[0] + 1, sizeof(char *));
 		cts[i].ins = ft_calloc(arr[1] + 1, sizeof(char *));
 		cts[i].outs = ft_calloc(arr[2] + 1, sizeof(char *));
@@ -80,7 +99,9 @@ static int	fill_tables(t_parsing *cts, const int numocmds, const char **tkns)
 			cts[i].islast = 1;
 			return (1);
 		}
-		// Stuff_rows should really be here.
+		if (stuff_rows(&cts[i], tkns, j))
+			return (1);
+		tkns += j;
 		i++;
 	}
 	cts[i - 1].islast = 1;
@@ -96,8 +117,6 @@ t_parsing	*parse_line(char *line)
 	tokenarr = tokenize_line(line);
 	if (!tokenarr)
 		return (NULL);
-	/** for (int i = 0; tokenarr[i]; i++)
-	  *     printf("%s\n", tokenarr[i]); */
 	numocmds = get_ncmds((const char **)tokenarr);
 	cts = malloc(sizeof(t_parsing) * numocmds);
 	if (cts)
