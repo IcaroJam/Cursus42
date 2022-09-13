@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:09:55 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 18:12:53 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:52:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		process_word(const char *line);
 int		isredir(const char c);
 void	free_cmndline(char **cmndline);
 int		check_redirerr(const char **tkns);
+void	set_tablelast(t_parsing *cts, const int i);
 int		stff_aid(char **chain, const char **tkns, int *qtty);
 
 #endif

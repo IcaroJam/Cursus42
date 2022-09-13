@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 13:23:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:54:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 #include "minishell.h"
 
 char	*g_env;
+
+static void	print_row(char **row)
+{
+	for (int i = 0; row[i]; i++) {
+		printf("%s ", row[i]);
+	}
+}
+
+static void	print_table(t_parsing *cts)
+{
+	for (int i = 0; !cts[i].islast; i++) {
+		printf("Cmnds: ");
+		print_row(cts[i].cmndtable);
+		printf("\nIns: ");
+		print_row(cts[i].ins);
+		printf("\nOuts: ");
+		print_row(cts[i].outs);
+		printf("\n");
+	}
+}
 
 int	main(void)
 {
@@ -29,7 +49,10 @@ int	main(void)
 			if (!ft_strncmp(cmndline, "EXIT", 5))
 				break ;
 			cts = parse_line(cmndline);
+			if (cts)
+				print_table(cts);
 			// What if cts == NULL?
+			// Free cts when finished with it AND when exiting.
 		}
 		// Before executing command, check wether it is builtin or not.
 		free(cmndline);

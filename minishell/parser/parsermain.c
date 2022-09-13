@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 18:13:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:53:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static int	stuff_rows(t_parsing *cts, const char **tkns, const int cmndend)
 		else if (tkns[i][0] == '>' && stff_aid(cts->outs, &tkns[++i], &qtty[2]))
 			return (1);
 		else if (stff_aid(cts->cmndtable, &tkns[i], &qtty[0]))
+			return (1);
 		i++;
 	}
 	return (0);
@@ -94,17 +95,15 @@ static int	fill_tables(t_parsing *cts, const int numocmds, const char **tkns)
 		cts[i].ins = ft_calloc(arr[1] + 1, sizeof(char *));
 		cts[i].outs = ft_calloc(arr[2] + 1, sizeof(char *));
 		cts[i].islast = 0;
-		if (!cts[i].cmndtable || !cts[i].ins || !cts[i].outs)
+		if (!cts[i].cmndtable || !cts[i].ins
+			|| !cts[i].outs || stuff_rows(&cts[i], tkns, j))
 		{
-			cts[i].islast = 1;
+			cts[i + 1].islast = 1;
 			return (1);
 		}
-		if (stuff_rows(&cts[i], tkns, j))
-			return (1);
 		tkns += j;
 		i++;
 	}
-	cts[i - 1].islast = 1;
 	return (0);
 }
 
@@ -118,7 +117,8 @@ t_parsing	*parse_line(char *line)
 	if (!tokenarr)
 		return (NULL);
 	numocmds = get_ncmds((const char **)tokenarr);
-	cts = malloc(sizeof(t_parsing) * numocmds);
+	cts = malloc(sizeof(t_parsing) * (numocmds + 1));
+	set_tablelast(cts, numocmds);
 	if (cts)
 	{
 		// Do stuff. If calloc returned NULL, jump straight to freeing.

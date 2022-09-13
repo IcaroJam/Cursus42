@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 18:13:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:51:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	stff_aid(char **chain, const char **tkns, int *qtty)
 {
 	int	len;
 
-	len = ft_strlen(*tkns);
+	len = ft_strlen(*tkns) + 1;
 	chain[*qtty] = ft_calloc(len, sizeof(char));
 	if (!chain[*qtty])
 		return (1);
@@ -80,11 +80,21 @@ int	stff_aid(char **chain, const char **tkns, int *qtty)
 	return (0);
 }
 
+void	set_tablelast(t_parsing *cts, const int i)
+{
+	cts[i].cmndtable = NULL;
+	cts[i].ins = NULL;
+	cts[i].outs = NULL;
+	cts[i].islast = 1;
+}
+
 void	free_tables(t_parsing *cts)
 {
 	int	i;
 
 	i = 0;
+	if (!cts)
+		return ;
 	while (!cts[i].islast)
 	{
 		free_cmndline(cts[i].cmndtable);
