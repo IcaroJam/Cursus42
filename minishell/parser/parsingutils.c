@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 18:51:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:40:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ int	stff_aid(char **chain, const char **tkns, int *qtty)
 {
 	int	len;
 
-	len = ft_strlen(*tkns) + 1;
-	chain[*qtty] = ft_calloc(len, sizeof(char));
+	len = ft_strlen(*tkns);
+	chain[*qtty] = ft_calloc(len + 1, sizeof(char));
+	if (!*qtty)
+		printf("AAA: %p\n", chain[*qtty]);
 	if (!chain[*qtty])
 		return (1);
 	ft_strlcpy(chain[*qtty], *tkns, len);
@@ -97,8 +99,11 @@ void	free_tables(t_parsing *cts)
 		return ;
 	while (!cts[i].islast)
 	{
+		printf("PRE\n");
 		free_cmndline(cts[i].cmndtable);
+		printf("POST\n");
 		free_cmndline(cts[i].ins);
+		printf("POSTPOST\n");
 		free_cmndline(cts[i].outs);
 		i++;
 	}

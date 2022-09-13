@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:57:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 13:19:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:55:37 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ void	free_cmndline(char **cmndline)
 	int	i;
 
 	i = 0;
+	if (!cmndline)
+		return ;
 	while (cmndline[i])
-		free(cmndline[i++]);
+	{
+		printf("What is going o00000000000on %p\n", cmndline[i]);
+		//if (cmndline[i])
+			free(cmndline[i++]);
+	}
 	free(cmndline);
 }
 
