@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 20:04:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:23:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ int	main(void)
 			if (!ft_strncmp(cmndline, "EXIT", 5))
 				break ;
 			cts = parse_line(cmndline);
-			if (!cts)
-			{
-				free(cmndline);
-				break ;
-			}
+			// What if cts == NULL?
 		}
 		// Before executing command, check wether it is builtin or not.
 		free(cmndline);

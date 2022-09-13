@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 16:43:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:02:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_parsing
 	char	**cmndtable;
 	char	**ins;
 	char	**outs;
+	int		islast;
 }	t_parsing;
 
 t_parsing	*parse_line(char *line);

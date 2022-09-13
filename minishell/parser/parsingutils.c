@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexingutils2.c                                     :+:      :+:    :+:   */
+/*   parsingutils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 13:59:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:19:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
 #include "msparser.h"
 
 /** static int	get_quotelen(t_lexutil *lxu)
@@ -67,3 +66,18 @@
   *         }
   *     }
   * } */
+
+void	free_tables(t_parsing *cts)
+{
+	int	i;
+
+	i = 0;
+	while (!cts[i].islast)
+	{
+		free_cmndline(cts[i].cmndtable);
+		free_cmndline(cts[i].ins);
+		free_cmndline(cts[i].outs);
+		i++;
+	}
+	free(cts);
+}

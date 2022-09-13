@@ -6,11 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:57:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/12 16:56:14 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:19:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
 #include "msparser.h"
 
 int	isredir(const char c)
