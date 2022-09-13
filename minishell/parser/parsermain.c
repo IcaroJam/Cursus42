@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 18:06:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:13:46 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ static int	stuff_rows(t_parsing *cts, const char **tkns, const int cmndend)
 	qtty[2] = 0;
 	while (i < cmndend)
 	{
-		if (tkns[i][0] == '<' && stuff_ins(cts, &tkns[++i], &qtty[1]))
+		if (tkns[i][0] == '<' && stff_aid(cts->ins, &tkns[++i], &qtty[1]))
 			return (1);
-		else if (tkns[i][0] == '>' && stuff_outs(cts, &tkns[++i], &qtty[2]))
+		else if (tkns[i][0] == '>' && stff_aid(cts->outs, &tkns[++i], &qtty[2]))
 			return (1);
-		else if (stuff_cmnd(cts, &tkns[i], &qtty[0]))
+		else if (stff_aid(cts->cmndtable, &tkns[i], &qtty[0]))
 		i++;
 	}
 	return (0);
