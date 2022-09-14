@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/05 17:18:31 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/05 17:52:55 by phijano-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ VPATH	= ./ #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
-SHRDSRC	= main.c
+SHRDSRC	= main.c execute.c ft_path.c
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 
