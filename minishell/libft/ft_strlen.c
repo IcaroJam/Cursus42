@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:15:31 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/03 09:52:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/14 13:13:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	ret;
 
+	if (!s)
+		return (-1);
 	ret = 0;
 	while (s[ret])
 		ret++;

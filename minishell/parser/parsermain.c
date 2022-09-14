@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/14 11:37:12 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/14 11:50:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,8 @@ t_parsing	*parse_line(char *line)
 	set_tablelast(cts, numocmds);
 	if (cts)
 	{
-		// Do stuff. If calloc returned NULL, jump straight to freeing.
-		// Expand $ UNLESS it is inside single quotes. A single $ will always print $.
-		if (fill_tables(cts, numocmds, (const char **)tokenarr))
+		if (fill_tables(cts, numocmds, (const char **)tokenarr)
+			|| expand_quotes(cts))
 		{
 			perror("Error");
 			free_tables(cts);
