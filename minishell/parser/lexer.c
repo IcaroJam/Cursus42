@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:57:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/14 11:19:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:02:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	check_redirerr(const char **tkns)
 	if (!tkns[0])
 		return (0);
 	if (isredir(tkns[0][0]) && !tkns[1])
+		return (1);
+	if (tkns[0][0] == '|')
 		return (1);
 	tkns++;
 	while (*tkns)
