@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/13 20:57:36 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/14 11:37:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,8 @@ static int	stuff_rows(t_parsing *cts, const char **tkns, const int cmndend)
 	qtty[0] = 0;
 	qtty[1] = 0;
 	qtty[2] = 0;
-	while (i < cmndend)
+	while (i < cmndend && tkns[i][0] != '|')
 	{
-		/** if (tkns[i][0] == '<' && stff_aid(cts->ins, &tkns[++i], &qtty[1]))
-		  *     return (1);
-		  * else if (tkns[i][0] == '>' && stff_aid(cts->outs, &tkns[++i], &qtty[2]))
-		  *     return (1);
-		  * else if (stff_aid(cts->cmndtable, &tkns[i], &qtty[0]))
-		  *     return (1); */
 		if (tkns[i][0] == '<')
 		{
 			if (stff_aid(cts->ins, &tkns[++i], &qtty[1]))
@@ -107,13 +101,12 @@ static int	fill_tables(t_parsing *cts, const int numocmds, const char **tkns)
 		cts[i].ins = ft_calloc(arr[1] + 1, sizeof(char *));
 		cts[i].outs = ft_calloc(arr[2] + 1, sizeof(char *));
 		cts[i].islast = 0;
-		if (i == 2 || !cts[i].cmndtable || !cts[i].ins
+		if (!cts[i].cmndtable || !cts[i].ins
 			|| !cts[i].outs || stuff_rows(&cts[i], tkns, j))
 		{
 			cts[i + 1].islast = 1;
 			return (1);
 		}
-		printf("dir: %p\n", cts[i].ins[0]);
 		tkns += j;
 		i++;
 	}
