@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/05 17:52:55 by phijano-         ###   ########.fr        #
+#    Updated: 2022/09/13 16:26:48 by phijano-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,15 @@ NAME	= minishell
 
 LIBFT	= ./libft/libft.a
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -I /Users/$(USER)/.brew/opt/readline/include
 
-FTFLGS	= -Llibft -lft -lreadline
+FTFLGS	= -Llibft -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 
-VPATH	= ./ #<<your directories here (separated by :)>>
+VPATH	= ./:./executor/:./signals:./builtins #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
-SHRDSRC	= main.c execute.c ft_path.c
+SHRDSRC	= main.c executor.c path.c exit_status.c signals.c builtins.c
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 

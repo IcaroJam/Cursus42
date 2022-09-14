@@ -1,0 +1,154 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
+/*   Updated: 2022/09/14 15:12:57 by phijano-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+/*
+int	ft_check_built(t_task task, char **env)
+{
+	int	built;
+
+	built = 1;
+	if (ft_strncmp(task.cmds[0], "echo", 5))// no se si vendran con ruta
+		ft_echo(task);
+	else if (ft_strncmp(task.cmds[0], "cd", 3))// no se si vendran con ruta
+		ft_cd(task);
+	else if (ft_strncmp(task.cmds[0], "pwd", 4))// no se si vendran con ruta
+		ft_pwd(task);
+	else if (ft_strncmp(task.cmds[0], "export", 7))// no se si vendran con ruta
+		ft_export(task);
+	else if (ft_strncmp(task.cmds[0], "unset", 5))// no se si vendran con ruta
+		ft_unset(task);
+	else if (ft_strncmp(task.cmds[0], "env", 4))// no se si vendran con ruta
+		ft_env(task);
+	else if (ft_exit(task.cmds[0], "exit", 5))// no se si vendran con ruta
+		ft_exit(task);
+	else
+		built = 0;
+	return (built);
+}
+*/
+
+
+void	ft_echo(t_task task)//Arreglar para la expansion de variables si hace falta
+{
+	int count;
+
+	if (task.cmds[1])
+	{
+		if(ft_strncmp(task.cmds[1], "-n", 3))
+		{
+			count = 1;
+			while(task.cmds[++count])
+				ft_putstr_fd(task.cmds[count], 1);
+		}
+		else
+		{
+			count = 0;
+			while (task.cmds[++count])
+				ft_putstr_fd(task.cmds[count], 1);
+			ft_putstr_fd("\n", 1);
+		}
+	}
+	else 
+		ft_putstr_fd("\n", 1);
+}
+
+void	ft_cd(t_task task, char **env)// Mirar lo del entorno
+{
+	char *pwd;
+	char *temp;
+
+	if (task.cmds[1])
+	{
+		chdir(task.cmds[1]);//Comprobar si cambia env o que hace, si no arreglar parecido al else
+	}
+	else
+	{
+		pwd = getenv("PWD");
+		temp = ft_strjoin("OLDPWD=", pwd);
+		free(pwd);
+		ft_export_var(temp, env);
+		free(temp);
+		pwd = getenv("HOME");//probar chdir(getenv("HOME"));para ver si cambia env o que hace
+		temp = ft_strjoin("PWD", pwd);
+		free(pwd);
+		ft_export_var(temp, env);
+		free(temp);
+	}
+}
+
+
+void	ft_pwd(char **env)
+{
+	char *pwd;
+	pwd = getenv("PWD");
+	ft_putstr_fd(pwd, 1);
+	ft_putstr_fd("\n", 1);
+}
+
+/*
+void	ft_pwd(char **env)
+{
+	char *pwd;
+	int count;
+
+	count = -1;
+	while (env[++count])
+	{
+		if (ft_strncmp(env[count], "PWD", 3))
+		{
+			pwd = ft_substr(env[count], 3, ft_strlen(env[count]));
+			put_str_fd(pwd, 1);
+			free (pwd);
+			break;	
+		}
+	}
+}
+*/
+
+void ft_export_var(char *var, char **env)
+{
+
+}
+
+void	ft_export(t_task task, char **env)// si no hay "=" no asigna, si hay mas de uno da igual
+{
+	int count;
+
+	count = 0;
+	while (task.cmds[++count])
+		if (ft_strchr(task.cmds[count], "=") && task.cmds[count][0] != '=')
+			ft_export_var(task.cmds[count], env);
+
+}
+
+void	ft_unset(t_task task, char **env)
+{
+
+}
+
+void	ft_env(char **env)//puede que haga falta los \n
+{
+	int count;
+
+	count = -1;
+	while(env[++count])
+		ft_putstr_fd(env[count], 1);
+
+}
+
+void	ft_exit(t_task *task) //Arreglar para todo lo que tengamos que liberar
+{
+	ft_free(task); //hacer funcion para liberar
+	exit(0);
+}
