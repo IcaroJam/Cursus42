@@ -6,69 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/14 17:23:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:16:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "msparser.h"
-
-static int	get_varlen(const char *str, const char flag)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '$' && str[i] != flag && !ft_isspace(str[i]))
-		i++;
-	return (i);
-}
-
-static int	get_quotelen(const char *str, const char flag, int *i)
-{
-	int		qlen;
-	int		temp;
-	char	*var;
-
-	qlen = 0;
-	(*i)++;
-	while (str[*i] && str[*i] != flag)
-	{
-		if (str[*i] == '$' && flag == '\"')
-		{
-			temp = get_varlen(&str[*i + 1], flag);
-			var = ft_substr(&str[*i], 1, temp);
-			*i += temp;
-			temp = ft_strlen(getenv(var));
-			free(var);
-			if (temp > -1)
-				qlen += temp;
-		}
-		else if (str[*i] != '$')
-			qlen++;
-		(*i)++;
-	}
-	return (qlen);
-}
-
-static int	get_tknlen(const char *str)
-{
-	int	tlen;
-	int	i;
-
-	i = 0;
-	tlen = 0;
-	while (str[i])
-	{
-		// Optimize this and add $ condition!!!
-		if ((str[i] == '\'' || str[i] == '\"')
-			&& handle_quotes(&str[i], str[i]))
-			tlen += get_quotelen(str, str[i], &i);
-		else
-			tlen++;
-		i++;
-	}
-	return (tlen);
-}
 
 /** static void	tokencpy(const char *line, int tknlen, char *cmdline)
   * {
@@ -92,37 +34,11 @@ static int	get_tknlen(const char *str)
   *     }
   * } */
 
-static int	need_expansion(const char *str)
-{
-	int	temp;
-	int	expandflag;
-
-	expandflag = 0;
-	while (*str)
-	{
-		if (*str == '\'' || *str == '\"')
-		{
-			temp = handle_quotes(str, *str);
-			if (temp && *str == '\"')
-				expandflag = 1;
-			str += temp;
-		}
-		else if (*str == '$' && !ft_isspace(str[1]))
-			expandflag = 1;
-		str++;
-	}
-	return (expandflag);
-}
-
 int	expand_quotes(t_parsing *cts)
 {
 	int	i;
 	int	tokenlen;
 
-	//
-	printf("TKNLEN: %d\n", get_tknlen(cts[0].cmndtable[1]));
-	return (0);
-	//
 	while (!cts->islast)
 	{
 		i = 1;
