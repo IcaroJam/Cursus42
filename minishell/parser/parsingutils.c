@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:16:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:37:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	expand_quotes(t_parsing *cts)
 		while (cts[0].cmndtable[i])
 		{
 			// Find tokens with expansible shit.
-			if (!need_expansion(cts[0].cmndtable[i]))
-				continue ;
+			if (need_expansion(cts[0].cmndtable[i]))
+			{
 			// Get the len of the tokens once expanded. (Wildcards should also
 			// be considered in here).
 			tokenlen = get_tknlen(cts[0].cmndtable[i]);
@@ -54,6 +54,7 @@ int	expand_quotes(t_parsing *cts)
 			// Do the expansion.
 			// Expand $ UNLESS it is inside single quotes.
 			// A single $ will always print $.
+			}
 			i++;
 		}
 		cts++;

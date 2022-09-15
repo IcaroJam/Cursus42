@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:49:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:15:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:35:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	need_expansion(const char *str)
 				expandflag = 1;
 			str += temp;
 		}
-		else if (*str == '$' && !ft_isspace(str[1]))
+		else if (*str == '$' && !ft_isspace(str[1]) && str[1])
 			expandflag = 1;
 		str++;
 	}
@@ -49,6 +49,9 @@ static int	expand_dollar(const char *str, const char flag, int *i)
 	int		ret;
 	char	*var;
 
+	// $? expansion left to implement.
+	if (!str[1])
+		return (1);
 	ret = get_varlen(&str[*i + 1], flag);
 	var = ft_substr(&str[*i], 1, ret);
 	*i += ret;
