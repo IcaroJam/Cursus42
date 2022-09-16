@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:49:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:35:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:39:37 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,18 @@ int	need_expansion(const char *str)
 	return (expandflag);
 }
 
-static int	get_varlen(const char *str, const char flag)
+int	get_varlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != '$' && str[i] != flag && !ft_isspace(str[i]))
+	while (str[i] && str[i] != '$' && str[i] != '\''
+			&& str[i] != '\"' && !ft_isspace(str[i]))
 		i++;
 	return (i);
 }
 
-static int	expand_dollar(const char *str, const char flag, int *i)
+static int	expand_dollar(const char *str, int *i)
 {
 	int		ret;
 	char	*var;
@@ -52,7 +53,7 @@ static int	expand_dollar(const char *str, const char flag, int *i)
 	// $? expansion left to implement.
 	if (!str[1])
 		return (1);
-	ret = get_varlen(&str[*i + 1], flag);
+	ret = get_varlen(&str[*i + 1]);
 	var = ft_substr(&str[*i], 1, ret);
 	*i += ret;
 	ret = ft_strlen(getenv(var));
@@ -71,7 +72,7 @@ static int	get_quotelen(const char *str, const char flag, int *i)
 	while (str[*i] && str[*i] != flag)
 	{
 		if (str[*i] == '$' && flag == '\"')
-			qlen += expand_dollar(str, flag, i);
+			qlen += expand_dollar(str, i);
 		else
 			qlen++;
 		(*i)++;
@@ -88,12 +89,13 @@ int	get_tknlen(const char *str)
 	tlen = 0;
 	while (str[i])
 	{
+		printf("CURRTKNLEN (%c): %d\n", str[i], tlen);
 		// Optimize this and add $ condition!!!
 		if ((str[i] == '\'' || str[i] == '\"')
 			&& handle_quotes(&str[i], str[i]))
 			tlen += get_quotelen(str, str[i], &i);
 		else if (str[i] == '$')
-			tlen += expand_dollar(str, 0, &i);
+			tlen += expand_dollar(str, &i);
 		else
 			tlen++;
 		i++;
