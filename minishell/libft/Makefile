@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/05 14:32:13 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/06 12:23:50 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC			= ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strl
 
 BONUS_SRC	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-EXTRA_SRC	= ft_abs.c ft_ipow.c ft_free.c ft_ioverflw.c
+EXTRA_SRC	= ft_abs.c ft_ipow.c ft_free.c ft_ioverflw.c ft_isspace.c
 
 GNL_SRC		= $(addprefix ./get_next_line/, get_next_line_bonus.c get_next_line_utils_bonus.c)
 
@@ -32,8 +32,6 @@ LIBSRCS		= $(SRC) $(BONUS_SRC) $(EXTRA_SRC) $(GNL_SRC)
 OBJS		= $(SRC:.c=.o)
 
 BONUS_OBJS	= $(BONUS_SRC:.c=.o)
-
-PRINTF_OBJS	= $(addprefix printf/, ft_printf.o ft_printf_utils_I.o ptf_itoa.o ptf_lenghts.o flags_and_conversions.o char_string_conv.o digit_conv.o unsigned_conv.o hex_conv.o pointer_conv.o)
 
 EXTRA_OBJS	= $(EXTRA_SRC:.c=.o)
 

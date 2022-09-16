@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/13 11:21:54 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:23:39 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void static	ft_do_cmd(char **path, char **cmd, char **envp)
 	int		count;
 	char	*path_cmd;
 	int		cmd_exist;
-
+	
 	cmd_exist = ft_path_cmd(cmd, envp);
 	count = -1;
 	while (path[++count])
@@ -57,7 +57,9 @@ typedef struct s_process //poner en minishell.h cuando este terminada
 	int	fd_in;
 	int	fd_out;
 	int	pid;
-	int fd_pipex[2];
+//	int fd_pipex[2];
+	int in_fd_pipex[2];
+	int out_fd_pipex[2];
 	int error;
 }	t_process;
 
@@ -66,9 +68,18 @@ void	ft_execute(t_process *process, char **cmd, char **envp) // abrir y cerrar f
 {
 	char	**path;
 
+//	perror("Execute");//borrar
+	//
+	if (process->in_fd_pipex[1] > 0)
+		close(process->in_fd_pipex[1]);
+	if (process->out_fd_pipex[0] > 0)
+		close(process->out_fd_pipex[0]);
+	//
 	dup2(process->fd_in, 0);
+//	perror("FDS: ");//
 	close(process->fd_in);
 	dup2(process->fd_out, 1);
+//	perror("FDS: ");//
 	close(process->fd_out);
 	path = ft_get_path(envp);
 	ft_do_cmd(path, cmd, envp);
@@ -80,19 +91,33 @@ void	ft_execute(t_process *process, char **cmd, char **envp) // abrir y cerrar f
 void	ft_set_fd_in(t_process *process, char **ins)
 {
 	int count;
-
 	ft_putstr_fd("fd_in start\n", 1);//borrar
-	if (process->fd_pipex[0] > 0)
-		process->fd_in = process->fd_pipex[0];
+//	if (process->fd_pipex[0] > 0)
+//		process->fd_in = process->fd_pipex[0];
+	if (process->out_fd_pipex[0] > 0)
+	{
+		if (process->in_fd_pipex[0] > 0)
+		{
+			close(process->in_fd_pipex[0]);
+			close(process->in_fd_pipex[1]);
+		}
+		process->in_fd_pipex[0] = process->out_fd_pipex[0];
+		process->in_fd_pipex[1] = process->out_fd_pipex[0];
+		process->fd_in = process->in_fd_pipex[0];
+	}
+//
 	process->error = 0;
 	count = -1;
-	while (ins[++count])
+	if (ins)
 	{
-		process->fd_in = open(ins[count], O_RDONLY);
-		if (process->fd_in == -1)
+		while (ins[++count])
 		{
-			process->error = 1;
-			break;
+			process->fd_in = open(ins[count], O_RDONLY);
+			if (process->fd_in == -1)
+			{
+				process->error = 1;
+				break;
+			}
 		}
 	}
 	ft_putstr_fd("fd_in set\n", 1);//borrar
@@ -102,19 +127,21 @@ void	ft_set_fd_in(t_process *process, char **ins)
 void	ft_set_fd_out(t_process *process, char **outs)
 {
 	int count;
-
 	ft_putstr_fd("fd_out start\n", 1);//borrar
-	pipe(process->fd_pipex);
-	process->fd_out = process->fd_pipex[1];
+	pipe(process->out_fd_pipex);
+	process->fd_out = process->out_fd_pipex[1];
 	count = -1;
-	while (outs[++count])
+	if (outs)
 	{
-		process->fd_out = open(outs[count], O_WRONLY | O_CREAT
-			| O_TRUNC | O_APPEND, S_IRWXU);	//comprobar flags
-		if (process->fd_out == -1)
+		while (outs[++count])
 		{
-			process->error = 1;
-			break;
+			process->fd_out = open(outs[count], O_WRONLY | O_CREAT
+				| O_TRUNC | O_APPEND, S_IRWXU);	//comprobar flags
+			if (process->fd_out == -1)
+			{
+				process->error = 1;
+				break;
+			}
 		}
 	}
 	ft_putstr_fd("fd_out set\n", 1);//borrar
@@ -123,8 +150,12 @@ void	ft_set_fd_out(t_process *process, char **outs)
 
 void	ft_init_process(t_process *process)
 {
-	process->fd_pipex[0] = -1;
-	process->fd_pipex[1] = -1;
+	//process->fd_pipex[0] = -1;
+	//process->fd_pipex[1] = -1;
+	process->in_fd_pipex[0] = -1;
+	process->in_fd_pipex[1] = -1;
+	process->out_fd_pipex[0] = -1;
+	process->out_fd_pipex[1] = -1;
 	process->error = 0;
 }
 
@@ -134,10 +165,12 @@ int	ft_father(int pid)
 	int		error;
 
 	error = 0;
+	ft_putstr_fd("esperando:", 1);
 	waitpid(pid, &status, 0);
+	ft_putstr_fd("hecho", 1);
 	if (ft_exit_status(status))
 		error = ft_exit_code(status);
-	return (error); //averigiuar donde ponemos el valor de exit
+	return (error); //averiguar donde ponemos el valor de exit
 }
 
 void	ft_executor(t_task *task, char **envp)
@@ -160,12 +193,16 @@ void	ft_executor(t_task *task, char **envp)
 		else
 			ft_set_fd_out(&process, task[count].outs);
 		//if (!ft_check_built(task[count]))//comprobar
-			process.pid = fork(); //Arreglar! si el comando es un built debe ejecutarlo el padre !No hacer fork
+		process.pid = fork(); //Arreglar! si el comando es un built debe ejecutarlo el padre !No hacer fork
+		//perror("???");
 		if (process.pid == -1)
 			perror("Error fork\n");
 		else if (process.pid == 0)
+			//perror("???");
 			ft_execute(&process, task[count].cmds, envp);
 	}
+	close(process.in_fd_pipex[0]);
+	close(process.in_fd_pipex[1]);
 	ft_father(process.pid);
 	ft_putstr_fd("executor finished\n", 1);//borrar
 }

@@ -1,67 +1,72 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/09/16 13:09:13 by phijano-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_task	*ft_parser(char *line)
+char	*g_env;
+
+static void	print_row(char **row)
 {
-	t_task	*cmds_array;
-	char	**cmds;
+	for (int i = 0; row[i]; i++) {
+		printf("\"%s\" ", row[i]);
+	}
+}
 
-	(void)line;
-
-	cmds_array = malloc((3 + 1) * sizeof(t_task));
-
-	cmds = malloc((2 + 1) * sizeof(char *));
-	cmds[0] = ft_strdup("cat");
-	cmds[1] = ft_strdup("main.c");
-	cmds[2] = NULL;
-
-	cmds_array[0].cmds = cmds;
-
-	cmds = malloc((2 + 1) * sizeof(char *));
-	cmds[0] = ft_strdup("grep");
-	cmds[1] = ft_strdup("a");
-	cmds[2] = NULL;
-
-	cmds_array[1].cmds = cmds;
-
-	cmds = malloc((2 + 1) * sizeof(char *));
-	cmds[0] = ft_strdup("wc");
-	cmds[1] = ft_strdup("-l");
-	cmds[2] = NULL;
-
-	cmds_array[2].cmds = cmds;
-
-	cmds_array[3].cmds = NULL;
-
-	return (cmds_array);
+static void	print_table(t_parsing *cts)
+{
+	for (int i = 0; !cts[i].islast; i++) {
+		printf("Cmnds: ");
+		print_row(cts[i].cmndtable);
+		printf("\nIns: ");
+		print_row(cts[i].ins);
+		printf("\nOuts: ");
+		print_row(cts[i].outs);
+		printf("\n");
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	char *line;
-	t_task *task;
+	char		*cmndline;
+	t_parsing	*cts;
 
-	(void)argc;
-	(void)argv;
-	
+	(void)argc;//arreglar
+	(void)argv;//arreglar
 	signal(SIGINT, INT_handler);
-	signal(SIGQUIT, QUIT_handler);
+	//signal(SIGQUIT, QUIT_handler); para hacer funcion Ctrl + \ ?
+	signal(SIGQUIT, SIG_IGN);//para ignorarlo
+	//signal(SIGQUIT, SIG_DFL);//el manejador por defecto, para que mate el proceso. hara falta para los child?
+	cts = NULL;
 	while (1)
 	{
-		line = readline("minishell: ");
-		ft_putstr_fd(line, 1);
-		ft_putstr_fd("\nstart\n", 1);
-		if (!line)
+		cmndline = readline("pinche_perro@minishell~ $ ");
+		// Handle signals here.
+		if (cmndline[0])
 		{
-			ft_putstr_fd("Ctrl + D Pulsado\n", 1);
-			exit(0);
+			add_history(cmndline);
+			if (!ft_strncmp(cmndline, "exit", 5))
+				break ;
+			cts = parse_line(cmndline);
+			if (cts)
+				print_table(cts);
+			// What if cts == NULL?
+			// Free cts when finished with it AND when exiting.
 		}
-		task = ft_parser(line);
-		ft_putstr_fd("fake cmd done\n", 1);
-		add_history(line);
-		ft_executor(task, envp);
-		ft_putstr_fd("cmds executed\n", 1);
-		free(line);
+		// Before executing command, check wether it is builtin or not.
+		ft_executor(cts, envp);
+		free(cmndline);
 	}
+	//
 	system("leaks minishell");
+	//
 	return (0);
 }

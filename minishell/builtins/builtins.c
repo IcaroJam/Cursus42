@@ -6,38 +6,17 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/14 15:12:57 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/15 11:26:04 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-int	ft_check_built(t_task task, char **env)
+void ft_export_var(char *var, char **env)
 {
-	int	built;
-
-	built = 1;
-	if (ft_strncmp(task.cmds[0], "echo", 5))// no se si vendran con ruta
-		ft_echo(task);
-	else if (ft_strncmp(task.cmds[0], "cd", 3))// no se si vendran con ruta
-		ft_cd(task);
-	else if (ft_strncmp(task.cmds[0], "pwd", 4))// no se si vendran con ruta
-		ft_pwd(task);
-	else if (ft_strncmp(task.cmds[0], "export", 7))// no se si vendran con ruta
-		ft_export(task);
-	else if (ft_strncmp(task.cmds[0], "unset", 5))// no se si vendran con ruta
-		ft_unset(task);
-	else if (ft_strncmp(task.cmds[0], "env", 4))// no se si vendran con ruta
-		ft_env(task);
-	else if (ft_exit(task.cmds[0], "exit", 5))// no se si vendran con ruta
-		ft_exit(task);
-	else
-		built = 0;
-	return (built);
+	(void)var;
+	(void)env;
 }
-*/
-
 
 void	ft_echo(t_task task)//Arreglar para la expansion de variables si hace falta
 {
@@ -88,7 +67,7 @@ void	ft_cd(t_task task, char **env)// Mirar lo del entorno
 }
 
 
-void	ft_pwd(char **env)
+void	ft_pwd()
 {
 	char *pwd;
 	pwd = getenv("PWD");
@@ -116,10 +95,6 @@ void	ft_pwd(char **env)
 }
 */
 
-void ft_export_var(char *var, char **env)
-{
-
-}
 
 void	ft_export(t_task task, char **env)// si no hay "=" no asigna, si hay mas de uno da igual
 {
@@ -127,13 +102,15 @@ void	ft_export(t_task task, char **env)// si no hay "=" no asigna, si hay mas de
 
 	count = 0;
 	while (task.cmds[++count])
-		if (ft_strchr(task.cmds[count], "=") && task.cmds[count][0] != '=')
+		if (ft_strchr(task.cmds[count], '=') && task.cmds[count][0] != '=')
 			ft_export_var(task.cmds[count], env);
 
 }
 
 void	ft_unset(t_task task, char **env)
 {
+	(void)task;
+	(void)env;
 
 }
 
@@ -146,9 +123,35 @@ void	ft_env(char **env)//puede que haga falta los \n
 		ft_putstr_fd(env[count], 1);
 
 }
-
+/*
 void	ft_exit(t_task *task) //Arreglar para todo lo que tengamos que liberar
 {
-	ft_free(task); //hacer funcion para liberar
+	(void)task;
+	//ft_free(task); //hacer funcion para liberar
 	exit(0);
+}*/
+
+int	ft_check_built(t_task task, char **env)
+{
+	int	built;
+
+	built = 1;
+	if (ft_strncmp(task.cmds[0], "echo", 5))// no se si vendran con ruta
+		ft_echo(task);
+	else if (ft_strncmp(task.cmds[0], "cd", 3))// no se si vendran con ruta
+		ft_cd(task, env);
+	else if (ft_strncmp(task.cmds[0], "pwd", 4))// no se si vendran con ruta
+		ft_pwd();
+	else if (ft_strncmp(task.cmds[0], "export", 7))// no se si vendran con ruta
+		ft_export(task, env);
+	else if (ft_strncmp(task.cmds[0], "unset", 5))// no se si vendran con ruta
+		ft_unset(task, env);
+	else if (ft_strncmp(task.cmds[0], "env", 4))// no se si vendran con ruta
+		ft_env(env);
+	else if (ft_strncmp(task.cmds[0], "exit", 5))// no se si vendran con ruta
+		//ft_exit(task); //tenemos que pasarle todo lo que haya que liberar
+		;
+	else
+		built = 0;
+	return (built);
 }
