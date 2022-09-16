@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/16 12:22:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:19:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,28 @@ char	*g_env;
 
 static void	print_row(char **row)
 {
-	for (int i = 0; row[i]; i++) {
-		printf("\"%s\" ", row[i]);
+	int	i;
+
+	i = 0;
+	while (row[i])
+	{
+		printf("\"%s\" ", row[i++]);
 	}
 }
 
 static void	print_table(t_parsing *cts)
 {
-	for (int i = 0; !cts[i].islast; i++) {
+	int	i;
+
+	i = 0;
+	while (!cts[i].islast)
+	{
 		printf("Cmnds: ");
 		print_row(cts[i].cmndtable);
 		printf("\nIns: ");
 		print_row(cts[i].ins);
 		printf("\nOuts: ");
-		print_row(cts[i].outs);
+		print_row(cts[i++].outs);
 		printf("\n");
 	}
 }
