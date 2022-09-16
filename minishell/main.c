@@ -6,11 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/14 17:24:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:22:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "minishell.h"
 
 char	*g_env;
@@ -18,7 +17,7 @@ char	*g_env;
 static void	print_row(char **row)
 {
 	for (int i = 0; row[i]; i++) {
-		printf("%s ", row[i]);
+		printf("\"%s\" ", row[i]);
 	}
 }
 

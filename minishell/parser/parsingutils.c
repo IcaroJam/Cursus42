@@ -6,38 +6,17 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:37:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:20:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msparser.h"
 
-/** static void	tokencpy(const char *line, int tknlen, char *cmdline)
-  * {
-  *     int		i;
-  *     char	tmp;
-  *
-  *     i = 0;
-  *     while (i < tknlen)
-  *     {
-  *         if ((*line == '\'' || *line == '\"') && handle_quotes(line, *line))
-  *         {
-  *             tmp = *line;
-  *             line++;
-  *             while (*line != tmp)
-  *                 cmdline[i++] = *line++;
-  *         }
-  *         else
-  *         {
-  *             cmdline[i++] = *line++;
-  *         }
-  *     }
-  * } */
-
 int	expand_quotes(t_parsing *cts)
 {
-	int	i;
-	int	tokenlen;
+	int		i;
+	int		tokenlen;
+	char	*temp;
 
 	while (!cts->islast)
 	{
@@ -51,6 +30,12 @@ int	expand_quotes(t_parsing *cts)
 			// be considered in here).
 			tokenlen = get_tknlen(cts[0].cmndtable[i]);
 			// Allocate space for them.
+			temp = ft_calloc(tokenlen, sizeof(char));
+			if (!temp)
+				return (1);
+			tokencpy(cts[0].cmndtable[i], tokenlen, temp);
+			free(cts[0].cmndtable[i]);
+			cts[0].cmndtable[i] = temp;
 			// Do the expansion.
 			// Expand $ UNLESS it is inside single quotes.
 			// A single $ will always print $.

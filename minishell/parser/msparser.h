@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:09:55 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/15 15:15:45 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:39:47 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int		check_redirerr(const char **tkns);
 void	set_tablelast(t_parsing *cts, const int i);
 int		stff_aid(char **chain, const char **tkns, int *qtty);
 int		need_expansion(const char *str);
+int		get_varlen(const char *str);
 int		expand_quotes(t_parsing *cts);
 int		get_tknlen(const char *str);
+void	tokencpy(const char *line, int tknlen, char *cmdline);
 
 #endif

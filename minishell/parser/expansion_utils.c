@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:49:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/16 12:39:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:52:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	get_varlen(const char *str)
 
 	i = 0;
 	while (str[i] && str[i] != '$' && str[i] != '\''
-			&& str[i] != '\"' && !ft_isspace(str[i]))
+		&& str[i] != '\"' && !ft_isspace(str[i]))
 		i++;
 	return (i);
 }
@@ -89,7 +89,6 @@ int	get_tknlen(const char *str)
 	tlen = 0;
 	while (str[i])
 	{
-		printf("CURRTKNLEN (%c): %d\n", str[i], tlen);
 		// Optimize this and add $ condition!!!
 		if ((str[i] == '\'' || str[i] == '\"')
 			&& handle_quotes(&str[i], str[i]))
