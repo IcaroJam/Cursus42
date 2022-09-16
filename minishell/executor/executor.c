@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/16 11:23:39 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/16 13:51:57 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ int	ft_father(int pid)
 	return (error); //averiguar donde ponemos el valor de exit
 }
 
-void	ft_executor(t_task *task, char **envp)
+void	ft_executor(t_parsing *task, char **envp)
 {
 	t_process	process;
 	int 		count;
@@ -181,14 +181,14 @@ void	ft_executor(t_task *task, char **envp)
 	ft_init_process(&process);
 	count = -1;
 	ft_putstr_fd("executor start\n", 1);//borrar
-	while (task[++count].cmds)
+	while (task[++count].cmndtable)
 	{
 		if (count == 0 && !task[count].ins)
 			process.fd_in = dup(0);
 		else
 			ft_set_fd_in(&process, task[count].ins);
 		// si hay entrada que no existe sacar error y no ejecutar lo demas 
-		if (!task[count + 1].cmds)
+		if (!task[count + 1].cmndtable)
 			process.fd_out = dup(1);
 		else
 			ft_set_fd_out(&process, task[count].outs);
@@ -199,7 +199,7 @@ void	ft_executor(t_task *task, char **envp)
 			perror("Error fork\n");
 		else if (process.pid == 0)
 			//perror("???");
-			ft_execute(&process, task[count].cmds, envp);
+			ft_execute(&process, task[count].cmndtable, envp);
 	}
 	close(process.in_fd_pipex[0]);
 	close(process.in_fd_pipex[1]);
