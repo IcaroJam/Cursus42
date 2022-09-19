@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 12:47:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:29:43 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
-# include <errno.h>
 # include "libft/libft.h"
 
 // Parser stuff.
