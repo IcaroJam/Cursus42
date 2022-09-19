@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 11:06:47 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:27:29 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmndline = readline("pinche_perro@minishell~ $ ");
 		// Handle signals here.
-		if (!cmndline)
+		if (!cmndline)//Ctrl + D
 			exit(0);//liberar memoria
 		if (cmndline[0])
 		{

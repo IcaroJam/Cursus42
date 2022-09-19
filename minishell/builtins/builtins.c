@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/16 13:57:32 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:00:46 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_echo(t_parsing task)//Arreglar para la expansion de variables si hace fa
 
 	if (task.cmndtable[1])
 	{
-		if(ft_strncmp(task.cmndtable[1], "-n", 3))
+		if(!ft_strncmp(task.cmndtable[1], "-n", 3))
 		{
 			count = 1;
 			while(task.cmndtable[++count])
@@ -42,28 +42,13 @@ void	ft_echo(t_parsing task)//Arreglar para la expansion de variables si hace fa
 		ft_putstr_fd("\n", 1);
 }
 
-void	ft_cd(t_parsing task, char **env)// Mirar lo del entorno
+void	ft_cd(t_parsing task)// Mirar lo del entorno
 {
-	char *pwd;
-	char *temp;
 
 	if (task.cmndtable[1])
-	{
 		chdir(task.cmndtable[1]);//Comprobar si cambia env o que hace, si no arreglar parecido al else
-	}
 	else
-	{
-		pwd = getenv("PWD");
-		temp = ft_strjoin("OLDPWD=", pwd);
-		free(pwd);
-		ft_export_var(temp, env);
-		free(temp);
-		pwd = getenv("HOME");//probar chdir(getenv("HOME"));para ver si cambia env o que hace
-		temp = ft_strjoin("PWD", pwd);
-		free(pwd);
-		ft_export_var(temp, env);
-		free(temp);
-	}
+		chdir(getenv("HOME"));
 }
 
 
@@ -135,20 +120,39 @@ int	ft_check_built(t_parsing task, char **env)
 {
 	int	built;
 
+	ft_putstr_fd("checking built\n", 1);
 	built = 1;
-	if (ft_strncmp(task.cmndtable[0], "echo", 5))// no se si vendran con ruta
+	if (!ft_strncmp(task.cmndtable[0], "echo", 5))// no se si vendran con ruta
+	{
+		ft_putstr_fd("Doing echo: \n", 1);
 		ft_echo(task);
-	else if (ft_strncmp(task.cmndtable[0], "cd", 3))// no se si vendran con ruta
-		ft_cd(task, env);
-	else if (ft_strncmp(task.cmndtable[0], "pwd", 4))// no se si vendran con ruta
+	}
+	else if (!ft_strncmp(task.cmndtable[0], "cd", 3))// no se si vendran con ruta
+	{
+		ft_putstr_fd("Doing cd: \n", 1);
+		ft_cd(task);
+	}
+	else if (!ft_strncmp(task.cmndtable[0], "pwd", 4))// no se si vendran con ruta
+	{
+		ft_putstr_fd("Doing pwd: \n", 1);
 		ft_pwd();
-	else if (ft_strncmp(task.cmndtable[0], "export", 7))// no se si vendran con ruta
+	}
+	else if (!ft_strncmp(task.cmndtable[0], "export", 7))// no se si vendran con ruta
+	{
+		ft_putstr_fd("Doing export: \n", 1);
 		ft_export(task, env);
-	else if (ft_strncmp(task.cmndtable[0], "unset", 5))// no se si vendran con ruta
+	}
+	else if (!ft_strncmp(task.cmndtable[0], "unset", 5))// no se si vendran con ruta
+	{
+		ft_putstr_fd("Doing unset: \n", 1);
 		ft_unset(task, env);
-	else if (ft_strncmp(task.cmndtable[0], "env", 4))// no se si vendran con ruta
+	}
+	else if (!ft_strncmp(task.cmndtable[0], "env", 4))// no se si vendran con ruta
+	{
+		ft_putstr_fd("Doing env: \n", 1);
 		ft_env(env);
-	else if (ft_strncmp(task.cmndtable[0], "exit", 5))// no se si vendran con ruta
+	}
+	else if (!ft_strncmp(task.cmndtable[0], "exit", 5))// no se si vendran con ruta
 		//ft_exit(task); //tenemos que pasarle todo lo que haya que liberar
 		;
 	else
