@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/16 14:00:12 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:06:47 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;//arreglar
 	(void)argv;//arreglar
+	signal(SIGINT, INT_handler);
+	//signal(SIGQUIT, QUIT_handler); para hacer funcion Ctrl + \ ?
+	signal(SIGQUIT, SIG_IGN);//para ignorarlo
+	//signal(SIGQUIT, SIG_DFL);//el manejador por defecto, para que mate el proceso. hara falta para los child?
 	cts = NULL;
 	while (1)
 	{
 		cmndline = readline("pinche_perro@minishell~ $ ");
 		// Handle signals here.
-		//if (!cmndline)
-		//	ft_ctrl_D();
-		signal(SIGINT, INT_handler);
-		//signal(SIGQUIT, QUIT_handler); para hacer funcion Ctrl + \ ?
-		signal(SIGQUIT, SIG_IGN);//para ignorarlo
-		//signal(SIGQUIT, SIG_DFL);//el manejador por defecto, para que mate el proceso. hara falta para los child?
+		if (!cmndline)
+			exit(0);//liberar memoria
 		if (cmndline[0])
 		{
 			add_history(cmndline);

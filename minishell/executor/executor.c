@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/16 13:51:57 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:04:01 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,9 +165,9 @@ int	ft_father(int pid)
 	int		error;
 
 	error = 0;
-	ft_putstr_fd("esperando:", 1);
+	ft_putstr_fd("waiting...\n", 1);
 	waitpid(pid, &status, 0);
-	ft_putstr_fd("hecho", 1);
+	ft_putstr_fd("done\n", 1);
 	if (ft_exit_status(status))
 		error = ft_exit_code(status);
 	return (error); //averiguar donde ponemos el valor de exit
@@ -183,12 +183,12 @@ void	ft_executor(t_parsing *task, char **envp)
 	ft_putstr_fd("executor start\n", 1);//borrar
 	while (task[++count].cmndtable)
 	{
-		if (count == 0 && !task[count].ins)
+		if (count == 0 && task[count].ins[0] == NULL)
 			process.fd_in = dup(0);
 		else
 			ft_set_fd_in(&process, task[count].ins);
 		// si hay entrada que no existe sacar error y no ejecutar lo demas 
-		if (!task[count + 1].cmndtable)
+		if (!task[count + 1].cmndtable && task[count].outs[0] == NULL)
 			process.fd_out = dup(1);
 		else
 			ft_set_fd_out(&process, task[count].outs);
