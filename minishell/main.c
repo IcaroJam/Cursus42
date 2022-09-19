@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 19:44:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:47:32 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,15 @@ int	main(int argc, char **argv, char **envp)
 			if (!ft_strncmp(cmndline, "exit", 5))
 				break ;
 			cts = parse_line(cmndline);
+			//
 			if (cts)
 				print_table(cts);
 			if (!ft_strncmp(cmndline, "env", 4))
 				ms_env(envp);
+			//
+			if (!cts)
+				perror("Error");
+			free_tables(cts);
 			// What if cts == NULL?
 			// Free cts when finished with it AND when exiting.
 		}
