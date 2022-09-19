@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:22:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 12:36:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:47:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ms_pwd(t_parsing cts)
+int	ms_pwd(void)
 {
 	char	*tmp;
 
