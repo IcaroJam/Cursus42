@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/16 12:17:19 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/19 11:46:57 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,19 +22,21 @@ CFLAGS	= -Wall -Werror -Wextra
 
 FTFLGS	= -Llibft -lft -lreadline
 
-VPATH	= ./:./parser/ #<<your directories here (separated by :)>>
+VPATH	= ./:./parser/:./builtins/ #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
 SHRDSRC	= main.c
 PARSSRC	= $(addprefix ./parser/, parsingutils.c parsermain.c lexingutils.c lexer.c expansion_utils.c copy_utils.c)
+BLTNSRC	= $(addprefix ./builtins/, )
 #------------------------------------------------------------------------------#
-SRCS	= $(SHRDSRC) $(PARSSRC)
+SRCS	= $(SHRDSRC) $(PARSSRC) $(BLTNSRC)
 
 SHRDOBJ	= $(SHRDSRC:.c=.o)
 PARSOBJ	= $(addsuffix .o, $(notdir $(basename $(PARSSRC))))
+BLTNOBJ	= $(addsuffix .o, $(notdir $(basename $(BLTNSRC))))
 #------------------------------------------------------------------------------#
-OBJS	= $(SHRDOBJ) $(PARSOBJ)
+OBJS	= $(SHRDOBJ) $(PARSOBJ) $(BLTNOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
