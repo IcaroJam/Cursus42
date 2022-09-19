@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/19 12:15:31 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:02:03 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_executor(t_parsing *task, char **envp)
 			process.fd_out = dup(1);
 		else
 			ft_set_fd_out(&process, task[count].outs);
-		if (!ft_check_built(task[count]))//comprobar
+		if (!ft_check_built(task[count], envp))//comprobar
 			process.pid = fork(); //Arreglar! si el comando es un built debe ejecutarlo el padre !No hacer fork
 		if (process.pid == -1)
 			perror("Error fork\n");
