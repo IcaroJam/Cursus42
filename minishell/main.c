@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/16 17:19:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:38:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*g_env;
+char	**g_env;
 
 static void	print_row(char **row)
 {
@@ -42,12 +42,13 @@ static void	print_table(t_parsing *cts)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char		*cmndline;
 	t_parsing	*cts;
 
 	cts = NULL;
+	g_env = envp;
 	while (1)
 	{
 		cmndline = readline("pinche_perro@minishell~ $ ");
