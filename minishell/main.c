@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 19:33:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:44:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,29 @@ static void	print_table(t_parsing *cts)
 	}
 }
 
+static char	*prompter(const int argc, char **argv)
+{
+	char	*ret;
+
+	ret = NULL;
+	if (argc > 1)
+		ret = ft_strjoin(argv[1], "@minishell ~ $ ");
+	if (!ret)
+		ret = "pinche_perro@minishell~ $ ";
+	return (ret);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
+	char		*prompt;
 	char		*cmndline;
 	t_parsing	*cts;
 
 	cts = NULL;
-	// Prompt initialization here;
-	argc = 0;
-	argv = NULL;
-	//
+	prompt = prompter(argc, argv);
 	while (1)
 	{
-		cmndline = readline("pinche_perro@minishell~ $ ");
+		cmndline = readline(prompt);
 		// Handle signals here.
 		if (cmndline[0])
 		{
