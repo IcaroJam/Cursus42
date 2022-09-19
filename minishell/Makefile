@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/19 11:46:57 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/19 12:36:24 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ VPATH	= ./:./parser/:./builtins/ #<<your directories here (separated by :)>>
 
 SHRDSRC	= main.c
 PARSSRC	= $(addprefix ./parser/, parsingutils.c parsermain.c lexingutils.c lexer.c expansion_utils.c copy_utils.c)
-BLTNSRC	= $(addprefix ./builtins/, )
+BLTNSRC	= $(addprefix ./builtins/, echo.c pwd.c)
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC) $(PARSSRC) $(BLTNSRC)
 
