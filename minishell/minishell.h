@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 15:29:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:31:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void		free_tables(t_parsing *cts);
 
 int			ms_echo(t_parsing cts);
 int			ms_pwd(void);
+int			ms_env(char **env);
 
 #endif

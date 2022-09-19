@@ -6,13 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 12:38:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:33:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**g_env;
 
 static void	print_row(char **row)
 {
@@ -48,7 +46,10 @@ int	main(int argc, char **argv, char **envp)
 	t_parsing	*cts;
 
 	cts = NULL;
-	g_env = envp;
+	// Prompt initialization here;
+	argc = 0;
+	argv = NULL;
+	//
 	while (1)
 	{
 		cmndline = readline("pinche_perro@minishell~ $ ");
@@ -61,6 +62,8 @@ int	main(int argc, char **argv, char **envp)
 			cts = parse_line(cmndline);
 			if (cts)
 				print_table(cts);
+			if (!ft_strncmp(cmndline, "env", 4))
+				ms_env(envp);
 			// What if cts == NULL?
 			// Free cts when finished with it AND when exiting.
 		}
