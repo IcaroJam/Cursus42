@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/16 12:20:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/20 11:26:01 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	expand_quotes(t_parsing *cts)
 
 	while (!cts->islast)
 	{
-		i = 1;
+		i = 0;
 		while (cts[0].cmndtable[i])
 		{
 			// Find tokens with expansible shit.
