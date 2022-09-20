@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 11:27:29 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:52:21 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int argc, char **argv, char **envp)
 			// Free cts when finished with it AND when exiting.
 		}
 		// Before executing command, check wether it is builtin or not.
+		ft_check_cmds(cts, envp);// mirar si cabe en el executor para limpiar algo el main
 		ft_executor(cts, envp);
 		free(cmndline);
 	}
