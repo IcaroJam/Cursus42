@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 13:11:58 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:25:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,15 @@ int	expand_quotes(t_parsing *cts)
 	return (0);
 }
 
-int	stff_aid(char **chain, const char **tkns, int *i, int *qtty)
+int	stff_aid(char **chain, const char **tkns, int *qtty)
 {
 	int	len;
 
-	if (!ft_strncmp(tkns[*i], "<<", 3))
-	{
-		chain[*qtty] = ft_strdup("HEREDOC");
-		if (!chain[*qtty])
-			return (1);
-	}
-	else
-	{
-		if (tkns[*i][0] == '<' || tkns[*i][0] == '>')
-			(*i)++;
-		len = ft_strlen(tkns[*i]) + 1;
-		chain[*qtty] = ft_calloc(len, sizeof(char));
-		if (!chain[*qtty])
-			return (1);
-		ft_strlcpy(chain[*qtty], tkns[*i], len);
-	}
+	len = ft_strlen(*tkns) + 1;
+	chain[*qtty] = ft_calloc(len, sizeof(char));
+	if (!chain[*qtty])
+		return (1);
+	ft_strlcpy(chain[*qtty], *tkns, len);
 	(*qtty)++;
 	return (0);
 }
@@ -80,7 +69,6 @@ void	ioflager(t_parsing *cts, const char **tokenarr)
 	cm = 0;
 	in = 0;
 	ou = 0;
-	printf("SEG?\n");
 	while (*tokenarr)
 	{
 		if (**tokenarr == '|')
@@ -99,7 +87,6 @@ void	ioflager(t_parsing *cts, const char **tokenarr)
 		}
 		tokenarr++;
 	}
-	printf("SEG??\n");
 }
 
 void	set_tablelast(t_parsing *cts, const int i)

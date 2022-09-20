@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:09:55 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 12:34:58 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:24:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		check_redirerr(const char **tkns);
 
 // Utilities for the parsing stage:
 void	set_tablelast(t_parsing *cts, const int i);
-int		stff_aid(char **chain, const char **tkns, int *i, int *qtty);
+int		stff_aid(char **chain, const char **tkns, int *qtty);
 void	ioflager(t_parsing *cts, const char **tokenarr);
 int		need_expansion(const char *str);
 int		get_varlen(const char *str);
