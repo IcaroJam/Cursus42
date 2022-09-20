@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/19 13:00:46 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:22:33 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,8 @@ void	ft_exit(t_task *task) //Arreglar para todo lo que tengamos que liberar
 	exit(0);
 }*/
 
-int	ft_check_built(t_parsing task, char **env)
+void ft_builtins(t_parsing task, char **env)
 {
-	int	built;
-
-	ft_putstr_fd("checking built\n", 1);
-	built = 1;
 	if (!ft_strncmp(task.cmndtable[0], "echo", 5))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing echo: \n", 1);
@@ -142,7 +138,7 @@ int	ft_check_built(t_parsing task, char **env)
 		ft_putstr_fd("Doing export: \n", 1);
 		ft_export(task, env);
 	}
-	else if (!ft_strncmp(task.cmndtable[0], "unset", 5))// no se si vendran con ruta
+	else if (!ft_strncmp(task.cmndtable[0], "unset", 6))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing unset: \n", 1);
 		ft_unset(task, env);
@@ -155,6 +151,33 @@ int	ft_check_built(t_parsing task, char **env)
 	else if (!ft_strncmp(task.cmndtable[0], "exit", 5))// no se si vendran con ruta
 		//ft_exit(task); //tenemos que pasarle todo lo que haya que liberar
 		;
+}
+
+
+int	ft_check_built(t_parsing task, char **env, t_process process)
+{
+	int	built;
+	int tmp_stdin;
+	int tmp_stdout;
+
+	ft_putstr_fd("checking built\n", 1);
+	built = 1;
+	if (!ft_strncmp(task.cmndtable[0], "echo", 5) || !ft_strncmp(task.cmndtable[0], "cd", 3)
+			|| !ft_strncmp(task.cmndtable[0], "pwd", 4) || !ft_strncmp(task.cmndtable[0], "export", 7)
+			|| !ft_strncmp(task.cmndtable[0], "unset", 6) || !ft_strncmp(task.cmndtable[0], "env", 4)
+			|| !ft_strncmp(task.cmndtable[0], "exit", 5))
+	{
+		ft_putstr_fd("built command\n", 1);
+		tmp_stdin = dup(0);
+		tmp_stdout = dup(1);
+		dup2(process.fd_in, 0);
+		dup2(process.fd_out, 1);
+		close(process.fd_in);
+		close(process.fd_out);
+		ft_builtins(task, env);
+		dup2(tmp_stdin, 0);
+		dup2(tmp_stdout, 1);
+	}
 	else
 		built = 0;
 	return (built);

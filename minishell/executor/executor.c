@@ -6,14 +6,12 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/19 14:02:03 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:01:56 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//de todas las entradas tiene que quedarse con la ultima
-//pero si una entrada no existe tiene que terminar la ejecucion y sacar error
 void	ft_set_fd_in(t_process *process, char **ins)
 {
 	int	count;
@@ -108,13 +106,13 @@ void	ft_executor(t_parsing *task, char **envp)
 			process.fd_in = dup(0);
 		else
 			ft_set_fd_in(&process, task[count].ins);
-		// si hay entrada que no existe sacar error y no ejecutar lo demas 
+		// si hay entrada que no existe sacar error y no ejecutar lo demas
 		if (!task[count + 1].cmndtable && task[count].outs[0] == NULL)
 			process.fd_out = dup(1);
 		else
 			ft_set_fd_out(&process, task[count].outs);
-		if (!ft_check_built(task[count], envp))//comprobar
-			process.pid = fork(); //Arreglar! si el comando es un built debe ejecutarlo el padre !No hacer fork
+		if (!ft_check_built(task[count], envp, process))
+			process.pid = fork();
 		if (process.pid == -1)
 			perror("Error fork\n");
 		else if (process.pid == 0)
