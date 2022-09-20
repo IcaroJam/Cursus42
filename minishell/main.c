@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/19 19:49:56 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:07:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,20 @@ static void	print_row(char **row)
 
 	i = 0;
 	while (row[i])
-	{
 		printf("\"%s\" ", row[i++]);
-	}
+}
+
+static void	printf_flags(char **strarr, int *row)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (strarr[len])
+		len++;
+	while (i < len)
+		printf("%d ", row[i++]);
 }
 
 static void	print_table(t_parsing *cts)
@@ -34,9 +45,14 @@ static void	print_table(t_parsing *cts)
 		print_row(cts[i].cmndtable);
 		printf("\nIns: ");
 		print_row(cts[i].ins);
+		printf("\nInflags: ");
+		printf_flags(cts[i].ins, cts[i].iflgs);
 		printf("\nOuts: ");
-		print_row(cts[i++].outs);
+		print_row(cts[i].outs);
+		printf("\nOutflags: ");
+		printf_flags(cts[i].outs, cts[i].oflgs);
 		printf("\n");
+		i++;
 	}
 }
 
@@ -51,6 +67,13 @@ static char	*prompter(const int argc, char **argv)
 		ret = "pinche_perro@minishell~ $ ";
 	return (ret);
 }
+
+//
+static void	leakcheck(void)
+{
+	system("leaks minishell");
+}
+//
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -67,12 +90,12 @@ int	main(int argc, char **argv, char **envp)
 		if (cmndline[0])
 		{
 			add_history(cmndline);
-			if (!ft_strncmp(cmndline, "exit", 5))
-				break ;
 			cts = parse_line(cmndline);
-			//
 			if (cts)
 			{
+				if (!ft_strncmp(cmndline, "exit", 5))
+					break ;
+					//	return (ms_exit(cts, cmndline));
 				print_table(cts);
 				if (!ft_strncmp(cmndline, "env", 4))
 					ms_env(envp);
@@ -86,7 +109,10 @@ int	main(int argc, char **argv, char **envp)
 		free(cmndline);
 	}
 	//
-	system("leaks minishell");
+	free(cmndline);
+	free_tables(cts);
+	//
+	atexit(leakcheck);
 	//
 	return (0);
 }

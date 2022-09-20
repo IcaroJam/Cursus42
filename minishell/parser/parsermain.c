@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/14 11:50:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:40:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ static int	stuff_rows(t_parsing *cts, const char **tkns, const int cmndend)
 	{
 		if (tkns[i][0] == '<')
 		{
-			if (stff_aid(cts->ins, &tkns[++i], &qtty[1]))
+			if (stff_aid(cts->ins, tkns, &i, &qtty[1]))
 				return (1);
 		}
 		else if (tkns[i][0] == '>')
 		{
-			if (stff_aid(cts->outs, &tkns[++i], &qtty[2]))
+			if (stff_aid(cts->outs, tkns, &i, &qtty[2]))
 				return (1);
 		}
-		else if (stff_aid(cts->cmndtable, &tkns[i], &qtty[0]))
+		else if (stff_aid(cts->cmndtable, tkns, &i, &qtty[0]))
 			return (1);
 		i++;
 	}
@@ -100,9 +100,11 @@ static int	fill_tables(t_parsing *cts, const int numocmds, const char **tkns)
 		cts[i].cmndtable = ft_calloc(arr[0] + 1, sizeof(char *));
 		cts[i].ins = ft_calloc(arr[1] + 1, sizeof(char *));
 		cts[i].outs = ft_calloc(arr[2] + 1, sizeof(char *));
+		cts[i].iflgs = ft_calloc(arr[1], sizeof(int));
+		cts[i].oflgs = ft_calloc(arr[2], sizeof(int));
 		cts[i].islast = 0;
-		if (!cts[i].cmndtable || !cts[i].ins
-			|| !cts[i].outs || stuff_rows(&cts[i], tkns, j))
+		if (!cts[i].cmndtable || !cts[i].ins || !cts[i].outs
+			|| !cts[i].iflgs || !cts[i].oflgs || stuff_rows(&cts[i], tkns, j))
 		{
 			cts[i + 1].islast = 1;
 			return (1);
@@ -137,6 +139,7 @@ t_parsing	*parse_line(char *line)
 	}
 	else
 		perror("Error");
+	ioflager(cts, (const char **)tokenarr);
 	free_cmndline(tokenarr);
 	return (cts);
 }
