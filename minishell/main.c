@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 13:07:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:01:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int	main(int argc, char **argv, char **envp)
 	//
 	free(cmndline);
 	free_tables(cts);
-	//
 	atexit(leakcheck);
 	//
 	return (0);
