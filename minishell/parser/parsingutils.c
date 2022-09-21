@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 12:52:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:58:15 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,4 @@ void	set_tablelast(t_parsing *cts, const int i)
 	cts[i].ins = NULL;
 	cts[i].outs = NULL;
 	cts[i].islast = 1;
-}
-
-void	free_tables(t_parsing *cts)
-{
-	int	i;
-
-	i = 0;
-	if (!cts)
-		return ;
-	while (!cts[i].islast)
-	{
-		free_cmndline(cts[i].cmndtable);
-		free_cmndline(cts[i].ins);
-		free_cmndline(cts[i].outs);
-		free(cts[i].iflgs);
-		free(cts[i].oflgs);
-		i++;
-	}
-	free(cts);
 }
