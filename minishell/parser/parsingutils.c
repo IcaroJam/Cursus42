@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 13:58:15 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 16:07:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,15 @@ int	expand_quotes(t_parsing *cts)
 		i = 0;
 		while (cts[0].cmndtable[i])
 		{
-			// Find tokens with expansible shit.
 			if (need_expansion(cts[0].cmndtable[i]))
 			{
-			// Get the len of the tokens once expanded. (Wildcards should also
-			// be considered in here).
-			tokenlen = get_tknlen(cts[0].cmndtable[i]);
-			// Allocate space for them.
-			temp = ft_calloc(tokenlen, sizeof(char));
-			if (!temp)
-				return (1);
-			tokencpy(cts[0].cmndtable[i], tokenlen, temp);
-			free(cts[0].cmndtable[i]);
-			cts[0].cmndtable[i] = temp;
-			// Do the expansion.
-			// Expand $ UNLESS it is inside single quotes.
-			// A single $ will always print $.
+				tokenlen = get_tknlen(cts[0].cmndtable[i]);
+				temp = ft_calloc(tokenlen + 1, sizeof(char));
+				if (!temp)
+					return (1);
+				tokencpy(cts[0].cmndtable[i], tokenlen, temp);
+				free(cts[0].cmndtable[i]);
+				cts[0].cmndtable[i] = temp;
 			}
 			i++;
 		}

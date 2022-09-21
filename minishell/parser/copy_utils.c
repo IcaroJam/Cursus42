@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:53:19 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 15:26:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 16:17:50 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	dollarcpy(char **ogline, char *nuline, int *i)
 	char	tmpchr;
 	int		tmppos;
 
-	// Left to implement $?
 	(*ogline)++;
 	tmppos = get_varlen(*ogline);
 	if (!tmppos)
