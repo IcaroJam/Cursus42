@@ -6,13 +6,59 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/20 10:01:56 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:24:24 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_set_fd_in(t_process *process, char **ins)
+//Nestor heredoc
+/*
+void static	dochere(t_piper *piper)
+{
+	char	temp[4096];
+	int		readflag;
+
+	readflag = 1;
+	while (readflag)
+	{
+		write(1, "pipex heredoc> ", 15);
+		readflag = read(0, temp, 4096);
+		if (!ft_strncmp(piper->herelim, temp, ft_strlen(piper->herelim))
+			&& temp[ft_strlen(piper->herelim)] == '\n')
+			break ;
+		write(piper->infd, temp, readflag);
+	}
+	close(piper->infd);
+	piper->infd = open("here_doc.tmp", O_RDONLY);
+	if (piper->infd < 0)
+		errxit("Failed to reopen tempfile.");
+}
+*/
+
+void static	dochere(t_process *process, char *limit)
+{
+	char	temp[4096];
+	int		readflag;
+
+	process->fd_in = open("here_doc.tmp", O_CREAT | O_WRONLY | O_APPEND, 0644);
+	readflag = 1;
+	while (readflag)
+	{
+		ft_putstr_fd("minishell heredoc >" , 1);
+		readflag = read(0, temp, 4096);
+		if (!ft_strncmp(limit, temp, ft_strlen(limit))
+			&& temp[ft_strlen(limit)] == '\n')
+			break ;
+		write(process->fd_in, temp, readflag);
+	}
+	close(process->fd_in);
+	process->fd_in = open("here_doc.tmp", O_RDONLY);
+	if (process->fd_in < 0)
+		perror("Error: ");
+}
+
+void	ft_set_fd_in(t_process *process, char **ins, int *iflgs)
 {
 	int	count;
 
@@ -34,7 +80,10 @@ void	ft_set_fd_in(t_process *process, char **ins)
 	{
 		while (ins[++count])
 		{
-			process->fd_in = open(ins[count], O_RDONLY);
+			if (iflgs[count])
+				dochere(process, ins[count]);
+			else
+				process->fd_in = open(ins[count], O_RDONLY);
 			if (process->fd_in == -1)
 			{
 				process->error = 1;
@@ -105,7 +154,7 @@ void	ft_executor(t_parsing *task, char **envp)
 		if (count == 0 && task[count].ins[0] == NULL)
 			process.fd_in = dup(0);
 		else
-			ft_set_fd_in(&process, task[count].ins);
+			ft_set_fd_in(&process, task[count].ins, task[count].iflgs);
 		// si hay entrada que no existe sacar error y no ejecutar lo demas
 		if (!task[count + 1].cmndtable && task[count].outs[0] == NULL)
 			process.fd_out = dup(1);

@@ -6,11 +6,20 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:14:53 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/06 15:51:19 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:18:02 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void ft_check_memory_error(void *pnt)
+{
+	if (!pnt)
+	{
+		perror("memory error");
+		exit(1);
+	}
+}
 
 int	ft_has_path(char *cmd)
 {
@@ -38,11 +47,13 @@ char static	**ft_fix_path(char *full_path)
 	int		count;
 
 	path = ft_split(full_path, ':');
+	ft_check_memory_error(path);
 	count = -1;
 	while (path[++count])
 	{
 		temp = path[count];
 		path[count] = ft_strjoin(path[count], "/");
+		ft_check_memory_error(path[count]);
 		free(temp);
 	}
 	return (path);

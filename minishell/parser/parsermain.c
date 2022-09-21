@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/14 11:50:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:26:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,11 @@ static int	fill_tables(t_parsing *cts, const int numocmds, const char **tkns)
 		cts[i].cmndtable = ft_calloc(arr[0] + 1, sizeof(char *));
 		cts[i].ins = ft_calloc(arr[1] + 1, sizeof(char *));
 		cts[i].outs = ft_calloc(arr[2] + 1, sizeof(char *));
+		cts[i].iflgs = ft_calloc(arr[1], sizeof(int));
+		cts[i].oflgs = ft_calloc(arr[2], sizeof(int));
 		cts[i].islast = 0;
-		if (!cts[i].cmndtable || !cts[i].ins
-			|| !cts[i].outs || stuff_rows(&cts[i], tkns, j))
+		if (!cts[i].cmndtable || !cts[i].ins || !cts[i].outs
+			|| !cts[i].iflgs || !cts[i].oflgs || stuff_rows(&cts[i], tkns, j))
 		{
 			cts[i + 1].islast = 1;
 			return (1);
@@ -137,6 +139,7 @@ t_parsing	*parse_line(char *line)
 	}
 	else
 		perror("Error");
+	ioflager(cts, (const char **)tokenarr);
 	free_cmndline(tokenarr);
 	return (cts);
 }

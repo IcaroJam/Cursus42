@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/20 12:34:21 by phijano-         ###   ########.fr        #
+#    Updated: 2022/09/21 10:15:08 by phijano-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,20 +29,20 @@ VPATH	= ./:./parser/:./executor/:./signals:./builtins #<<your directories here (
 SHRDSRC	= main.c
 PARSSRC	= $(addprefix ./parser/, parsingutils.c parsermain.c lexingutils.c lexer.c expansion_utils.c copy_utils.c)
 EXECSRC	= $(addprefix ./executor/, executor.c check_cmds.c execute.c path.c exit_status.c)
-BUILSRC	= $(addprefix ./builtins/, builtins.c)
+BLTNSRC	= $(addprefix ./builtins/, builtins.c, echo.c pwd.c environ.c)
 SIGNSRC	= $(addprefix ./signals/, signals.c)
 
 #------------------------------------------------------------------------------#
-SRCS	= $(SHRDSRC) $(PARSSRC) $(EXECSRC) $(BUILSRC) $(SIGNSRC)
+SRCS	= $(SHRDSRC) $(PARSSRC) $(EXECSRC) $(BLTNSRC) $(SIGNSRC)
 
 SHRDOBJ	= $(SHRDSRC:.c=.o)
 PARSOBJ	= $(addsuffix .o, $(notdir $(basename $(PARSSRC))))
 EXECOBJ	= $(addsuffix .o, $(notdir $(basename $(EXECSRC))))
-BUILOBJ	= $(addsuffix .o, $(notdir $(basename $(BUILSRC))))
+BLTNOBJ	= $(addsuffix .o, $(notdir $(basename $(BLTNSRC))))
 SIGNOBJ	= $(addsuffix .o, $(notdir $(basename $(SIGNSRC))))
 
 #------------------------------------------------------------------------------#
-OBJS	= $(SHRDOBJ) $(PARSOBJ) $(EXECOBJ) $(BUILOBJ) $(SIGNOBJ)
+OBJS	= $(SHRDOBJ) $(PARSOBJ) $(EXECOBJ) $(BLTNOBJ) $(SIGNOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #

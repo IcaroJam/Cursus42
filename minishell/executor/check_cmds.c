@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:48:09 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/20 12:38:36 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:30:52 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_check_cmd(char **path, char *cmd)
 		ft_arg_error(cmd, 1);
 }
 
-int	ft_check_files(char **files, int ins_outs)
+int	ft_check_files(char **files, int ins_outs, int *iflgs)
 {
 	int	f1;
 	int	count;
@@ -53,7 +53,10 @@ int	ft_check_files(char **files, int ins_outs)
 	while (files[++count])
 	{
 		if (ins_outs == 0)
-			f1 = open(files[count], O_RDONLY);
+		{
+			if (!iflgs[count])
+				f1 = open(files[count], O_RDONLY);
+		}
 		else
 			f1 = open(files[count], O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (f1 < 0)
@@ -75,9 +78,9 @@ void	ft_check_cmds(t_parsing *task, char **envp)
 	count = -1;
 	while (task[++count].cmndtable)
 	{
-		if (!ft_check_files(task[count].ins, 0))
+		if (!ft_check_files(task[count].ins, 0, task[count].iflgs))
 		{
-			if (!ft_check_files(task[count].outs, 1))
+			if (!ft_check_files(task[count].outs, 1, task[count].oflgs))
 			{
 				path = ft_get_path(envp);
 				ft_check_cmd(path, task[count].cmndtable[0]);

@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/20 10:22:33 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:27:56 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,13 @@ void	ft_exit(t_task *task) //Arreglar para todo lo que tengamos que liberar
 	exit(0);
 }*/
 
+//void ft_builtins(t_parsing task, char **env, t_parsing *cts, char *cmndline)
 void ft_builtins(t_parsing task, char **env)
 {
 	if (!ft_strncmp(task.cmndtable[0], "echo", 5))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing echo: \n", 1);
-		ft_echo(task);
+		ms_echo(task);
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "cd", 3))// no se si vendran con ruta
 	{
@@ -131,7 +132,7 @@ void ft_builtins(t_parsing task, char **env)
 	else if (!ft_strncmp(task.cmndtable[0], "pwd", 4))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing pwd: \n", 1);
-		ft_pwd();
+		ms_pwd();
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "export", 7))// no se si vendran con ruta
 	{
@@ -146,11 +147,11 @@ void ft_builtins(t_parsing task, char **env)
 	else if (!ft_strncmp(task.cmndtable[0], "env", 4))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing env: \n", 1);
-		ft_env(env);
+		ms_env(env);
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "exit", 5))// no se si vendran con ruta
-		//ft_exit(task); //tenemos que pasarle todo lo que haya que liberar
-		;
+		//ms_exit(cts, cmndline);
+		; //me van a sobrar argumentos en funciones para pasarle todo arreglar funciones
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:39:24 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/20 11:47:13 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:08:46 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int static	ft_path_cmd(char **cmd, char **envp)
 	if (access(cmd[0], F_OK) != -1)
 	{
 		cmd_exist = 1;
-		ft_putstr_fd(cmd[0], 1);
 		if (access(cmd[0], X_OK) == -1)
 			exit(0);
 		else if (execve(cmd[0], cmd, envp) == -1)
@@ -40,6 +39,11 @@ void static	ft_do_cmd(char **path, char **cmd, char **envp)
 	while (path[++count])
 	{
 		path_cmd = ft_strjoin(path[count], cmd[0]);
+		if (!path_cmd)
+		{
+			perror("memory error");
+			exit(1);
+		}
 		if (access(path_cmd, F_OK) != -1)
 		{
 			cmd_exist = 1;

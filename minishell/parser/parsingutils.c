@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 11:26:01 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:25:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,35 @@ int	stff_aid(char **chain, const char **tkns, int *qtty)
 	return (0);
 }
 
+void	ioflager(t_parsing *cts, const char **tokenarr)
+{
+	int	cm;
+	int	in;
+	int	ou;
+
+	cm = 0;
+	in = 0;
+	ou = 0;
+	while (*tokenarr)
+	{
+		if (**tokenarr == '|')
+			cm++;
+		else if (tokenarr[0][0] == '<')
+		{
+			if (tokenarr[0][1] == '<')
+				cts[cm].iflgs[in] = 1;
+			in++;
+		}
+		else if (tokenarr[0][0] == '>')
+		{
+			if (tokenarr[0][1] == '>')
+				cts[cm].oflgs[ou] = 1;
+			ou++;
+		}
+		tokenarr++;
+	}
+}
+
 void	set_tablelast(t_parsing *cts, const int i)
 {
 	cts[i].cmndtable = NULL;
@@ -80,6 +109,8 @@ void	free_tables(t_parsing *cts)
 		free_cmndline(cts[i].cmndtable);
 		free_cmndline(cts[i].ins);
 		free_cmndline(cts[i].outs);
+		free(cts[i].iflgs);
+		free(cts[i].oflgs);
 		i++;
 	}
 	free(cts);
