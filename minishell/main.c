@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 15:40:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:55:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*prompter(const int argc, char **argv)
 	if (argc > 1)
 		ret = ft_strjoin(argv[1], "@minishell ~ $ ");
 	if (!ret)
-		ret = "pinche_perro@minishell~ $ ";
+		ret = ft_strdup("pinche_perro@minishell~ $ ");
 	return (ret);
 }
 
@@ -112,6 +112,11 @@ int	main(int argc, char **argv, char **envp)
 
 	cts = NULL;
 	prompt = prompter(argc, argv);
+	if (!prompt)
+	{
+		ft_putendl_fd("Error while initializing prompt.\n", 2);
+		return (1);
+	}
 	g_env = enviromentor(envp);
 	if (!g_env)
 	{
@@ -148,6 +153,7 @@ int	main(int argc, char **argv, char **envp)
 		free(cmndline);
 	}
 	//
+	free(prompt);
 	free(cmndline);
 	free_cmndline(g_env);
 	free_tables(cts);

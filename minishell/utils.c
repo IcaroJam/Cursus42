@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:55:53 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 15:41:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:50:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ extern char	**g_env;
 char	*ms_getenv(const char *name)
 {
 	int	len;
+	int	i;
 
 	len = ft_strlen(name);
-	while (*g_env)
+	i = 0;
+	while (g_env[i])
 	{
-		if (!ft_strncmp(*g_env, name, len) && g_env[0][len] == '=')
-			return (&g_env[0][len + 1]);
-		g_env++;
+		if (!ft_strncmp(g_env[i], name, len) && g_env[i][len] == '=')
+			return (&g_env[i][len + 1]);
+		i++;
 	}
 	return (NULL);
 }
