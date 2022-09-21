@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:53:19 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/16 12:51:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:26:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	dollarcpy(char **ogline, char *nuline, int *i)
 	}
 	tmpchr = ogline[0][tmppos];
 	ogline[0][tmppos] = 0;
-	expanval = getenv(*ogline);
+	expanval = ms_getenv(*ogline);
 	*ogline = &ogline[0][tmppos];
 	**ogline = tmpchr;
 	tmppos = ft_strlen(expanval);

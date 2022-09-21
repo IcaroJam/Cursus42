@@ -6,11 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 11:54:25 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:40:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**g_env;
 
 //
 static void	print_row(char **row)
@@ -110,8 +112,8 @@ int	main(int argc, char **argv, char **envp)
 
 	cts = NULL;
 	prompt = prompter(argc, argv);
-	envp = enviromentor(envp);
-	if (!envp)
+	g_env = enviromentor(envp);
+	if (!g_env)
 	{
 		ft_putendl_fd("Error while initializing environment variable.\n", 2);
 		return (1);
@@ -131,11 +133,11 @@ int	main(int argc, char **argv, char **envp)
 					//	return (ms_exit(cts, cmndline));
 				print_table(cts);
 				if (!ft_strncmp(cmndline, "env", 4))
-					ms_env(envp);
+					ms_env(g_env);
 				if (!ft_strncmp(cts->cmndtable[0], "unset", 6))
-					ms_unset((const char **)cts->cmndtable, envp);
+					ms_unset((const char **)cts->cmndtable, g_env);
 				if (!ft_strncmp(cts->cmndtable[0], "export", 7))
-					envadd(cts->cmndtable[1], envp);
+					ms_export(cts->cmndtable[1], g_env);
 				//
 				free_tables(cts);
 				// What if cts == NULL?
@@ -147,7 +149,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	//
 	free(cmndline);
-	free_cmndline(envp);
+	free_cmndline(g_env);
 	free_tables(cts);
 	atexit(leakcheck);
 	//

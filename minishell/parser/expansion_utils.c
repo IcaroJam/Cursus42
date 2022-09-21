@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:49:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/16 12:52:23 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:26:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	expand_dollar(const char *str, int *i)
 	ret = get_varlen(&str[*i + 1]);
 	var = ft_substr(&str[*i], 1, ret);
 	*i += ret;
-	ret = ft_strlen(getenv(var));
+	ret = ft_strlen(ms_getenv(var));
 	free(var);
 	if (ret > -1)
 		return (ret);
