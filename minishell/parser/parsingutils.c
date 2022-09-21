@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 13:25:25 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:52:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	stff_aid(char **chain, const char **tkns, int *qtty)
 
 void	ioflager(t_parsing *cts, const char **tokenarr)
 {
-	int	cm;
+    int	cm;
 	int	in;
 	int	ou;
 
@@ -72,7 +72,11 @@ void	ioflager(t_parsing *cts, const char **tokenarr)
 	while (*tokenarr)
 	{
 		if (**tokenarr == '|')
+		{
 			cm++;
+			in = 0;
+			ou = 0;
+		}
 		else if (tokenarr[0][0] == '<')
 		{
 			if (tokenarr[0][1] == '<')
