@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 10:35:18 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:10:19 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,31 @@ static char	*prompter(const int argc, char **argv)
 	return (ret);
 }
 
+static char	**enviromentor(char **ogenv)
+{
+	char	**env;
+	int		i;
+
+	i = 0;
+	while (ogenv[i])
+		i++;
+	env = ft_calloc(i + 2, sizeof(char *));
+	if (!env)
+		return (NULL);
+	i = 0;
+	while (ogenv[i + 1])
+	{
+		env[i] = ft_strdup(ogenv[i]);
+		if (!env[i++])
+			return (free_cmndline(env));
+	}
+	env[i++] = ft_strdup("?=0");
+	env[i] = ft_strdup(ogenv[i - 1]);
+	if (!env[i] || !env[i - 1])
+		return (free_cmndline(env));
+	return (env);
+}
+
 //
 static void	leakcheck(void)
 {
@@ -89,6 +114,12 @@ int	main(int argc, char **argv, char **envp)
 
 	cts = NULL;
 	prompt = prompter(argc, argv);
+	envp = enviromentor(envp);
+	if (!envp)
+	{
+		ft_putendl_fd("Error while initializing environment variable.\n", 2);
+		return (1);
+	}
 	while (1)
 	{
 		cmndline = readline(prompt);
@@ -113,6 +144,7 @@ int	main(int argc, char **argv, char **envp)
 		// Before executing command, check wether it is builtin or not.
 		ft_check_cmds(cts, envp);// mirar si cabe en el executor para limpiar algo el main
 		ft_executor(cts, envp);
+		free_tables(cts);
 		free(cmndline);
 	}
 	//

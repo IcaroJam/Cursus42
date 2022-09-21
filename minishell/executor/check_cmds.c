@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:48:09 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/21 11:30:52 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:13:52 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_check_cmds(t_parsing *task, char **envp)
 			{
 				path = ft_get_path(envp);
 				ft_check_cmd(path, task[count].cmndtable[0]);
-			//	ft_free_split(path); hacer
+				//free_split(path);//hacer
 			}
 		}
 	}

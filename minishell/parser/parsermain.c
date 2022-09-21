@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:47:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 13:26:18 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:52:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,8 @@ static int	get_ncmds(const char **tokenarr)
 	ret = 1;
 	while (*tokenarr)
 	{
-		if (tokenarr[1] && isredir(tokenarr[1][0]))
-		{
-			if (tokenarr[1][0] != '|')
-				tokenarr++;
-			else
-				ret++;
-			tokenarr++;
-		}
+		if (**tokenarr == '|')
+			ret++;
 		tokenarr++;
 	}
 	return (ret);

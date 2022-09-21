@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:09:55 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 13:24:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:47:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int		handle_quotes(const char *line, const char flag);
 int		handle_redir(const char *line);
 int		process_word(const char *line);
 int		isredir(const char c);
-void	free_cmndline(char **cmndline);
 int		check_redirerr(const char **tkns);
 
 // Utilities for the parsing stage:
