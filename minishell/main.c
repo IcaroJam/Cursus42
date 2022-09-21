@@ -6,12 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 17:01:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:54:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//
 static void	print_row(char **row)
 {
 	int	i;
@@ -55,6 +56,7 @@ static void	print_table(t_parsing *cts)
 		i++;
 	}
 }
+//
 
 static char	*prompter(const int argc, char **argv)
 {
@@ -66,6 +68,31 @@ static char	*prompter(const int argc, char **argv)
 	if (!ret)
 		ret = "pinche_perro@minishell~ $ ";
 	return (ret);
+}
+
+static char	**enviromentor(char **ogenv)
+{
+	char	**env;
+	int		i;
+
+	i = 0;
+	while (ogenv[i])
+		i++;
+	env = ft_calloc(i + 2, sizeof(char *));
+	if (!env)
+		return (NULL);
+	i = 0;
+	while (ogenv[i + 1])
+	{
+		env[i] = ft_strdup(ogenv[i]);
+		if (!env[i++])
+			return (free_cmndline(env));
+	}
+	env[i++] = ft_strdup("?=0");
+	env[i] = ft_strdup(ogenv[i - 1]);
+	if (!env[i] || !env[i - 1])
+		return (free_cmndline(env));
+	return (env);
 }
 
 //
@@ -83,6 +110,12 @@ int	main(int argc, char **argv, char **envp)
 
 	cts = NULL;
 	prompt = prompter(argc, argv);
+	envp = enviromentor(envp);
+	if (!envp)
+	{
+		ft_putendl_fd("Error while initializing environment variable.\n", 2);
+		return (1);
+	}
 	while (1)
 	{
 		cmndline = readline(prompt);
@@ -99,6 +132,10 @@ int	main(int argc, char **argv, char **envp)
 				print_table(cts);
 				if (!ft_strncmp(cmndline, "env", 4))
 					ms_env(envp);
+				if (!ft_strncmp(cts->cmndtable[0], "unset", 6))
+					ms_unset((const char **)cts->cmndtable, envp);
+				if (!ft_strncmp(cts->cmndtable[0], "export", 7))
+					envadd(cts->cmndtable[1], envp);
 				//
 				free_tables(cts);
 				// What if cts == NULL?
@@ -110,6 +147,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	//
 	free(cmndline);
+	free_cmndline(envp);
 	free_tables(cts);
 	atexit(leakcheck);
 	//

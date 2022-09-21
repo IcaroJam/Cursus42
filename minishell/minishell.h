@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/20 11:43:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:47:15 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@ typedef struct s_parsing
 
 t_parsing	*parse_line(char *line);
 char		**tokenize_line(char *line);
+void		*free_cmndline(char **cmndline);
 void		free_tables(t_parsing *cts);
 
 // Builtins.
 
 int			ms_echo(t_parsing cts);
 int			ms_pwd(void);
+int			envadd(const char *var, char **env);
+int			ms_unset(const char **vars, char **env);
 int			ms_env(char **env);
 int			ms_exit(t_parsing *cts, char *cmndline);
 
