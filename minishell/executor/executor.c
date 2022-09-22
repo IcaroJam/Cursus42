@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/21 15:09:37 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/22 11:13:17 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_set_fd_in(t_process *process, char **ins, int *iflgs)
 			close(process->in_fd_pipex[1]);
 		}
 		process->in_fd_pipex[0] = process->out_fd_pipex[0];
-		process->in_fd_pipex[1] = process->out_fd_pipex[0];
+		process->in_fd_pipex[1] = process->out_fd_pipex[1];
 		process->fd_in = process->in_fd_pipex[0];
 	}
 	process->error = 0;
@@ -165,12 +165,22 @@ void	ft_executor(t_parsing *task, char **envp)
 	while (task[++count].cmndtable)
 	{
 		if (count == 0 && task[count].ins[0] == NULL)
+		{
 			process.fd_in = dup(0);
+			ft_putstr_fd("fd_stdin_dup: ", 1);
+			ft_putnbr_fd(process.fd_in, 1);
+			ft_putstr_fd("\n", 1);
+		}	
 		else
 			ft_set_fd_in(&process, task[count].ins, task[count].iflgs);
 		// si hay entrada que no existe sacar error y no ejecutar lo demas
 		if (!task[count + 1].cmndtable && task[count].outs[0] == NULL)
+		{
 			process.fd_out = dup(1);
+			ft_putstr_fd("fd_stdout_dup: ", 1);
+			ft_putnbr_fd(process.fd_out, 1);
+			ft_putstr_fd("\n", 1);
+		}
 		else
 			ft_set_fd_out(&process, task[count].outs, task[count].oflgs);
 		if (!ft_check_built(task[count], envp, process))
@@ -178,7 +188,7 @@ void	ft_executor(t_parsing *task, char **envp)
 		if (process.pid == -1)
 			perror("Error fork\n");
 		else if (process.pid == 0)
-			ft_execute(&process, task[count].cmndtable, envp);
+			ft_execute(process, task[count].cmndtable, envp);
 	}
 	close(process.in_fd_pipex[0]);
 	close(process.in_fd_pipex[1]);

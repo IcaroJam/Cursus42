@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/22 10:15:19 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/22 10:55:04 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char		**ft_get_path(char **envp);
 void		ft_check_cmds(t_parsing *task, char **envp);
 void		ft_executor(t_parsing *task, char **envp);
 int			ft_check_built(t_parsing task, char **envp, t_process process);
-void		ft_execute(t_process *process, char **cmd, char **envp);
+void		ft_execute(t_process process, char **cmd, char **envp);
 int			ft_exit_status(int status);
 int			ft_exit_code(int status);
 #endif

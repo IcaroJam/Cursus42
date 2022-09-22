@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:39:24 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/21 13:37:06 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/22 11:29:10 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,52 @@ void static	ft_do_cmd(char **path, char **cmd, char **envp)
 		exit(127);
 }
 
-void	ft_execute(t_process *process, char **cmd, char **envp)
+void	ft_execute(t_process process, char **cmd, char **envp)
 {
 	char	**path;
 
-	if (process->in_fd_pipex[1] > 0)
-		close(process->in_fd_pipex[1]);
-	if (process->out_fd_pipex[0] > 0)
-		close(process->out_fd_pipex[0]);
-	dup2(process->fd_in, 0);
-	close(process->fd_in);
-	dup2(process->fd_out, 1);
-	close(process->fd_out);
+	ft_putstr_fd("fd_in: ", 1);//
+	ft_putnbr_fd(process.fd_in, 1);//
+	ft_putstr_fd("\n", 1);//
+	ft_putstr_fd("fd_out: ", 1);//
+	ft_putnbr_fd(process.fd_out, 1);//
+	ft_putstr_fd("\n", 1);//
+	ft_putstr_fd("fd_pipex_in_0: ", 1);//
+	ft_putnbr_fd(process.in_fd_pipex[0], 1);//
+	ft_putstr_fd("\n", 1);//
+	ft_putstr_fd("fd_pipex_in_1: ", 1);//
+	ft_putnbr_fd(process.in_fd_pipex[1], 1);//
+	ft_putstr_fd("\n", 1);//
+	ft_putstr_fd("fd_pipex_out_0: ", 1);//
+	ft_putnbr_fd(process.out_fd_pipex[0], 1);//
+	ft_putstr_fd("\n", 1);//
+	ft_putstr_fd("fd_pipex_out_1: ", 1);//
+	ft_putnbr_fd(process.out_fd_pipex[1], 1);//
+	ft_putstr_fd("\n", 1);//
+	if (process.in_fd_pipex[1] > 0)
+	{
+		close(process.in_fd_pipex[1]);
+		ft_putstr_fd("closed: ", 1);//
+		ft_putnbr_fd(process.in_fd_pipex[1], 1);//
+		ft_putstr_fd("\n", 1);//
+	}
+	if (process.out_fd_pipex[0] > 0 && process.out_fd_pipex[0] != process.fd_in )
+	{
+		close(process.out_fd_pipex[0]);
+		ft_putstr_fd("closed: ", 1);//
+		ft_putnbr_fd(process.out_fd_pipex[0], 1);//
+		ft_putstr_fd("\n", 1);//
+	}
+	ft_putstr_fd("closed after dup2: ", 1);//
+	ft_putnbr_fd(process.fd_in, 1);//
+	ft_putstr_fd("\n", 1);//
+	ft_putstr_fd("closed after dup2: ", 1);//
+	ft_putnbr_fd(process.fd_out, 1);//
+	ft_putstr_fd("\n", 1);//
+	dup2(process.fd_in, 0);
+	close(process.fd_in);
+	dup2(process.fd_out, 1);
+	close(process.fd_out);
 	path = ft_get_path(envp);
 	ft_do_cmd(path, cmd, envp);
 	free(path);
