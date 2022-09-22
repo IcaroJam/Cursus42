@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 11:57:10 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 11:46:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:57:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,6 @@
 int	isredir(const char c)
 {
 	return (c == '<' || c == '>' || c == '|');
-}
-
-void	*free_cmndline(char **cmndline)
-{
-	int	i;
-
-	i = 0;
-	if (!cmndline)
-		return (NULL);
-	while (cmndline[i])
-		free(cmndline[i++]);
-	free(cmndline);
-	return (NULL);
 }
 
 int	check_redirerr(const char **tkns)

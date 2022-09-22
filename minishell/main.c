@@ -6,12 +6,15 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 13:10:19 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/22 10:24:24 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char	**g_env;
+
+//
 static void	print_row(char **row)
 {
 	int	i;
@@ -114,8 +117,13 @@ int	main(int argc, char **argv, char **envp)
 
 	cts = NULL;
 	prompt = prompter(argc, argv);
-	envp = enviromentor(envp);
-	if (!envp)
+	if (!prompt)
+	{
+		ft_putendl_fd("Error while initializing prompt.\n", 2);
+		return (1);
+	}
+	g_env = enviromentor(envp);
+	if (!g_env)
 	{
 		ft_putendl_fd("Error while initializing environment variable.\n", 2);
 		return (1);
@@ -148,7 +156,9 @@ int	main(int argc, char **argv, char **envp)
 		free(cmndline);
 	}
 	//
+	//free(prompt);
 	free(cmndline);
+	//free_cmndline(g_env);
 	free_tables(cts);
 	atexit(leakcheck);
 	//
