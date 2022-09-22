@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/22 14:02:16 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:05:07 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ void	ft_set_fd_in(t_process *process, char **ins, int *iflgs)
 	{
 		while (ins[++count])
 		{
+			if (count > 0)
+			{
+				close(process->fd_in);
+				ft_putstr_fd("closed fd_in de file father: ", 1);//
+				ft_putnbr_fd(process->fd_in, 1);//
+				ft_putstr_fd("\n", 1);//
+			}
 			if (iflgs[count])
 			{
 				process->here_doc++;
@@ -113,6 +120,13 @@ void	ft_set_fd_out(t_process *process, char **outs, int *oflgs)
 		count = -1;
 		while (outs[++count])
 		{
+			if (count > 0)
+			{
+				close(process->fd_out);
+				ft_putstr_fd("closed fd_out de file father: ", 1);//
+				ft_putnbr_fd(process->fd_out, 1);//
+				ft_putstr_fd("\n", 1);//
+			}
 			if (oflgs[count])
 			{
 				process->fd_out = open(outs[count], O_CREAT | O_WRONLY | O_APPEND, 0644);
