@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/22 11:13:17 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:02:16 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,8 @@ void	ft_set_fd_in(t_process *process, char **ins, int *iflgs)
 	int	count;
 
 	ft_putstr_fd("fd_in start\n", 1);//borrar
-	if (process->out_fd_pipex[0] > 0)
+	if (process->out_fd_pipex[0] >= 0)
 	{
-		if (process->in_fd_pipex[0] > 0)
-		{
-			close(process->in_fd_pipex[0]);
-			close(process->in_fd_pipex[1]);
-		}
 		process->in_fd_pipex[0] = process->out_fd_pipex[0];
 		process->in_fd_pipex[1] = process->out_fd_pipex[1];
 		process->fd_in = process->in_fd_pipex[0];
@@ -101,11 +96,21 @@ void	ft_set_fd_out(t_process *process, char **outs, int *oflgs)
 	int	count;
 
 	ft_putstr_fd("fd_out start\n", 1);//borrar
-	pipe(process->out_fd_pipex);
-	process->fd_out = process->out_fd_pipex[1];
-	count = -1;
+//	if (!outs)
+//	{
+		pipe(process->out_fd_pipex);
+		process->fd_out = process->out_fd_pipex[1];
+		ft_putstr_fd("created pipex: ", 1);//
+		ft_putnbr_fd(process->out_fd_pipex[0], 1);//
+		ft_putstr_fd(" ", 1);//
+		ft_putnbr_fd(process->out_fd_pipex[1], 1);//
+		ft_putstr_fd("\n", 1);//
+
+//	}
+//	else
 	if (outs)
 	{
+		count = -1;
 		while (outs[++count])
 		{
 			if (oflgs[count])
@@ -154,6 +159,57 @@ int	ft_father(int pid)
 	return (error); //averiguar donde ponemos el valor de exit
 }
 
+void ft_close_fds(t_process process)
+{
+	if (process.fd_in >= 0)
+	{
+		close(process.fd_in);
+		ft_putstr_fd("closed fd_in father: ", 1);//
+		ft_putnbr_fd(process.fd_in, 1);//
+		ft_putstr_fd("\n", 1);//
+	}
+	if (process.fd_out >= 0 && process.fd_out) 
+	{
+		close(process.fd_out);
+		ft_putstr_fd("closed fd_out father: ", 1);//
+		ft_putnbr_fd(process.fd_out, 1);//
+		ft_putstr_fd("\n", 1);//
+	}
+	if (process.in_fd_pipex[0] >= 0 && process.in_fd_pipex[0] != process.fd_in)
+	{
+		close(process.in_fd_pipex[0]);
+		ft_putstr_fd("closed fd_in_pipex_0 father: ", 1);//
+		ft_putnbr_fd(process.in_fd_pipex[0], 1);//
+		ft_putstr_fd("\n", 1);//
+	}
+/*
+	if (process.in_fd_pipex[1] >= 0)
+	{
+		close(process.in_fd_pipex[1]);
+		ft_putstr_fd("closed fd_in_pipex_1 father: ", 1);//
+		ft_putnbr_fd(process.in_fd_pipex[1], 1);//
+		ft_putstr_fd("\n", 1);//
+	}
+*/
+
+/*
+	if (process.out_fd_pipex[0] >= 0)
+	{
+		close(process.out_fd_pipex[0]);
+		ft_putstr_fd("closed fd_out_pipex_0 father: ", 1);//
+		ft_putnbr_fd(process.out_fd_pipex[0], 1);//
+		ft_putstr_fd("\n", 1);//
+	}
+*/
+	if (process.out_fd_pipex[1] >= 0 && process.out_fd_pipex[1] != process.fd_out && process.out_fd_pipex[1] != process.in_fd_pipex[1])
+	{
+		close(process.out_fd_pipex[1]);
+		ft_putstr_fd("closed fd_out_pipex_1 father: ", 1);//
+		ft_putnbr_fd(process.out_fd_pipex[1], 1);//
+		ft_putstr_fd("\n", 1);//
+	}
+}
+
 void	ft_executor(t_parsing *task, char **envp)
 {
 	t_process	process;
@@ -167,9 +223,9 @@ void	ft_executor(t_parsing *task, char **envp)
 		if (count == 0 && task[count].ins[0] == NULL)
 		{
 			process.fd_in = dup(0);
-			ft_putstr_fd("fd_stdin_dup: ", 1);
-			ft_putnbr_fd(process.fd_in, 1);
-			ft_putstr_fd("\n", 1);
+			ft_putstr_fd("fd_stdin_dup: ", 1);//
+			ft_putnbr_fd(process.fd_in, 1);//
+			ft_putstr_fd("\n", 1);//
 		}	
 		else
 			ft_set_fd_in(&process, task[count].ins, task[count].iflgs);
@@ -177,9 +233,9 @@ void	ft_executor(t_parsing *task, char **envp)
 		if (!task[count + 1].cmndtable && task[count].outs[0] == NULL)
 		{
 			process.fd_out = dup(1);
-			ft_putstr_fd("fd_stdout_dup: ", 1);
-			ft_putnbr_fd(process.fd_out, 1);
-			ft_putstr_fd("\n", 1);
+			ft_putstr_fd("fd_stdout_dup: ", 1);//
+			ft_putnbr_fd(process.fd_out, 1);//
+			ft_putstr_fd("\n", 1);//
 		}
 		else
 			ft_set_fd_out(&process, task[count].outs, task[count].oflgs);
@@ -189,9 +245,9 @@ void	ft_executor(t_parsing *task, char **envp)
 			perror("Error fork\n");
 		else if (process.pid == 0)
 			ft_execute(process, task[count].cmndtable, envp);
+		else 
+			ft_close_fds(process);
 	}
-	close(process.in_fd_pipex[0]);
-	close(process.in_fd_pipex[1]);
 	ft_father(process.pid);
 	if (process.here_doc > 0)
 	{
