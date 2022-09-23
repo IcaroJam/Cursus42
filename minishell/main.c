@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 15:23:06 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:12:55 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,6 @@ static char	**enviromentor(char **ogenv)
 	return (env);
 }
 
-//
-static void	leakcheck(void)
-{
-	system("leaks minishell");
-}
-//
-
-
 int	main(int argc, char **argv, char **envp)
 {
 	char		*prompt;
@@ -142,8 +134,7 @@ int	main(int argc, char **argv, char **envp)
 			if (cts)
 			{
 				if (!ft_strncmp(cmndline, "exit", 5))
-					break ;
-					//	return (ms_exit(cts, cmndline));
+					return (ms_exit(cts, cmndline, prompt));
 				print_table(cts);
 				// What if cts == NULL?
 				// Free cts when finished with it AND when exiting.
@@ -155,12 +146,5 @@ int	main(int argc, char **argv, char **envp)
 		free_tables(cts);
 		free(cmndline);
 	}
-	//
-	//free(prompt);
-	free(cmndline);
-	free_cmndline(g_env);
-	free_tables(cts);
-	atexit(leakcheck);
-	//
 	return (0);
 }
