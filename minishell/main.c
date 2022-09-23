@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 12:44:34 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:23:06 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**g_env;
+//char	**g_env;
 
 //
 static void	print_row(char **row)

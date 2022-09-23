@@ -6,33 +6,21 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/23 13:31:18 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:52:49 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void ft_export_var(char *var, char **env)
-{
-	(void)var;
-	(void)env;
-}
 
-int	ft_export(t_parsing task, char **env)// si no hay "=" no asigna, si hay mas de uno da igual
+int ft_fake_exit(t_parsing task)
 {
 	int count;
 
 	count = 0;
 	while (task.cmndtable[++count])
-		if (ft_strchr(task.cmndtable[count], '=') && task.cmndtable[count][0] != '=')
-			ft_export_var(task.cmndtable[count], env);
-	return (0);
-}
-
-int	ft_unset(t_parsing task, char **env)
-{
-	(void)task;
-	(void)env;
+		if (count > 1)
+			return (1);
 	return (0);
 }
 
@@ -43,38 +31,19 @@ int ft_builtins(t_parsing task, char **env)
 
 	exit_code = 0;
 	if (!ft_strncmp(task.cmndtable[0], "echo", 5))
-	{
-		ft_putstr_fd("Doing echo: \n", 1);
 		exit_code = ms_echo(task);
-	}
 	else if (!ft_strncmp(task.cmndtable[0], "cd", 3))
-	{
-		ft_putstr_fd("Doing cd: \n", 1);
 		exit_code = ms_cd((const char **)task.cmndtable);
-	}
 	else if (!ft_strncmp(task.cmndtable[0], "pwd", 4))
-	{
-		ft_putstr_fd("Doing pwd: \n", 1);
 		exit_code = ms_pwd();
-	}
 	else if (!ft_strncmp(task.cmndtable[0], "export", 7))
-	{
-		ft_putstr_fd("Doing export: \n", 1);
-		exit_code = ft_export(task, env);
-	}
+		exit_code = ms_export(task.cmndtable[1], &g_env);
 	else if (!ft_strncmp(task.cmndtable[0], "unset", 6))
-	{
-		ft_putstr_fd("Doing unset: \n", 1);
-		exit_code = ft_unset(task, env);
-	}
+		exit_code = ms_unset((const char **)task.cmndtable, g_env);
 	else if (!ft_strncmp(task.cmndtable[0], "env", 4))
-	{
-		ft_putstr_fd("Doing env: \n", 1);
 		exit_code = ms_env(env);
-	}
 	else if (!ft_strncmp(task.cmndtable[0], "exit", 5))
-		//ms_exit(cts, cmndline);
-		; //me van a sobrar argumentos en funciones para pasarle todo arreglar funciones
+		exit_code = ft_fake_exit(task);
 	return (exit_code);
 }
 

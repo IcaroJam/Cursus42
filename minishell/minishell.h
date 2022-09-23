@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 12:40:56 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:58:10 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/ioctl.h>
 
 # define PTH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+
+char	**g_env;
 
 typedef struct s_parsing
 {
@@ -62,7 +64,7 @@ int			ms_cd(const char **cmndarr);
 int			ms_export(const char *var, char ***env);
 int			ms_unset(const char **vars, char **env);
 int			ms_env(char **env);
-int			ms_exit(t_parsing *cts, char *cmndline);
+int			ms_exit(t_parsing *cts, char *cmndline, char *prompt);
 
 void		INT_handler(int sig);
 void		QUIT_handler(int sig);
@@ -75,6 +77,7 @@ char		**ft_get_path(char **envp);
 void		ft_check_cmds(t_parsing *task, char **envp);
 void		ft_executor(t_parsing *task, char **envp);
 int			ft_check_built(t_parsing task, char **envp, t_process *process);
+int			ft_fake_exit(t_parsing task);
 void		ft_execute(t_process process, char **cmd, char **envp);
 int			ft_exit_status(int status);
 int			ft_exit_code(int status);

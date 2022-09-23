@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 16:07:45 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:57:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,16 @@ int	stff_aid(char **chain, const char **tkns, int *qtty)
 	return (0);
 }
 
+static int	valupdate(char cmpval, char c, int *num)
+{
+	if (c == cmpval)
+		*num = 1;
+	return (1);
+}
+
 void	ioflager(t_parsing *cts, const char **tokenarr)
 {
-    int	cm;
+	int	cm;
 	int	in;
 	int	ou;
 
@@ -71,17 +78,9 @@ void	ioflager(t_parsing *cts, const char **tokenarr)
 			ou = 0;
 		}
 		else if (tokenarr[0][0] == '<')
-		{
-			if (tokenarr[0][1] == '<')
-				cts[cm].iflgs[in] = 1;
-			in++;
-		}
+			in += valupdate('<', tokenarr[0][1], &cts[cm].iflgs[in]);
 		else if (tokenarr[0][0] == '>')
-		{
-			if (tokenarr[0][1] == '>')
-				cts[cm].oflgs[ou] = 1;
-			ou++;
-		}
+			ou += valupdate('>', tokenarr[0][1], &cts[cm].oflgs[ou]);
 		tokenarr++;
 	}
 }
