@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 15:58:10 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:44:13 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int			ms_unset(const char **vars, char **env);
 int			ms_env(char **env);
 int			ms_exit(t_parsing *cts, char *cmndline, char *prompt);
 
-void		INT_handler(int sig);
-void		QUIT_handler(int sig);
+void		ft_ctrl_c(int sig);
+void		ft_ctrl_backslash(int sig);
 void		ft_set_fd_in(t_process *process, char **ins, int *iflgs);
 void		ft_set_fd_out(t_process *process, char **outs, int *oflgs);
 void		ft_close_fds(t_process process);

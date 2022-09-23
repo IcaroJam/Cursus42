@@ -6,17 +6,17 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:14:53 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/20 13:18:02 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:58:02 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void ft_check_memory_error(void *pnt)
+void	ft_check_memory_error(void *pnt)
 {
 	if (!pnt)
 	{
-		perror("memory error");
+		perror("Error\n");
 		exit(1);
 	}
 }

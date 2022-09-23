@@ -6,41 +6,22 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 10:26:27 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/13 17:57:42 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:55:14 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//averiguar porque saca el anoying ^C !!
-
-void  INT_handler()//ctrl + C funcion
+void	ft_ctrl_c(int sig)
 {
-/*	unsigned char c;
-	c = 9;
-	write(1, &c, 1);
-	write(1, &c, 1);
-	c = 8;
-	write(1, &c, 1);
-	write(1, &c, 1);
-	write(1, &c, 1);
-	write(1, &c, 1);
-	write(1, &c, 1);
-	c = 127;
-	write(1, &c, 1);
-	write(1, &c, 1);*/
+	(void)sig;
 	ft_putstr_fd("\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
 
-void  QUIT_handler()//ctrl + \ funcion, ni idea de que hacer por ahora
+void	ft_ctrl_backslash(int sig)
 {
-
-	ft_putstr_fd("Ctrl+\\ pulsado\n", 1);
-	//rl_on_new_line();
-	//rl_redisplay();
-	//readline("minishell: ");
-	//exit(0);
+	(void)sig;
 }

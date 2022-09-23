@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:48:09 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/23 15:59:13 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 17:00:52 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	ft_check_cmds(t_parsing *task, char **envp)
 				if (!ft_strncmp(task[count].cmndtable[0], "exit", 5))
 				{
 					if (ft_fake_exit(task[count]))
-						ft_putstr_fd("minishell : exit: too many arguments\n", 1);
+					{
+						ft_putstr_fd("minishell : exit: ", 1);
+						ft_putstr_fd("too many arguments\n", 1);
+					}
 				}
 				else
 					ft_check_cmd(path, task[count].cmndtable[0]);

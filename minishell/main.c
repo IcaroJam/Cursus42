@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 16:12:55 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:45:08 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int	main(int argc, char **argv, char **envp)
 	char		*cmndline;
 	t_parsing	*cts;
 
-	signal(SIGINT, INT_handler);
-	//signal(SIGQUIT, QUIT_handler); para hacer funcion Ctrl + \ ?
+	signal(SIGINT, ft_ctrl_c);
+	//signal(SIGQUIT, ft_ctrl_backslash); para hacer funcion Ctrl + \ ?
 	signal(SIGQUIT, SIG_IGN);//para ignorarlo
 	//signal(SIGQUIT, SIG_DFL);//el manejador por defecto, para que mate el proceso. hara falta para los child?
 
