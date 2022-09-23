@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/22 18:09:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:45:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char		**tokenize_line(char *line);
 
 // Utils.
 char		*ms_getenv(const char *name);
+int			envupdate(char *var, const char *newval);
 void		*free_cmndline(char **cmndline);
 void		free_tables(t_parsing *cts);
 
@@ -43,6 +44,7 @@ void		free_tables(t_parsing *cts);
 
 int			ms_echo(t_parsing cts);
 int			ms_pwd(void);
+int			ms_cd(const char **cmndarr);
 int			ms_export(const char *var, char ***env);
 int			ms_unset(const char **vars, char **env);
 int			ms_env(char **env);

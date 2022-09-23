@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/22 18:11:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:46:32 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,10 @@ int	main(int argc, char **argv, char **envp)
 					ms_unset((const char **)cts->cmndtable, g_env);
 				if (!ft_strncmp(cts->cmndtable[0], "export", 7))
 					ms_export(cts->cmndtable[1], &g_env);
+				if (!ft_strncmp(cmndline, "pwd", 4))
+					ms_pwd();
+				if (!ft_strncmp(cts->cmndtable[0], "cd", 3))
+					ms_cd((const char **)cts->cmndtable);
 				//
 				free_tables(cts);
 				// What if cts == NULL?
