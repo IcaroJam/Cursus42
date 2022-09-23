@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 11:46:32 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:39:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,6 @@ static char	**enviromentor(char **ogenv)
 	return (env);
 }
 
-//
-static void	leakcheck(void)
-{
-	system("leaks minishell");
-}
-//
-
 int	main(int argc, char **argv, char **envp)
 {
 	char		*prompt;
@@ -134,8 +127,7 @@ int	main(int argc, char **argv, char **envp)
 			if (cts)
 			{
 				if (!ft_strncmp(cmndline, "exit", 5))
-					break ;
-					//	return (ms_exit(cts, cmndline));
+					return (ms_exit(cts, cmndline, prompt));
 				print_table(cts);
 				if (!ft_strncmp(cmndline, "env", 4))
 					ms_env(g_env);
@@ -153,15 +145,8 @@ int	main(int argc, char **argv, char **envp)
 				// Free cts when finished with it AND when exiting.
 			}
 		}
-		// Before executing command, check wether it is builtin or not.
+		// Before executing command, check whether it is builtin or not.
 		free(cmndline);
 	}
-	//
-	free(prompt);
-	free(cmndline);
-	free_cmndline(g_env);
-	free_tables(cts);
-	atexit(leakcheck);
-	//
 	return (0);
 }
