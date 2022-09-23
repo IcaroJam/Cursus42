@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:48:09 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/22 10:25:02 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:41:30 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_check_cmd(char **path, char *cmd)
 	int		count;
 	int		exist;
 	char	*path_cmd;
+
 	count = -1;
 	exist = 0;
 	if (access(cmd, F_OK) != -1)
@@ -46,7 +47,7 @@ int	ft_check_files(char **files, int ins_outs, int *iflgs)
 {
 	int	f1;
 	int	count;
-	int error;
+	int	error;
 
 	error = 0;
 	count = -1;
@@ -83,7 +84,8 @@ void	ft_check_cmds(t_parsing *task, char **envp)
 			if (!ft_check_files(task[count].outs, 1, task[count].oflgs))
 			{
 				path = ft_get_path(envp);
-				ft_check_cmd(path, task[count].cmndtable[0]);
+				if (ft_strncmp(task[count].cmndtable[0], "exit", 5))
+					ft_check_cmd(path, task[count].cmndtable[0]);
 				free_cmndline(path);
 			}
 		}

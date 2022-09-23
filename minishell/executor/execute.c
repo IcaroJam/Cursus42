@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:39:24 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/23 11:55:17 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:50:14 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	ft_execute(t_process process, char **cmd, char **envp)
 	dup2(process.fd_out, 1);
 	close(process.fd_out);
 	path = ft_get_path(envp);
+	if (process.fd_in < 0 || process.fd_out < 0)
+		exit(1);
 	ft_do_cmd(path, cmd, envp);
 	free(path);
 }
