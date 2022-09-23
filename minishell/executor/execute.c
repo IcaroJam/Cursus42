@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:39:24 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/22 12:47:38 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:55:17 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ void	ft_execute(t_process process, char **cmd, char **envp)
 	ft_putstr_fd("fd_pipex_out_1: ", 1);//
 	ft_putnbr_fd(process.out_fd_pipex[1], 1);//
 	ft_putstr_fd("\n", 1);//
-	if (process.in_fd_pipex[1] >= 0)
+	if (process.in_fd_pipex[1] >= 0 && process.in_fd_pipex[1] != process.fd_in && process.in_fd_pipex[1] != process.fd_out)
 	{
 		close(process.in_fd_pipex[1]);
 		ft_putstr_fd("closed: ", 1);//
 		ft_putnbr_fd(process.in_fd_pipex[1], 1);//
 		ft_putstr_fd("\n", 1);//
 	}
-	if (process.out_fd_pipex[0] >= 0 && process.out_fd_pipex[0] != process.fd_in )
+	if (process.out_fd_pipex[0] >= 0 && process.out_fd_pipex[0] != process.fd_in && process.out_fd_pipex[0] != process.fd_out)
 	{
 		close(process.out_fd_pipex[0]);
 		ft_putstr_fd("closed: ", 1);//

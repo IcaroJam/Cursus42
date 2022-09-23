@@ -6,148 +6,11 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/22 15:05:07 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 12:41:47 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void static	dochere(t_process *process, char *limit)
-{
-	char	temp[4096];
-	int		readflag;
-	char 	*file_here;//
-	char	*tmp;//
-
-
-	tmp = ft_itoa(process->here_doc);//
-	file_here = ft_strjoin(tmp, "_here_doc.tmp");//
-	free(tmp);//
-	//process->fd_in = open("here_doc.tmp", O_CREAT | O_WRONLY | O_APPEND, 0644);
-	process->fd_in = open(file_here, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	readflag = 1;
-	while (readflag)
-	{
-		ft_putstr_fd("minishell heredoc >" , 1);
-		readflag = read(0, temp, 4096);
-		if (!ft_strncmp(limit, temp, ft_strlen(limit))
-			&& temp[ft_strlen(limit)] == '\n')
-			break ;
-		write(process->fd_in, temp, readflag);
-	}
-	close(process->fd_in);
-	process->fd_in = open(file_here, O_RDONLY);
-	free(file_here);
-	if (process->fd_in < 0)
-		perror("Error: ");
-}
-
-void ft_remove_here(int count)
-{
-	char *file;
-	char *tmp;
-
-	while (count > 0)
-	{
-		tmp = ft_itoa(count--);
-		file = ft_strjoin(tmp, "_here_doc.tmp");
-		free(tmp);
-		unlink(file);
-		free(file);
-	}
-}
-
-void	ft_set_fd_in(t_process *process, char **ins, int *iflgs)
-{
-	int	count;
-
-	ft_putstr_fd("fd_in start\n", 1);//borrar
-	if (process->out_fd_pipex[0] >= 0)
-	{
-		process->in_fd_pipex[0] = process->out_fd_pipex[0];
-		process->in_fd_pipex[1] = process->out_fd_pipex[1];
-		process->fd_in = process->in_fd_pipex[0];
-	}
-	process->error = 0;
-	count = -1;
-	if (ins)
-	{
-		while (ins[++count])
-		{
-			if (count > 0)
-			{
-				close(process->fd_in);
-				ft_putstr_fd("closed fd_in de file father: ", 1);//
-				ft_putnbr_fd(process->fd_in, 1);//
-				ft_putstr_fd("\n", 1);//
-			}
-			if (iflgs[count])
-			{
-				process->here_doc++;
-				dochere(process, ins[count]);
-			}
-			else
-				process->fd_in = open(ins[count], O_RDONLY);
-			if (process->fd_in == -1)
-			{
-				process->error = 1;
-				break ;
-			}
-		}
-	}
-	ft_putstr_fd("fd_in set\n", 1);//borrar
-}
-
-void	ft_set_fd_out(t_process *process, char **outs, int *oflgs)
-{
-	int	count;
-
-	ft_putstr_fd("fd_out start\n", 1);//borrar
-//	if (!outs)
-//	{
-		pipe(process->out_fd_pipex);
-		process->fd_out = process->out_fd_pipex[1];
-		ft_putstr_fd("created pipex: ", 1);//
-		ft_putnbr_fd(process->out_fd_pipex[0], 1);//
-		ft_putstr_fd(" ", 1);//
-		ft_putnbr_fd(process->out_fd_pipex[1], 1);//
-		ft_putstr_fd("\n", 1);//
-
-//	}
-//	else
-	if (outs)
-	{
-		count = -1;
-		while (outs[++count])
-		{
-			if (count > 0)
-			{
-				close(process->fd_out);
-				ft_putstr_fd("closed fd_out de file father: ", 1);//
-				ft_putnbr_fd(process->fd_out, 1);//
-				ft_putstr_fd("\n", 1);//
-			}
-			if (oflgs[count])
-			{
-				process->fd_out = open(outs[count], O_CREAT | O_WRONLY | O_APPEND, 0644);
-			//	process->fd_out = open(outs[count], O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);//comprobar flags
-				ft_putstr_fd("modo append??\n" , 1);
-			}
-			else
-			{
-				process->fd_out = open(outs[count], O_WRONLY | O_CREAT
-					| O_TRUNC | O_APPEND, S_IRWXU);//comprobar flags
-				ft_putstr_fd("modo truncate\n",1);
-			}
-			if (process->fd_out == -1)
-			{
-				process->error = 1;
-				break ;
-			}
-		}
-	}
-	ft_putstr_fd("fd_out set\n", 1);//borrar
-}
 
 void	ft_init_process(t_process *process)
 {
@@ -156,72 +19,33 @@ void	ft_init_process(t_process *process)
 	process->in_fd_pipex[1] = -1;
 	process->out_fd_pipex[0] = -1;
 	process->out_fd_pipex[1] = -1;
-	process->error = 0;
+	process->last_process = -1;// 0 normal, 1 builtin
+	process->exit_code = -1;
 }
 
-int	ft_father(int pid)
+void	ft_father(t_process process)
 {
 	int		status;
-	int		error;
+	//int		error;
 
-	error = 0;
-	ft_putstr_fd("waiting...\n", 1);//borrar
-	waitpid(pid, &status, 0);
-	ft_putstr_fd("done\n", 1);//borrar
-	if (ft_exit_status(status))
-		error = ft_exit_code(status);
-	return (error); //averiguar donde ponemos el valor de exit
-}
-
-void ft_close_fds(t_process process)
-{
-	if (process.fd_in >= 0)
-	{
-		close(process.fd_in);
-		ft_putstr_fd("closed fd_in father: ", 1);//
-		ft_putnbr_fd(process.fd_in, 1);//
-		ft_putstr_fd("\n", 1);//
-	}
-	if (process.fd_out >= 0 && process.fd_out) 
-	{
-		close(process.fd_out);
-		ft_putstr_fd("closed fd_out father: ", 1);//
-		ft_putnbr_fd(process.fd_out, 1);//
-		ft_putstr_fd("\n", 1);//
-	}
-	if (process.in_fd_pipex[0] >= 0 && process.in_fd_pipex[0] != process.fd_in)
-	{
-		close(process.in_fd_pipex[0]);
-		ft_putstr_fd("closed fd_in_pipex_0 father: ", 1);//
-		ft_putnbr_fd(process.in_fd_pipex[0], 1);//
-		ft_putstr_fd("\n", 1);//
-	}
-/*
-	if (process.in_fd_pipex[1] >= 0)
-	{
-		close(process.in_fd_pipex[1]);
-		ft_putstr_fd("closed fd_in_pipex_1 father: ", 1);//
-		ft_putnbr_fd(process.in_fd_pipex[1], 1);//
-		ft_putstr_fd("\n", 1);//
-	}
-*/
-
-/*
 	if (process.out_fd_pipex[0] >= 0)
-	{
 		close(process.out_fd_pipex[0]);
-		ft_putstr_fd("closed fd_out_pipex_0 father: ", 1);//
-		ft_putnbr_fd(process.out_fd_pipex[0], 1);//
-		ft_putstr_fd("\n", 1);//
-	}
-*/
-	if (process.out_fd_pipex[1] >= 0 && process.out_fd_pipex[1] != process.fd_out && process.out_fd_pipex[1] != process.in_fd_pipex[1])
+	if (process.here_doc > 0)
 	{
-		close(process.out_fd_pipex[1]);
-		ft_putstr_fd("closed fd_out_pipex_1 father: ", 1);//
-		ft_putnbr_fd(process.out_fd_pipex[1], 1);//
-		ft_putstr_fd("\n", 1);//
+		ft_putstr_fd("deleting *here_doc.temp files\n", 1);//
+		ft_remove_here(process.here_doc);
 	}
+//	error = 0;
+	ft_putstr_fd("waiting...\n", 1);//borrar
+	waitpid(process.pid, &status, 0);
+	ft_putstr_fd("done\n", 1);//borrar
+	if (process.last_process)
+		envupdate("?", ft_itoa(process.exit_code));
+		//	error = process.exit_code;
+	else if (ft_exit_status(status))
+		envupdate("?", ft_itoa(ft_exit_code(status)));	
+	//	error = ft_exit_code(status);
+	//return (error); //averiguar donde ponemos el valor de exit
 }
 
 void	ft_executor(t_parsing *task, char **envp)
@@ -253,7 +77,8 @@ void	ft_executor(t_parsing *task, char **envp)
 		}
 		else
 			ft_set_fd_out(&process, task[count].outs, task[count].oflgs);
-		if (!ft_check_built(task[count], envp, process))
+		process.last_process = ft_check_built(task[count], envp, &process);
+		if (!process.last_process)
 			process.pid = fork();
 		if (process.pid == -1)
 			perror("Error fork\n");
@@ -262,15 +87,6 @@ void	ft_executor(t_parsing *task, char **envp)
 		else 
 			ft_close_fds(process);
 	}
-	ft_father(process.pid);
-	if (process.here_doc > 0)
-	{
-		ft_putstr_fd("deleting *here_doc.temp files\n", 1);//
-		ft_remove_here(process.here_doc);
-	}
+	ft_father(process);//utilizer el retorno para poner el $?
 	ft_putstr_fd("executor finished\n", 1);//borrar
 }
-
-	//de todas las salidas tiene que guardar en la ultima
-	//pero tiene que crear los archivos de todas las salidas anteriores y machachar lo que tengan si estan creados (se quedan vacios)
-	//si ademas depues de las salidas a ficheros hay un pipex no se guarda en el pipex se queda vacio

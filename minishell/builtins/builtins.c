@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/21 10:27:56 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:33:19 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ void	ft_echo(t_parsing task)//Arreglar para la expansion de variables si hace fa
 		ft_putstr_fd("\n", 1);
 }
 
-void	ft_cd(t_parsing task)// Mirar lo del entorno
+int	ft_cd(t_parsing task)// Mirar lo del entorno
 {
 
 	if (task.cmndtable[1])
 		chdir(task.cmndtable[1]);//Comprobar si cambia env o que hace, si no arreglar parecido al else
 	else
 		chdir(getenv("HOME"));
+	return (0);
 }
 
 
@@ -81,7 +82,7 @@ void	ft_pwd(char **env)
 */
 
 
-void	ft_export(t_parsing task, char **env)// si no hay "=" no asigna, si hay mas de uno da igual
+int	ft_export(t_parsing task, char **env)// si no hay "=" no asigna, si hay mas de uno da igual
 {
 	int count;
 
@@ -89,14 +90,14 @@ void	ft_export(t_parsing task, char **env)// si no hay "=" no asigna, si hay mas
 	while (task.cmndtable[++count])
 		if (ft_strchr(task.cmndtable[count], '=') && task.cmndtable[count][0] != '=')
 			ft_export_var(task.cmndtable[count], env);
-
+	return (0);
 }
 
-void	ft_unset(t_parsing task, char **env)
+int	ft_unset(t_parsing task, char **env)
 {
 	(void)task;
 	(void)env;
-
+	return (0);
 }
 
 void	ft_env(char **env)//puede que haga falta los \n
@@ -117,45 +118,49 @@ void	ft_exit(t_task *task) //Arreglar para todo lo que tengamos que liberar
 }*/
 
 //void ft_builtins(t_parsing task, char **env, t_parsing *cts, char *cmndline)
-void ft_builtins(t_parsing task, char **env)
+int ft_builtins(t_parsing task, char **env)
 {
+	int exit_code;
+
+	exit_code = 0;
 	if (!ft_strncmp(task.cmndtable[0], "echo", 5))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing echo: \n", 1);
-		ms_echo(task);
+		exit_code = ms_echo(task);
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "cd", 3))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing cd: \n", 1);
-		ft_cd(task);
+		exit_code = ft_cd(task);
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "pwd", 4))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing pwd: \n", 1);
-		ms_pwd();
+		exit_code = ms_pwd();
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "export", 7))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing export: \n", 1);
-		ft_export(task, env);
+		exit_code = ft_export(task, env);
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "unset", 6))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing unset: \n", 1);
-		ft_unset(task, env);
+		exit_code = ft_unset(task, env);
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "env", 4))// no se si vendran con ruta
 	{
 		ft_putstr_fd("Doing env: \n", 1);
-		ms_env(env);
+		exit_code = ms_env(env);
 	}
 	else if (!ft_strncmp(task.cmndtable[0], "exit", 5))// no se si vendran con ruta
 		//ms_exit(cts, cmndline);
 		; //me van a sobrar argumentos en funciones para pasarle todo arreglar funciones
+	return (exit_code);
 }
 
 
-int	ft_check_built(t_parsing task, char **env, t_process process)
+int	ft_check_built(t_parsing task, char **env, t_process *process)
 {
 	int	built;
 	int tmp_stdin;
@@ -171,11 +176,11 @@ int	ft_check_built(t_parsing task, char **env, t_process process)
 		ft_putstr_fd("built command\n", 1);
 		tmp_stdin = dup(0);
 		tmp_stdout = dup(1);
-		dup2(process.fd_in, 0);
-		dup2(process.fd_out, 1);
-		close(process.fd_in);
-		close(process.fd_out);
-		ft_builtins(task, env);
+		dup2(process->fd_in, 0);
+		dup2(process->fd_out, 1);
+		close(process->fd_in);
+		close(process->fd_out);
+		process->exit_code = ft_builtins(task, env);
 		dup2(tmp_stdin, 0);
 		dup2(tmp_stdout, 1);
 	}
