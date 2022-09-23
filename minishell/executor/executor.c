@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/23 12:41:47 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/23 12:59:40 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_init_process(t_process *process)
 void	ft_father(t_process process)
 {
 	int		status;
-	//int		error;
+	char	*exit_code;
 
 	if (process.out_fd_pipex[0] >= 0)
 		close(process.out_fd_pipex[0]);
@@ -35,17 +35,16 @@ void	ft_father(t_process process)
 		ft_putstr_fd("deleting *here_doc.temp files\n", 1);//
 		ft_remove_here(process.here_doc);
 	}
-//	error = 0;
 	ft_putstr_fd("waiting...\n", 1);//borrar
 	waitpid(process.pid, &status, 0);
 	ft_putstr_fd("done\n", 1);//borrar
+	exit_code = NULL;
 	if (process.last_process)
-		envupdate("?", ft_itoa(process.exit_code));
-		//	error = process.exit_code;
+		exit_code = ft_itoa(process.exit_code);
 	else if (ft_exit_status(status))
-		envupdate("?", ft_itoa(ft_exit_code(status)));	
-	//	error = ft_exit_code(status);
-	//return (error); //averiguar donde ponemos el valor de exit
+		exit_code = ft_itoa(ft_exit_code(status));
+	envupdate("?", exit_code);
+	free(exit_code);	
 }
 
 void	ft_executor(t_parsing *task, char **envp)
