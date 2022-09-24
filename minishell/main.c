@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 14:39:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/24 11:03:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ static char	*prompter(const int argc, char **argv)
 
 	ret = NULL;
 	if (argc > 1)
-		ret = ft_strjoin(argv[1], "@minishell ~ $ ");
+		ret = ft_strjoin(argv[1], \
+				"@\e[38;5;208mminishell ~ \e[38;5;220m$ \e[0m");
 	if (!ret)
-		ret = ft_strdup("pinche_perro@minishell~ $ ");
+		ret = ft_strdup(\
+				"pinche_perro@\e[38;5;208mminishell ~ \e[38;5;220m$ \e[0m");
 	return (ret);
 }
 
@@ -137,6 +139,8 @@ int	main(int argc, char **argv, char **envp)
 					ms_export(cts->cmndtable[1], &g_env);
 				if (!ft_strncmp(cmndline, "pwd", 4))
 					ms_pwd();
+				if (!ft_strncmp(cmndline, "echo", 4))
+					ms_echo(*cts);
 				if (!ft_strncmp(cts->cmndtable[0], "cd", 3))
 					ms_cd((const char **)cts->cmndtable);
 				//
