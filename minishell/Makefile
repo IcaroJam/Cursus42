@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/23 14:34:14 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/26 14:30:04 by phijano-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,25 +18,33 @@ NAME	= minishell
 
 LIBFT	= ./libft/libft.a
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -I /Users/$(USER)/.brew/opt/readline/include
 
-FTFLGS	= -Llibft -lft -lreadline
+FTFLGS	= -Llibft -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib 
 
-VPATH	= ./:./parser/:./builtins/ #<<your directories here (separated by :)>>
+VPATH	= ./:./parser/:./executor/:./signals:./builtins #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
 SHRDSRC	= main.c utils.c
 PARSSRC	= $(addprefix ./parser/, parsingutils.c parsermain.c lexingutils.c lexer.c expansion_utils.c copy_utils.c)
-BLTNSRC	= $(addprefix ./builtins/, exit.c cd.c echo.c pwd.c environ.c)
+EXECSRC	= $(addprefix ./executor/, executor.c fds.c doc_here.c check_cmds.c execute.c path.c exit_status.c)
+BLTNSRC	= $(addprefix ./builtins/, builtins.c,  exit.c cd.c echo.c pwd.c environ.c)
+SIGNSRC	= $(addprefix ./signals/, signals.c)
+
 #------------------------------------------------------------------------------#
-SRCS	= $(SHRDSRC) $(PARSSRC) $(BLTNSRC)
+
+SRCS	= $(SHRDSRC) $(PARSSRC) $(EXECSRC) $(BLTNSRC) $(SIGNSRC)
 
 SHRDOBJ	= $(SHRDSRC:.c=.o)
 PARSOBJ	= $(addsuffix .o, $(notdir $(basename $(PARSSRC))))
+EXECOBJ	= $(addsuffix .o, $(notdir $(basename $(EXECSRC))))
 BLTNOBJ	= $(addsuffix .o, $(notdir $(basename $(BLTNSRC))))
+SIGNOBJ	= $(addsuffix .o, $(notdir $(basename $(SIGNSRC))))
+
 #------------------------------------------------------------------------------#
-OBJS	= $(SHRDOBJ) $(PARSOBJ) $(BLTNOBJ)
+
+OBJS	= $(SHRDOBJ) $(PARSOBJ) $(EXECOBJ) $(BLTNOBJ) $(SIGNOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #

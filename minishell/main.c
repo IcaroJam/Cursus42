@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/24 11:03:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:49:39 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	main(int argc, char **argv, char **envp)
 	char		*cmndline;
 	t_parsing	*cts;
 
+	signal(SIGINT, ft_ctrl_c);
+	signal(SIGQUIT, SIG_IGN);
 	cts = NULL;
 	prompt = prompter(argc, argv);
 	if (!prompt)
@@ -121,35 +123,21 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		cmndline = readline(prompt);
-		// Handle signals here.
+		if (!cmndline)
+			exit(0);
 		if (cmndline[0])
 		{
 			add_history(cmndline);
 			cts = parse_line(cmndline);
 			if (cts)
 			{
-				if (!ft_strncmp(cmndline, "exit", 5))
-					return (ms_exit(cts, cmndline, prompt));
-				print_table(cts);
-				if (!ft_strncmp(cmndline, "env", 4))
-					ms_env(g_env);
-				if (!ft_strncmp(cts->cmndtable[0], "unset", 6))
-					ms_unset((const char **)cts->cmndtable, g_env);
-				if (!ft_strncmp(cts->cmndtable[0], "export", 7))
-					ms_export(cts->cmndtable[1], &g_env);
-				if (!ft_strncmp(cmndline, "pwd", 4))
-					ms_pwd();
-				if (!ft_strncmp(cmndline, "echo", 4))
-					ms_echo(*cts);
-				if (!ft_strncmp(cts->cmndtable[0], "cd", 3))
-					ms_cd((const char **)cts->cmndtable);
-				//
-				free_tables(cts);
-				// What if cts == NULL?
-				// Free cts when finished with it AND when exiting.
+			//if (!ft_strncmp(*cts[0].cmndtable, "exit", 5) && (!cts[1].cmndtable))
+			if (!ft_strncmp(cmndline, "exit", 5))
+				return (ms_exit(cts, cmndline, prompt));
 			}
+			ft_executor(cts, envp);
+			free_tables(cts);
 		}
-		// Before executing command, check whether it is builtin or not.
 		free(cmndline);
 	}
 	return (0);
