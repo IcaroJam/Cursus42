@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:49:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/21 15:54:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:05:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	expand_dollar(const char *str, int *i)
 	int		ret;
 	char	*var;
 
-	// $? expansion left to implement.
 	if (!str[1])
 		return (1);
 	ret = get_varlen(&str[*i + 1]);
@@ -89,7 +88,6 @@ int	get_tknlen(const char *str)
 	tlen = 0;
 	while (str[i])
 	{
-		// Optimize this and add $ condition!!!
 		if ((str[i] == '\'' || str[i] == '\"')
 			&& handle_quotes(&str[i], str[i]))
 			tlen += get_quotelen(str, str[i], &i);

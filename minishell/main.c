@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/26 16:45:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:08:42 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,10 @@ static char	**enviromentor(char **ogenv)
 	return (env);
 }
 
-int	main(int argc, char **argv, char **envp)
+static int	stuffinit(int argc, char **argv, char **envp, char **prompt)
 {
-	char		*prompt;
-	char		*cmndline;
-	t_parsing	*cts;
-
-	signal(SIGINT, ft_ctrl_c);
-	signal(SIGQUIT, SIG_IGN);
-	cts = NULL;
-	prompt = prompter(argc, argv);
-	if (!prompt)
+	*prompt = prompter(argc, argv);
+	if (!*prompt)
 	{
 		ft_putendl_fd("Error while initializing prompt.\n", 2);
 		return (1);
@@ -120,6 +113,19 @@ int	main(int argc, char **argv, char **envp)
 		ft_putendl_fd("Error while initializing environment variable.\n", 2);
 		return (1);
 	}
+	return (0);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	char		*prompt;
+	char		*cmndline;
+	t_parsing	*cts;
+
+	signal(SIGINT, ft_ctrl_c);
+	signal(SIGQUIT, SIG_IGN);
+	cts = NULL;
+	stuffinit(argc, argv, envp, &prompt);
 	while (1)
 	{
 		cmndline = readline(prompt);
