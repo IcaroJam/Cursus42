@@ -6,11 +6,13 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/23 16:35:40 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:11:17 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char extern	**g_env;
 
 int	ft_fake_exit(t_parsing task)
 {
@@ -59,7 +61,6 @@ int	ft_check_built(t_parsing task, char **env, t_process *process)
 	int	tmp_stdin;
 	int	tmp_stdout;
 
-	ft_putstr_fd("checking built\n", 1);
 	built = 1;
 	if (!ft_strncmp(task.cmndtable[0], "echo", 5)
 		|| !ft_strncmp(task.cmndtable[0], "cd", 3)
@@ -69,7 +70,6 @@ int	ft_check_built(t_parsing task, char **env, t_process *process)
 		|| !ft_strncmp(task.cmndtable[0], "env", 4)
 		|| !ft_strncmp(task.cmndtable[0], "exit", 5))
 	{
-		ft_putstr_fd("built command\n", 1);
 		tmp_stdin = dup(0);
 		tmp_stdout = dup(1);
 		ft_set_in_out(*process);

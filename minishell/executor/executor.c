@@ -6,24 +6,35 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/23 12:59:40 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:14:12 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_init_process(t_process *process)
+void static	ft_init_process(t_process *process)
 {
 	process->here_doc = 0;
 	process->in_fd_pipex[0] = -1;
 	process->in_fd_pipex[1] = -1;
 	process->out_fd_pipex[0] = -1;
 	process->out_fd_pipex[1] = -1;
-	process->last_process = -1;// 0 normal, 1 builtin
+	process->last_process = -1;
 	process->exit_code = -1;
 }
 
-void	ft_father(t_process process)
+void static	ft_fork(t_process *process, t_parsing task, char **envp)
+{
+	process->pid = fork();
+	if (process->pid == -1)
+		perror("Error fork\n");
+	else if (process->pid == 0)
+		ft_execute(*process, task.cmndtable, envp);
+	else
+		ft_close_fds(*process);
+}
+
+void static	ft_father(t_process process)
 {
 	int		status;
 	char	*exit_code;
@@ -31,20 +42,15 @@ void	ft_father(t_process process)
 	if (process.out_fd_pipex[0] >= 0)
 		close(process.out_fd_pipex[0]);
 	if (process.here_doc > 0)
-	{
-		ft_putstr_fd("deleting *here_doc.temp files\n", 1);//
 		ft_remove_here(process.here_doc);
-	}
-	ft_putstr_fd("waiting...\n", 1);//borrar
 	waitpid(process.pid, &status, 0);
-	ft_putstr_fd("done\n", 1);//borrar
 	exit_code = NULL;
 	if (process.last_process)
 		exit_code = ft_itoa(process.exit_code);
 	else if (ft_exit_status(status))
 		exit_code = ft_itoa(ft_exit_code(status));
 	envupdate("?", exit_code);
-	free(exit_code);	
+	free(exit_code);
 }
 
 void	ft_executor(t_parsing *task, char **envp)
@@ -54,38 +60,19 @@ void	ft_executor(t_parsing *task, char **envp)
 
 	ft_init_process(&process);
 	count = -1;
-	ft_putstr_fd("executor start\n", 1);//borrar
 	while (task[++count].cmndtable)
 	{
 		if (count == 0 && task[count].ins[0] == NULL)
-		{
 			process.fd_in = dup(0);
-			ft_putstr_fd("fd_stdin_dup: ", 1);//
-			ft_putnbr_fd(process.fd_in, 1);//
-			ft_putstr_fd("\n", 1);//
-		}	
 		else
 			ft_set_fd_in(&process, task[count].ins, task[count].iflgs);
-		// si hay entrada que no existe sacar error y no ejecutar lo demas
 		if (!task[count + 1].cmndtable && task[count].outs[0] == NULL)
-		{
 			process.fd_out = dup(1);
-			ft_putstr_fd("fd_stdout_dup: ", 1);//
-			ft_putnbr_fd(process.fd_out, 1);//
-			ft_putstr_fd("\n", 1);//
-		}
 		else
 			ft_set_fd_out(&process, task[count].outs, task[count].oflgs);
 		process.last_process = ft_check_built(task[count], envp, &process);
 		if (!process.last_process)
-			process.pid = fork();
-		if (process.pid == -1)
-			perror("Error fork\n");
-		else if (process.pid == 0)
-			ft_execute(process, task[count].cmndtable, envp);
-		else 
-			ft_close_fds(process);
+			ft_fork(&process, task[count], envp);
 	}
-	ft_father(process);//utilizer el retorno para poner el $?
-	ft_putstr_fd("executor finished\n", 1);//borrar
+	ft_father(process);
 }

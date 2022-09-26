@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:14:53 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/23 16:58:02 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:59:12 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_check_memory_error(void *pnt)
 	}
 }
 
-int	ft_has_path(char *cmd)
+int static	ft_has_path(char *cmd)
 {
 	int	count;
 	int	bar;
@@ -59,27 +59,47 @@ char static	**ft_fix_path(char *full_path)
 	return (path);
 }
 
-char	**ft_get_path(char **envp)
+char static	*ft_get_env_path(char **envp)
 {
+	int		bar;
 	int		c;
 	char	*full_path;
-	char	**path;
-	int		bar;
 
+	full_path = NULL;
 	bar = 0;
-	path = NULL;
 	c = -1;
+	while (envp[++c])
+	{
+		if (ft_strncmp(envp[c], "PATH", 4) == 0)
+		{
+			full_path = ft_substr(envp[c], 5, ft_strlen(envp[c]) - 5);
+			ft_check_memory_error(full_path);
+		}
+	}
+	bar = ft_has_path(full_path);
+	if (bar == 0)
+	{
+		free(full_path);
+		full_path = ft_strdup(".");
+	}
+	return (full_path);
+}
+
+char	**ft_get_path(char **envp)
+{
+	char	*full_path;
+	char	**path;
+
+	path = NULL;
 	if (envp[0])
 	{
-		while (envp[++c])
-			if (ft_strncmp(envp[c], "PATH", 4) == 0)
-				full_path = ft_substr(envp[c], 5, ft_strlen(envp[c]) - 5);
-		bar = ft_has_path(full_path);
-		if (bar == 0)
-			full_path = ft_strdup(".");
+		full_path = ft_get_env_path(envp);
 	}
 	else
+	{
 		full_path = ft_substr(PTH, 5, ft_strlen(PTH) - 5);
+		ft_check_memory_error(full_path);
+	}
 	path = ft_fix_path(full_path);
 	free(full_path);
 	return (path);

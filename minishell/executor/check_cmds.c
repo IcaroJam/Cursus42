@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:48:09 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/23 17:00:52 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:28:07 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_check_cmd(char **path, char *cmd)
 	while (path[++count] && exist == 0)
 	{
 		path_cmd = ft_strjoin(path[count], cmd);
+		ft_check_memory_error(path_cmd);
 		if (access(path_cmd, F_OK) != -1)
 			exist = 1;
 		free(path_cmd);
@@ -59,14 +60,15 @@ int	ft_check_files(char **files, int ins_outs, int *iflgs)
 				f1 = open(files[count], O_RDONLY);
 		}
 		else
-			f1 = open(files[count], O_CREAT | O_RDWR | O_TRUNC, 0644);
+			f1 = open(files[count], O_CREAT | O_RDWR, 0644);
 		if (f1 < 0)
 		{
 			ft_arg_error(files[count], 0);
 			error = 1;
 			break ;
 		}
-		close(f1);
+		if (f1 > 1)
+			close(f1);
 	}
 	return (error);
 }

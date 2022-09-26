@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:19:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/22 18:16:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/24 11:18:08 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,21 @@ static char	**envadd(const char *var, char **env)
 int	ms_export(const char *var, char ***env)
 {
 	char	**tmp;
+	char	*equalpos;
 
-	if (!ft_strchr(var, '='))
+	equalpos = ft_strchr(var, '=');
+	if (!equalpos)
 	{
 		ft_putendl_fd("Error: Exported var must have a value assigned.", 2);
 		return (1);
 	}
+	*equalpos = 0;
+	if (ms_getenv(var))
+	{
+		envupdate((char *)var, &equalpos[1]);
+		return (0);
+	}
+	*equalpos = '=';
 	tmp = envadd(var, *env);
 	if (!tmp)
 	{
