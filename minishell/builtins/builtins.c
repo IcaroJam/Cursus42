@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/26 16:41:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:55:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int static	ft_builtins(t_parsing task)
 	else if (!ft_strncmp(task.cmndtable[0], "pwd", 4))
 		exit_code = ms_pwd();
 	else if (!ft_strncmp(task.cmndtable[0], "export", 7))
-		exit_code = ms_export(task.cmndtable[1], &g_env);
+		exit_code = ms_export((const char **)task.cmndtable, &g_env);
 	else if (!ft_strncmp(task.cmndtable[0], "unset", 6))
 		exit_code = ms_unset((const char **)task.cmndtable, g_env);
 	else if (!ft_strncmp(task.cmndtable[0], "env", 4))

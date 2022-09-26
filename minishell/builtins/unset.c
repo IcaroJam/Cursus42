@@ -1,25 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.c                                          :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 19:19:22 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/26 16:48:40 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/09/26 16:48:48 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/09/26 16:48:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ms_env(char **env)
+static int	envrem(const char *var, char **env)
 {
 	int	i;
+	int	len;
 
-	i = 0;
-	if (!env)
+	if (!var)
 		return (1);
+	i = 0;
+	len = ft_strlen(var);
+	while (env[i] && !(!ft_strncmp(env[i], var, len) && env[i][len] == '='))
+		i++;
+	free(env[i]);
 	while (env[i])
-		ft_putendl_fd(env[i++], 1);
+	{
+		env[i] = env[i + 1];
+		i++;
+	}
+	return (0);
+}
+
+int	ms_unset(const char **vars, char **env)
+{
+	if (!vars || !*vars)
+		return (1);
+	vars++;
+	while (*vars)
+	{
+		if (envrem(*vars, env))
+			return (1);
+		vars++;
+	}
 	return (0);
 }
