@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/26 14:41:49 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:49:39 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	main(int argc, char **argv, char **envp)
 			if (!ft_strncmp(cmndline, "exit", 5))
 				return (ms_exit(cts, cmndline, prompt));
 			}
-			ft_check_cmds(cts, envp);
 			ft_executor(cts, envp);
 			free_tables(cts);
 		}
