@@ -14,6 +14,52 @@
 
 char	**g_env;
 
+//
+static void	print_row(char **row)
+{
+	int	i;
+
+	i = 0;
+	while (row[i])
+		printf("\"%s\" ", row[i++]);
+}
+
+static void	printf_flags(char **strarr, int *row)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (strarr[len])
+		len++;
+	while (i < len)
+		printf("%d ", row[i++]);
+}
+
+static void	print_table(t_parsing *cts)
+{
+	int	i;
+
+	i = 0;
+	while (!cts[i].islast)
+	{
+		printf("Cmnds: ");
+		print_row(cts[i].cmndtable);
+		printf("\nIns: ");
+		print_row(cts[i].ins);
+		printf("\nInflags: ");
+		printf_flags(cts[i].ins, cts[i].iflgs);
+		printf("\nOuts: ");
+		print_row(cts[i].outs);
+		printf("\nOutflags: ");
+		printf_flags(cts[i].outs, cts[i].oflgs);
+		printf("\n");
+		i++;
+	}
+}
+//
+
 static char	*prompter(const int argc, char **argv)
 {
 	char	*ret;

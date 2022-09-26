@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/09 12:45:36 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/06 12:20:28 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC			= ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strl
 
 BONUS_SRC	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-EXTRA_SRC	= ft_abs.c ft_ipow.c ft_free.c ft_ioverflw.c
+EXTRA_SRC	= ft_abs.c ft_ipow.c ft_free.c ft_ioverflw.c ft_isspace.c
 
 GNL_SRC		= $(addprefix ./get_next_line/, get_next_line_bonus.c get_next_line_utils_bonus.c)
 
