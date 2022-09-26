@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:48:09 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/26 17:00:59 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:11:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_check_cmds(t_parsing *task, char **envp)
 				path = ft_get_path(envp);
 				if (!ft_strncmp(task[count].cmndtable[0], "exit", 5))
 					ft_check_exit_args(task[count]);
-				else if (ft_strncmp(task[count].cmndtable[0], "export", 7) 
+				else if (ft_strncmp(task[count].cmndtable[0], "export", 7)
 					&& ft_strncmp(task[count].cmndtable[0], "unset", 6))
 					ft_check_cmd(path, task[count].cmndtable[0]);
 				free_cmndline(path);
