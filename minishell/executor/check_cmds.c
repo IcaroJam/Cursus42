@@ -6,13 +6,13 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:48:09 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/26 14:28:07 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:00:59 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_arg_error(char *s, int error)
+void static	ft_arg_error(char *s, int error)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(s, 2);
@@ -22,7 +22,7 @@ void	ft_arg_error(char *s, int error)
 		ft_putstr_fd(": command not found\n", 2);
 }
 
-void	ft_check_cmd(char **path, char *cmd)
+void static	ft_check_cmd(char **path, char *cmd)
 {
 	int		count;
 	int		exist;
@@ -44,7 +44,7 @@ void	ft_check_cmd(char **path, char *cmd)
 		ft_arg_error(cmd, 1);
 }
 
-int	ft_check_files(char **files, int ins_outs, int *iflgs)
+int static	ft_check_files(char **files, int ins_outs, int *iflgs)
 {
 	int	f1;
 	int	count;
@@ -73,6 +73,15 @@ int	ft_check_files(char **files, int ins_outs, int *iflgs)
 	return (error);
 }
 
+void static	ft_check_exit_args(t_parsing task)
+{
+	if (ft_fake_exit(task))
+	{
+		ft_putstr_fd("minishell : exit: ", 1);
+		ft_putstr_fd("too many arguments\n", 1);
+	}
+}
+
 void	ft_check_cmds(t_parsing *task, char **envp)
 {
 	int		count;
@@ -87,14 +96,9 @@ void	ft_check_cmds(t_parsing *task, char **envp)
 			{
 				path = ft_get_path(envp);
 				if (!ft_strncmp(task[count].cmndtable[0], "exit", 5))
-				{
-					if (ft_fake_exit(task[count]))
-					{
-						ft_putstr_fd("minishell : exit: ", 1);
-						ft_putstr_fd("too many arguments\n", 1);
-					}
-				}
-				else
+					ft_check_exit_args(task[count]);
+				else if (ft_strncmp(task[count].cmndtable[0], "export", 7) 
+					&& ft_strncmp(task[count].cmndtable[0], "unset", 6))
 					ft_check_cmd(path, task[count].cmndtable[0]);
 				free_cmndline(path);
 			}
