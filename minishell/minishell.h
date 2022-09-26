@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:57:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/26 14:30:15 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:38:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void		dochere(t_process *process, char *limit);
 void		ft_close_fds(t_process process);
 void		ft_remove_here(int count);
 void		ft_check_cmds(t_parsing *task, char **envp);
-int			ft_check_built(t_parsing task, char **envp, t_process *process);
+int			ft_check_built(t_parsing task, t_process *process);
 int			ft_fake_exit(t_parsing task);
 void		ft_execute(t_process process, char **cmd, char **envp);
 char		**ft_get_path(char **envp);

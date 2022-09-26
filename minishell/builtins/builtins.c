@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:06:32 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/26 12:11:17 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:41:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_fake_exit(t_parsing task)
 	return (0);
 }
 
-int static	ft_builtins(t_parsing task, char **env)
+int static	ft_builtins(t_parsing task)
 {
 	int	exit_code;
 
@@ -41,7 +41,7 @@ int static	ft_builtins(t_parsing task, char **env)
 	else if (!ft_strncmp(task.cmndtable[0], "unset", 6))
 		exit_code = ms_unset((const char **)task.cmndtable, g_env);
 	else if (!ft_strncmp(task.cmndtable[0], "env", 4))
-		exit_code = ms_env(env);
+		exit_code = ms_env(g_env);
 	else if (!ft_strncmp(task.cmndtable[0], "exit", 5))
 		exit_code = ft_fake_exit(task);
 	return (exit_code);
@@ -55,7 +55,7 @@ void static	ft_set_in_out(t_process process)
 	close(process.fd_out);
 }
 
-int	ft_check_built(t_parsing task, char **env, t_process *process)
+int	ft_check_built(t_parsing task, t_process *process)
 {
 	int	built;
 	int	tmp_stdin;
@@ -73,7 +73,7 @@ int	ft_check_built(t_parsing task, char **env, t_process *process)
 		tmp_stdin = dup(0);
 		tmp_stdout = dup(1);
 		ft_set_in_out(*process);
-		process->exit_code = ft_builtins(task, env);
+		process->exit_code = ft_builtins(task);
 		dup2(tmp_stdin, 0);
 		dup2(tmp_stdout, 1);
 	}

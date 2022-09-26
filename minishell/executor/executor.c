@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/26 14:48:48 by phijano-         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:41:53 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_executor(t_parsing *task, char **envp)
 			process.fd_out = dup(1);
 		else
 			ft_set_fd_out(&process, task[count].outs, task[count].oflgs);
-		process.last_process = ft_check_built(task[count], envp, &process);
+		process.last_process = ft_check_built(task[count], &process);
 		if (!process.last_process)
 			ft_fork(&process, task[count], envp);
 	}
