@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/26 16:20:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:45:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,8 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(cmndline);
 			cts = parse_line(cmndline);
-			if (cts)
-			{
-			if (!ft_strncmp(*cts[0].cmndtable, "exit", 5))
-			//if (!ft_strncmp(cmndline, "exit", 5))
+			if (cts && !ft_strncmp(*cts[0].cmndtable, "exit", 5))
 				return (ms_exit(cts, cmndline, prompt));
-			}
 			ft_executor(cts, envp);
 			free_tables(cts);
 		}
