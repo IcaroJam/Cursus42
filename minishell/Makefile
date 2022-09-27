@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/26 16:49:29 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/27 13:41:44 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ VPATH	= ./:./parser/:./executor/:./signals:./builtins #<<your directories here (
 #----                                                                      ----#
 
 SHRDSRC	= main.c utils.c
-PARSSRC	= $(addprefix ./parser/, parsingutils.c parsermain.c lexingutils.c lexer.c expansion_utils.c copy_utils.c)
+PARSSRC	= $(addprefix ./parser/, parsingutils.c parsermain.c lexingutils.c lexer.c expansion.c expansion_utils.c copy_utils.c)
 EXECSRC	= $(addprefix ./executor/, executor.c fds.c doc_here.c check_cmds.c execute.c path.c exit_status.c)
 BLTNSRC	= $(addprefix ./builtins/, builtins.c,  exit.c cd.c echo.c pwd.c environ.c export.c unset.c)
 SIGNSRC	= $(addprefix ./signals/, signals.c)

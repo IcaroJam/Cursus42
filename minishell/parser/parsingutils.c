@@ -6,39 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:40:41 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 14:57:55 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/27 13:34:37 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msparser.h"
-
-int	expand_quotes(t_parsing *cts)
-{
-	int		i;
-	int		tokenlen;
-	char	*temp;
-
-	while (!cts->islast)
-	{
-		i = 0;
-		while (cts[0].cmndtable[i])
-		{
-			if (need_expansion(cts[0].cmndtable[i]))
-			{
-				tokenlen = get_tknlen(cts[0].cmndtable[i]);
-				temp = ft_calloc(tokenlen + 1, sizeof(char));
-				if (!temp)
-					return (1);
-				tokencpy(cts[0].cmndtable[i], tokenlen, temp);
-				free(cts[0].cmndtable[i]);
-				cts[0].cmndtable[i] = temp;
-			}
-			i++;
-		}
-		cts++;
-	}
-	return (0);
-}
 
 int	stff_aid(char **chain, const char **tkns, int *qtty)
 {
