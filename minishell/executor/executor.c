@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:31:55 by phijano-          #+#    #+#             */
-/*   Updated: 2022/09/26 16:41:53 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:49:25 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_executor(t_parsing *task, char **envp)
 	t_process	process;
 	int			count;
 
+	if (!task || !task[0].cmndtable || !task[0].cmndtable[0])
+		return ;
 	ft_check_cmds(task, envp);
 	ft_init_process(&process);
 	count = -1;
