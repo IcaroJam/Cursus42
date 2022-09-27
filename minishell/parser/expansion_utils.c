@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:49:40 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/26 17:05:55 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/09/27 13:23:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	need_expansion(const char *str)
 		if (*str == '\'' || *str == '\"')
 		{
 			temp = handle_quotes(str, *str);
-			if (temp && *str == '\"')
+			if (temp)
 				expandflag = 1;
 			str += temp;
 		}
