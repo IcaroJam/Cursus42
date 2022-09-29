@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/29 18:16:15 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/29 18:25:45 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ $(NAME):	$(OBJS)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "\n\033[38;5;11mDeobjectifying...\033[0m\n"
+	@echo "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
 
 fclean:		clean
 	@rm -f $(NAME)

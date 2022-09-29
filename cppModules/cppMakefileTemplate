@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/01 15:20:27 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/29 18:27:19 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,29 +43,30 @@ all:		$(NAME)
 #bonus:		$(BONUS)
 
 $(NAME):	$(OBJS)
-	@echo "Material stuff in a material world."
+	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@c++ $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "Ready to execute the protocol."
+	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
 
 #$(BONUS):	$(BNSOBJS)
-#	@echo "Bonus objects for ya chief."
+#	@echo "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
 #	@c++ $(CFLAGS) $(BNSOBJS) -o $(BONUS)
-#	@echo "Look at all that extra."
+#	@echo "\n\033[38;5;6mLook at all that extra.\033[0m"
 
 #----                                                                      ----#
 
 %.o:	%.cpp
+	@echo -n '>'
 	@c++ $(CFLAGS) -c $<
 
 #----                                                                      ----#
 
 clean:
 	@rm -f $(OBJS) $(BNSOBJS)
-	@echo "Deobjectifying..."
+	@echo "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
 
 fclean:		clean
 	@rm -f $(NAME) $(BONUS)
-	@echo "No more $(NAME)."
+	@echo "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
 
 re:			fclean all
 

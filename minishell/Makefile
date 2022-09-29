@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/29 18:17:17 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/29 18:24:29 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ $(LIBFT):
 
 clean:
 	@rm -f $(OBJS)
-	@echo "\n\033[38;5;11mDeobjectifying...\033[0m\n"
+	@echo "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
 
 libclean:
 	@make -C ./libft fclean
