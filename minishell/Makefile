@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/27 13:41:44 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/29 16:13:52 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,37 +52,41 @@ OBJS	= $(SHRDOBJ) $(PARSOBJ) $(EXECOBJ) $(BLTNOBJ) $(SIGNOBJ)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT)
-	@echo "Material stuff in a material world."
+$(NAME):	compilemsg $(OBJS) $(LIBFT)
+	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
-	@echo "Ready to execute the protocol."
+	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
+
+compilemsg:
+	@echo "Pressing sourcefiles into sweet sweet objects..."
 
 $(LIBFT):
 	@make -C ./libft
-	@echo "Bookcases restocked."
+	@echo "\n \033[38;5;35m~Bookcases restocked.\033[0m"
 
 #----                                                                      ----#
 
 %.o:	%.c
+	@echo -n '>'
 	@gcc $(CFLAGS) -c $<
 
 #----                                                                      ----#
 
 clean:
 	@rm -f $(OBJS)
-	@echo "Deobjectifying..."
+	@echo "\n\033[38;5;11mDeobjectifying...\033[0m\n"
 
 libclean:
 	@make -C ./libft fclean
-	@echo "Library reduced to ashes."
+	@echo "\n\033[38;5;202m/Library reduced to ashes\\ \n\033[0m"
 
 fclean:		clean
 	@rm -f $(NAME)
-	@echo "No more $(NAME)."
+	@echo "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
 
 re:			fclean all
 
-.PHONY: all clean libclean fclean re
+.PHONY: all compilemsg clean libclean fclean re
 #-------------------------------------Tmpl-------------------------------------#
 
 #TMPLSRC	= $(addprefix ./yourdirhere/, sourcefiles.c)
