@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/29 16:13:52 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/29 18:17:17 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,13 +52,10 @@ OBJS	= $(SHRDOBJ) $(PARSOBJ) $(EXECOBJ) $(BLTNOBJ) $(SIGNOBJ)
 
 all:		$(NAME)
 
-$(NAME):	compilemsg $(OBJS) $(LIBFT)
+$(NAME):	$(OBJS) $(LIBFT)
 	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
 	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
-
-compilemsg:
-	@echo "Pressing sourcefiles into sweet sweet objects..."
 
 $(LIBFT):
 	@make -C ./libft

@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/29 16:17:47 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/29 18:16:47 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,13 +46,10 @@ all:		$(NAME)
 
 #bonus:		$(BONUS)
 
-$(NAME):	compilemsg $(OBJS) $(LIBFT)
+$(NAME):	$(OBJS) $(LIBFT)
 	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
 	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
-
-compilemsg:
-	@echo "Pressing sourcefiles into sweet sweet objects..."
 
 #$(BONUS):	$(BNSOBJS) $(LIBFT)
 #	@echo "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
