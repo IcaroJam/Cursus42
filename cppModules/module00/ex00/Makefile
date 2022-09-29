@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/08/31 17:53:59 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/29 17:41:15 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,6 @@
 #######################################/\#######################################
 
 NAME	= megaphone
-
-#BONUS	= <<Your bonus exec here>>
 
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
 
@@ -27,12 +25,10 @@ VPATH	= ./
 SHRDSRC	= megaphone.cpp
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
-BNSSRCS	= $(SHRDSRC)
 
 SHRDOBJ	= megaphone.o
 #------------------------------------------------------------------------------#
 OBJS	= $(SHRDOBJ)
-BNSOBJS	= $(SHRDOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -40,36 +36,33 @@ BNSOBJS	= $(SHRDOBJ)
 
 all:		$(NAME)
 
-#bonus:		$(BONUS)
-
-$(NAME):	$(OBJS)
-	@echo "Material stuff in a material world."
+$(NAME):	compilemsg $(OBJS)
+	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@c++ $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "Ready to execute the protocol."
+	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
 
-#$(BONUS):	$(BNSOBJS)
-#	@echo "Bonus objects for ya chief."
-#	@c++ $(CFLAGS) $(BNSOBJS) -o $(BONUS)
-#	@echo "Look at all that extra."
+compilemsg:
+	@echo "Pressing sourcefiles into sweet sweet objects..."
 
 #----                                                                      ----#
 
 %.o:	%.cpp
+	@echo -n '>'
 	@c++ $(CFLAGS) -c $<
 
 #----                                                                      ----#
 
 clean:
-	@rm -f $(OBJS) $(BNSOBJS)
-	@echo "Deobjectifying..."
+	@rm -f $(OBJS)
+	@echo "\n\033[38;5;11mDeobjectifying...\033[0m\n"
 
 fclean:		clean
-	@rm -f $(NAME) $(BONUS)
-	@echo "No more $(NAME)."
+	@rm -f $(NAME)
+	@echo "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
 
 re:			fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all compilemsg clean fclean re bonus
 #-------------------------------------Tmpl-------------------------------------#
 
 #TMPLSRC	= $(addprefix ./yourdirhere/, sourcefiles.c)
