@@ -6,13 +6,15 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 18:48:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/06 12:23:50 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/09/30 13:30:38 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	libft.a
 
 CFLAGS		=	-Wall -Werror -Wextra
+
+VPATH		=	./:./get_next_line
 
 ################################################################################
 
@@ -44,9 +46,12 @@ LIBOBJS		= $(OBJS) $(BONUS_OBJS) $(EXTRA_OBJS) $(GNL_OBJS)
 
 all:		$(NAME)
 
-$(NAME):	$(LIBSRCS)
-	@gcc $(CFLAGS) -c $(LIBSRCS)
+$(NAME):	$(LIBOBJS)
 	@ar rcs $(NAME) $(LIBOBJS)
+
+%.o:		%.c
+	@echo -n '>'
+	@gcc $(CFLAGS) -c $<
 
 clean:
 	@rm -f $(LIBOBJS)
