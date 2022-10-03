@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 13:03:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/03 16:30:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:25:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,13 @@ void	PhoneBook::contact_display() const {
 	}
 	std::cout << std::resetiosflags(std::ios::right);
 	std::cout << "Enter index of contact to display: ";
-	if (process_line(indxLine) == "") {
-		std::cout << "\nInvalid index.\n";
-		return;
-	}
-	if (indxLine.find_first_not_of("0123456789") != std::string::npos) {
+	if (process_line(indxLine) == "" || indxLine.find_first_not_of("0123456789") != std::string::npos) {
+		if (indxLine == "")
+			std::cout << std::endl;
 		std::cout << "Invalid index.\n";
 		return;
 	}
-	i = std::stoi(indxLine);
+	i = atoi(indxLine.c_str());
 	if (i >= _lastContact) {
 		std::cout << "Invalid index.\n";
 		return;
