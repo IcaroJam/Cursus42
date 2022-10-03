@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 12:52:25 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 17:39:47 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:34:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
-#include <string>
 
 Contact::Contact() {
 }

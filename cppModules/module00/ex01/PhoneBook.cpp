@@ -6,12 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 13:03:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/04 18:05:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:37:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include "Contact.hpp"
 
 PhoneBook::PhoneBook() : _lastContact(0) {
 }
@@ -68,9 +67,10 @@ void	PhoneBook::contact_display() const {
 	std::cout << std::resetiosflags(std::ios::right);
 	std::cout << "Enter index of contact to display: ";
 	std::cin >> contactIndex;
-	std::getline(std::cin, dummy);
-	if (std::cin.fail() || contactIndex < 0 || contactIndex > _lastContact - 1) {
-		fail_check();
+	if (std::cin.eof() || std::cin.fail() || contactIndex < 0 || contactIndex > _lastContact - 1) {
+		std::cin.clear();
+		std::clearerr(stdin);
+		std::getline(std::cin, dummy);
 		std::cout << "Invalid index.\n";
 		return;
 	}

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 12:53:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/05 13:05:45 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:26:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 void	fail_check() {
 	if (std::cin.eof() || std::cin.fail()) {
 		std::cin.clear();
-		// The line bellow solves alpha input on SEARCH index.
-		//std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		// But half-breaks ctrl-D input (trailing \n or something).
 		std::clearerr(stdin);
 	}
 }
