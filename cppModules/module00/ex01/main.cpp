@@ -6,17 +6,20 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 12:53:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/03 15:26:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:51:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-void	fail_check() {
+std::string	process_line(std::string &ret) {
+	std::getline(std::cin, ret);
 	if (std::cin.eof() || std::cin.fail()) {
 		std::cin.clear();
 		std::clearerr(stdin);
+		ret.clear();
 	}
+	return ret;
 }
 
 int	main() {
@@ -26,8 +29,7 @@ int	main() {
 	std::cout << "Welcome to your Awesome PhoneBook™!\n";
 	while (true) {
 		std::cout << "Enter a command [ADD/SEARCH/EXIT]: ";
-		std::getline(std::cin, cmnd);
-		fail_check();
+		process_line(cmnd);
 		if (cmnd == "ADD") {
 			phbook.contact_add();
 		} else if (cmnd == "SEARCH") {

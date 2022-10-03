@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 13:03:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/03 15:37:36 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:30:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	print_contact(Contact const &temp) {
 }
 
 void	PhoneBook::contact_display() const {
-	int			contactIndex;
-	std::string	dummy;
+	std::string	indxLine;
+	int			i;
 
 	std::cout << std::setiosflags(std::ios::right);
 	for (int i = 0; i < _lastContact; i++) {
@@ -66,13 +66,18 @@ void	PhoneBook::contact_display() const {
 	}
 	std::cout << std::resetiosflags(std::ios::right);
 	std::cout << "Enter index of contact to display: ";
-	std::cin >> contactIndex;
-	if (std::cin.eof() || std::cin.fail() || contactIndex < 0 || contactIndex > _lastContact - 1) {
-		std::cin.clear();
-		std::clearerr(stdin);
-		std::getline(std::cin, dummy);
+	if (process_line(indxLine) == "") {
+		std::cout << "\nInvalid index.\n";
+		return;
+	}
+	if (indxLine.find_first_not_of("0123456789") != std::string::npos) {
 		std::cout << "Invalid index.\n";
 		return;
 	}
-	print_contact(_contactArray[contactIndex]);
+	i = std::stoi(indxLine);
+	if (i >= _lastContact) {
+		std::cout << "Invalid index.\n";
+		return;
+	}
+	print_contact(_contactArray[i]);
 }
