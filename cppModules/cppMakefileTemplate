@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/10/03 17:25:39 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/10/05 13:09:00 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SHRDSRC	=
 SRCS	= $(SHRDSRC)
 BNSSRCS	= $(SHRDSRC)
 
-SHRDOBJ	=
+SHRDOBJ	= $(SHRDSRC:.cpp=.o)
 #------------------------------------------------------------------------------#
 OBJS	= $(SHRDOBJ)
 BNSOBJS	= $(SHRDOBJ)
