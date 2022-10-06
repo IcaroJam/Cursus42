@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:33:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/06 13:11:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:13:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Account::Account( void ) {
 }
 
 Account::Account( int initial_deposit ) {
+	_displayTimestamp();
 }
 
 /////Destructor/////////////////////////////////////////////////////////////////
@@ -47,7 +48,7 @@ void	Account::_displayTimestamp( void ) {
 
 	std::cout << "[" << std::setfill('0') 
 		<< currDate.tm_year + 1900
-		<< std::setw(2) << currDate.tm_mon
+		<< std::setw(2) << currDate.tm_mon + 1
 		<< std::setw(2) << currDate.tm_mday
 		<< "_"
 		<< std::setw(2) << currDate.tm_hour
