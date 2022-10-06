@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:33:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/06 13:13:58 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:28:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ int	Account::_totalNbDeposits = 0;
 int	Account::_totalNbWithdrawals = 0;
 
 /////Constructors///////////////////////////////////////////////////////////////
-Account::Account( void ) {
+Account::Account( void ) : _accountIndex(_nbAccounts++), _nbDeposits(0), _nbWithdrawals(0) {
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";amount:0;created" << std::endl;
 }
 
-Account::Account( int initial_deposit ) {
+Account::Account( int initial_deposit ) : _accountIndex(_nbAccounts++), _amount(initial_deposit), _nbDeposits(0), _nbWithdrawals(0) {
+	_totalAmount += initial_deposit;
 	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";amount:" << initial_deposit << ";created" << std::endl;
 }
 
 /////Destructor/////////////////////////////////////////////////////////////////
