@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/10/05 13:07:48 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/10/06 14:06:06 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ VPATH	= ./ #<<your directories here (separated by :)>>
 
 #----                                                                      ----#
 
-SHRDSRC	= Account.cpp
+SHRDSRC	= tests.cpp Account.cpp
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 

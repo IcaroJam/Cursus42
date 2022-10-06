@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:33:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/06 13:52:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:05:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	Account::makeDeposit(int deposit) {
 		<< ";p_amount:" << _amount
 		<< ";deposits:" << deposit;
 	_amount += deposit;
+	_totalAmount += deposit;
 	_nbDeposits++;
 	_totalNbDeposits++;
 	std::cout << ";amount:" << _amount
@@ -99,9 +100,21 @@ void	Account::makeDeposit(int deposit) {
 }
 
 bool	Account::makeWithdrawal(int withdrawal) {
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex
+		<< ";p_amount:" << _amount;
+	if (withdrawal > _amount) {
+		std::cout << ";withdrawal:refused" << std::endl;
+		return false;
+	}
+	std::cout << ";withdrawal:" << withdrawal;
+	_amount -= withdrawal;
+	_totalAmount -= withdrawal;
+	_nbWithdrawals += 1;
+	_totalNbWithdrawals += 1;
+	std::cout << ";amount:" << _amount
+		<< ";nb_withdrawals:" << _nbWithdrawals << std::endl;
 	return true;
 }
 
-int		Account::checkAmount( void ) const {
-	return 0;
-}
+int		Account::checkAmount( void ) const {return _amount;}
