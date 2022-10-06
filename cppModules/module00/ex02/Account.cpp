@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:33:50 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/06 13:03:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:11:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <chrono>
 #include <iostream>
 #include <iomanip>
+
+/////Static init////////////////////////////////////////////////////////////////
+int	Account::_nbAccounts = 0;
+int	Account::_totalAmount = 0;
+int	Account::_totalNbDeposits = 0;
+int	Account::_totalNbWithdrawals = 0;
 
 /////Constructors///////////////////////////////////////////////////////////////
 Account::Account( void ) {
