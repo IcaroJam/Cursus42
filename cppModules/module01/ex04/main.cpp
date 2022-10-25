@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:52:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/25 13:48:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:04:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	inputCheck(int argc, char **argv, std::ifstream &input, std::ofstream &outpu
 		return (-1);
 	}
 	input.open(argv[1]);
-	if (!input.is_open()) {
+	if (input.fail()) {
 		std::cerr << "Failed to open " << argv[1] << std::endl;
 		return (-1);
 	}
 	std::string	outname(argv[1]);
 	outname += ".replace";
 	output.open(outname);
-	if (!output.is_open()) {
+	if (output.fail()) {
 		std::cerr << "Failed to open " << outname << std::endl;
 		return (-1);
 	}
