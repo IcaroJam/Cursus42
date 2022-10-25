@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:52:39 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/10/25 15:04:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:17:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	placeAgain(char **argv, std::ifstream &input, std::ofstream &output) {
 	while (!input.eof()) {
 		std::getline(input, tempstr);
 		currpos = 0;
-		while (currpos != tempstr.npos) {
+		while (argv[2][0] && currpos != tempstr.npos) {
 			currpos = tempstr.find(argv[2]);
 			if (currpos != std::string::npos) {
 				std::string	parts = tempstr.substr(0, currpos);
