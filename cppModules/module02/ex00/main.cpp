@@ -6,11 +6,12 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/08 12:25:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/11 12:15:20 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+
 int main( void ) {
 	Fixed a;
 	Fixed b( a );
