@@ -6,15 +6,16 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/17 13:50:25 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:15:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 int main( void ) {
-	ClapTrap	a("1"), b(a), c;
-	c = a;
+	ClapTrap	a("1");
 
+	a.takeDamage(9);
+	a.takeDamage(9);
 	return 0;
 }

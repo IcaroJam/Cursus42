@@ -6,12 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:13:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/17 13:59:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:15:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
+// Canonical class shite:
 ClapTrap::ClapTrap() : _name("Unnamed"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "Unnamed ClapTrap assembled." << std::endl;
 }
@@ -39,3 +40,36 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &cpyfrom) {
 ClapTrap::~ClapTrap() {
 	std::cout << "ClapTrap " << _name << " destroyed." << std::endl;
 }
+////////////////////////////////////////////////////////////////////////////////
+// Member functions:
+void	ClapTrap::attack(const std::string &target) {
+	if (_energyPoints > 0) {
+		std::cout << "ClapTrap " << _name << " attacks " << target
+				  << ", causing " << _attackDamage << " points of damage!" << std::endl;
+		_energyPoints--;
+	} else {
+		std::cout << "ClapTrap " << _name << " failed to attack " << target << "!" << std::endl;
+	}
+}
+
+void	ClapTrap::beRepaired(unsigned int amount) {
+	if (_energyPoints > 0) {
+		std::cout << "ClapTrap " << _name << " repairs itself for " << amount << " hitpoints!" << std::endl;
+		_energyPoints--;
+	} else {
+		std::cout << "ClapTrap " << _name << " failed to repair itself!" << std::endl;
+	}
+}
+
+void	ClapTrap::takeDamage(unsigned int amount) {
+	if (!_hitPoints) {
+		std::cout << "ClapTrap " << _name << " already has 0 hitpoints!" << std::endl;
+		return;
+	}
+	if (amount >= _hitPoints)
+		_hitPoints = 0;
+	else
+		_hitPoints -= amount;
+	std::cout << "ClapTrap " << _name << " takes " << amount << " points of damage!" << std::endl;
+}
+////////////////////////////////////////////////////////////////////////////////
