@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:13:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/17 15:15:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:56:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &cpyfrom) {
 	_hitPoints = cpyfrom._hitPoints;
 	_energyPoints = cpyfrom._energyPoints;
 	_attackDamage = cpyfrom._attackDamage;
+	std::cout << "ClapTrap " << _name << " assembled." << std::endl;
 	return (*this);
 }
 
@@ -55,6 +56,7 @@ void	ClapTrap::attack(const std::string &target) {
 void	ClapTrap::beRepaired(unsigned int amount) {
 	if (_energyPoints > 0) {
 		std::cout << "ClapTrap " << _name << " repairs itself for " << amount << " hitpoints!" << std::endl;
+		_hitPoints += amount;
 		_energyPoints--;
 	} else {
 		std::cout << "ClapTrap " << _name << " failed to repair itself!" << std::endl;
