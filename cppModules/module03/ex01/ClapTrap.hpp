@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:07:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/18 13:09:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:34:26 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class	ClapTrap {
 		~ClapTrap();
 
 	protected:
+		std::string		_model;
 		std::string		_name;
 		unsigned int	_hitPoints;
 		unsigned int	_energyPoints;

@@ -6,18 +6,18 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:13:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/18 13:45:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:42:07 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 // Canonical class shite:
-ClapTrap::ClapTrap() : _name("Unnamed"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap() : _model("ClapTrap"), _name("Unnamed"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "Unnamed ClapTrap assembled." << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string givenName) : _name(givenName), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap(std::string givenName) : _model("ClapTrap"), _name(givenName), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "ClapTrap " << _name << " assembled." << std::endl;
 }
 
@@ -46,10 +46,10 @@ ClapTrap::~ClapTrap() {
 void	ClapTrap::attack(const std::string &target) {
 	if (_energyPoints > 0) {
 		_energyPoints--;
-		std::cout << "ClapTrap " << _name << " attacks " << target
+		std::cout << _model << " " << _name << " attacks " << target
 				  << ", causing " << _attackDamage << " points of damage!" << std::endl;
 	} else {
-		std::cout << "ClapTrap " << _name << " failed to attack " << target << "!" << std::endl;
+		std::cout << _model << " " << _name << " failed to attack " << target << "!" << std::endl;
 	}
 }
 
@@ -57,21 +57,21 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 	if (_energyPoints > 0) {
 		_energyPoints--;
 		_hitPoints += amount;
-		std::cout << "ClapTrap " << _name << " repairs itself for " << amount << " hitpoints!" << std::endl;
+		std::cout << _model << " " << _name << " repairs itself for " << amount << " hitpoints!" << std::endl;
 	} else {
-		std::cout << "ClapTrap " << _name << " failed to repair itself!" << std::endl;
+		std::cout << _model << " " << _name << " failed to repair itself!" << std::endl;
 	}
 }
 
 void	ClapTrap::takeDamage(unsigned int amount) {
 	if (!_hitPoints) {
-		std::cout << "ClapTrap " << _name << " already has 0 hitpoints!" << std::endl;
+		std::cout << _model << " " << _name << " already has 0 hitpoints!" << std::endl;
 		return;
 	}
 	if (amount >= _hitPoints)
 		_hitPoints = 0;
 	else
 		_hitPoints -= amount;
-	std::cout << "ClapTrap " << _name << " takes " << amount << " points of damage!" << std::endl;
+	std::cout << _model << " " << _name << " takes " << amount << " points of damage!" << std::endl;
 }
 ////////////////////////////////////////////////////////////////////////////////
