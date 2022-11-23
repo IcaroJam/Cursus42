@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/10/05 13:09:00 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/11/23 13:27:54 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,23 +16,25 @@
 
 NAME	= #<<Your target-file here>>
 
-#BONUS	= <<Your bonus exec here>>
-
 CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic-errors
 
 VPATH	= ./ #<<your directories here (separated by :)>>
+
+# Echo needs the (non existent in macosx) -e flag to print colours in Linux
+ECHO = echo -e
+ifeq ($(shell uname -s),Darwin)
+	ECHO = echo
+endif
 
 #----                                                                      ----#
 
 SHRDSRC	=
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
-BNSSRCS	= $(SHRDSRC)
 
 SHRDOBJ	= $(SHRDSRC:.cpp=.o)
 #------------------------------------------------------------------------------#
 OBJS	= $(SHRDOBJ)
-BNSOBJS	= $(SHRDOBJ)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -40,37 +42,29 @@ BNSOBJS	= $(SHRDOBJ)
 
 all:		$(NAME)
 
-#bonus:		$(BONUS)
-
 $(NAME):	$(OBJS)
-	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
+	@$(ECHO) "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@c++ $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
-
-#$(BONUS):	$(BNSOBJS)
-#	@echo "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
-#	@c++ $(CFLAGS) $(BNSOBJS) -o $(BONUS)
-#	@echo "\n\033[38;5;6mLook at all that extra.\033[0m"
-
+	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
 #----                                                                      ----#
 
 %.o:	%.cpp
-	@echo -n '>'
+	@$(ECHO) -n '>'
 	@c++ $(CFLAGS) -c $<
 
 #----                                                                      ----#
 
 clean:
 	@rm -f $(OBJS) $(BNSOBJS)
-	@echo "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
+	@$(ECHO) "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
 
 fclean:		clean
 	@rm -f $(NAME) $(BONUS)
-	@echo "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
+	@$(ECHO) "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
 
 re:			fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 #-------------------------------------Tmpl-------------------------------------#
 
 #TMPLSRC	= $(addprefix ./yourdirhere/, sourcefiles.c)
