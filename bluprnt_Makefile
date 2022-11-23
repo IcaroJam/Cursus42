@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/10/05 13:09:16 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/11/23 13:25:07 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,12 @@ CFLAGS	= -Wall -Werror -Wextra
 FTFLGS	= -Llibft -lft
 
 VPATH	= ./ #<<your directories here (separated by :)>>
+
+# Echo needs the (non existent in macosx) -e flag to print colours in Linux
+ECHO = echo -e
+ifeq ($(shell uname -s),Darwin)
+	ECHO = echo
+endif
 
 #----                                                                      ----#
 
@@ -47,40 +53,42 @@ all:		$(NAME)
 #bonus:		$(BONUS)
 
 $(NAME):	$(LIBFT) $(OBJS)
-	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
+	@$(ECHO) "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
-	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
+	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
 
 #$(BONUS):	$(BNSOBJS) $(LIBFT)
-#	@echo "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
+#	@$(ECHO) "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
 #	@gcc $(CFLAGS) $(BNSOBJS) $(FTFLGS) -o $(BONUS)
-#	@echo "\n\033[38;5;6mLook at all that extra.\033[0m"
+#	@$(ECHO) "\n\033[38;5;6mLook at all that extra.\033[0m"
 
 $(LIBFT):
 	@make -C ./libft
-	@echo "\n \033[38;5;35m~Bookcases restocked.\033[0m"
+	@$(ECHO) "\n \033[38;5;35m~Bookcases restocked.\033[0m"
 
 #----                                                                      ----#
 
 %.o:	%.c
-	@echo -n '>'
+	@$(ECHO) -n '>'
 	@gcc $(CFLAGS) -c $<
 
 #----                                                                      ----#
 
 clean:
 	@rm -f $(OBJS) $(BNSOBJS)
-	@echo "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
+	@$(ECHO) "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
 
 libclean:
 	@make -C ./libft fclean
-	@echo "\n\033[38;5;202m/Library reduced to ashes\\ \n\033[0m"
+	@$(ECHO) "\n\033[38;5;202m/Library reduced to ashes\\ \n\033[0m"
 
 fclean:		clean
 	@rm -f $(NAME) $(BONUS)
-	@echo "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
+	@$(ECHO) "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
 
-.PHONY: all compilemsg clean libclean fclean re bonus
+re:			fclean all
+
+.PHONY: all clean libclean fclean re bonus
 #-------------------------------------Tmpl-------------------------------------#
 
 #TMPLSRC	= $(addprefix ./yourdirhere/, sourcefiles.c)
