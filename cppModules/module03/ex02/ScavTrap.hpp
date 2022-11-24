@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:07:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:34:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:11:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 
-#include <iostream>
+#include "ClapTrap.hpp"
 
-class	ClapTrap {
+class	ScavTrap : public ClapTrap {
 	public:
-		void	attack(const std::string &target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
+		void	guardGate(void);
 
-		ClapTrap();
-		ClapTrap(std::string givenName);
-		ClapTrap(const ClapTrap &cpyfrom);
-		ClapTrap &operator=(const ClapTrap &cpyfrom);
-		~ClapTrap();
-
-	protected:
-		std::string		_model;
-		std::string		_name;
-		unsigned int	_hitPoints;
-		unsigned int	_energyPoints;
-		unsigned int	_attackDamage;
+		ScavTrap();
+		ScavTrap(const std::string &givenName);
+		ScavTrap(const ScavTrap &cpyfrom);
+		ScavTrap &operator=(const ScavTrap &cpyfrom);
+		~ScavTrap();
 };
 
 #endif

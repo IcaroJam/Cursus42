@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:13:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:49:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:59:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ ScavTrap::ScavTrap() {
 	std::cout << "Unnamed ScavTrap assembled." << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string givenName) {
+ScavTrap::ScavTrap(const std::string &givenName) {
 	_model = "ScavTrap";
 	_name = givenName;
 	_hitPoints = 100;
@@ -55,5 +55,10 @@ ScavTrap::~ScavTrap() {
 // Member functions:
 void	ScavTrap::guardGate(void) {
 	std::cout << "ScavTrap " << _name << " is now in gate keeper mode." << std::endl;
+}
+
+void	ScavTrap::attack(const std::string &target) {
+	ClapTrap::attack(target);
+	std::cout << ">> Attacking from ScavTrap" << std::endl;
 }
 ////////////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:07:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:34:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:10:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class	ClapTrap {
 		void	beRepaired(unsigned int amount);
 
 		ClapTrap();
-		ClapTrap(std::string givenName);
+		ClapTrap(const std::string &givenName);
 		ClapTrap(const ClapTrap &cpyfrom);
 		ClapTrap &operator=(const ClapTrap &cpyfrom);
 		~ClapTrap();

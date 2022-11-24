@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 12:07:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:34:26 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/11/23 11:26:22 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/11/23 12:01:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+#ifndef DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
 
-#include <iostream>
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-class	ClapTrap {
+class DiamondTrap : public ScavTrap, public FragTrap {
 	public:
 		void	attack(const std::string &target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
+		void	whoAmI(void);
 
-		ClapTrap();
-		ClapTrap(std::string givenName);
-		ClapTrap(const ClapTrap &cpyfrom);
-		ClapTrap &operator=(const ClapTrap &cpyfrom);
-		~ClapTrap();
+		DiamondTrap();
+		DiamondTrap(const std::string &givenName);
+		DiamondTrap(const DiamondTrap &cpyFrom);
+		DiamondTrap &operator=(const DiamondTrap &cpyfrom);
+		~DiamondTrap();
 
-	protected:
-		std::string		_model;
-		std::string		_name;
-		unsigned int	_hitPoints;
-		unsigned int	_energyPoints;
-		unsigned int	_attackDamage;
+	private:
+		std::string	_name;
 };
 
 #endif

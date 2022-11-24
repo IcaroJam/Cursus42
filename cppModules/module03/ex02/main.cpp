@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 12:07:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:49:19 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/11/08 12:25:33 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/11/21 16:46:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-#define SCAVTRAP_HPP
+#include "FragTrap.hpp"
 
-#include "ClapTrap.hpp"
+int main( void ) {
+	FragTrap	a("1"), b, c(a);
 
-class	ScavTrap : public ClapTrap {
-	public:
-		void	guardGate(void);
-
-		ScavTrap();
-		ScavTrap(std::string givenName);
-		ScavTrap(const ScavTrap &cpyfrom);
-		ScavTrap &operator=(const ScavTrap &cpyfrom);
-		~ScavTrap();
-};
-
-#endif
+	a.takeDamage(90);
+	a.takeDamage(10);
+	a.takeDamage(1);
+	a.beRepaired(12);
+	for (int i = 0; i < 100; i++) {
+		a.attack("a presumptuous asshole");
+	}
+	a.highFivesGuys();
+	return 0;
+}

@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    cppMakefileTemplate                                :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/11/23 15:27:35 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/11/21 16:43:46 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,15 @@
 #                                     Vars                                     #
 #######################################/\#######################################
 
-NAME	= #<<Your target-file here>>
+NAME	= frag-off
 
 CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic-errors
 
-VPATH	= ./ #<<your directories here (separated by :)>>
-
-# Echo needs the (non existent in macosx) -e flag to print colours in Linux
-ECHO = echo -e
-ifeq ($(shell uname -s),Darwin)
-	ECHO = echo
-endif
+VPATH	= ./
 
 #----                                                                      ----#
 
-SHRDSRC	=
+SHRDSRC	= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 
@@ -43,29 +37,29 @@ OBJS	= $(SHRDOBJ)
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-	@$(ECHO) "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
+	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@c++ $(CFLAGS) $(OBJS) -o $(NAME)
-	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
+	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
+
 #----                                                                      ----#
 
 %.o:	%.cpp
-	@$(ECHO) -n '>'
+	@echo -n '>'
 	@c++ $(CFLAGS) -c $<
 
 #----                                                                      ----#
 
 clean:
-	@rm -f $(OBJS) $(BNSOBJS)
-	@$(ECHO) "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
+	@rm -f $(OBJS)
+	@echo "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
 
 fclean:		clean
-	@rm -f $(NAME) $(BONUS)
-	@$(ECHO) "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
+	@rm -f $(NAME)
+	@echo "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
 
 re:			fclean all
 
 .PHONY: all clean fclean re
-
 #-------------------------------------Tmpl-------------------------------------#
 
 #TMPLSRC	= $(addprefix ./yourdirhere/, sourcefiles.c)

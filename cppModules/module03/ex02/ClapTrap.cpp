@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:13:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:42:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:11:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ ClapTrap::ClapTrap() : _model("ClapTrap"), _name("Unnamed"), _hitPoints(10), _en
 	std::cout << "Unnamed ClapTrap assembled." << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string givenName) : _model("ClapTrap"), _name(givenName), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap(const std::string &givenName) : _model("ClapTrap"), _name(givenName), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "ClapTrap " << _name << " assembled." << std::endl;
 }
 

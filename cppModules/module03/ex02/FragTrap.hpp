@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 12:07:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:49:19 by ntamayo-         ###   ########.fr       */
+/*   Created: 2022/11/21 13:03:56 by ntamayo-          #+#    #+#             */
+/*   Updated: 2022/11/21 13:13:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-#define SCAVTRAP_HPP
+#ifndef FRAGTRAP_HPP
+#define FRAGTRAP_HPP
 
 #include "ClapTrap.hpp"
 
-class	ScavTrap : public ClapTrap {
+class	FragTrap : public ClapTrap {
 	public:
-		void	guardGate(void);
+		void	highFivesGuys(void);
 
-		ScavTrap();
-		ScavTrap(std::string givenName);
-		ScavTrap(const ScavTrap &cpyfrom);
-		ScavTrap &operator=(const ScavTrap &cpyfrom);
-		~ScavTrap();
+		FragTrap();
+		FragTrap(const std::string &givenName);
+		FragTrap(const FragTrap &cpyFrom);
+		FragTrap &operator=(const FragTrap &cpyfrom);
+		~FragTrap();
 };
 
 #endif
