@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:37:23 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/23 11:56:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:00:21 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ DiamondTrap::DiamondTrap(const std::string &givenName) {
 	std::cout << "DiamondTrap " << _name << " assembled." << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &cpyfrom) {
+DiamondTrap::DiamondTrap(const DiamondTrap &cpyfrom) : ClapTrap(), ScavTrap(), FragTrap() {
 	std::cout << "DiamondTrap Copy constructor called." << std::endl;
 	*this = cpyfrom;
 }

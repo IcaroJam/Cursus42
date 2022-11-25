@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:13:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:49:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:02:29 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ ScavTrap::ScavTrap() {
 	std::cout << "Unnamed ScavTrap assembled." << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string givenName) {
+ScavTrap::ScavTrap(const std::string &givenName) {
 	_model = "ScavTrap";
 	_name = givenName;
 	_hitPoints = 100;
@@ -31,7 +31,7 @@ ScavTrap::ScavTrap(std::string givenName) {
 	std::cout << "ScavTrap " << _name << " assembled." << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &cpyfrom) {
+ScavTrap::ScavTrap(const ScavTrap &cpyfrom) : ClapTrap()  {
 	std::cout << "ScavTrap Copy constructor called." << std::endl;
 	*this = cpyfrom;
 }

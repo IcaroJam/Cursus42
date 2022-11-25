@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:13:58 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/23 11:59:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:59:05 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ ScavTrap::ScavTrap(const std::string &givenName) {
 	std::cout << "ScavTrap " << _name << " assembled." << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &cpyfrom) {
+ScavTrap::ScavTrap(const ScavTrap &cpyfrom) : ClapTrap() {
 	std::cout << "ScavTrap Copy constructor called." << std::endl;
 	*this = cpyfrom;
 }

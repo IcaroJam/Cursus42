@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:07:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/21 12:49:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:02:41 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class	ScavTrap : public ClapTrap {
 		void	guardGate(void);
 
 		ScavTrap();
-		ScavTrap(std::string givenName);
+		ScavTrap(const std::string &givenName);
 		ScavTrap(const ScavTrap &cpyfrom);
 		ScavTrap &operator=(const ScavTrap &cpyfrom);
 		~ScavTrap();

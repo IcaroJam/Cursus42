@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:14:00 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/11/23 12:00:14 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/25 12:59:22 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ FragTrap::FragTrap(const std::string &givenName) {
 	std::cout << "FragTrap " << _name << " assembled." << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &cpyfrom) {
+FragTrap::FragTrap(const FragTrap &cpyfrom) : ClapTrap() {
 	std::cout << "FragTrap Copy constructor called." << std::endl;
 	*this = cpyfrom;
 }
