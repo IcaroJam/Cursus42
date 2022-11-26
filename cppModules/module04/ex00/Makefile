@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/11/25 09:24:13 by senari           ###   ########.fr        #
+#    Updated: 2022/11/26 14:28:47 by senari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ endif
 
 #----                                                                      ----#
 
-SHRDSRC	= main.cpp Animal.cpp Cat.cpp Dog.cpp
+SHRDSRC	= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 
