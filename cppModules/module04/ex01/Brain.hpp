@@ -6,14 +6,14 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:24:33 by senari            #+#    #+#             */
-/*   Updated: 2022/11/25 19:30:41 by senari           ###   ########.fr       */
+/*   Updated: 2022/11/26 14:18:26 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BRAIN_HPP
 #define BRAIN_HPP
 
-#include <string>
+#include <iostream>
 
 class Brain {
 	public:
