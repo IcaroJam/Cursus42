@@ -6,11 +6,11 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:21:37 by senari            #+#    #+#             */
-/*   Updated: 2022/11/25 19:36:16 by senari           ###   ########.fr       */
+/*   Updated: 2022/11/27 13:07:22 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cstdlib>
+#include <stdlib.h>
 #include "Cat.hpp"
 #include "Dog.hpp"
 
@@ -20,21 +20,18 @@ void	leakCheck(void) {
 
 int main()
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	std::cout << "Creation phase done" << std::endl;
+	const Animal	*animalArr[10];
 
-	std::cout << "Var j has type: " << j->getType() << " " << std::endl;
-	std::cout << "Var i has type: " << i->getType() << " " << std::endl;
-	std::cout << "Var meta has type: " << meta->getType() << " " << std::endl;
-	std::cout << "j: "; j->makeSound();
-	std::cout << "i: "; i->makeSound(); //will output the cat sound!
-	std::cout << "meta: "; meta->makeSound();
+	for (int i = 0; i < 5; i++)
+		animalArr[i] = new Cat();
+	for (int i = 5; i < 10; i++)
+		animalArr[i] = new Dog();
 
-	delete j;
-	delete i;
-	delete meta;
+	std::cout << "animalArr[3] (" << animalArr[3]->getType() << "): " << std::endl; animalArr[3]->makeSound();
+	std::cout << "animalArr[7] (" << animalArr[7]->getType() << "): " << std::endl; animalArr[7]->makeSound();
+
+	for (int i = 0; i < 10; i++)
+		delete animalArr[i];
 
 	atexit(leakCheck);
 
