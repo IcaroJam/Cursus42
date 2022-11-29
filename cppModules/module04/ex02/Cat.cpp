@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:05:58 by senari            #+#    #+#             */
-/*   Updated: 2022/11/28 15:38:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/29 11:56:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ Cat::Cat(const Cat &cpyFrom) : AAnimal() {
 Cat &Cat::operator=(const Cat &cpyFrom) {
 	std::cout << "Calling copy Cat operator." << std::endl;
 	_type = cpyFrom._type;
+	delete _brain;
+	_brain = new Brain();
 	return (*this);
 }
 

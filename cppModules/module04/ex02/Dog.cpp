@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:05:58 by senari            #+#    #+#             */
-/*   Updated: 2022/11/28 15:39:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/11/29 11:57:16 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ Dog::Dog(const Dog &cpyFrom) : AAnimal() {
 Dog &Dog::operator=(const Dog &cpyFrom) {
 	std::cout << "Calling copy Dog operator." << std::endl;
 	_type = cpyFrom._type;
+	delete _brain;
+	_brain = new Brain();
 	return (*this);
 }
 
