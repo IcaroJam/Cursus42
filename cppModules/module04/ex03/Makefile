@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/12/01 12:40:58 by ntamayo-         ###   ########.fr        #
+#    Updated: 2022/12/01 17:51:35 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ endif
 
 #----                                                                      ----#
 
-SHRDSRC	= main.cpp
+SHRDSRC	= main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 
