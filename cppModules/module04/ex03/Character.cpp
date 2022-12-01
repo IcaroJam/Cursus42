@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:15:35 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/01 17:19:57 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:21:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ Character::Character(const Character &cpyFrom) {
 }
 
 Character &Character::operator=(const Character &cpyFrom) {
+	for (int i = 0; i < 4; i++)
+		delete _inventory[i];
 	delete [] _inventory;
 	_name = cpyFrom._name;
 	_invIndex = cpyFrom._invIndex;
@@ -37,6 +39,8 @@ Character &Character::operator=(const Character &cpyFrom) {
 }
 
 Character::~Character() {
+	for (int i = 0; i < 4; i++)
+		delete _inventory[i];
 	delete [] _inventory;
 }
 ////////////////////////////////////////////////////////////////////////////////

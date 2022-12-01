@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 17:32:44 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/01 17:47:40 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:22:12 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ MateriaSource::MateriaSource(const MateriaSource &cpyFrom) {
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &cpyFrom) {
+	for (int i = 0; i < 4; i++)
+		delete _inventory[i];
 	delete [] _inventory;
 	_invIndex = cpyFrom._invIndex;
 	_inventory = new AMateria*[4];
@@ -31,6 +33,8 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &cpyFrom) {
 }
 
 MateriaSource::~MateriaSource() {
+	for (int i = 0; i < 4; i++)
+		delete _inventory[i];
 	delete [] _inventory;
 }
 ////////////////////////////////////////////////////////////////////////////////
