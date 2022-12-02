@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:45:28 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/01 18:20:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:42:12 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	main(void) {
 	ICharacter* bob = new Character("bob");
 	me->use(0, *bob);
 	me->use(1, *bob);
+
+	me->unequip(2);
+	me->unequip(1);
+	me->use(1, *bob);
+	me->unequip(0);
 
 	delete bob;
 	delete me;
