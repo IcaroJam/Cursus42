@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:06:11 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/04 13:18:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/12/05 12:34:47 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 class Bureaucrat {
 	public:
 		Bureaucrat();
-		Bureaucrat(short givenGrade);
+		Bureaucrat(const std::string &givenName, short givenGrade);
 		Bureaucrat(const Bureaucrat &cpyFrom);
 		Bureaucrat &operator=(const Bureaucrat &cpyFrom);
 		~Bureaucrat();
