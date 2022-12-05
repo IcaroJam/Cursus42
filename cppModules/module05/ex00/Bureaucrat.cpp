@@ -6,16 +6,34 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:05:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/05 15:16:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:36:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
+// Exception definitions:
+class Bureaucrat::gradeTooHighException : public std::exception {
+	public:
+		virtual const char	*what() const throw() {
+			return ("An error ocurred while initializing a Bureaucrat class instance (Bureaucrat::gradeTooHighException)\n");
+		};
+};
+
+class Bureaucrat::gradeTooLowException : public std::exception {
+	public:
+		virtual const char	*what() const throw() {
+			return ("An error ocurred while initializing a Bureaucrat class instance (Bureaucrat::gradeTooLowException)\n");
+		};
+};
+////////////////////////////////////////////////////////////////////////////////
 // Canonical class shite:
 Bureaucrat::Bureaucrat() : _name("Unnamed"), _grade(150) {}
 
-Bureaucrat::Bureaucrat(const std::string &givenName, short givenGrade) : _name(givenName), _grade(givenGrade) {}
+Bureaucrat::Bureaucrat(const std::string &givenName, short givenGrade) {
+	if (givenGrade < 1 || givenGrade > 150)
+		throw gr
+}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &cpyFrom) {
 	*this = cpyFrom;
