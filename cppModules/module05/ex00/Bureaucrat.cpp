@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:05:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/05 12:36:47 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:16:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,23 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &cpyFrom) {
 Bureaucrat::~Bureaucrat() {}
 ////////////////////////////////////////////////////////////////////////////////
 // Member functions:
+std::string	Bureaucrat::getName(void) const {return (_name);}
 
+short		Bureaucrat::getGrade(void) const {return (_grade);}
+
+void		Bureaucrat::gradeInc(void) {
+	if (_grade > 1)
+		_grade--;
+}
+
+void		Bureaucrat::gradeDec(void) {
+	if (_grade < 150)
+		_grade++;
+}
 ////////////////////////////////////////////////////////////////////////////////
 // Non-member functions:
-
+std::ostream	&operator<<(std::ostream &outstream, const Bureaucrat &buro) {
+	outstream << buro.getName() << ", bureaucrat grade " << buro.getGrade() << ".";
+	return (outstream);
+}
 ////////////////////////////////////////////////////////////////////////////////
