@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:50:13 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/05 16:09:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:30:30 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(void) {
 				<< third << std::endl << std::endl;
 
 	try {
+		std::cout << "Attempting to increase buro second's grade." << std::endl;
 		second.gradeInc();
 	} catch (std::exception &exep) {
 		std::cout << exep.what() << std::endl;
@@ -49,6 +50,7 @@ int	main(void) {
 				<< third << std::endl << std::endl;
 
 	try {
+		std::cout << "Attempting to decrease buro third's grade." << std::endl;
 		third.gradeDec();
 	} catch (std::exception &exep) {
 		std::cout << exep.what() << std::endl;
