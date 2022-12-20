@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:59:54 by senari            #+#    #+#             */
-/*   Updated: 2022/12/20 17:07:05 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 17:09:14 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 		exit(1);
 	}
 	Form::execute(executor);
-	std::cout << "*tree*\n_tree_\n*tree*\n(ascii fucked the editor up lol)" << std::endl;
+	outfile << "*tree*\n_tree_\n*tree*\n(ascii fucked the editor up lol)" << std::endl;
+	outfile.close();
 }
 ////////////////////////////////////////////////////////////////////////////////
