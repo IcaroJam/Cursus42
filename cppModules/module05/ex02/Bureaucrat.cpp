@@ -6,11 +6,10 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:05:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/19 19:36:39 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 13:51:13 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <exception>
 #include "Form.hpp"
 
 // Exception definitions:
@@ -72,7 +71,16 @@ void		Bureaucrat::signForm(Form *form) {
 		form->beSigned(*this);
 		std::cout << "Buro " << _name << " signed form \"" << form->getName() << "\"." << std::endl;
 	} catch (std::exception &exep) {
-		std::cout << "Buro " << _name << " couldn't sign form \"" << form->getName() << "\". " << exep.what() << std::endl;
+		std::cout << "Buro " << _name << " couldn't sign form \"" << form->getName() << "\": " << exep.what() << std::endl;
+	}
+}
+
+void		Bureaucrat::execForm(const Form &form) const {
+	try {
+		form.execute(*this);
+		std::cout << "Buro " << _name << " executed form \"" << form.getName() << "\"." << std::endl;
+	} catch (std::exception &excep) {
+		std::cout << "Buro " << _name << " failed to execute form \"" << form.getName() << "\": " << excep.what() << std::endl;
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////

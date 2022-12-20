@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:05:57 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/19 18:25:43 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 13:45:33 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ class Form::gradeTooLowException : public std::exception {
 	public:
 		virtual const char	*what() const throw() {
 			return ("An error ocurred while initializing a Form class instance (Form::gradeTooLowException)\n");
+		}
+};
+
+class Form::unsignedFormException : public std::exception {
+	public:
+		virtual const char	*what() const throw() {
+			return ("An error ocurred while executing a Form class instance derived class instance (Form::unsignedFormException)\n");
 		}
 };
 ////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +72,13 @@ void		Form::beSigned(const Bureaucrat &signer) {
 	if (signer.getGrade() <= _signGrade)
 		_signed = true;
 	else
+		throw gradeTooLowException();
+}
+
+void		Form::execute(const Bureaucrat &executor) const {
+	if (!_signed)
+		throw unsignedFormException();
+	if (executor.getGrade() > _execGrade)
 		throw gradeTooLowException();
 }
 ////////////////////////////////////////////////////////////////////////////////

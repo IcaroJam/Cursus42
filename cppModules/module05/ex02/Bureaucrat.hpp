@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:06:11 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/19 18:57:32 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 13:46:58 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ class Bureaucrat {
 		void		gradeDec(void);
 
 		void		signForm(Form *form);
+		void		execForm(const Form &form) const;
 
 	private:
 		const std::string	_name;

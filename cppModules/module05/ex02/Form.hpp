@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:06:11 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/19 18:56:51 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 13:54:47 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ class Form {
 		Form &operator=(const Form &cpyFrom);
 		~Form();
 
-		std::string	getName(void) const;
-		bool		getSignStatus(void) const;
-		short		getSignGrade(void) const;
-		short		getExecGrade(void) const;
+		std::string			getName(void) const;
+		bool				getSignStatus(void) const;
+		short				getSignGrade(void) const;
+		short				getExecGrade(void) const;
 
-		void		beSigned(const Bureaucrat &signer);
+		void				beSigned(const Bureaucrat &signer);
+		virtual void		execute(const Bureaucrat &executor) const = 0;
 
 	private:
 		const std::string	_name;
@@ -38,6 +39,7 @@ class Form {
 
 		class				gradeTooHighException;
 		class				gradeTooLowException;
+		class				unsignedFormException;
 };
 
 std::ostream	&operator<<(std::ostream &outstream, const Form &form);
