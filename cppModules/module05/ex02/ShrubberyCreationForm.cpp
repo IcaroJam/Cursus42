@@ -6,18 +6,18 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:59:54 by senari            #+#    #+#             */
-/*   Updated: 2022/12/20 17:40:42 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 18:00:16 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
 // Canonical class shite:
-ShrubberyCreationForm::ShrubberyCreationForm() : _target("noTarget"), Form("ShrubberyCreationForm", 145, 137) {}
+ShrubberyCreationForm::ShrubberyCreationForm() : Form("ShrubberyCreationForm", 145, 137), _target("noTarget") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string givenTarget) : _target(givenTarget), Form("ShrubberyCreationForm", 145, 137) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string givenTarget) : Form("ShrubberyCreationForm", 145, 137), _target(givenTarget) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &cpyFrom) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &cpyFrom) : Form(cpyFrom) {
 	*this = cpyFrom;
 }
 
@@ -33,7 +33,7 @@ void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 	std::ofstream	outfile;
 
 	Form::execute(executor);
-	outfile.open(_target + "_shrubbery");
+	outfile.open((_target + "_shrubbery").c_str());
 	if (outfile.fail()) {
 		std::cerr << "Failed to create the outfile." << std::endl;
 		exit(1);

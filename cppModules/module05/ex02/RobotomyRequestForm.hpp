@@ -6,13 +6,15 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:55:29 by senari            #+#    #+#             */
-/*   Updated: 2022/12/20 17:11:54 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 19:18:00 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ROBOTOMYREQUESTFORM_HPP
 #define ROBOTOMYREQUESTFORM_HPP
 
+#include <ctime>
+#include <cstdlib>
 #include "Form.hpp"
 
 class RobotomyRequestForm : public Form {

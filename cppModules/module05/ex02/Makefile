@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/12/19 21:19:28 by senari           ###   ########.fr        #
+#    Updated: 2022/12/20 18:01:21 by senari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ endif
 
 #----                                                                      ----#
 
-SHRDSRC	= main.cpp Bureaucrat.cpp Form.cpp
+SHRDSRC	= main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 
