@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:06:11 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/20 13:54:47 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 20:21:26 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Form {
 		Form(const std::string &givenName, short givenSignGrade, short givenExecGrade);
 		Form(const Form &cpyFrom);
 		Form &operator=(const Form &cpyFrom);
-		~Form();
+		virtual ~Form();
 
 		std::string			getName(void) const;
 		bool				getSignStatus(void) const;

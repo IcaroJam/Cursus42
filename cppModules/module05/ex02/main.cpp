@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:50:13 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/20 19:38:50 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 20:21:07 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,8 @@ int	main(void) {
 	shrubExec.execForm(*shrubForm);
 	roboExec.execForm(*roboForm);
 	presiExec.execForm(*presiForm);
+
+	delete shrubForm;
+	delete roboForm;
+	delete presiForm;
 }
