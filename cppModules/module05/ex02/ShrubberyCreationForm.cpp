@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:59:54 by senari            #+#    #+#             */
-/*   Updated: 2022/12/20 17:09:14 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 17:40:42 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {}
 void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 	std::ofstream	outfile;
 
+	Form::execute(executor);
 	outfile.open(_target + "_shrubbery");
 	if (outfile.fail()) {
 		std::cerr << "Failed to create the outfile." << std::endl;
 		exit(1);
 	}
-	Form::execute(executor);
 	outfile << "*tree*\n_tree_\n*tree*\n(ascii fucked the editor up lol)" << std::endl;
 	outfile.close();
 }
