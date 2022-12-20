@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:59:54 by senari            #+#    #+#             */
-/*   Updated: 2022/12/20 14:35:54 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/20 17:07:05 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {}
 ////////////////////////////////////////////////////////////////////////////////
 // Member functions:
 void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
-	std::fstream	outfile;
+	std::ofstream	outfile;
 
 	outfile.open(_target + "_shrubbery");
 	if (outfile.fail()) {
