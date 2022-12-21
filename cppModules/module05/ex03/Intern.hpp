@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 12:24:56 by senari            #+#    #+#             */
-/*   Updated: 2022/12/21 13:56:34 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/21 14:11:05 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ class Intern {
 		~Intern();
 
 		Form	*makeForm(std::string formName, const std::string &formTarget);
-
-	private:
-		static Form	*(*_formPtrs[])(std::string);
 };
 
 #endif

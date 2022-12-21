@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 12:33:35 by senari            #+#    #+#             */
-/*   Updated: 2022/12/21 14:09:00 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/21 14:11:26 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ std::string validForms[] = {
 	""
 };
 
-Form	*(*Intern::_formPtrs[])(std::string) = {
+Form	*(*formPtrs[])(std::string) = {
 	ShrubberyCreationForm::clone,
 	RobotomyRequestForm::clone,
 	PresidentialPardonForm::clone
@@ -48,7 +48,7 @@ Form	*Intern::makeForm(std::string formName, const std::string &formTarget) {
 	for (int i = 0; validForms[i] != ""; i++) {
 		if (formName == validForms[i]) {
 			std::cout << "Intern creates " << formName << std::endl;
-			return (_formPtrs[i / 3](formTarget));
+			return (formPtrs[i / 3](formTarget));
 		}
 	}
 	std::cerr << "Intern couldn't find references for " << formName << std::endl;
