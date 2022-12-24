@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/21 20:33:43 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/24 14:20:21 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,13 @@ enum	convTypes {
 }		definedType;
 
 // Canonical class shite:
-Converter::Converter() {}
+Converter::Converter() : _inStr(""), _cval(0), _ival(0), _dval(0.), _fval(0.0f) {
+	_plausible[0] = true;
+	_plausible[1] = true;
+	_plausible[2] = true;
+	_plausible[3] = true;
+}
+
 Converter::Converter(const char *givenString) {
 	_inStr = givenString;
 	_plausible[0] = false;
@@ -32,9 +38,22 @@ Converter::Converter(const char *givenString) {
 	plausibilityCheck();
 }
 
-Converter::Converter(const Converter &cpyFrom) {(void)cpyFrom;}
+Converter::Converter(const Converter &cpyFrom) {
+	*this = cpyFrom;
+}
 
-Converter &Converter::operator=(const Converter &cpyFrom) {(void)cpyFrom; return (*this);}
+Converter &Converter::operator=(const Converter &cpyFrom) {
+	_inStr = cpyFrom._inStr;
+	_cval = cpyFrom._cval;
+	_ival = cpyFrom._ival;
+	_dval = cpyFrom._dval;
+	_fval = cpyFrom._fval;
+	_plausible[0] = cpyFrom._plausible[0];
+	_plausible[1] = cpyFrom._plausible[1];
+	_plausible[2] = cpyFrom._plausible[2];
+	_plausible[3] = cpyFrom._plausible[3];
+	return (*this);
+}
 
 Converter::~Converter() {}
 ////////////////////////////////////////////////////////////////////////////////
