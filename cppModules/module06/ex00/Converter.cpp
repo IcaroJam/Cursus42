@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/24 14:20:21 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/24 15:19:05 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ Converter &Converter::operator=(const Converter &cpyFrom) {
 
 Converter::~Converter() {}
 ////////////////////////////////////////////////////////////////////////////////
+// Aid functions:
+
+////////////////////////////////////////////////////////////////////////////////
 // Member functions:
 void	Converter::plausibilityCheck(void) {
 	// Char specific:
@@ -70,22 +73,25 @@ void	Converter::plausibilityCheck(void) {
 	std::string::size_type	i = 0;
 	if (_inStr[0] == '-')
 		i++;
-	if (std::isdigit(_inStr[i]))
-		definedType = convInt;
 	while (i < _inStr.length() && std::isdigit(_inStr[i]))
 		i++;
-	if (_inStr[i] == '.') {
+	if (!_inStr[i])
+		definedType = convInt;
+	else if (_inStr[i] == '.') {
+		_plausible[convDouble] = true;
 		definedType = convDouble;
 		i++;
 		while (i < _inStr.length() && std::isdigit(_inStr[i]))
 			i++;
-	}
-	if (_inStr[i] == 'f' && !_inStr[i + 1]) {
-		_plausible[convDouble] = true;
-		_plausible[convFloat] = true;
-		definedType = convFloat;
-	} else if (_inStr[i]) {
+		if (_inStr[i] == 'f') {
+			if (!_inStr[i + 1]) {
+				_plausible[convFloat] = true;
+				definedType = convFloat;
+			} else
+				definedType = convBad;
+		} else if (_inStr[i])
+			definedType = convBad;
+	} else
 		definedType = convBad;
-	}
 }
 ////////////////////////////////////////////////////////////////////////////////
