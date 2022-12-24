@@ -6,13 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:18:19 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/06 12:31:56 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2022/12/24 18:43:45 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isspace(const char c)
 {
-	if ((c > 8 && c < 14) || c == 32)
-		return (1);
-	return (0);
+	return ((c > 8 && c < 14) || c == 32);
 }
