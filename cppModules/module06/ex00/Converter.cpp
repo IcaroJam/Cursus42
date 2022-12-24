@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/24 15:19:05 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/24 19:20:55 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	Converter::plausibilityCheck(void) {
 	std::string::size_type	i = 0;
 	if (_inStr[0] == '-')
 		i++;
-	while (i < _inStr.length() && std::isdigit(_inStr[i]))
+	while (_inStr[i] && std::isdigit(_inStr[i]))
 		i++;
 	if (!_inStr[i])
 		definedType = convInt;
@@ -81,7 +81,7 @@ void	Converter::plausibilityCheck(void) {
 		_plausible[convDouble] = true;
 		definedType = convDouble;
 		i++;
-		while (i < _inStr.length() && std::isdigit(_inStr[i]))
+		while (_inStr[i] && std::isdigit(_inStr[i]))
 			i++;
 		if (_inStr[i] == 'f') {
 			if (!_inStr[i + 1]) {
