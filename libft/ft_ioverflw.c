@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 12:37:36 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/12/24 19:05:38 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/25 20:48:49 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	numlen(const char *str)
 	int	i;
 
 	i = 0;
+	if (*str == '-')
+		i++;
 	while (ft_isdigit(str[i]))
 		i++;
 	return (i);
