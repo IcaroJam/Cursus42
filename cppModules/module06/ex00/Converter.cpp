@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/24 19:20:55 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/26 19:40:21 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ enum	convTypes {
 }		definedType;
 
 // Canonical class shite:
-Converter::Converter() : _inStr(""), _cval(0), _ival(0), _dval(0.), _fval(0.0f) {
+Converter::Converter() : _inStr(""), _cval(0), _ival(0), _fval(0.0f), _dval(0.) {
 	_plausible[0] = true;
 	_plausible[1] = true;
 	_plausible[2] = true;
@@ -67,31 +67,36 @@ void	Converter::plausibilityCheck(void) {
 		_cval = _inStr[0];
 		_plausible[convChar] = true;
 		definedType = convChar;
-	}
-
-	// Digit correctness:
-	std::string::size_type	i = 0;
-	if (_inStr[0] == '-')
-		i++;
-	while (_inStr[i] && std::isdigit(_inStr[i]))
-		i++;
-	if (!_inStr[i])
-		definedType = convInt;
-	else if (_inStr[i] == '.') {
-		_plausible[convDouble] = true;
-		definedType = convDouble;
-		i++;
+	} else {
+		// Digit correctness:
+		std::string::size_type	i = 0;
+		if (_inStr[0] == '-')
+			i++;
 		while (_inStr[i] && std::isdigit(_inStr[i]))
 			i++;
-		if (_inStr[i] == 'f') {
-			if (!_inStr[i + 1]) {
-				_plausible[convFloat] = true;
-				definedType = convFloat;
-			} else
+		if (!_inStr[i])
+			definedType = convInt;
+		else if (_inStr[i] == '.') {
+			_plausible[convDouble] = true;
+			definedType = convDouble;
+			i++;
+			while (_inStr[i] && std::isdigit(_inStr[i]))
+				i++;
+			if (_inStr[i] == 'f') {
+				if (!_inStr[i + 1]) {
+					_plausible[convFloat] = true;
+					definedType = convFloat;
+				} else
+					definedType = convBad;
+			} else if (_inStr[i])
 				definedType = convBad;
-		} else if (_inStr[i])
+		} else if (_inStr[i] == 'f' && !_inStr[i + 1]) {
+			_plausible[convFloat] = true;
+			definedType = convFloat;
+		} else
 			definedType = convBad;
-	} else
-		definedType = convBad;
+	}
+	// DEBUG:
+	std::cout << definedType << std::endl;
 }
 ////////////////////////////////////////////////////////////////////////////////
