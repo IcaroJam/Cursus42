@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/27 12:03:40 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/27 12:31:31 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ Converter::Converter() : _inStr(""), _cval(0), _ival(0), _fval(0.0f), _dval(0.) 
 
 Converter::Converter(const char *givenString) : _cval(0), _ival(0), _fval(0.0f), _dval(0.) {
 	_inStr = givenString;
-	_plausible[0] = false;
-	_plausible[1] = false;
-	_plausible[2] = false;
-	_plausible[3] = false;
+	_plausible[0] = true;
+	_plausible[1] = true;
+	_plausible[2] = true;
+	_plausible[3] = true;
 
 	plausibilityCheck();
 	typeConversion();
@@ -66,7 +66,6 @@ void	Converter::plausibilityCheck(void) {
 	// Char specific:
 	if (_inStr.length() == 1 && !std::isdigit(_inStr[0])) {
 		_cval = _inStr[0];
-		_plausible[convChar] = true;
 		definedType = convChar;
 	} else {
 		// Digit correctness:
@@ -75,24 +74,21 @@ void	Converter::plausibilityCheck(void) {
 			i++;
 		while (_inStr[i] && std::isdigit(_inStr[i]))
 			i++;
-		if (!_inStr[i])
+		if (!_inStr[i]) {
 			definedType = convInt;
-		else if (_inStr[i] == '.') {
-			_plausible[convDouble] = true;
+		 } else if (_inStr[i] == '.') {
 			definedType = convDouble;
 			i++;
 			while (_inStr[i] && std::isdigit(_inStr[i]))
 				i++;
 			if (_inStr[i] == 'f') {
 				if (!_inStr[i + 1]) {
-					_plausible[convFloat] = true;
 					definedType = convFloat;
 				} else
 					definedType = convBad;
 			} else if (_inStr[i])
 				definedType = convBad;
 		} else if (_inStr[i] == 'f' && !_inStr[i + 1]) {
-			_plausible[convFloat] = true;
 			definedType = convFloat;
 		} else
 			definedType = convBad;
@@ -108,6 +104,8 @@ void	Converter::typeConversion(void) {
 			break;
 		case convInt:
 			_ival = std::atoi(_inStr.c_str());
+			// This resulted in segfaults for some reason:
+			//isprint(_ival) ? _cval = static_cast<char>(_ival) : _plausible[convChar] = false;
 			_fval = static_cast<float>(_ival);
 			_dval = static_cast<double>(_ival);
 			break;
@@ -125,7 +123,7 @@ void	Converter::typeConversion(void) {
 			break;
 	}
 	// DEBUG:
-	std::cout << "Char:   " << _cval << std::endl;
+	std::cout << "Char:   " << "\'" << _cval << "\'" << std::endl;
 	std::cout << "Int:    " << _ival << std::endl;
 	std::cout << "Float:  " << _fval << std::endl;
 	std::cout << "Double: " << _dval << std::endl;
