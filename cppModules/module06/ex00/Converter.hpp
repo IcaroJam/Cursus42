@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:05:16 by senari            #+#    #+#             */
-/*   Updated: 2022/12/24 14:56:12 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/27 11:38:49 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CONVERTER_HPP
 
 #include <iostream>
+#include <cstdlib>
 
 class Converter {
 	public:
@@ -33,6 +34,8 @@ class Converter {
 		double		_dval;
 
 		void	plausibilityCheck(void);
+		void	typeConversion(void);
+		void	typeCasting(void);
 };
 
 #endif

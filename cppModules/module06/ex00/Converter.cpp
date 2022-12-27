@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/26 19:40:21 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/27 11:56:05 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Converter::Converter() : _inStr(""), _cval(0), _ival(0), _fval(0.0f), _dval(0.) 
 	_plausible[3] = true;
 }
 
-Converter::Converter(const char *givenString) {
+Converter::Converter(const char *givenString) : _cval(0), _ival(0), _fval(0.0f), _dval(0.) {
 	_inStr = givenString;
 	_plausible[0] = false;
 	_plausible[1] = false;
@@ -36,6 +36,7 @@ Converter::Converter(const char *givenString) {
 	_plausible[3] = false;
 
 	plausibilityCheck();
+	typeConversion();
 }
 
 Converter::Converter(const Converter &cpyFrom) {
@@ -98,5 +99,31 @@ void	Converter::plausibilityCheck(void) {
 	}
 	// DEBUG:
 	std::cout << definedType << std::endl;
+}
+
+void	Converter::typeConversion(void) {
+	switch (definedType) {
+		// Single chars have already been handled. Digit to char will be during casting.
+		case convChar:
+			break;
+		case convInt:
+			_ival = std::atoi(_inStr.c_str());
+		case convFloat:
+			_fval = std::atof(_inStr.c_str());
+		case convDouble:
+			_dval = std::atof(_inStr.c_str());
+			break;
+		case convBad:
+			break;
+	}
+	// DEBUG:
+	std::cout << "Char:   " << _cval << std::endl;
+	std::cout << "Int:    " << _ival << std::endl;
+	std::cout << "Float:  " << _fval << std::endl;
+	std::cout << "Double: " << _dval << std::endl;
+}
+
+void	Converter::typeCasting(void) {
+	
 }
 ////////////////////////////////////////////////////////////////////////////////

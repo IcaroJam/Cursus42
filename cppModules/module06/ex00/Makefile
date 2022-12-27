@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/12/21 18:05:01 by senari           ###   ########.fr        #
+#    Updated: 2022/12/27 11:42:38 by senari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME	= convert
 
-CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic-errors
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic-errors -Wno-implicit-fallthrough
 
 VPATH	= ./ #<<your directories here (separated by :)>>
 
