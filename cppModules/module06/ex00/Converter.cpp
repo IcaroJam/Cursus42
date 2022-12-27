@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/27 12:31:31 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/27 12:59:18 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ Converter::Converter(const char *givenString) : _cval(0), _ival(0), _fval(0.0f),
 
 	plausibilityCheck();
 	typeConversion();
+	convDisplay();
 }
 
 Converter::Converter(const Converter &cpyFrom) {
@@ -104,8 +105,7 @@ void	Converter::typeConversion(void) {
 			break;
 		case convInt:
 			_ival = std::atoi(_inStr.c_str());
-			// This resulted in segfaults for some reason:
-			//isprint(_ival) ? _cval = static_cast<char>(_ival) : _plausible[convChar] = false;
+			/* isprint(_ival) ? _cval = static_cast<char>(_ival) : _plausible[convChar] = false; */
 			_fval = static_cast<float>(_ival);
 			_dval = static_cast<double>(_ival);
 			break;
@@ -122,14 +122,22 @@ void	Converter::typeConversion(void) {
 		case convBad:
 			break;
 	}
-	// DEBUG:
-	std::cout << "Char:   " << "\'" << _cval << "\'" << std::endl;
-	std::cout << "Int:    " << _ival << std::endl;
-	std::cout << "Float:  " << _fval << std::endl;
-	std::cout << "Double: " << _dval << std::endl;
 }
 
-void	Converter::typeCasting(void) {
-	
+void	Converter::convDisplay(void) {
+	// Chars:
+	std::cout << "Char:   ";
+	if (!_plausible[convChar])
+		std::cout << "Impossible" << std::endl;
+	else if (isprint(_ival))
+		std::cout << "\'" << _cval << "\'" << std::endl;
+	else
+	    std::cout << "Non-displayable" << std::endl;
+	// Ints:
+	std::cout << "Int:    " << _ival << std::endl;
+	// Floats:
+	std::cout << "Float:  " << _fval << std::endl;
+	// Doubles:
+	std::cout << "Double: " << _dval << std::endl;
 }
 ////////////////////////////////////////////////////////////////////////////////
