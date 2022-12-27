@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/27 11:56:05 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/27 12:03:40 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,18 @@ void	Converter::typeConversion(void) {
 			break;
 		case convInt:
 			_ival = std::atoi(_inStr.c_str());
+			_fval = static_cast<float>(_ival);
+			_dval = static_cast<double>(_ival);
+			break;
 		case convFloat:
 			_fval = std::atof(_inStr.c_str());
+			_ival = static_cast<int>(_fval);
+			_dval = static_cast<double>(_fval);
+			break;
 		case convDouble:
 			_dval = std::atof(_inStr.c_str());
+			_ival = static_cast<int>(_dval);
+			_fval = static_cast<float>(_dval);
 			break;
 		case convBad:
 			break;
