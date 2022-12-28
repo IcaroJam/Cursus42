@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:05:06 by senari            #+#    #+#             */
-/*   Updated: 2022/12/28 19:05:47 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/28 20:16:11 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,7 @@ int	main(int argc, char **argv) {
 	if (argc > 1) {
 		// do stuff for each string on argv. Maybe create a Converter instance and print with it?
 		Converter	DEBUG(argv[1]);
+		std::cout << std::numeric_limits<float>::max() << std::endl;
+		std::cout << std::numeric_limits<double>::max() << std::endl;
 	}
 }
