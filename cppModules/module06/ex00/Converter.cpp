@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/28 20:28:25 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/28 20:52:09 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,12 @@ static bool	overflowCheck(const std::string &str) {
 	}
 	return false;
 }
+
+static bool	weirdValsCheck(std::string str) {
+	for (int i = 0; i < 4 && str[i]; i++)
+		str[i] = std::tolower(str[i]);
+	return (str == "nan" || str == "+inf" || str == "-inf");
+}
 ////////////////////////////////////////////////////////////////////////////////
 // Member functions:
 void	Converter::plausibilityCheck(void) {
@@ -93,6 +99,12 @@ void	Converter::plausibilityCheck(void) {
 		_plausible[convInt] = false;
 		_plausible[convFloat] = false;
 		_plausible[convDouble] = false;
+	} else if (weirdValsCheck(_inStr)) {
+		definedType = convBad;
+		_plausible[convChar] = false;
+		_plausible[convInt] = false;
+		_fval = std::atof(_inStr.c_str());
+		_dval = _fval;
 	} else {
 		// Digit correctness:
 		std::string::size_type	i = 0;
@@ -116,8 +128,13 @@ void	Converter::plausibilityCheck(void) {
 				definedType = convBad;
 		} else if (_inStr[i] == 'f' && !_inStr[i + 1]) {
 			definedType = convFloat;
-		} else
+		} else {
 			definedType = convBad;
+			_plausible[0] = false;
+			_plausible[1] = false;
+			_plausible[2] = false;
+			_plausible[3] = false;
+		}
 	}
 	// DEBUG:
 	std::cout << definedType << std::endl;
@@ -177,8 +194,16 @@ void	Converter::convDisplay(void) {
 	else
 		std::cout << "Impossible" << std::endl;
 	// Floats:
-	std::cout << "Float:  " << _fval << std::endl; // Overflows and 'nan/+inf/-inf' should be checked for here.
+	std::cout << "Float:  ";
+	if (_plausible[convFloat])
+		std::cout << _fval << std::endl; // Overflows should be checked for here.
+	else
+		std::cout << "Impossible" << std::endl;
 	// Doubles:
-	std::cout << "Double: " << _dval << std::endl; // Overflows and 'nan/+inf/-inf' should be checked for here.
+	std::cout << "Double: ";
+	if (_plausible[convDouble])
+		std::cout << _dval << std::endl; // Overflows should be checked for here.
+	else
+		std::cout << "Impossible" << std::endl;
 }
 ////////////////////////////////////////////////////////////////////////////////
