@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/28 19:19:20 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/28 20:13:54 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,29 @@ Converter &Converter::operator=(const Converter &cpyFrom) {
 Converter::~Converter() {}
 ////////////////////////////////////////////////////////////////////////////////
 // Aid functions:
+static bool	overflowCheck(const std::string &str) {
+	long					temp = 0;
+	std::string::size_type	i = 0;
 
+	if (str[0] == '-') {
+		i++;
+		temp -= str[i++] + '0';
+		while (std::isdigit(str[i])) {
+			temp *= 10;
+			temp += str[i++] + '0';
+			if (temp < std::numeric_limits<int>::min())
+				return true;
+		}
+	} else {
+		while (std::isdigit(str[i])) {
+			temp *= 10;
+			temp += str[i++] + '0';
+			if (temp > std::numeric_limits<int>::max())
+				return true;
+		}
+	}
+	return false;
+}
 ////////////////////////////////////////////////////////////////////////////////
 // Member functions:
 void	Converter::plausibilityCheck(void) {
@@ -68,6 +90,9 @@ void	Converter::plausibilityCheck(void) {
 	if (_inStr.length() == 1 && !std::isdigit(_inStr[0])) {
 		_cval = _inStr[0];
 		definedType = convChar;
+		_plausible[convInt] = false;
+		_plausible[convFloat] = false;
+		_plausible[convDouble] = false;
 	} else {
 		// Digit correctness:
 		std::string::size_type	i = 0;
@@ -77,7 +102,7 @@ void	Converter::plausibilityCheck(void) {
 			i++;
 		if (!_inStr[i]) {
 			definedType = convInt;
-		 } else if (_inStr[i] == '.') {
+		} else if (_inStr[i] == '.') {
 			definedType = convDouble;
 			i++;
 			while (_inStr[i] && std::isdigit(_inStr[i]))
@@ -99,15 +124,22 @@ void	Converter::plausibilityCheck(void) {
 }
 
 void	Converter::typeConversion(void) {
+	if (overflowCheck(_inStr))
+		_plausible[convInt] = false;
+
 	switch (definedType) {
-		// Single chars have already been handled. Digit to char will be during casting.
 		case convChar:
 			break;
 		case convInt:
-			_ival = std::atoi(_inStr.c_str());
-			_cval = static_cast<char>(_ival);
-			_fval = static_cast<float>(_ival);
-			_dval = static_cast<double>(_ival);
+			if (_plausible[convInt]) {
+				_ival = std::atoi(_inStr.c_str());
+				_cval = static_cast<char>(_ival);
+				_fval = static_cast<float>(_ival);
+				_dval = static_cast<double>(_ival);
+			} else {
+				_fval = atof(_inStr.c_str());
+				_dval = atof(_inStr.c_str());
+			}
 			break;
 		case convFloat:
 			_fval = std::atof(_inStr.c_str());
@@ -124,6 +156,9 @@ void	Converter::typeConversion(void) {
 		case convBad:
 			break;
 	}
+
+	if (!_plausible[convInt] || _ival < 0 || _ival > 127)
+		_plausible[convChar] = false;
 }
 
 void	Converter::convDisplay(void) {
@@ -136,7 +171,11 @@ void	Converter::convDisplay(void) {
 	else
 	    std::cout << "Non-displayable" << std::endl;
 	// Ints:
-	std::cout << "Int:    " << _ival << std::endl; // Overflows should be checked for here.
+	std::cout << "Int:    ";
+	if (_plausible[convInt])
+		std::cout << _ival << std::endl; // Overflows should be checked for here.
+	else
+		std::cout << "Impossible" << std::endl;
 	// Floats:
 	std::cout << "Float:  " << _fval << std::endl; // Overflows and 'nan/+inf/-inf' should be checked for here.
 	// Doubles:
