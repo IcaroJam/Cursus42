@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/27 12:59:18 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/28 19:06:43 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void	Converter::typeConversion(void) {
 			break;
 		case convInt:
 			_ival = std::atoi(_inStr.c_str());
-			/* isprint(_ival) ? _cval = static_cast<char>(_ival) : _plausible[convChar] = false; */
 			_fval = static_cast<float>(_ival);
 			_dval = static_cast<double>(_ival);
 			break;
@@ -129,7 +128,7 @@ void	Converter::convDisplay(void) {
 	std::cout << "Char:   ";
 	if (!_plausible[convChar])
 		std::cout << "Impossible" << std::endl;
-	else if (isprint(_ival))
+	else if (_ival > 31 && _ival < 127)
 		std::cout << "\'" << _cval << "\'" << std::endl;
 	else
 	    std::cout << "Non-displayable" << std::endl;
