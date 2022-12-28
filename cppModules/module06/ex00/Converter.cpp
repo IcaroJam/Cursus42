@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/28 19:06:43 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/28 19:19:20 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,20 @@ void	Converter::typeConversion(void) {
 			break;
 		case convInt:
 			_ival = std::atoi(_inStr.c_str());
+			_cval = static_cast<char>(_ival);
 			_fval = static_cast<float>(_ival);
 			_dval = static_cast<double>(_ival);
 			break;
 		case convFloat:
 			_fval = std::atof(_inStr.c_str());
 			_ival = static_cast<int>(_fval);
+			_cval = static_cast<char>(_ival);
 			_dval = static_cast<double>(_fval);
 			break;
 		case convDouble:
 			_dval = std::atof(_inStr.c_str());
 			_ival = static_cast<int>(_dval);
+			_cval = static_cast<char>(_ival);
 			_fval = static_cast<float>(_dval);
 			break;
 		case convBad:
@@ -133,10 +136,10 @@ void	Converter::convDisplay(void) {
 	else
 	    std::cout << "Non-displayable" << std::endl;
 	// Ints:
-	std::cout << "Int:    " << _ival << std::endl;
+	std::cout << "Int:    " << _ival << std::endl; // Overflows should be checked for here.
 	// Floats:
-	std::cout << "Float:  " << _fval << std::endl;
+	std::cout << "Float:  " << _fval << std::endl; // Overflows and 'nan/+inf/-inf' should be checked for here.
 	// Doubles:
-	std::cout << "Double: " << _dval << std::endl;
+	std::cout << "Double: " << _dval << std::endl; // Overflows and 'nan/+inf/-inf' should be checked for here.
 }
 ////////////////////////////////////////////////////////////////////////////////
