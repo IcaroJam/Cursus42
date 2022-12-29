@@ -36,7 +36,7 @@ class Converter {
 		float		_fval;
 		double		_dval;
 
-		void	plausibilityCheck(void);
+		void	typeCheck(void);
 		void	typeConversion(void);
 		void	typeCasting(void);
 };
