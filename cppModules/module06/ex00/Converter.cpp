@@ -91,7 +91,7 @@ static bool	weirdValsCheck(std::string str) {
 }
 ////////////////////////////////////////////////////////////////////////////////
 // Member functions:
-void	Converter::plausibilityCheck(void) {
+void	Converter::typeCheck(void) {
 	// Char specific:
 	if (_inStr.length() == 1 && !std::isdigit(_inStr[0])) {
 		_cval = _inStr[0];
@@ -136,8 +136,6 @@ void	Converter::plausibilityCheck(void) {
 			_plausible[3] = false;
 		}
 	}
-	// DEBUG:
-	std::cout << definedType << std::endl;
 }
 
 void	Converter::typeConversion(void) {
