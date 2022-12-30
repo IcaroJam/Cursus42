@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/28 20:52:09 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/30 17:09:46 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Converter::Converter(const char *givenString) : _cval(0), _ival(0), _fval(0.0f),
 	_plausible[2] = true;
 	_plausible[3] = true;
 
-	plausibilityCheck();
+	typeCheck();
 	typeConversion();
 	convDisplay();
 }
