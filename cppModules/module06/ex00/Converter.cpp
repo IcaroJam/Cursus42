@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/31 17:07:51 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/31 17:14:34 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ bool	Converter::weirdValsCheck(std::string str) {
 void	Converter::typeCheck(void) {
 	// Char specific:
 	if (_inStr.length() == 1 && !std::isdigit(_inStr[0])) {
-		_cval = _inStr[0];
 		definedType = convChar;
 		_plausible[convInt] = false;
 		_plausible[convFloat] = false;
@@ -149,6 +148,7 @@ void	Converter::typeConversion(void) {
 
 	switch (definedType) {
 		case convChar:
+			_cval = _inStr[0];
 			break;
 		case convInt:
 			if (_plausible[convInt]) {
@@ -190,18 +190,21 @@ void	Converter::convDisplay(void) {
 		std::cout << "\'" << _cval << "\'" << std::endl;
 	else
 	    std::cout << "Non-displayable" << std::endl;
+
 	// Ints:
 	std::cout << "Int:    ";
 	if (_plausible[convInt])
 		std::cout << _ival << std::endl; // Overflows should be checked for here.
 	else
 		std::cout << "Impossible" << std::endl;
+
 	// Floats:
 	std::cout << "Float:  ";
 	if (_plausible[convFloat])
 		std::cout << _fval << std::endl; // Overflows should be checked for here.
 	else
 		std::cout << "Impossible" << std::endl;
+
 	// Doubles:
 	std::cout << "Double: ";
 	if (_plausible[convDouble])
