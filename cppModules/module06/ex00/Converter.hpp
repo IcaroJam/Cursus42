@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:05:16 by senari            #+#    #+#             */
-/*   Updated: 2022/12/28 19:42:58 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/31 16:54:26 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class Converter {
 		float		_fval;
 		double		_dval;
 
+		bool	weirdValsCheck(std::string str);
 		void	typeCheck(void);
 		void	typeConversion(void);
 		void	typeCasting(void);

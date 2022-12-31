@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/30 17:09:46 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/31 16:57:27 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,22 @@ static bool	overflowCheck(const std::string &str) {
 	}
 	return false;
 }
-
-static bool	weirdValsCheck(std::string str) {
-	for (int i = 0; i < 4 && str[i]; i++)
-		str[i] = std::tolower(str[i]);
-	return (str == "nan" || str == "+inf" || str == "-inf");
-}
 ////////////////////////////////////////////////////////////////////////////////
 // Member functions:
+bool	Converter::weirdValsCheck(std::string str) {
+	for (int i = 0; i < 5 && str[i]; i++)
+		str[i] = std::tolower(str[i]);
+	if (str == "nanf" || str == "+inff" || str == "-inff") {
+		definedType = convFloat;
+		return true;
+	}
+	if (str == "nan" || str == "+inf" || str == "-inf") {
+		definedType = convDouble;
+		return true;
+	}
+	return false;
+}
+
 void	Converter::typeCheck(void) {
 	// Char specific:
 	if (_inStr.length() == 1 && !std::isdigit(_inStr[0])) {
@@ -100,11 +108,8 @@ void	Converter::typeCheck(void) {
 		_plausible[convFloat] = false;
 		_plausible[convDouble] = false;
 	} else if (weirdValsCheck(_inStr)) {
-		definedType = convBad;
 		_plausible[convChar] = false;
 		_plausible[convInt] = false;
-		_fval = std::atof(_inStr.c_str());
-		_dval = _fval;
 	} else {
 		// Digit correctness:
 		std::string::size_type	i = 0;
