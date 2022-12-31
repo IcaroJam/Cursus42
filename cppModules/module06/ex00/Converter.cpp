@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/31 16:57:27 by senari           ###   ########.fr       */
+/*   Updated: 2022/12/31 17:07:51 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void	Converter::typeConversion(void) {
 			break;
 	}
 
-	if (!_plausible[convInt] || _ival < 0 || _ival > 127)
+	if (definedType != convChar && (!_plausible[convInt] || _ival < 0 || _ival > 127))
 		_plausible[convChar] = false;
 }
 
@@ -186,7 +186,7 @@ void	Converter::convDisplay(void) {
 	std::cout << "Char:   ";
 	if (!_plausible[convChar])
 		std::cout << "Impossible" << std::endl;
-	else if (_ival > 31 && _ival < 127)
+	else if (definedType == convChar || (_ival > 31 && _ival < 127))
 		std::cout << "\'" << _cval << "\'" << std::endl;
 	else
 	    std::cout << "Non-displayable" << std::endl;
