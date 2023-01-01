@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2022/12/31 17:14:34 by senari           ###   ########.fr       */
+/*   Updated: 2023/01/01 18:48:08 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,13 @@ void	Converter::typeCheck(void) {
 			if (_inStr[i] == 'f') {
 				if (!_inStr[i + 1]) {
 					definedType = convFloat;
-				} else
+				} else {
 					definedType = convBad;
+					_plausible[0] = false;
+					_plausible[1] = false;
+					_plausible[2] = false;
+					_plausible[3] = false;
+				}
 			} else if (_inStr[i])
 				definedType = convBad;
 		} else if (_inStr[i] == 'f' && !_inStr[i + 1]) {
@@ -200,15 +205,23 @@ void	Converter::convDisplay(void) {
 
 	// Floats:
 	std::cout << "Float:  ";
-	if (_plausible[convFloat])
-		std::cout << _fval << std::endl; // Overflows should be checked for here.
+	if (_plausible[convFloat]) {
+		std::cout << _fval;
+		if (std::floor(_fval) == _fval)
+			std::cout << ".0";
+		std::cout << "f" << std::endl;
+	}
 	else
 		std::cout << "Impossible" << std::endl;
 
 	// Doubles:
 	std::cout << "Double: ";
-	if (_plausible[convDouble])
-		std::cout << _dval << std::endl; // Overflows should be checked for here.
+	if (_plausible[convDouble]) {
+		std::cout << _dval;
+		if (std::floor(_dval) == _dval)
+			std::cout << ".0";
+		std::cout << std::endl;
+	}
 	else
 		std::cout << "Impossible" << std::endl;
 }

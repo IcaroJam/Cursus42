@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:05:16 by senari            #+#    #+#             */
-/*   Updated: 2022/12/31 16:54:26 by senari           ###   ########.fr       */
+/*   Updated: 2023/01/01 18:45:24 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 #include <limits>
 
 class Converter {
