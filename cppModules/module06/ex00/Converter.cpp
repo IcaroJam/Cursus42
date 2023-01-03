@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2023/01/01 18:48:08 by senari           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:52:15 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void	Converter::convDisplay(void) {
 	// Ints:
 	std::cout << "Int:    ";
 	if (_plausible[convInt])
-		std::cout << _ival << std::endl; // Overflows should be checked for here.
+		std::cout << _ival << std::endl;
 	else
 		std::cout << "Impossible" << std::endl;
 
