@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2023/01/03 12:52:15 by senari           ###   ########.fr       */
+/*   Updated: 2023/01/04 14:59:55 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,8 +207,10 @@ void	Converter::convDisplay(void) {
 	std::cout << "Float:  ";
 	if (_plausible[convFloat]) {
 		std::cout << _fval;
-		if (std::floor(_fval) == _fval)
-			std::cout << ".0";
+		if (!std::isinf(_fval) && !std::isnan(_fval)) {
+			if (std::floor(_fval) == _fval && _fval < 1000000 && _fval > -1000000)
+				std::cout << ".0";
+		}
 		std::cout << "f" << std::endl;
 	}
 	else
@@ -218,8 +220,10 @@ void	Converter::convDisplay(void) {
 	std::cout << "Double: ";
 	if (_plausible[convDouble]) {
 		std::cout << _dval;
-		if (std::floor(_dval) == _dval)
-			std::cout << ".0";
+		if (!std::isinf(_dval) && !std::isnan(_dval)) {
+			if (std::floor(_dval) == _dval && _dval < 1000000 && _dval > -1000000)
+				std::cout << ".0";
+		}
 		std::cout << std::endl;
 	}
 	else
