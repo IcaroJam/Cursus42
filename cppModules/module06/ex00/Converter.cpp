@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2023/01/04 14:59:55 by senari           ###   ########.fr       */
+/*   Updated: 2023/01/05 12:18:50 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,20 +163,41 @@ void	Converter::typeConversion(void) {
 				_dval = static_cast<double>(_ival);
 			} else {
 				_fval = atof(_inStr.c_str());
+				if (std::isinf(_fval)) {
+					_plausible[convFloat] = false;
+					_dval = std::atof(_inStr.c_str());
+					if (std::isinf(_dval))
+						_plausible[convDouble] = false;
+					break;
+				}
 				_dval = atof(_inStr.c_str());
 			}
 			break;
 		case convFloat:
 			_fval = std::atof(_inStr.c_str());
+			if (std::isinf(_fval)) {
+				_plausible[convFloat] = false;
+				_dval = std::atof(_inStr.c_str());
+				if (std::isinf(_dval))
+					_plausible[convDouble] = false;
+				break;
+			}
 			_ival = static_cast<int>(_fval);
 			_cval = static_cast<char>(_ival);
 			_dval = static_cast<double>(_fval);
 			break;
 		case convDouble:
 			_dval = std::atof(_inStr.c_str());
+			if (std::isinf(_dval)) {
+				_plausible[convFloat] = false;
+				_plausible[convDouble] = false;
+				break;
+			}
 			_ival = static_cast<int>(_dval);
 			_cval = static_cast<char>(_ival);
 			_fval = static_cast<float>(_dval);
+			if (std::isinf(_fval))
+				_plausible[convFloat] = false;
 			break;
 		case convBad:
 			break;
