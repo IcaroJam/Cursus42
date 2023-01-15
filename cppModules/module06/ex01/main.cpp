@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 10:55:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/01/15 11:38:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 11:40:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ Data	*deserialize(uintptr_t raw) {
 int main(void) {
 	Data		dstruc;
 	Data		*dptr = &dstruc;
-	uintptr_t	uiptr = 27;
+	uintptr_t	uiptr = 0;
 	Data		*desz = 0;
 
 	std::cout	<< "Og:    " << dptr << std::endl
 				<< "Uiptr: " << uiptr << std::endl
 				<< "Dsptr: " << desz << std::endl
-				<< "Eq?:   " << std::boolalpha << (reinterpret_cast<Data *>(uiptr) == desz) << std::endl;
+				<< "Eq?:   " << std::boolalpha << (dptr == desz) << std::endl;
 
 	uiptr = serialize(dptr);
 	desz = deserialize(uiptr);
@@ -38,5 +38,5 @@ int main(void) {
 	std::cout	<< "Og:    " << dptr << std::endl
 				<< "Uiptr: " << uiptr << std::endl
 				<< "Dsptr: " << desz << std::endl
-				<< "Eq?:   " << std::boolalpha << (reinterpret_cast<Data *>(uiptr) == desz) << std::endl;
+				<< "Eq?:   " << std::boolalpha << (dptr == desz) << std::endl;
 }
