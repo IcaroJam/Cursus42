@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:36:34 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/01/16 17:07:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:13:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ template<typename T> class Array {
 		unsigned int	size(void) const;
 
 	private:
-		T				*arr;
-		unsigned int	len;
+		T				*_arr;
+		unsigned int	_len;
 };
 
 #include "Array.tpp"
