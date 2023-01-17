@@ -6,13 +6,20 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:55:37 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/01/17 11:28:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:35:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
+#include <cstdlib>
+
+void	leaksCheck(void) {
+	system("leaks classyArrays");
+}
 
 int	main(void) {
+	atexit(leaksCheck);
+
 	Array<int>			a1;
 	Array<char>			a2;
 	Array<char *>		a3;
