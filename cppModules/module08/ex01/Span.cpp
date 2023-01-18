@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 11:50:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/01/18 12:57:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:16:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	Span::addNumber(int n) {
 		_lowest = n;
 	if (n > _highest)
 		_highest = n;
+}
+
+void	Span::addNumber(std::vector<int>::iterator beg, std::vector<int>::iterator end) {
+	for (; beg != end; ++beg)
+		this->addNumber(*beg);
 }
 
 int	Span::shortestSpan(void) {
