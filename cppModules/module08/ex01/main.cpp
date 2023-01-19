@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:48:43 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/01/18 12:59:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:13:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ int	main(void) {
 
 	std::cout	<< "Shortest span: " << s.shortestSpan() << std::endl
 				<< "Longest span:  " << s.longestSpan() << std::endl;
+
+	std::vector<int>	v;
+	Span				s2(100000);
+	for (int i = 0; i < 100000; i++)
+		v.push_back(i);
+	s2.addNumber(v.begin(), v.end());
+	std::cout << "Created a vector [0, 99999] and copied it to a Span.\nShortest span: " << s2.shortestSpan() << std::endl << "Longest span:  " << s2.longestSpan() << std::endl;
 }
