@@ -5,7 +5,7 @@ template <typename T> MutantStack<T>::MutantStack(const MutantStack &cpyFrom) {
 }
 
 template <typename T> MutantStack<T> &MutantStack<T>::operator=(const MutantStack &cpyFrom) {
-	*this = cpyFrom;
+	std::stack<T>::operator=(cpyFrom);
 	return (*this);
 }
 
