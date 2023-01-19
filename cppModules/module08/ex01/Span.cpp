@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 11:50:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/01/18 16:16:58 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:17:15 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	Span::addNumber(int n) {
 }
 
 void	Span::addNumber(std::vector<int>::iterator beg, std::vector<int>::iterator end) {
+	if (beg > end)
+		return;
 	for (; beg != end; ++beg)
 		this->addNumber(*beg);
 }
