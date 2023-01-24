@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:13:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 15:47:59 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:48:40 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void static	playermove(int xto, int yto, t_program *mlx)
 		playerupdate(mlx, xto, yto);
 	else if (mlx->map.tile[yto][xto].type == 'B')
 		playerupdate(mlx, xto, yto);
-	// Optimizar esta basura redundante
 }
 
 int	keystroked(int key, void *program)
