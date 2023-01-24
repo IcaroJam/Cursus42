@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:47:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/23 15:18:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:55:46 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 	if (!mlx.mlxptr)
 		return (1);
 	mlx.winptr = mlx_new_window(mlx.mlxptr, mlx.map.clms * 80,
-			mlx.map.rows * 80, "ThisIsATest B)");
+			mlx.map.rows * 80, "Dune II");
 	textureinit(&mlx);
 	mlx_hook(mlx.winptr, 17, 0, closer, &mlx);
 	mlx_hook(mlx.winptr, 2, 0, keystroked, &mlx);
