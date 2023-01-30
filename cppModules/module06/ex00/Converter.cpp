@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2023/01/30 12:09:04 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:21:45 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ enum	convTypes {
 
 // Canonical class shite:
 Converter::Converter() : _inStr(""), _cval(0), _ival(0), _fval(0.0f), _dval(0.) {
+	_isFloatingExtreme = false;
 	_plausible[0] = true;
 	_plausible[1] = true;
 	_plausible[2] = true;
@@ -30,6 +31,7 @@ Converter::Converter() : _inStr(""), _cval(0), _ival(0), _fval(0.0f), _dval(0.) 
 
 Converter::Converter(const char *givenString) : _cval(0), _ival(0), _fval(0.0f), _dval(0.) {
 	_inStr = givenString;
+	_isFloatingExtreme = false;
 	_plausible[0] = true;
 	_plausible[1] = true;
 	_plausible[2] = true;
@@ -50,6 +52,7 @@ Converter &Converter::operator=(const Converter &cpyFrom) {
 	_ival = cpyFrom._ival;
 	_dval = cpyFrom._dval;
 	_fval = cpyFrom._fval;
+	_isFloatingExtreme = cpyFrom._isFloatingExtreme;
 	_plausible[0] = cpyFrom._plausible[0];
 	_plausible[1] = cpyFrom._plausible[1];
 	_plausible[2] = cpyFrom._plausible[2];
@@ -66,7 +69,6 @@ static bool	overflowCheck(const std::string &str) {
 
 	if (str[0] == '-') {
 		i++;
-		//temp -= str[i++] - '0';
 		while (std::isdigit(str[i])) {
 			temp *= 10;
 			temp -= str[i++] - '0';
@@ -90,13 +92,13 @@ bool	Converter::weirdValsCheck(std::string str) {
 		str[i] = std::tolower(str[i]);
 	if (str == "nanf" || str == "+inff" || str == "-inff") {
 		definedType = convFloat;
-		return true;
+		_isFloatingExtreme = true;
 	}
 	if (str == "nan" || str == "+inf" || str == "-inf") {
 		definedType = convDouble;
-		return true;
+		_isFloatingExtreme = true;
 	}
-	return false;
+	return _isFloatingExtreme;
 }
 
 void	Converter::typeCheck(void) {
@@ -160,12 +162,12 @@ void	Converter::typeConversion(void) {
 						_plausible[convDouble] = false;
 					break;
 				}
-				_dval = atof(_inStr.c_str());
+				_dval = static_cast<double>(_fval);
 			}
 			break;
 		case convFloat:
 			_fval = std::atof(_inStr.c_str());
-			if (_inStr[0] != '-' && _inStr[0] != '+' && std::isinf(_fval)) {
+			if (!_isFloatingExtreme && std::isinf(_fval)) {
 				_plausible[convFloat] = false;
 				_dval = std::atof(_inStr.c_str());
 				if (std::isinf(_dval))
@@ -178,7 +180,7 @@ void	Converter::typeConversion(void) {
 			break;
 		case convDouble:
 			_dval = std::atof(_inStr.c_str());
-			if (_inStr[0] != '-' && _inStr[0] != '+' && std::isinf(_dval)) {
+			if (!_isFloatingExtreme && std::isinf(_dval)) {
 				_plausible[convFloat] = false;
 				_plausible[convDouble] = false;
 				break;
@@ -186,7 +188,7 @@ void	Converter::typeConversion(void) {
 			_ival = static_cast<int>(_dval);
 			_cval = static_cast<char>(_ival);
 			_fval = static_cast<float>(_dval);
-			if (_inStr[0] != '-' && _inStr[0] != '+' && std::isinf(_fval))
+			if (!_isFloatingExtreme && std::isinf(_fval))
 				_plausible[convFloat] = false;
 			break;
 		case convBad:
