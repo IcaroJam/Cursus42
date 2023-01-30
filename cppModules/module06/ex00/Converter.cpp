@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2023/01/30 12:02:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:09:04 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ static bool	overflowCheck(const std::string &str) {
 
 	if (str[0] == '-') {
 		i++;
-		temp -= str[i++] - '0';
+		//temp -= str[i++] - '0';
 		while (std::isdigit(str[i])) {
 			temp *= 10;
-			temp += str[i++] - '0';
+			temp -= str[i++] - '0';
 			if (temp < std::numeric_limits<int>::min())
 				return true;
 		}
