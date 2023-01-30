@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:31:12 by senari            #+#    #+#             */
-/*   Updated: 2023/01/15 10:35:14 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:02:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,24 +126,14 @@ void	Converter::typeCheck(void) {
 			if (_inStr[i] == 'f') {
 				if (!_inStr[i + 1]) {
 					definedType = convFloat;
-				} else {
+				} else
 					definedType = convBad;
-					_plausible[0] = false;
-					_plausible[1] = false;
-					_plausible[2] = false;
-					_plausible[3] = false;
-				}
 			} else if (_inStr[i])
 				definedType = convBad;
 		} else if (_inStr[i] == 'f' && !_inStr[i + 1]) {
 			definedType = convFloat;
-		} else {
+		} else
 			definedType = convBad;
-			_plausible[0] = false;
-			_plausible[1] = false;
-			_plausible[2] = false;
-			_plausible[3] = false;
-		}
 	}
 }
 
@@ -200,6 +190,10 @@ void	Converter::typeConversion(void) {
 				_plausible[convFloat] = false;
 			break;
 		case convBad:
+			_plausible[0] = false;
+			_plausible[1] = false;
+			_plausible[2] = false;
+			_plausible[3] = false;
 			break;
 	}
 
