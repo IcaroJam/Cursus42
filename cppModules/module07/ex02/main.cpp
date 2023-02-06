@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:55:37 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/02/06 16:04:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:19:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,7 @@ int	main(void) {
 	} catch (std::exception &exep) {
 		std::cerr << exep.what() << std::endl << std::endl;
 	}
+
+	Array<int>	c1(b1);
+	c1 = a1;
 }

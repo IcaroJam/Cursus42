@@ -6,18 +6,22 @@ template<typename T> Array<T>::Array() {
 template<typename T> Array<T>::Array(unsigned int n) {
 	_len = n;
 	_arr = new T[n];
-	/*for (unsigned int i = 0; i < n; i++)
-		_arr[i] = 0;*/
 }
 
 template<typename T> Array<T>::Array(const Array &cpyFrom) {
-	*this = cpyFrom;
+	_len = cpyFrom._len;
+	_arr = new T[_len];
+	for (unsigned int i = 0; i < _len; i++)
+		_arr[i] = cpyFrom._arr[i];
 }
 
 template<typename T> Array<T> &Array<T>::operator=(const Array &cpyFrom) {
+	delete[] _arr;
 	_len = cpyFrom._len;
+	_arr = new T[_len];
 	for (unsigned int i = 0; i < _len; i++)
 		_arr[i] = cpyFrom._arr[i];
+	return (*this);
 }
 
 template<typename T> Array<T>::~Array() {
