@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:47:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/02/09 15:14:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:04:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	leakscheck(void)
 {
-	system("leaks so_long");
+	system(_SO_LONG_LEAKCHECK_STR_);
 }
 
 int static	check_extension(char *argv)

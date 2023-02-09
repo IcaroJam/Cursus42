@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:26:18 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/02/09 16:01:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:06:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <fcntl.h>
 # include "mlx/mlx.h"
 
-# ifdef TARGET_OS_MAC
+# ifdef __APPLE__
 #  define _SO_LONG_LEAKCHECK_STR_ "leaks so_long"
+# else
+#  define _SO_LONG_LEAKCHECK_STR_ ""
 # endif
 
 typedef struct s_image
