@@ -6,11 +6,16 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:47:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/01/24 11:55:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:14:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	leakscheck(void)
+{
+	system("leaks so_long");
+}
 
 int static	check_extension(char *argv)
 {
@@ -50,6 +55,7 @@ int	main(int argc, char **argv)
 {
 	t_program	mlx;
 
+	atexit(leakscheck);
 	secureinit(&mlx);
 	inputhandler(&mlx, argc, argv[1]);
 	premap(argv[1], &mlx);
