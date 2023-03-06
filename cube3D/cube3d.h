@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/06 15:53:51 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:54:03 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUBERT_H
 
 # include "libft/libft.h"
+# include "MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 
 /**
