@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/06 13:15:22 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/06 14:54:11 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ PARSSRC	= atouc.c
 SRCS	= $(SHRDSRC) $(PARSSRC)
 BNSSRCS	= $(SHRDSRC)
 
-SHRDOBJ	= $(SHRDSRC:.c=.o)
 #------------------------------------------------------------------------------#
 OBJS	= $(SRCS:.c=.o)
 BNSOBJS	= $(SHRDOBJ)
