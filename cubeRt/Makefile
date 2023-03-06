@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    bluprnt_Makefile                                   :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/11/23 15:27:21 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/06 11:04:21 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #                                     Vars                                     #
 #######################################/\#######################################
 
-NAME	= #<<Your target-file here>>
+NAME	= TEMPNAME
 
 BONUS	= #<<Your bonus exec here>>
 
@@ -24,7 +24,7 @@ CFLAGS	= -Wall -Werror -Wextra
 
 FTFLGS	= -Llibft -lft
 
-VPATH	= ./ #<<your directories here (separated by :)>>
+VPATH	= ./:./src/:./src/parser/ #<<your directories here (separated by :)>>
 
 # Echo needs the (non existent in macosx) -e flag to print colours in Linux
 ECHO = echo -e
@@ -34,14 +34,15 @@ endif
 
 #----                                                                      ----#
 
-SHRDSRC	=
+SHRDSRC	= main.c
+PARSSRC	= atouc.c
 #------------------------------------------------------------------------------#
-SRCS	= $(SHRDSRC)
+SRCS	= $(SHRDSRC) $(PARSSRC)
 BNSSRCS	= $(SHRDSRC)
 
 SHRDOBJ	= $(SHRDSRC:.c=.o)
 #------------------------------------------------------------------------------#
-OBJS	= $(SHRDOBJ)
+OBJS	= $(SRCS:.c=.o)
 BNSOBJS	= $(SHRDOBJ)
 
 #######################################\/#######################################
