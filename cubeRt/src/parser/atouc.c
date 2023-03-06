@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:55:33 by senari            #+#    #+#             */
-/*   Updated: 2023/03/04 16:06:24 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/06 11:07:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	atouc(const char *s, int *offset)
 			return (-1);
 		i++;
 	}
-	*offset = i;
+	if (offset)
+		*offset = i;
 	return (ret);
 }
