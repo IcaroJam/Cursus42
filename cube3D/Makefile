@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/06 13:08:38 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/06 13:15:22 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,8 @@ clean:
 libclean:
 	@make -C ./libft fclean
 	@$(ECHO) "\n\033[38;5;202m/Library reduced to ashes\\ \n\033[0m"
+	@make -C ./MLX42/build clean
+	@$(ECHO) "\n\033[38;5;202m/MLX banished from this land\\ \n\033[0m"
 
 fclean:		clean
 	@rm -f $(NAME) $(BONUS)
