@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
+/*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/06 13:08:15 by ntamayo-         ###   ########.fr       */
+/*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
+/*   Updated: 2023/03/06 13:07:53 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBERT_H
-# define CUBERT_H
+#include "../cube3d.h"
 
-# include "libft/libft.h"
-# include <stdio.h>
-
-int	atouc(const char *s, int *offset);
-
-#endif
+int	main(void)
+{
+	printf("This is a test: %d\n", atouc("47", NULL));
+	return (0);
+}

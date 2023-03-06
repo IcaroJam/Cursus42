@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/06 11:41:42 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/06 13:08:38 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ NAME	= cube3D
 BONUS	= #<<Your bonus exec here>>
 
 LIBFT	= ./libft/libft.a
+
+MLX		= ./MLX42/build/libmlx42.a
 
 CFLAGS	= -Wall -Werror -Wextra
 
@@ -53,7 +55,7 @@ all:		$(NAME)
 
 #bonus:		$(BONUS)
 
-$(NAME):	$(LIBFT) $(OBJS)
+$(NAME):	$(LIBFT) $(MLX) $(OBJS)
 	@$(ECHO) "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
 	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
@@ -66,6 +68,12 @@ $(NAME):	$(LIBFT) $(OBJS)
 $(LIBFT):
 	@make -C ./libft
 	@$(ECHO) "\n \033[38;5;35m~Bookcases restocked.\033[0m"
+
+$(MLX):
+	@$(ECHO) "\n\033[38;5;202mMLX is being built. STAND STILL!!!\n\033[0m"
+	@cmake -S MLX42 -B MLX42/build # build here refers to the outputfolder.
+	@cmake --build MLX42/build -j4 # or do make -C build -j4
+	@$(ECHO) "\n \033[38;5;35m~MLX built in all it's glory.\033[0m"
 
 #----                                                                      ----#
 
