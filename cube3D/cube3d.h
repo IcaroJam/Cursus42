@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/07 10:06:52 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:30:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
+
 
 //     PARSING                                                                //
 
@@ -27,7 +28,7 @@
 *
 * @return 
 */
-int	filecheck(const char *s, size_t len);
+int		filecheck(const char *s, size_t len);
 
 /**
 * @brief A function that takes a string beginning by a digit character and
@@ -43,6 +44,16 @@ int	filecheck(const char *s, size_t len);
 	*
 	* @return 
 */
-int	atouc(const char *s, int *offset);
+int		atouc(const char *s, int *offset);
+
+
+//     UTILS                                                                  //
+
+/**
+* @brief Print "Error\n" followed by msg to stderr.
+*
+	* @param msg
+	*/
+void	errmsg(char *msg);
 
 #endif

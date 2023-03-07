@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/06 17:23:53 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/07 10:31:31 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ FTFLGS	= -Llibft -lft
 
 MLXFLGS	= -framework Cocoa -framework OpenGL -framework IOKit -LMLX42/build -lmlx42 -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
-VPATH	= ./:./src/:./src/parser/ #<<your directories here (separated by :)>>
+VPATH	= ./:./src/:./src/parser/:./src/utils/ #<<your directories here (separated by :)>>
 
 # Echo needs the (non existent in macosx) -e flag to print colours in Linux
 ECHO = echo -e
@@ -38,7 +38,7 @@ endif
 
 #----                                                                      ----#
 
-SHRDSRC	= main.c
+SHRDSRC	= main.c error.c input.c
 PARSSRC	= atouc.c
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC) $(PARSSRC)
