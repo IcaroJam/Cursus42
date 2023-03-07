@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:17:21 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/07 18:01:42 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/07 19:17:47 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	gettextures(int fd, t_cub *cub)
 	cub->mdata.wpath = NULL;
 	cub->mdata.spath = NULL;
 	cub->mdata.epath = NULL;
-	while (!cub->mdata.npath && !cub->mdata.spath && !cub->mdata.epath && !cub->mdata.wpath)
+	while (!cub->mdata.npath || !cub->mdata.spath || !cub->mdata.epath || !cub->mdata.wpath)
 	{
 		temp = get_next_line(fd);
 		if (!temp)
