@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/07 10:44:26 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:32:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,17 @@ static void	handleinput(int argc, char **argv)
 	}
 }
 
+void	leakcheck(void)
+{
+	system("leaks cube3D");
+}
+
 int	main(int argc, char **argv)
 {
+	t_cub	cub;
+
+	atexit(leakcheck);
 	handleinput(argc, argv);
+	parsemap(argv[1], &cub);
 	return (0);
 }

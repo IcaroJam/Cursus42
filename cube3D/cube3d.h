@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/07 12:21:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:20:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,21 @@
 # include <stdio.h>
 
 //     STRUCTURES                                                             //
-typedef struct s_data
+typedef struct s_mapdata
 {
+	char	**cmap;
 	char	*npath;
 	char	*wpath;
 	char	*spath;
 	char	*epath;
 	int		floorc;
 	int		ceilic;
-	char	**cmap;
-}	t_data;
+}			t_mapdata;
+
+typedef struct s_cub
+{
+	t_mapdata	mdata;
+}			t_cub;
 
 //     PARSING                                                                //
 
@@ -56,6 +61,24 @@ int		filecheck(const char *s, size_t len);
 	* @return 
 */
 int		atouc(const char *s, int *offset);
+
+/**
+* @brief Opens and parses mapfile, storing the processed values in cub and
+* exiting after printing the corresponding error if something goes wrong.
+*
+* @param mapfile: The path to the file containing the map information.
+* @param cub: A pointer to the data structure where everything will be stored.
+*/
+void	parsemap(char *mapfile, t_cub *cub);
+
+/**
+* @brief Stores the path to the walls' textures inside cub. Error exits if
+* something goes wrong.
+*
+* @param fd: File descriptor of the map file.
+* @param cub: Pointer to the data structure.
+*/
+void	gettextures(int fd, t_cub *cub);
 
 //     UTILS                                                                  //
 
