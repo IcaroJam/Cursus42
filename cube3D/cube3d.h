@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/07 09:50:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:06:52 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
+
+//     PARSING                                                                //
+
+/**
+* @brief Returns 0 for valid filenames or -1 for invalid ones.
+*
+* @param s: The name of the file.
+* @param len: The length of the filename string.
+*
+* @return 
+*/
+int	filecheck(const char *s, size_t len);
 
 /**
 * @brief A function that takes a string beginning by a digit character and
