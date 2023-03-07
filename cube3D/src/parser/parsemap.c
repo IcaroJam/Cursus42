@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 16:40:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/07 17:18:17 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:53:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	openmap(char *mapfile)
 void	parsemap(char *mapfile, t_cub *cub)
 {
 	int	fd;
-	
+
 	fd = openmap(mapfile);
 	gettextures(fd, cub);
 }
