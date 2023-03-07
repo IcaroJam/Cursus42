@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/07 10:30:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:21:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@
 # include "MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 
+//     STRUCTURES                                                             //
+typedef struct s_data
+{
+	char	*npath;
+	char	*wpath;
+	char	*spath;
+	char	*epath;
+	int		floorc;
+	int		ceilic;
+	char	**cmap;
+}	t_data;
 
 //     PARSING                                                                //
 
@@ -45,7 +56,6 @@ int		filecheck(const char *s, size_t len);
 	* @return 
 */
 int		atouc(const char *s, int *offset);
-
 
 //     UTILS                                                                  //
 
