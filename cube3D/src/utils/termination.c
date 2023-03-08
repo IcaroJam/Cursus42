@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   termination.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:27:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 15:39:36 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:56:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void	errexit(char *msg)
 
 void	freecub(t_cub *cub)
 {
+	int	i;
+
+	i = 0;
+	while (cub->mdata.cmap[i])
+		free(cub->mdata.cmap[i++]);
+	free(cub->mdata.cmap);
 	free(cub->mdata.npath);
 	free(cub->mdata.wpath);
 	free(cub->mdata.spath);

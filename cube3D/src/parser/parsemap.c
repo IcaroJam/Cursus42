@@ -6,13 +6,12 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 16:40:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 17:51:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:57:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
 #include <fcntl.h>
-#include <unistd.h>
 
 static int	openmap(char *mapfile)
 {
@@ -90,6 +89,8 @@ static void	getmapline(int fd, t_cub *cub)
 		free(in);
 		in = get_next_line(fd);
 	}
+	cub->mdata.cmap = ft_split(onelinemap, '\n');
+	free(onelinemap);
 }
 
 void	parsemap(char *mapfile, t_cub *cub)
