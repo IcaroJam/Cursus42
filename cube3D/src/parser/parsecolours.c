@@ -6,11 +6,20 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:23:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 13:26:51 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:59:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
+
+static int	getoffset(char *line, int i)
+{
+	if (line[i++] != ',')
+		errexit("RGB elements must be separated by a comma.");
+	while (ft_isspace(line[i]))
+		i++;
+	return (i);
+}
 
 static int	gethex(char *line)
 {
@@ -18,16 +27,10 @@ static int	gethex(char *line)
 	int	i;
 
 	ret = atouc(line, &i) << 16;
-	if (line[i++] != ',')
-		errexit("RGB elements must be separated by a comma.");
-	while (ft_isspace(line[i]))
-		i++;
+	i = getoffset(line, i);
 	line += i;
 	ret += atouc(line, &i) << 8;
-	if (line[i++] != ',')
-		errexit("RGB elements must be separated by a comma.");
-	while (ft_isspace(line[i]))
-		i++;
+	i = getoffset(line, i);
 	line += i;
 	ret += atouc(line, &i);
 	return (ret);

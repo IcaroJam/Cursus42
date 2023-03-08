@@ -3,6 +3,7 @@
 NO		./norte    
 	 SO ../sur
 
+		 F 16,  37, 220 
 
   EA   este
 C				 0,		0, 255		
