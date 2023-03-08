@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 16:40:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 15:32:43 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:37:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void	getconfig(int fd, t_cub *cub)
 
 static void	getmap(int fd, t_cub *cub)
 {
-	
+	fd = 0;
+	cub = NULL;
 }
 
 void	parsemap(char *mapfile, t_cub *cub)
@@ -60,5 +61,6 @@ void	parsemap(char *mapfile, t_cub *cub)
 
 	fd = openmap(mapfile);
 	getconfig(fd, cub);
+	getmap(fd, cub);
 	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 12:22:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:38:07 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	main(int argc, char **argv)
 	atexit(leakcheck);
 	handleinput(argc, argv);
 	parsemap(argv[1], &cub);
+	freecub(&cub);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/08 13:12:34 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/08 15:40:34 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ endif
 
 #----                                                                      ----#
 
-SHRDSRC	= main.c error.c input.c
+SHRDSRC	= main.c termination.c input.c
 PARSSRC	= atouc.c parsetextures.c parsemap.c parsecolours.c
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC) $(PARSSRC)
