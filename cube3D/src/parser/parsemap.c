@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 16:40:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 15:37:09 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:51:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,47 @@ static void	getconfig(int fd, t_cub *cub)
 	printf("NO: [%s]\nWE: [%s]\nSO: [%s]\nEA: [%s]\nF: [%x]\nC: [%x]\n", cub->mdata.npath, cub->mdata.wpath, cub->mdata.spath, cub->mdata.epath, cub->mdata.floorc, cub->mdata.ceilic);
 }
 
-static void	getmap(int fd, t_cub *cub)
+static char	*getfirstmapline(int fd)
 {
-	fd = 0;
-	cub = NULL;
+	char	*ret;
+	int		i;
+
+	ret = get_next_line(fd);
+	while (ret)
+	{
+		i = 0;
+		while (ret[i] == ' ')
+			i++;
+		if (ret[i] == '1')
+			return (ret);
+		else if (ret[i] && ret[i] != '\n')
+			return (NULL);
+		free(ret);
+		ret = get_next_line(fd);
+	}
+	return (ret);
+}
+
+static void	getmapline(int fd, t_cub *cub)
+{
+	char	*in;
+	char	*temp;
+	char	*onelinemap;
+
+	onelinemap = getfirstmapline(fd);
+	if (!onelinemap)
+		frerrxit("Map contains invalid char.", cub);
+	in = get_next_line(fd);
+	while (in)
+	{
+		temp = onelinemap;
+		onelinemap = ft_strjoin(onelinemap, in);
+		if (!onelinemap)
+			frerrxit("Failed to join onelinemap D:", cub);
+		free(temp);
+		free(in);
+		in = get_next_line(fd);
+	}
 }
 
 void	parsemap(char *mapfile, t_cub *cub)
@@ -61,6 +98,6 @@ void	parsemap(char *mapfile, t_cub *cub)
 
 	fd = openmap(mapfile);
 	getconfig(fd, cub);
-	getmap(fd, cub);
+	getmapline(fd, cub);
 	close(fd);
 }

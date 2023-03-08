@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/08 15:39:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:08:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@
 //     STRUCTURES                                                             //
 typedef struct s_mapdata
 {
-	char	**cmap;
-	char	*npath;
-	char	*wpath;
-	char	*spath;
-	char	*epath;
-	int		floorc;
-	int		ceilic;
-}			t_mapdata;
+	char			**cmap;
+	unsigned int	xsize;
+	unsigned int	ysize;
+	char			*npath;
+	char			*wpath;
+	char			*spath;
+	char			*epath;
+	int				floorc;
+	int				ceilic;
+}					t_mapdata;
 
 typedef struct s_cub
 {
