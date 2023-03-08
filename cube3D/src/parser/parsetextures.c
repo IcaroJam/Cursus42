@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:17:21 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/07 19:17:47 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/08 12:22:55 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ static char	**gettexptr(char *line, t_cub *cub)
 	else if (!cub->mdata.epath && !ft_strncmp(line, "EA", 2))
 		texturedir = &cub->mdata.epath;
 	else
-	{
-		errmsg("Bad/dup texture identifier. Accepted: [NO, WE, SO, EA].");
-		exit(1);
-	}
+		errexit("Bad/dup texture identifier. Accepted: [NO, WE, SO, EA].");
 	return (texturedir);
 }
 
@@ -56,10 +53,7 @@ static void	texstore(char *line, t_cub *cub)
 		line++;
 	*texturedir = ft_substr(line, 0, texlen(line));
 	if (!*texturedir)
-	{
-		errmsg("Failed to copy a texture path.");
-		exit(1);
-	}
+		errexit("Failed to copy a texture path.");
 }
 
 void	gettextures(int fd, t_cub *cub)
@@ -70,14 +64,12 @@ void	gettextures(int fd, t_cub *cub)
 	cub->mdata.wpath = NULL;
 	cub->mdata.spath = NULL;
 	cub->mdata.epath = NULL;
-	while (!cub->mdata.npath || !cub->mdata.spath || !cub->mdata.epath || !cub->mdata.wpath)
+	while (!cub->mdata.npath || !cub->mdata.spath
+		|| !cub->mdata.epath || !cub->mdata.wpath)
 	{
 		temp = get_next_line(fd);
 		if (!temp)
-		{
-			errmsg("Map reading failed!");
-			exit(1);
-		}
+			errexit("Map reading failed!");
 		texstore(temp, cub);
 		free(temp);
 	}

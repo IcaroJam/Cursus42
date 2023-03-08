@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/07 17:20:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:21:39 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,14 @@ void	parsemap(char *mapfile, t_cub *cub);
 */
 void	gettextures(int fd, t_cub *cub);
 
+/**
+* @brief Stores the floor's and ceiling's colours inside cub. Exits on error.
+*
+* @param fd: File descriptor of the map file.
+* @param cub: Pointer to the data structure.
+*/
+void	getcolours(int fd, t_cub *cub);
+
 //     UTILS                                                                  //
 
 /**
@@ -88,5 +96,12 @@ void	gettextures(int fd, t_cub *cub);
 	* @param msg
 	*/
 void	errmsg(char *msg);
+
+/**
+* @brief Call errmsg and exit(1).
+*
+	* @param msg
+	*/
+void	errexit(char *msg);
 
 #endif
