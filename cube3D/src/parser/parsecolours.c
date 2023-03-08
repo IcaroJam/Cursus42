@@ -6,31 +6,31 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:23:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 14:59:30 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:35:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
 
-static int	getoffset(char *line, int i)
+static int	getoffset(char *line, int i, t_cub *cub)
 {
 	if (line[i++] != ',')
-		errexit("RGB elements must be separated by a comma.");
+		frerrxit("RGB elements must be separated by a comma.", cub);
 	while (ft_isspace(line[i]))
 		i++;
 	return (i);
 }
 
-static int	gethex(char *line)
+static int	gethex(char *line, t_cub *cub)
 {
 	int	ret;
 	int	i;
 
 	ret = atouc(line, &i) << 16;
-	i = getoffset(line, i);
+	i = getoffset(line, i, cub);
 	line += i;
 	ret += atouc(line, &i) << 8;
-	i = getoffset(line, i);
+	i = getoffset(line, i, cub);
 	line += i;
 	ret += atouc(line, &i);
 	return (ret);
@@ -53,9 +53,9 @@ void	getcolours(int colstored[2], char *line, t_cub *cub)
 		colstored[1] = 1;
 	}
 	else
-		errexit("Bad/dup colour identifier. Accepted: [F, C].");
+		frerrxit("Bad/dup colour identifier. Accepted: [F, C]", cub);
 	line++;
 	while (ft_isspace(*line))
 		line++;
-	*colourdir = gethex(line);
+	*colourdir = gethex(line, cub);
 }

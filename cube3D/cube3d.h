@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/08 12:56:32 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:32:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,13 @@ void	errmsg(char *msg);
 	* @param msg
 	*/
 void	errexit(char *msg);
+
+/**
+* @brief Free resources and call errexit.
+*
+	* @param msg
+	* @param cub
+	*/
+void	frerrxit(char *msg, t_cub *cub);
 
 #endif

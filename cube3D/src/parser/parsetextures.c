@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:17:21 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 13:12:10 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:35:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	**gettexptr(char *line, t_cub *cub)
 	else if (!cub->mdata.epath && !ft_strncmp(line, "EA", 2))
 		texturedir = &cub->mdata.epath;
 	else if (ft_strncmp(line, "F", 1) && ft_strncmp(line, "C", 1))
-		errexit("Bad/dup texture identifier. Accepted: [NO, WE, SO, EA].");
+		frerrxit("Bad/dup texture identifier. Accepted: [NO, WE, SO, EA]", cub);
 	return (texturedir);
 }
 
@@ -56,7 +56,7 @@ static int	texstore(char *line, t_cub *cub)
 		line++;
 	*texturedir = ft_substr(line, 0, texlen(line));
 	if (!*texturedir)
-		errexit("Failed to copy a texture path.");
+		frerrxit("Failed to copy a texture path.", cub);
 	return (0);
 }
 
