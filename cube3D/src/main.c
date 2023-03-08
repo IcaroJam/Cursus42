@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 15:38:07 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:00:10 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
 
-static void	handleinput(int argc, char **argv)
+static void	handleinputandinit(int argc, char **argv, t_cub *cub)
 {
 	if (argc == 1)
 		errexit("Missing map. Usage: [./cube3D <<mapname>>.cub]");
@@ -20,6 +20,11 @@ static void	handleinput(int argc, char **argv)
 		errexit("Too many input arguments. Usage: [./cube3D <<mapname>>.cub]");
 	if (filecheck(argv[1], ft_strlen(argv[1])) == -1)
 		errexit("Invalid map format. Usage: [./cube3D <<mapname>>.cub]");
+	cub->mdata.cmap = NULL;
+	cub->mdata.npath = NULL;
+	cub->mdata.wpath = NULL;
+	cub->mdata.spath = NULL;
+	cub->mdata.epath = NULL;
 }
 
 void	leakcheck(void)
@@ -32,7 +37,7 @@ int	main(int argc, char **argv)
 	t_cub	cub;
 
 	atexit(leakcheck);
-	handleinput(argc, argv);
+	handleinputandinit(argc, argv, &cub);
 	parsemap(argv[1], &cub);
 	freecub(&cub);
 	return (0);

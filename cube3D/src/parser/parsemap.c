@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 16:40:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 17:57:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:01:40 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ static void	getconfig(int fd, t_cub *cub)
 
 	colstored[0] = 0;
 	colstored[1] = 0;
-	cub->mdata.npath = NULL;
-	cub->mdata.wpath = NULL;
-	cub->mdata.spath = NULL;
-	cub->mdata.epath = NULL;
 	while (!colstored[0] || !colstored[1]
 		|| !cub->mdata.npath || !cub->mdata.spath
 		|| !cub->mdata.epath || !cub->mdata.wpath)
