@@ -3,5 +3,7 @@
 NO		./norte    
 	 SO ../sur
 
+
   EA   este
+C				 0,		0, 255		
 			WE				/oeste			   
