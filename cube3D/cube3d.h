@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/09 18:28:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:37:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <stdio.h>
 # include <math.h>
 
-//     DEFINES                                                                //
+///////DEFINES//////////////////////////////////////////////////////////////////
 # define WINWIDTH 800
 # define WINHEIGHT 600
 
-//     STRUCTURES                                                             //
+///////STRUCTURES///////////////////////////////////////////////////////////////
 typedef struct s_mapdata
 {
 	char			**cmap;
@@ -58,7 +58,7 @@ typedef struct s_cub
 	mlx_image_t		*eimg;
 }			t_cub;
 
-//     PARSING                                                                //
+///////PARSING//////////////////////////////////////////////////////////////////
 
 /**
 * @brief Returns 0 for valid filenames or -1 for invalid ones.
@@ -128,7 +128,7 @@ void	makeitsquared(t_cub *cub);
 */
 void	checkmap(char **map, t_cub *cub);
 
-//     UTILS                                                                  //
+///////UTILS////////////////////////////////////////////////////////////////////
 
 /**
 * @brief Print "Error\n" followed by msg to stderr.
