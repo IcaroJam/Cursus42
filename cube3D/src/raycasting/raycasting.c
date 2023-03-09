@@ -6,13 +6,13 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/09 13:49:28 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:04:58 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int is_wall(t_cub *game, float x, float y, int orientation_x, int orientation_y)
+int ft_is_wall(t_cub *game, float x, float y, int orientation_x, int orientation_y)//fix
 {
 	int cell_x;
 	int cell_y;
@@ -20,17 +20,17 @@ int is_wall(t_cub *game, float x, float y, int orientation_x, int orientation_y)
 	cell_x = x/CELL_LENGTH - orientation_x;
 	cell_y = y/CELL_LENGTH - orientation_y;
 
-	//horizontal collision orientation_x = 0
-	//horizontal collision orientation_y 1 arriba, 0 abajo
-	//vertical collision orientation_x 0 derecha, 1 izquierda 
-	//vertical collision orientation_y = 0
+	//horizontal collision: orientation_x = 0
+	//horizontal collision: orientation_y 1 arriba, 0 abajo
+	//vertical collision: orientation_x 0 derecha, 1 izquierda 
+	//vertical collision: orientation_y = 0
 	
 	if (game->mdata.cmap[cell_y, cell_x] == '1')
 		return 1;
 	return 0;
 }
 
-raycasting (t_cub cub)
+raycasting (t_cub *cub)
 {
 	// hace falta saber celda del jugador??
 	
