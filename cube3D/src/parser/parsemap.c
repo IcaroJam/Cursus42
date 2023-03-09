@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 16:40:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/09 10:22:17 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:03:47 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,6 @@ void	parsemap(char *mapfile, t_cub *cub)
 	getconfig(fd, cub);
 	getmapline(fd, cub);
 	close(fd);
+	makeitsquared(cub);
+	checkmap(cub ->mdata.cmap, cub);
 }
