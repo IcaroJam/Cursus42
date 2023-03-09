@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/09 16:15:28 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:28:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include "MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <math.h>
+
+//     DEFINES                                                                //
+# define WINWIDTH 800
+# define WINHEIGHT 600
 
 //     STRUCTURES                                                             //
 typedef struct s_mapdata
@@ -41,8 +45,17 @@ typedef struct s_player
 
 typedef struct s_cub
 {
-	t_mapdata	mdata;
-	t_player	player;
+	t_mapdata		mdata;
+	t_player		player;
+	mlx_t			*mlx;
+	mlx_texture_t	*ntex;
+	mlx_texture_t	*wtex;
+	mlx_texture_t	*stex;
+	mlx_texture_t	*etex;
+	mlx_image_t		*nimg;
+	mlx_image_t		*wimg;
+	mlx_image_t		*simg;
+	mlx_image_t		*eimg;
 }			t_cub;
 
 //     PARSING                                                                //

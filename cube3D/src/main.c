@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/09 12:04:25 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:25:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ static void	handleinputandinit(int argc, char **argv, t_cub *cub)
 	cub->mdata.epath = NULL;
 }
 
+static void	loadimgsandinit(t_cub *cub)
+{
+	cub->mlx = mlx_init(WINWIDTH, WINHEIGHT, "N&P's Cube3D!", false);
+	cub->ntex = mlx_load_png(cub->mdata.npath);
+	cub->wtex = mlx_load_png(cub->mdata.wpath);
+	cub->stex = mlx_load_png(cub->mdata.spath);
+	cub->etex = mlx_load_png(cub->mdata.epath);
+	if (!cub->ntex || !cub->wtex || !cub->stex || !cub->etex)
+		frerrxit("Failed to load png textures.", cub);
+	cub->nimg = mlx_texture_to_image(cub->mlx, cub->ntex);
+	cub->wimg = mlx_texture_to_image(cub->mlx, cub->wtex);
+	cub->simg = mlx_texture_to_image(cub->mlx, cub->stex);
+	cub->eimg = mlx_texture_to_image(cub->mlx, cub->etex);
+	if (!cub->nimg || !cub->wimg || !cub->simg || !cub->eimg)
+		frerrxit("Failed to load images from textures.", cub);
+}
+
 void	leakcheck(void)
 {
 	system("leaks cube3D");
@@ -39,6 +56,7 @@ int	main(int argc, char **argv)
 	atexit(leakcheck);
 	handleinputandinit(argc, argv, &cub);
 	parsemap(argv[1], &cub);
+	loadimgsandinit(&cub);
 	freecub(&cub);
 	return (0);
 }
