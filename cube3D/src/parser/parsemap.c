@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 16:40:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/09 12:03:47 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:05:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ static void	getconfig(int fd, t_cub *cub)
 			getcolours(colstored, temp, cub);
 		free(temp);
 	}
-	printf("NO: [%s]\nWE: [%s]\nSO: [%s]\nEA: [%s]\nF: [%x]\nC: [%x]\n", cub->mdata.npath, cub->mdata.wpath, cub->mdata.spath, cub->mdata.epath, cub->mdata.floorc, cub->mdata.ceilic);
 }
+
+	//printf("NO: [%s]\nWE: [%s]\nSO: [%s]\nEA: [%s]\nF: [%x]\nC: [%x]\n", 
+//cub->mdata.npath, cub->mdata.wpath, cub->mdata.spath, cub->mdata.epath, 
+//cub->mdata.floorc, cub->mdata.ceilic);
 
 static char	*getfirstmapline(int fd)
 {
