@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/09 11:17:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:10:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ typedef struct s_mapdata
 	int				floorc;
 	int				ceilic;
 }					t_mapdata;
+
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	a;
+}			t_player;
 
 typedef struct s_cub
 {
