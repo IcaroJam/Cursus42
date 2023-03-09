@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/08 17:08:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:17:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,22 @@ int		gettextures(char *line, t_cub *cub);
 * @param cub: Pointer to the data structure.
 */
 void	getcolours(int colstored[2], char *line, t_cub *cub);
+
+/**
+* @brief Add spaces to the end of the lines shorter than the longest one in
+* order to make the map a matrix and avoid segmenting when checking adjacent
+* characters in checkmap.
+*
+* @param cub
+*/
+void	makeitsquared(t_cub *cub);
+
+/**
+* @brief Perform validity checks on the map. Frerrxit on error.
+*
+* @param cub
+*/
+void	checkmap(char **map, t_cub *cub);
 
 //     UTILS                                                                  //
 
