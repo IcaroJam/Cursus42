@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/09 16:19:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:47:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ static void	charcheck(char *line, unsigned int i, unsigned int lo, t_cub *cub)
 		return ;
 	if (!isvalid(line[i]))
 		frerrxit("Illegal tile found in the map.", cub);
-	if ((line[i] != '1' && (!line[i + 1] || line[i + 1] == ' '))
-		|| (line[i] != '1' && (!lo || lo == cub->mdata.ysize - 1))
-		|| (lo > 0
-			&& line[i] != '1' && !isvalid(cub->mdata.cmap[lo - 1][i]))
-		|| (lo < cub->mdata.ysize - 1
-			&& line[i] != '1' && !isvalid(cub->mdata.cmap[lo + 1][i])))
-		frerrxit("Map isn't closed.", cub);
+	if (line[i] != '1')
+	{
+		if ((!line[i + 1] || line[i + 1] == ' ')
+			|| (!lo || lo == cub->mdata.ysize - 1)
+			|| (lo > 0 && !isvalid(cub->mdata.cmap[lo - 1][i]))
+			|| (lo < cub->mdata.ysize - 1
+				&& !isvalid(cub->mdata.cmap[lo + 1][i])))
+			frerrxit("Map isn't closed.", cub);
+	}
 }
 
 static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
@@ -53,6 +55,7 @@ static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
 // For each character of the line:
 // Skip spaces until a 1 is found. If anything else is found after spaces,
 // throw an error.
+// Then, inside charcheck:
 // Check if the character is valid.
 // If it is BUT it isn't a 1, check wether it is the last char in the line
 // or there is a space after it. Also check if we are looking at the first or
