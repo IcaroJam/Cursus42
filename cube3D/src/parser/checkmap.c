@@ -6,18 +6,11 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/09 12:05:37 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:19:44 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
-
-// Saltarse espacios.
-// Encontrar 1.
-// Volver a saltar o encontrar char válido.
-// Comprobar que el válido no tenga espacios adyacentes
-// o que no esté en la primera o última línea.
-// Repetir hasta llegar al final de la línea.
 
 static int	isvalid(char c)
 {
@@ -38,6 +31,23 @@ static void	charcheck(char *line, unsigned int i, unsigned int lo, t_cub *cub)
 		|| (lo < cub->mdata.ysize - 1
 			&& line[i] != '1' && !isvalid(cub->mdata.cmap[lo + 1][i])))
 		frerrxit("Map isn't closed.", cub);
+}
+
+static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
+{
+	if (c == 'N' || c == 'W' || c == 'S' || c == 'E')
+	{
+		cub->player.x = i + 0.5;
+		cub->player.y = j + 0.5;
+		if (c == 'N')
+			cub->player.a = M_PI_2;
+		else if (c == 'W')
+			cub->player.a = 0;
+		else if (c == 'S')
+			cub->player.a = -M_PI_2;
+		else
+			cub->player.a = M_PI;
+	}
 }
 
 // For each character of the line:
@@ -66,6 +76,7 @@ static void	checkline(char *line, unsigned int lineno, t_cub *cub)
 				frerrxit("Illegal tile found after space.", cub);
 		}
 		charcheck(line, i, lineno, cub);
+		playerinfo(line[i], i, lineno, cub);
 		i++;
 	}
 }

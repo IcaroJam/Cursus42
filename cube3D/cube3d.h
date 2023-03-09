@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/09 16:10:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:15:28 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
+# include <math.h>
 
 //     STRUCTURES                                                             //
 typedef struct s_mapdata
@@ -41,6 +42,7 @@ typedef struct s_player
 typedef struct s_cub
 {
 	t_mapdata	mdata;
+	t_player	player;
 }			t_cub;
 
 //     PARSING                                                                //
