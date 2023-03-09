@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/08 12:33:54 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:45:58 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 /**
  * Vision Field
  * Total angle of player vision, typically between 60 and 90 grades in games
- * Its better to work with radians, 360 grades is 2π radianes
+ * its better to work with radians, 360 grades is 2π radianes
  * so 60 is π/3 radians, M_PI is a constant defined in math.h for π
  * if we want 90 grades it would be π/2, there is a constant defined in math.h for that: M_PI_2
 */
@@ -79,8 +79,8 @@ typedef struct s_player
 
 typedef struct s_vision_point
 {
-	int	length;
-	int	wall_orientation;
+	float	length;
+	int		wall_orientation;
 }t_vision_point;
 
 typedef struct raycasting
