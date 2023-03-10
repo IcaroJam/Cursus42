@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/10 10:52:14 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:12:30 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ typedef struct s_raycasting
 typedef struct s_collision
 {
 	int wall_collision;// yes/not
-	int x;//point of collision
-	int y;// point of colision
+	float x;//point of collision
+	float y;// point of colision
 } t_collision
 
 typedef struct s_ray
@@ -102,7 +102,6 @@ typedef struct s_ray
 	int direct_h;// izquierda/derecha
 	t_collision vertical;
 	t_collision horizontal;
-
 } t_ray;
 
 //     PARSING                                                                //
