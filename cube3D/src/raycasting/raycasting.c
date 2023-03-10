@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/10 13:12:34 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:21:55 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ void	ft_get_collisions(t_cub *game, t_ray *ray)
 			ray->horizontal.wall_collision = ft_is_wall();// arreglar argumentos
 		}
 	}
+}
+
+float ft_get_distance(t_cub *game, t_collision collision)
+{
+	return (sqrt(exp2(game->player->coord_x - collision.x) + exp2(game->player->coord_y - collision.y)));
 }
 
 void	ft_get_vision_point(t_cub *game, t_ray *ray, int index) //mirar si conviene calcular la distancia en el calculo de colisiones para no hacerlo dos veces en
