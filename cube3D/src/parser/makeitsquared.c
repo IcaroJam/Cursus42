@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 11:16:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/09 11:41:33 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/10 12:41:24 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,34 @@ static unsigned int	getmaxlen(char **map)
 static void	stretchlines(t_cub *cub)
 {
 	unsigned int	i;
+	unsigned int	j;
 	char			*temp;
 
 	i = 0;
 	while (cub->mdata.cmap[i])
 	{
-		while (ft_strlen(cub->mdata.cmap[i]) < cub->mdata.xsize)
+		/** while (ft_strlen(cub->mdata.cmap[i]) < cub->mdata.xsize)
+		  * {
+		  *     temp = ft_strjoin(cub->mdata.cmap[i], " ");
+		  *     if (!temp)
+		  *         frerrxit("Map stretching failed!", cub);
+		  *     free(cub->mdata.cmap[i]);
+		  *     cub->mdata.cmap[i] = temp;
+		  * } */
+		temp = malloc(sizeof(char) * (cub->mdata.xsize + 1));
+		if (!temp)
+			frerrxit("Map stretching failed!", cub);
+		j = 0;
+		while (cub->mdata.cmap[i][j])
 		{
-			temp = ft_strjoin(cub->mdata.cmap[i], " ");
-			if (!temp)
-				frerrxit("Map stretching failed!", cub);
-			free(cub->mdata.cmap[i]);
-			cub->mdata.cmap[i] = temp;
+			temp[j] = cub->mdata.cmap[i][j];
+			j++;
 		}
+		while (j < cub->mdata.xsize)
+			temp[j++] = ' ';
+		temp[j] = 0;
+		free(cub->mdata.cmap[i]);
+		cub->mdata.cmap[i] = temp;
 		i++;
 	}
 }
