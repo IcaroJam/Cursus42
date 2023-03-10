@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/09 14:04:58 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:17:27 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ raycasting (t_cub *cub)
 	vertical_collision_x = (cell_x * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va a la derecha o en 0 si va a la izquierda
 	vertical_colision_y // utilizar fórmula para collision_y donde collision_x = vertical_collision_x
 
-	vertical_collision_y = (cell_y * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si va a la izquierda
+	vertical_collision_y = (cell_y * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
 	vertical_colision_x // utilizar fórmula para collision_x donde collision_Y = vertical_collision_y
 
 	// hacer bucle hasta encontrar la primera colision con el muro (ver si alternamos las dos colisiones (vertical, horizontal) 
