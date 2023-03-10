@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 11:16:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/10 12:41:24 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/10 12:47:36 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static void	stretchlines(t_cub *cub)
 		cub->mdata.cmap[i] = temp;
 		i++;
 	}
+	for (unsigned int k = 0; k < cub->mdata.ysize; k++)
+		printf("%s| len: %lu\n", cub->mdata.cmap[k], ft_strlen(cub->mdata.cmap[k]));
 }
 
 void	makeitsquared(t_cub *cub)
