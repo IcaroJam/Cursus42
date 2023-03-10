@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/09 11:45:58 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/10 10:52:14 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,27 @@ typedef struct s_vision_point
 	int		wall_orientation;
 }t_vision_point;
 
-typedef struct raycasting
+typedef struct s_raycasting
 {
 	t_vision_point	sight[RES_WIDTH];
 } t_raycasting;
+
+typedef struct s_collision
+{
+	int wall_collision;// yes/not
+	int x;//point of collision
+	int y;// point of colision
+} t_collision
+
+typedef struct s_ray
+{
+	float angle;
+	int direct_v;// arriba/abajo
+	int direct_h;// izquierda/derecha
+	t_collision vertical;
+	t_collision horizontal;
+
+} t_ray;
 
 //     PARSING                                                                //
 

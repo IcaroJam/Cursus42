@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/09 14:17:27 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/10 11:20:10 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,40 @@ int ft_is_wall(t_cub *game, float x, float y, int orientation_x, int orientation
 	if (game->mdata.cmap[cell_y, cell_x] == '1')
 		return 1;
 	return 0;
+}
+
+void	ft_get_direction(t_ray *ray)
+{
+	if (ray.angle >= 2 * M_PI)
+		ray.angle = ray.angle - (2 * M_PI);
+	else if (ray.angle < 0)
+		ray.angle = ray.angle + (2 * M_PI);
+	if (ray.angle > 0 && ray.angle < M_PI)
+		ray.direct_v = // arriba
+	else
+		ray.direct_v = //abajo
+	if ((ray.angle > 0 && ray.angle < M_PI_2) || (ray.angle > 3 * M_PI_2 && ray.angle < 2 * M_PI))
+	{
+		ray.direct_h = //derecha
+	}
+	else
+		ray.direct_h = //izquierda
+	// ver que pasa cuando la direccion coincide con el eje (solo habrá colisiones de un tipo)
+}
+
+void	ft_raycasting(t_cub *game)
+{
+	int		count;
+	t_ray	ray;
+
+	count = -1;
+	while (++count < RES_WIDTH)
+	{
+		ray.angle = (game->player->sight_direction + VISION_FIELD/2) - (VISION_FIELD/WIDTH * count);
+		ft_get_direction(&ray);
+	}
+
+
 }
 
 raycasting (t_cub *cub)
@@ -59,8 +93,8 @@ raycasting (t_cub *cub)
 	// |/____________x
 	// tener en cuenta las coordenadas y ejes en nuestro mapa para ver si hay que ajustar algo del ángulo o lo que sea 
 
-	ray[n] = (player->sight_direction + VISION_FIELD/2) - (VISION_FIELD/WIDTH * n);// cálculo del ángulo de cada rayo
 
+	ray[n] = (player->sight_direction + VISION_FIELD/2) - (VISION_FIELD/WIDTH * n);// cálculo del ángulo de cada rayo
 	
 
 	if (ray > 0)
