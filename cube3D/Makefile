@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/09 11:22:19 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/10 12:54:17 by senari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,14 @@ CFLAGS	= -Wall -Werror -Wextra
 
 FTFLGS	= -Llibft -lft
 
-MLXFLGS	= -framework Cocoa -framework OpenGL -framework IOKit -LMLX42/build -lmlx42 -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+MLXFLGS	= $(MLX) -Iinclude -ldl -lglfw -pthread -lm
 
 VPATH	= ./:./src/:./src/parser/:./src/utils/ #<<your directories here (separated by :)>>
 
 # Echo needs the (non existent in macosx) -e flag to print colours in Linux
 ECHO = echo -e
 ifeq ($(shell uname -s),Darwin)
+	MLXFLGS	= -framework Cocoa -framework OpenGL -framework IOKit -LMLX42/build -lmlx42 -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 	ECHO = echo
 endif
 
