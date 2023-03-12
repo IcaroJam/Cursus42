@@ -26,12 +26,18 @@ static int	gethex(char *line, t_cub *cub)
 	int	ret;
 	int	i;
 
+	if (!ft_isdigit(*line))
+		frerrxit("Illegal colour declaration.", cub);
 	ret = atouc(line, &i) << 16;
 	i = getoffset(line, i, cub);
 	line += i;
+	if (!ft_isdigit(*line))
+		frerrxit("Illegal colour declaration.", cub);
 	ret += atouc(line, &i) << 8;
 	i = getoffset(line, i, cub);
 	line += i;
+	if (!ft_isdigit(*line))
+		frerrxit("Illegal colour declaration.", cub);
 	ret += atouc(line, &i);
 	return (ret);
 }
