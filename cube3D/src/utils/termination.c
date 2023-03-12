@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:27:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/09 18:22:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:15:48 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	freecub(t_cub *cub)
 	free(cub->mdata.wpath);
 	free(cub->mdata.spath);
 	free(cub->mdata.epath);
-	mlx_terminate(cub->mlx);
+	if (cub->mlx)
+		mlx_terminate(cub->mlx);
 }
 
 void	frerrxit(char *msg, t_cub *cub)
