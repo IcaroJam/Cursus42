@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/09 18:37:44 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:23:55 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_cub
 	mlx_image_t		*wimg;
 	mlx_image_t		*simg;
 	mlx_image_t		*eimg;
-}			t_cub;
+}					t_cub;
 
 ///////PARSING//////////////////////////////////////////////////////////////////
 
