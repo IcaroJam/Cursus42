@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/13 08:50:17 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/13 09:13:19 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,32 +51,35 @@ void	ft_get_direction(t_ray *ray)
 
 void	ft_get_collisions(t_cub *game, t_ray *ray)
 {
-	int collision_index;
-	int cell_x;
-	int cell_y;
+	int	count;
+	int	cell_x;
+	int	cell_y;
 
 	cell_x = game->player.coord_x/CELL_LENGTH;
 	cell_y = game->player.coord_y/CELL_LENGTH;
 	ray->vertical.wall_collision = 0;
-   	ray->horizontal.wall_collision = 0;	
-	collision_index =  -1;
-	while (!ray->vertical.wall_collision && !ray->horizontal.wall_collision)//va ha ser mas facil hacer dos bucles, revisar
+	count = 0;
+	if (ray->direct_h == 1)
+		count++;
+	while (!ray->vertical.wall_collision && ray->direct_h != 0)
 	{
-		collision_index++;
-		if (ray->direct_h != 0)//hay direccion horinzontal
-		{
-			// falta sustituir n por collision_index de acuerdo con la direccion que sea coherente	
 		//	ray->vertical.x = (cell_x * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va a la derecha o en 0 si va a la izquierda
-			ray->vertical.y = -tan(ray->angle) * (ray->vertical.x - game->player->coord_x) - game->player->coord_y;
-			ray->vertical.wall_collision = ft_is_wall();// arreglar argumentos
-		}
-		if (ray->direct_v != 0)//hay direccion vertical
-		{
-			// falta sustituir n por collision_index de acuerdo con la direccion que sea coherente
+		ray->vertical.x = (cell_x * CELL_LENGTH) + CELL_LENGTH * (count * ray->direct_h)
+		ray->vertical.y = -tan(ray->angle) * (ray->vertical.x - game->player->coord_x) - game->player->coord_y;
+		ray->vertical.wall_collision = ft_is_wall();// arreglar argumentos
+		count++;
+	}
+   	ray->horizontal.wall_collision = 0;
+	count = 0;
+	if (ray->direct_v == 1)
+		count++;
+	while (!ray->horizontal.wall_collision && ray->direct_v != 0)
+	{
 		//	ray->horizontal.y = (cell_y * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
-			ray->horizontal.xx = -(ray->horizontal.y + game->player->coord_y)/tan(ray->angle) + game->player->coord_x;
-			ray->horizontal.wall_collision = ft_is_wall();// arreglar argumentos
-		}
+		ray->horizontal.y = (cell_y * CELL_LENGTH) + CELL_LENGTH * (count * ray_direc_v) //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
+		ray->horizontal.xx = -(ray->horizontal.y + game->player->coord_y)/tan(ray->angle) + game->player->coord_x;
+		ray->horizontal.wall_collision = ft_is_wall();// arreglar argumentos
+		count++;
 	}
 }
 
