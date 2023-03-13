@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/12 18:16:22 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/13 11:22:56 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	handleinputandinit(int argc, char **argv, t_cub *cub)
 static void	loadimgsandinit(t_cub *cub)
 {
 	cub->mlx = mlx_init(WINWIDTH, WINHEIGHT, "N&P's Cube3D!", false);
+	if (!cub->mlx)
+		frerrxit("MLX init failed!", cub);
 	cub->ntex = mlx_load_png(cub->mdata.npath);
 	cub->wtex = mlx_load_png(cub->mdata.wpath);
 	cub->stex = mlx_load_png(cub->mdata.spath);
