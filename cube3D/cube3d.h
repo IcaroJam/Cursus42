@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/10 13:12:30 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/13 08:50:14 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct s_player
 
 typedef struct s_vision_point
 {
-	float	length;
-	int		wall_orientation;
+	float	distance;
+	int		wall_orientation;// -1 Sur, 1 Norte, 0 Este, 2 Oeste
 }t_vision_point;
 
 typedef struct s_raycasting
@@ -98,8 +98,8 @@ typedef struct s_collision
 typedef struct s_ray
 {
 	float angle;
-	int direct_v;// arriba/abajo
-	int direct_h;// izquierda/derecha
+	int direct_v;// 0 no direction, -1 arriba, 1 abajo
+	int direct_h;// 0 no direction, -1 izquierda, 1 derecha
 	t_collision vertical;
 	t_collision horizontal;
 } t_ray;

@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/10 13:21:55 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/13 08:50:17 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@ int ft_is_wall(t_cub *game, float x, float y, int orientation_x, int orientation
 
 void	ft_get_direction(t_ray *ray)
 {
-	if (ray.angle >= 2 * M_PI)
-		ray.angle = ray.angle - (2 * M_PI);
-	else if (ray.angle < 0)
-		ray.angle = ray.angle + (2 * M_PI);
-	if (ray.angle > 0 && ray.angle < M_PI)
-		ray.direct_v = // arriba
+	ray->direct_v = 0;
+	ray->direct_h = 0;
+	if (ray->angle >= 2 * M_PI)
+		ray->angle = ray->angle - (2 * M_PI);
+	else if (ray->angle < 0)
+		ray->angle = ray->angle + (2 * M_PI);
+	if (ray->angle > 0 && ray->angle < M_PI)
+		ray->direct_v = -1// arriba
 	else
-		ray.direct_v = //abajo
-	if ((ray.angle > 0 && ray.angle < M_PI_2) || (ray.angle > 3 * M_PI_2 && ray.angle < 2 * M_PI))
-	{
-		ray.direct_h = //derecha
-	}
+		ray->direct_v = 1//abajo
+	if ((ray->angle > 0 && ray->angle < M_PI_2) || (ray->angle > 3 * M_PI_2 && ray->angle < 2 * M_PI))
+		ray->direct_h = 1//derecha
 	else
-		ray.direct_h = //izquierda
+		ray->direct_h = -1//izquierda
 	// ver que pasa cuando la direccion coincide con los ejes (solo habrá colisiones de un tipo)
 }
 
@@ -60,20 +60,20 @@ void	ft_get_collisions(t_cub *game, t_ray *ray)
 	ray->vertical.wall_collision = 0;
    	ray->horizontal.wall_collision = 0;	
 	collision_index =  -1;
-	while (!ray->vertical.wall_collision && !ray->horizontal.wall_collision)
+	while (!ray->vertical.wall_collision && !ray->horizontal.wall_collision)//va ha ser mas facil hacer dos bucles, revisar
 	{
 		collision_index++;
-		if ()//hay direccion horinzontal
+		if (ray->direct_h != 0)//hay direccion horinzontal
 		{
-			// falta sustituir n por collision_index de acuerdo con la direccion que sea coherente
-			ray->vertical.x = (cell_x * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va a la derecha o en 0 si va a la izquierda
+			// falta sustituir n por collision_index de acuerdo con la direccion que sea coherente	
+		//	ray->vertical.x = (cell_x * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va a la derecha o en 0 si va a la izquierda
 			ray->vertical.y = -tan(ray->angle) * (ray->vertical.x - game->player->coord_x) - game->player->coord_y;
 			ray->vertical.wall_collision = ft_is_wall();// arreglar argumentos
 		}
-		if ()//hay direccion vertical
+		if (ray->direct_v != 0)//hay direccion vertical
 		{
 			// falta sustituir n por collision_index de acuerdo con la direccion que sea coherente
-			ray->horizontal.y = (cell_y * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
+		//	ray->horizontal.y = (cell_y * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
 			ray->horizontal.xx = -(ray->horizontal.y + game->player->coord_y)/tan(ray->angle) + game->player->coord_x;
 			ray->horizontal.wall_collision = ft_is_wall();// arreglar argumentos
 		}
@@ -97,13 +97,13 @@ void	ft_get_vision_point(t_cub *game, t_ray *ray, int index) //mirar si conviene
 	}
 	if (ray->vertical.wall_collision)
 	{
-		game->raycasting.sight[index].length = ft_get_distance(game, ray->vertical);
-		game->raycasting.sight[index].wall_orientation = ray->direct_v// arreglar, hay 4 muros, 2 para vertical y 2 para horizontal. determinar los valores
+		game->raycasting.sight[index].distance = ft_get_distance(game, ray->vertical);
+		game->raycasting.sight[index].wall_orientation = ray->direct_v// -1 Sur 1 Norte
 	}
 	else
 	{
-		game->raycasting.sight[index].length = ft_get_distance(game, ray->horizontal);
-		game->raycasting.sight[index].wall_orientation = ray->direct_h// arreglar, hay 4 muros, 2 para vertical y 2 para horizontal. determinar los valores
+		game->raycasting.sight[index].distance = ft_get_distance(game, ray->horizontal);
+		game->raycasting.sight[index].wall_orientation = ray->direct_h + 1// 0 Este 2 Oeste
 	}
 }
 
