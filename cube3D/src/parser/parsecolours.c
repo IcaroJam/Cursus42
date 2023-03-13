@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:23:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 15:35:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:16:14 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static int	gethex(char *line, t_cub *cub)
 	if (!ft_isdigit(*line))
 		frerrxit("Illegal colour declaration.", cub);
 	ret += atouc(line, &i);
+	while (line[i])
+		if (!ft_isspace(line[i++]))
+			frerrxit("Trailing bad stuff in colour declaration.", cub);
 	return (ret);
 }
 

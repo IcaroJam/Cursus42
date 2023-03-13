@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:17:21 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/08 15:35:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:19:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static char	**gettexptr(char *line, t_cub *cub)
 static int	texstore(char *line, t_cub *cub)
 {
 	char	**texturedir;
+	int		len;
 
 	while (ft_isspace(*line))
 		line++;
@@ -54,9 +55,13 @@ static int	texstore(char *line, t_cub *cub)
 	line += 2;
 	while (ft_isspace(*line))
 		line++;
-	*texturedir = ft_substr(line, 0, texlen(line));
+	len = texlen(line);
+	*texturedir = ft_substr(line, 0, len);
 	if (!*texturedir)
 		frerrxit("Failed to copy a texture path.", cub);
+	while (line[len])
+		if (!ft_isspace(line[len++]))
+			frerrxit("Trailing bad stuff in texture declaration.", cub);
 	return (0);
 }
 
