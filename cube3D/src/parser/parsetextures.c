@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:17:21 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/13 20:19:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:21:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	texstore(char *line, t_cub *cub)
 	while (ft_isspace(*line))
 		line++;
 	len = texlen(line);
+	if (!len)
+		frerrxit("Missing texture path.", cub);
 	*texturedir = ft_substr(line, 0, len);
 	if (!*texturedir)
 		frerrxit("Failed to copy a texture path.", cub);
