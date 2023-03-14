@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/09 17:47:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/13 22:48:32 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
 		if (c == 'N')
 			cub->player.a = M_PI_2;
 		else if (c == 'W')
-			cub->player.a = 0;
+			cub->player.a = M_PI;
 		else if (c == 'S')
 			cub->player.a = -M_PI_2;
 		else
-			cub->player.a = M_PI;
+			cub->player.a = 0;
 	}
 }
 
