@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/13 11:22:56 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:48:53 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,17 @@ void	leakcheck(void)
 	system("leaks cube3D");
 }
 
+void	infodump(t_cub *cub)
+{
+	unsigned int	i;
+
+	i = 0;
+	printf("Textures:\n\tNO: %s\n\tWE: %s\n\tSO: %s\n\tEA: %s\nColors:\n\tF: %x\n\tC: %x\nMap:\n", cub->mdata.npath, cub->mdata.wpath, cub->mdata.spath, cub->mdata.epath, cub->mdata.floorc, cub->mdata.ceilic);
+	while (i < cub->mdata.ysize)
+		printf("%s\n", cub->mdata.cmap[i++]);
+	printf("Player:\n\tX: %f\n\tY: %f\n\tA: %f\n", cub->player.x, cub->player.y, cub->player.a);
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
@@ -59,6 +70,7 @@ int	main(int argc, char **argv)
 	atexit(leakcheck);
 	handleinputandinit(argc, argv, &cub);
 	parsemap(argv[1], &cub);
+	infodump(&cub);
 	loadimgsandinit(&cub);
 	freecub(&cub);
 	return (0);
