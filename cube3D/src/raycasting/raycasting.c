@@ -6,19 +6,30 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/13 09:13:19 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/14 08:26:35 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int ft_is_wall(t_cub *game, float x, float y, int orientation_x, int orientation_y)//fix
+int ft_is_wall(t_cub *game, t_collision collision, int orientation_x, int orientation_y)//fix
 {
 	int cell_x;
 	int cell_y;
 	
-	cell_x = x/CELL_LENGTH - orientation_x;
-	cell_y = y/CELL_LENGTH - orientation_y;
+//	cell_x = x/CELL_LENGTH - orientation_x;
+//	cell_y = y/CELL_LENGTH - orientation_y;
+
+	if (orientation_x < 0)
+		orientation_x = 1;
+	else
+		orientation_x = 0;
+	if (orientation_y < 0)
+		orientation_y = 1;
+	else
+		orientation_y = 0;
+	cell_x = collision.x/CELL_LENGTH - orientation_x;
+	cell_y = collision.y/CELL_LENGTH - orientation_y;
 
 	//horizontal collision: orientation_x = 0
 	//horizontal collision: orientation_y 1 arriba, 0 abajo
@@ -66,7 +77,7 @@ void	ft_get_collisions(t_cub *game, t_ray *ray)
 		//	ray->vertical.x = (cell_x * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va a la derecha o en 0 si va a la izquierda
 		ray->vertical.x = (cell_x * CELL_LENGTH) + CELL_LENGTH * (count * ray->direct_h)
 		ray->vertical.y = -tan(ray->angle) * (ray->vertical.x - game->player->coord_x) - game->player->coord_y;
-		ray->vertical.wall_collision = ft_is_wall();// arreglar argumentos
+		ray->vertical.wall_collision = ft_is_wall(game, ray->vertical, ray->direct_h , 0);// arreglar argumentos
 		count++;
 	}
    	ray->horizontal.wall_collision = 0;
@@ -77,8 +88,8 @@ void	ft_get_collisions(t_cub *game, t_ray *ray)
 	{
 		//	ray->horizontal.y = (cell_y * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
 		ray->horizontal.y = (cell_y * CELL_LENGTH) + CELL_LENGTH * (count * ray_direc_v) //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
-		ray->horizontal.xx = -(ray->horizontal.y + game->player->coord_y)/tan(ray->angle) + game->player->coord_x;
-		ray->horizontal.wall_collision = ft_is_wall();// arreglar argumentos
+		ray->horizontal.x = -(ray->horizontal.y + game->player->coord_y)/tan(ray->angle) + game->player->coord_x;
+		ray->horizontal.wall_collision = ft_is_wall(game, ray->horizontal, 0, ray->direct_v);// arreglar argumentos
 		count++;
 	}
 }
