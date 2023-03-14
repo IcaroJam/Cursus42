@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/14 20:48:53 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/14 20:53:22 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	handleinputandinit(int argc, char **argv, t_cub *cub)
 	cub->mdata.wpath = NULL;
 	cub->mdata.spath = NULL;
 	cub->mdata.epath = NULL;
+	cub->player.x = 0;
 	cub->mlx = NULL;
 }
 

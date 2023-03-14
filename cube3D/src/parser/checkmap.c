@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/13 22:48:32 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/14 20:56:58 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
 {
 	if (c == 'N' || c == 'W' || c == 'S' || c == 'E')
 	{
+		if (cub->player.x != 0)
+			frerrxit("Dopplegangers?!?!", cub);
 		cub->player.x = i + 0.5;
 		cub->player.y = j + 0.5;
 		if (c == 'N')
@@ -94,4 +96,6 @@ void	checkmap(char **map, t_cub *cub)
 		checkline(map[i], i, cub);
 		i++;
 	}
+	if (cub->player.x == 0)
+		frerrxit("No players found.", cub);
 }
