@@ -9,7 +9,7 @@ a.out
 gnlTester
 born2beroot/
 so_long/so_long
-*.png
+so_long/sprites/*.png
 *.xcf
 pipex/pipex
 push_swap/push_swap
