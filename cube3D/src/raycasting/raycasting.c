@@ -6,13 +6,13 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/14 08:26:35 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/16 08:27:48 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int ft_is_wall(t_cub *game, t_collision collision, int orientation_x, int orientation_y)//fix
+int ft_is_wall(t_cub *game, t_collision collision, int orientation_x, int orientation_y)
 {
 	int cell_x;
 	int cell_y;
@@ -112,12 +112,20 @@ void	ft_get_vision_point(t_cub *game, t_ray *ray, int index) //mirar si conviene
 	if (ray->vertical.wall_collision)
 	{
 		game->raycasting.sight[index].distance = ft_get_distance(game, ray->vertical);
-		game->raycasting.sight[index].wall_orientation = ray->direct_v// -1 Sur 1 Norte
+		game->raycasting.sight[index].wall_orientation = ray->direct_h + 1// 0 Norte 2 Oeste //comprobar las direcciones!!!!!!
+		if (ray_direct_h > 0)
+			game->raycasting.sight[index].wall_texture_coord = ray->horizontal.y % CELL_LENGTH;//fix
+		else
+			game->raycasting.sight[index].wall_texture_coord = CELL_LENGTH - ray->horizontal.y % CELL_LENGTH;//fix
 	}
 	else
 	{
 		game->raycasting.sight[index].distance = ft_get_distance(game, ray->horizontal);
-		game->raycasting.sight[index].wall_orientation = ray->direct_h + 1// 0 Este 2 Oeste
+		game->raycasting.sight[index].wall_orientation = ray->direct_v// -1 Sur 1 Norte //comprobar las direcciones!!!!!!
+		if (ray_direct_v > 0)
+			game->raycasting.sight[index].wall_texture_coord = CELL_LENGTH - ray->horizontal.x % CELL_LENGTH;//fix
+		else
+			game->raycasting.sight[index].wall_texture_coord = ray->horizontal.x % CELL_LENGTH;//fix
 	}
 }
 
@@ -136,8 +144,8 @@ void	ft_raycasting(t_cub *game)
 	}
 }
 
-
 //teoría
+/*
 raycasting (t_cub *cub)
 {
 	// hace falta saber celda del jugador??
@@ -196,3 +204,4 @@ raycasting (t_cub *cub)
 	
 	collision_distance = sqrt(exp2(cub->player->coord_x - collision_x) + exp2(cub->player->coord_y - collision_y));
 }
+*/
