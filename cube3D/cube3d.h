@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/20 15:08:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:11:39 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
  * We´ll be moving inside of cells, no more teleport like so_long :D
 */
 
-# define VISION_FIELD 5 * M_PI / 9
+# define VISION_FIELD 1.74532925199432957692369076848861
 
 /**
  * Vision Field
@@ -103,11 +103,9 @@ typedef struct s_ray
 }				t_ray;
 
 ///////GAME/////////////////////////////////////////////////////////////////////
-
 void	ft_raycasting(t_cub *cub);
 
 ///////PARSING//////////////////////////////////////////////////////////////////
-
 /**
 * @brief Returns 0 for valid filenames or -1 for invalid ones.
 *
@@ -177,7 +175,6 @@ void	makeitsquared(t_cub *cub);
 void	checkmap(char **map, t_cub *cub);
 
 ///////GRAPHIC STUFF////////////////////////////////////////////////////////////
-
 /**
 * @brief Creates and puts the background to window.
 *
@@ -186,7 +183,6 @@ void	checkmap(char **map, t_cub *cub);
 void	backpaint(t_cub *cub);
 
 ///////UTILS////////////////////////////////////////////////////////////////////
-
 /**
 * @brief Print "Error\n" followed by msg to stderr.
 *
