@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/14 20:53:22 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/20 13:07:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ int	main(int argc, char **argv)
 	parsemap(argv[1], &cub);
 	infodump(&cub);
 	loadimgsandinit(&cub);
+
+	backpaint(&cub);
+	mlx_image_to_window(cub.mlx, cub.nimg, 0, 0);
+	mlx_put_pixel(cub.back, 100, 50, 0xff0000ff);
+
+	mlx_key_hook(cub.mlx, keyhooks, &cub);
+	mlx_loop(cub.mlx);
 	freecub(&cub);
 	return (0);
 }

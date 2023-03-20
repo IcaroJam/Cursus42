@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/20 12:02:15 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/20 13:08:02 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ endif
 
 #----                                                                      ----#
 
-SHRDSRC	= main.c termination.c input.c
+SHRDSRC	= main.c termination.c input.c hooks.c
 PARSSRC	= atouc.c parsetextures.c parsemap.c parsecolours.c checkmap.c makeitsquared.c
 GRPHSRC	= backpaint.c
 #------------------------------------------------------------------------------#

@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/20 12:13:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:19:18 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	makeitsquared(t_cub *cub);
 */
 void	checkmap(char **map, t_cub *cub);
 
-///////PARSING//////////////////////////////////////////////////////////////////
+///////GRAPHIC STUFF////////////////////////////////////////////////////////////
 
 /**
 * @brief Creates and puts the background to window.
@@ -168,5 +168,13 @@ void	freecub(t_cub *cub);
 	* @param cub
 	*/
 void	frerrxit(char *msg, t_cub *cub);
+
+/**
+* @brief Handles all key inputs.
+*
+	* @param keydata
+	* @param param Pointer to whatever the function may need. In this case: cub.
+	*/
+void	keyhooks(mlx_key_data_t keydata, void *param);
 
 #endif
