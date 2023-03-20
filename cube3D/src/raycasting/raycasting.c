@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/20 20:32:36 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/20 21:05:38 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void	ft_raycasting(t_cub *game)
 	while (++count < WINWIDTH)
 //	while (++count < 1)
 	{
-		ray.angle = (game->player.a + VISION_FIELD/2) - (VISION_FIELD/WINWIDTH * count);
+		ray.angle = (game->player.a + VISION_FIELD / 2) - (VISION_FIELD / WINWIDTH * count);
 //		write(1, "10\n", 3);
 		ft_get_direction(&ray);
 
@@ -172,6 +172,8 @@ void	ft_raycasting(t_cub *game)
 
 //		write(1, "30\n", 3);
 		ft_get_vision_point(game, &ray, count);
+		if (count == 0 || count == 399 || count == 799)
+			printf("[%3d] Angle: %f, Distance: %f\n", count, ray.angle, game->sight[count].distance);
 
 //		write(1, "40\n", 3);
 	}
