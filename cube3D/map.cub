@@ -3,8 +3,8 @@ WE ./assets/basalt_side.png
 SO ./assets/chiseled_red_sandstone.png
 EA ./assets/cracked_deepslate_tiles.png
 
-F 56, 128, 30
-C 40, 78, 200
+F 164, 194, 165
+C 202, 233, 250
   
        11111111111       
       10000000001
