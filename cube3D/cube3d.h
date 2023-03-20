@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/20 15:11:39 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:27:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_cub
 	mlx_image_t		*simg;
 	mlx_image_t		*eimg;
 	mlx_image_t		*back;
+	mlx_image_t		*lines[WINWIDTH];
 	t_vision_point	sight[WINWIDTH];
 }					t_cub;
 
@@ -181,6 +182,13 @@ void	checkmap(char **map, t_cub *cub);
 * @param cub
 */
 void	backpaint(t_cub *cub);
+
+/**
+* @brief Call raycast and update each of the lines printed to the window.
+*
+* @param cub
+*/
+void	lineupdate(t_cub *cub);
 
 ///////UTILS////////////////////////////////////////////////////////////////////
 /**

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/20 13:07:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:26:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	handleinputandinit(int argc, char **argv, t_cub *cub)
 
 static void	loadimgsandinit(t_cub *cub)
 {
+	unsigned int	i;
+
 	cub->mlx = mlx_init(WINWIDTH, WINHEIGHT, "N&P's Cube3D!", false);
 	if (!cub->mlx)
 		frerrxit("MLX init failed!", cub);
@@ -46,6 +48,13 @@ static void	loadimgsandinit(t_cub *cub)
 	cub->eimg = mlx_texture_to_image(cub->mlx, cub->etex);
 	if (!cub->nimg || !cub->wimg || !cub->simg || !cub->eimg)
 		frerrxit("Failed to load images from textures.", cub);
+	i = 0;
+	while (i < WINWIDTH)
+	{
+		cub->lines[i] = mlx_new_image(cub->mlx, 1, WINHEIGHT);
+		if (!cub->lines[i++])
+			frerrxit("Line allocation failed!", cub);
+	}
 }
 
 void	leakcheck(void)
@@ -73,11 +82,8 @@ int	main(int argc, char **argv)
 	parsemap(argv[1], &cub);
 	infodump(&cub);
 	loadimgsandinit(&cub);
-
 	backpaint(&cub);
-	mlx_image_to_window(cub.mlx, cub.nimg, 0, 0);
-	mlx_put_pixel(cub.back, 100, 50, 0xff0000ff);
-
+	lineupdate(&cub);
 	mlx_key_hook(cub.mlx, keyhooks, &cub);
 	mlx_loop(cub.mlx);
 	freecub(&cub);
