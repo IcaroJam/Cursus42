@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/20 21:05:38 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/20 22:06:38 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,18 @@ int	ft_is_wall(t_cub *game, t_collision collision, int direct_x, int direct_y)
 
 void	ft_get_direction(t_ray *ray)
 {
-	ray->direct_v = 0;
-	ray->direct_h = 0;
-	if (ray->angle >= 2 * M_PI)
-		ray->angle = ray->angle - (2 * M_PI);
-	else if (ray->angle < 0)
-		ray->angle = ray->angle + (2 * M_PI);
-	if (ray->angle > 0 && ray->angle < M_PI)
-		ray->direct_v = -1;// arriba
+	if (sinf(ray->angle) > 0)
+		ray->direct_v = -1;
 	else
-		ray->direct_v = 1;//abajo
-	if ((ray->angle > 0 && ray->angle < M_PI_2)
-			|| (ray->angle > 3 * M_PI_2 && ray->angle < 2 * M_PI))
-		ray->direct_h = 1;//derecha
+		ray->direct_v = 1;
+	if (cosf(ray->angle) > 0)
+		ray->direct_h = 1;
 	else
-		ray->direct_h = -1;//izquierda
+		ray->direct_h = -1;
+	/** if (ray->angle >= 2 * M_PI)
+	  *     ray->angle = ray->angle - (2 * M_PI);
+	  * else if (ray->angle < 0)
+	  *     ray->angle = ray->angle + (2 * M_PI); */
 	// ver que pasa cuando la direccion coincide con los ejes (solo habrá colisiones de un tipo)
 }
 
@@ -163,12 +160,18 @@ void	ft_raycasting(t_cub *game)
 	while (++count < WINWIDTH)
 //	while (++count < 1)
 	{
-		ray.angle = (game->player.a + VISION_FIELD / 2) - (VISION_FIELD / WINWIDTH * count);
+		ray.angle = game->player.a + VISION_FIELD / 2 - VISION_FIELD * count / (WINWIDTH - 1);
+		if (count == 0 || count == 399 || count == 799)
+			printf("[%3d] Angle: %f, Distance: %f\n", count, ray.angle, game->sight[count].distance);
 //		write(1, "10\n", 3);
 		ft_get_direction(&ray);
+		if (count == 0 || count == 399 || count == 799)
+			printf("[%3d] Angle: %f, Distance: %f\n", count, ray.angle, game->sight[count].distance);
 
 //		write(1, "20\n", 3);
 		ft_get_collisions(game, &ray);
+		if (count == 0 || count == 399 || count == 799)
+			printf("[%3d] Angle: %f, Distance: %f\n", count, ray.angle, game->sight[count].distance);
 
 //		write(1, "30\n", 3);
 		ft_get_vision_point(game, &ray, count);
