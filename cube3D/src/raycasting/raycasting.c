@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/20 17:20:30 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:32:36 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_is_wall(t_cub *game, t_collision collision, int direct_x, int direct_y)
 	//vertical collision: direct_y = 0
 //	printf("x %d y %d dx %d, dy %d\n", cell_x, cell_y, direct_x, direct_y);
 //	write(2, "2111\n", 5);
-	if (cell_x < 0 || cell_x >= game->mdata.xsize || cell_y < 0 || cell_y >= game->mdata.ysize || game->mdata.cmap[cell_y][cell_x] == '1') 
+	if (cell_x >= game->mdata.xsize || cell_y >= game->mdata.ysize || game->mdata.cmap[cell_y][cell_x] == '1') 
 	{
 //		write(2, "2112\n", 5);
 
