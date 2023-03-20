@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/20 11:47:43 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:27:22 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
  * We´ll be moving inside of cells, no more teleport like so_long :D
 */
 
-# define VISION_FIELD M_PI/3
+# define VISION_FIELD 5 * M_PI / 9
 
 /**
  * Vision Field

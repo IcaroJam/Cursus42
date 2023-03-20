@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/20 11:49:46 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:24:27 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	ft_is_wall(t_cub *game, t_collision collision, int direct_x, int direct_y)
 {
-	int	cell_x;
-	int	cell_y;
+	unsigned int	cell_x;
+	unsigned int	cell_y;
 
 //	cell_x = x/CELL_LENGTH - orientation_x;
 //	cell_y = y/CELL_LENGTH - orientation_y;
+//	printf("dx%d, dy%d\n", direct_x, direct_y);
 	if (direct_x < 0)
 		direct_x = 1;
 	else
@@ -33,8 +34,14 @@ int	ft_is_wall(t_cub *game, t_collision collision, int direct_x, int direct_y)
 	//horizontal collision: direct_y 1 arriba, 0 abajo
 	//vertical collision: direct_x 0 derecha, 1 izquierda 
 	//vertical collision: direct_y = 0
-	if (game->mdata.cmap[cell_y][cell_x] == '1')
+//	printf("x %d y %d dx %d, dy %d\n", cell_x, cell_y, direct_x, direct_y);
+//	write(2, "2111\n", 5);
+	if (cell_x < 0 || cell_x >= game->mdata.xsize || cell_y < 0 || cell_y >= game->mdata.ysize || game->mdata.cmap[cell_y][cell_x] == '1') 
+	{
+//		write(2, "2112\n", 5);
+
 		return (1);
+	}
 	return (0);
 }
 
@@ -64,35 +71,48 @@ void	ft_get_collisions(t_cub *game, t_ray *ray)
 	int	cell_x;
 	int	cell_y;
 
-	write(1, "20\n", 3);
+	//write(1, "20\n", 3);
 	cell_x = game->player.x / CELL_LENGTH;
 	cell_y = game->player.y / CELL_LENGTH;
+//	printf("cx %d, cy %d\n", cell_x, cell_y);
+//	printf("px %f, py%f\n",game->player.x, game->player.y);
+//	printf("ray angle %f\n", ray->angle);
 	ray->vertical.wall_collision = 0;
 	count = 0;
 	if (ray->direct_h == 1)
 		count++;
-	write(1, "210\n", 4);
+//	write(1, "210\n", 4);
 	while (!ray->vertical.wall_collision && ray->direct_h != 0)
 	{
 		//	ray->vertical.x = (cell_x * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va a la derecha o en 0 si va a la izquierda
 		ray->vertical.x = (cell_x * CELL_LENGTH) + CELL_LENGTH * (count * ray->direct_h);
-		ray->vertical.y = -tan(ray->angle) * (ray->vertical.x - game->player.x) - game->player.y;
+		//ray->vertical.y = -tan(ray->angle) * (ray->vertical.x - game->player.x) - game->player.y;
+		ray->vertical.y = -tan(ray->angle) * (ray->vertical.x - game->player.x) + game->player.y;
+
+		
+//		write(1, "211\n", 4);
 		ray->vertical.wall_collision = ft_is_wall(game, ray->vertical, ray->direct_h , 0);// arreglar argumentos
+																						  //
+//		write(1, "212\n", 4);
 		count++;
 	}
    	ray->horizontal.wall_collision = 0;
 	count = 0;
 	if (ray->direct_v == 1)
 		count++;
-	write(1, "220\n", 4);
+//	write(1, "220\n", 4);
+	
 	while (!ray->horizontal.wall_collision && ray->direct_v != 0)
 	{
 		//	ray->horizontal.y = (cell_y * CELL_LENGTH) + CELL_LENGTH * n //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
 		ray->horizontal.y = (cell_y * CELL_LENGTH) + CELL_LENGTH * (count * ray->direct_v); //cuidado n empezaria en 1 si el rayo va hacia abajo o en 0 si hacia arriba
-		ray->horizontal.x = -(ray->horizontal.y + game->player.y)/tan(ray->angle) + game->player.x;
+	//	ray->horizontal.x = -(ray->horizontal.y + game->player.y)/tan(ray->angle) + game->player.x;
+		ray->horizontal.x = -(ray->horizontal.y - game->player.y)/tan(ray->angle) + game->player.x;
+
 		ray->horizontal.wall_collision = ft_is_wall(game, ray->horizontal, 0, ray->direct_v);// arreglar argumentos
 		count++;
 	}
+	
 }
 
 float ft_get_distance(t_cub *game, t_collision collision)
@@ -112,8 +132,9 @@ void	ft_get_vision_point(t_cub *game, t_ray *ray, int index) //mirar si conviene
 	}
 	if (ray->vertical.wall_collision)
 	{
+//		printf("collision E/O");
 		game->sight[index].distance = ft_get_distance(game, ray->vertical);
-		game->sight[index].wall_orientation = ray->direct_h + 1;// 0 Norte 2 Oeste //comprobar las direcciones!!!!!!
+		game->sight[index].wall_orientation = ray->direct_h + 1;// 0 Este 2 Oeste //comprobar las direcciones!!!!!!
 		if (ray->direct_h > 0)
 			game->sight[index].wall_texture_coord = (int)ray->horizontal.y % CELL_LENGTH;//fix
 		else
@@ -121,6 +142,7 @@ void	ft_get_vision_point(t_cub *game, t_ray *ray, int index) //mirar si conviene
 	}
 	else
 	{
+//		printf("collision N/S");
 		game->sight[index].distance = ft_get_distance(game, ray->horizontal);
 		game->sight[index].wall_orientation = ray->direct_v;// -1 Sur 1 Norte //comprobar las direcciones!!!!!!
 		if (ray->direct_v > 0)
@@ -136,25 +158,25 @@ void	ft_raycasting(t_cub *game)
 	t_ray	ray;
 
 	count = -1;
-	write(1, "00\n", 3);
+//	write(1, "00\n", 3);
 
 	while (++count < WINWIDTH)
+//	while (++count < 1)
 	{
 		ray.angle = (game->player.a + VISION_FIELD/2) - (VISION_FIELD/WINWIDTH * count);
-		
-		write(1, "10\n", 3);
+//		write(1, "10\n", 3);
 		ft_get_direction(&ray);
 
-		write(1, "20\n", 3);
-	//	ft_get_collisions(game, &ray);
+//		write(1, "20\n", 3);
+		ft_get_collisions(game, &ray);
 
-		write(1, "30\n", 3);
-	//	ft_get_vision_point(game, &ray, count);
+//		write(1, "30\n", 3);
+		ft_get_vision_point(game, &ray, count);
 
-		write(1, "40\n", 3);
+//		write(1, "40\n", 3);
 	}
-	write(1, "50\n", 3);
-
+//	write(1, "50\n", 3);
+//	exit(0);
 }
 
 //teoría
