@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/20 17:25:08 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:42:21 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,15 @@ void	freecub(t_cub *cub);
 	* @param cub
 	*/
 void	frerrxit(char *msg, t_cub *cub);
+
+/**
+* @brief Checks if given character is a valid map character.
+*
+* @param c
+*
+* @return 
+*/
+int	isvalid(char c);
 
 /**
 * @brief Handles all key inputs.

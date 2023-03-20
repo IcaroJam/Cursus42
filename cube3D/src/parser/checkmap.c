@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/14 20:56:58 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/20 18:41:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
 
-static int	isvalid(char c)
+int	isvalid(char c)
 {
 	return (c == '1' || c == '0'
 		|| c == 'N' || c == 'W' || c == 'S' || c == 'E');

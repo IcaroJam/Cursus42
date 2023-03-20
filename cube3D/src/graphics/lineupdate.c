@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/20 18:31:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:59:31 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,17 @@ static void	scanline(t_cub *cub, unsigned int i)
 	while (j < start)
 		mlx_put_pixel(cub->lines[i], 0, j++, 0);
 	while (j < end)
-		mlx_put_pixel(cub->lines[i], 0, j++, 0xFF0000FF);
+	{
+		if (cub->sight[i].wall_orientation == -1)
+			mlx_put_pixel(cub->lines[i], 0, j, 0x995050FF);
+		else if (cub->sight[i].wall_orientation == 0)
+			mlx_put_pixel(cub->lines[i], 0, j, 0x509950FF);
+		else if (cub->sight[i].wall_orientation == 2)
+			mlx_put_pixel(cub->lines[i], 0, j, 0x505099FF);
+		else
+			mlx_put_pixel(cub->lines[i], 0, j, 0x995050FF);
+		j++;
+	}
 	while (j < WINHEIGHT)
 		mlx_put_pixel(cub->lines[i], 0, j++, 0);
 }
