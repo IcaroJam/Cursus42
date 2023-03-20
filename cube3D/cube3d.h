@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/14 08:39:04 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:47:43 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,10 @@
 
 // CONSTANTS
 
-# define RES_WIDTH 320
+# define WINWIDTH 800
+# define WINHEIGHT 600
 
-/**
- * Resolution width
- * Raycasting in Wolfenstein3D throw a ray for each pixel in width so it affect a lot in perfomance
-*/
-
-# define RES_HEIGHT 240
-
-/**
- * Resolution height
- * Height is fake?? I know so far our game is really 2D for calculations, so it sholud affect perfomance but not much
-*/
-
-# define CELL_LENGTH 64
+# define CELL_LENGTH 1
 
 /**
  * Cell length
@@ -56,26 +45,24 @@
 //     STRUCTURES                                                             //
 typedef struct s_mapdata
 {
-	char	**cmap;
-	char	*npath;
-	char	*wpath;
-	char	*spath;
-	char	*epath;
-	int		floorc;
-	int		ceilic;
-}			t_mapdata;
+	char			**cmap;
+	unsigned int	xsize;
+	unsigned int	ysize;
+	char			*npath;
+	char			*wpath;
+	char			*spath;
+	char			*epath;
+	int				floorc;
+	int				ceilic;
+}					t_mapdata;
 
-typedef struct s_cub
-{
-	t_mapdata	mdata;
-}			t_cub;
 
 typedef struct s_player
 {
-	float	coord_x;
-	float	coord_y;
-	float	sight_direction;
-} t_player;
+	float	x;
+	float	y;
+	float	a;
+}			t_player;
 
 typedef struct s_vision_point
 {
@@ -84,17 +71,29 @@ typedef struct s_vision_point
 	float	wall_texture_coord;
 }t_vision_point;
 
-typedef struct s_raycasting
+typedef struct s_cub
 {
-	t_vision_point	sight[RES_WIDTH];
-} t_raycasting;
+	t_mapdata		mdata;
+	t_player		player;
+	mlx_t			*mlx;
+	mlx_texture_t	*ntex;
+	mlx_texture_t	*wtex;
+	mlx_texture_t	*stex;
+	mlx_texture_t	*etex;
+	mlx_image_t		*nimg;
+	mlx_image_t		*wimg;
+	mlx_image_t		*simg;
+	mlx_image_t		*eimg;
+	t_vision_point	sight[WINWIDTH];
+
+}					t_cub;
 
 typedef struct s_collision
 {
 	int wall_collision;// yes/not
 	float x;//point of collision
 	float y;// point of colision
-} t_collision
+} t_collision;
 
 typedef struct s_ray
 {
@@ -104,8 +103,11 @@ typedef struct s_ray
 	t_collision vertical;
 	t_collision horizontal;
 } t_ray;
+///////GAME/////////////////////////////////////////////////////////////////////
 
-//     PARSING                                                                //
+void ft_raycasting(t_cub *cub);
+
+///////PARSING//////////////////////////////////////////////////////////////////
 
 /**
 * @brief Returns 0 for valid filenames or -1 for invalid ones.
@@ -113,7 +115,7 @@ typedef struct s_ray
 * @param s: The name of the file.
 * @param len: The length of the filename string.
 *
-* @return 
+* @return
 */
 int		filecheck(const char *s, size_t len);
 
@@ -129,7 +131,7 @@ int		filecheck(const char *s, size_t len);
 	* @param offset: Pointer to an integer to store the length of the number,
 	* or NULL.
 	*
-	* @return 
+	* @return
 */
 int		atouc(const char *s, int *offset);
 
@@ -149,9 +151,33 @@ void	parsemap(char *mapfile, t_cub *cub);
 * @param fd: File descriptor of the map file.
 * @param cub: Pointer to the data structure.
 */
-void	gettextures(int fd, t_cub *cub);
+int		gettextures(char *line, t_cub *cub);
 
-//     UTILS                                                                  //
+/**
+* @brief Stores the floor's and ceiling's colours inside cub. Exits on error.
+*
+* @param fd: File descriptor of the map file.
+* @param cub: Pointer to the data structure.
+*/
+void	getcolours(int colstored[2], char *line, t_cub *cub);
+
+/**
+* @brief Add spaces to the end of the lines shorter than the longest one in
+* order to make the map a matrix and avoid segmenting when checking adjacent
+* characters in checkmap.
+*
+* @param cub
+*/
+void	makeitsquared(t_cub *cub);
+
+/**
+* @brief Perform validity checks on the map. Frerrxit on error.
+*
+* @param cub
+*/
+void	checkmap(char **map, t_cub *cub);
+
+///////UTILS////////////////////////////////////////////////////////////////////
 
 /**
 * @brief Print "Error\n" followed by msg to stderr.
@@ -159,5 +185,27 @@ void	gettextures(int fd, t_cub *cub);
 	* @param msg
 	*/
 void	errmsg(char *msg);
+
+/**
+* @brief Call errmsg and exit(1).
+*
+	* @param msg
+	*/
+void	errexit(char *msg);
+
+/**
+* @brief Frees all of cub's resources.
+*
+* @param cub
+*/
+void	freecub(t_cub *cub);
+
+/**
+* @brief Frees resources and call errexit.
+*
+	* @param msg
+	* @param cub
+	*/
+void	frerrxit(char *msg, t_cub *cub);
 
 #endif

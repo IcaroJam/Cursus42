@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:17:21 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/07 19:17:47 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/13 20:21:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char	**gettexptr(char *line, t_cub *cub)
 {
 	char	**texturedir;
 
+	texturedir = NULL;
 	if (!cub->mdata.npath && !ft_strncmp(line, "NO", 2))
 		texturedir = &cub->mdata.npath;
 	else if (!cub->mdata.spath && !ft_strncmp(line, "SO", 2))
@@ -34,52 +35,39 @@ static char	**gettexptr(char *line, t_cub *cub)
 		texturedir = &cub->mdata.wpath;
 	else if (!cub->mdata.epath && !ft_strncmp(line, "EA", 2))
 		texturedir = &cub->mdata.epath;
-	else
-	{
-		errmsg("Bad/dup texture identifier. Accepted: [NO, WE, SO, EA].");
-		exit(1);
-	}
+	else if (ft_strncmp(line, "F", 1) && ft_strncmp(line, "C", 1))
+		frerrxit("Bad/dup texture identifier. Accepted: [NO, WE, SO, EA]", cub);
 	return (texturedir);
 }
 
-static void	texstore(char *line, t_cub *cub)
+static int	texstore(char *line, t_cub *cub)
 {
 	char	**texturedir;
+	int		len;
 
 	while (ft_isspace(*line))
 		line++;
 	if (!*line)
-		return ;
+		return (0);
 	texturedir = gettexptr(line, cub);
+	if (!texturedir)
+		return (1);
 	line += 2;
 	while (ft_isspace(*line))
 		line++;
-	*texturedir = ft_substr(line, 0, texlen(line));
+	len = texlen(line);
+	if (!len)
+		frerrxit("Missing texture path.", cub);
+	*texturedir = ft_substr(line, 0, len);
 	if (!*texturedir)
-	{
-		errmsg("Failed to copy a texture path.");
-		exit(1);
-	}
+		frerrxit("Failed to copy a texture path.", cub);
+	while (line[len])
+		if (!ft_isspace(line[len++]))
+			frerrxit("Trailing bad stuff in texture declaration.", cub);
+	return (0);
 }
 
-void	gettextures(int fd, t_cub *cub)
+int	gettextures(char *line, t_cub *cub)
 {
-	char	*temp;
-
-	cub->mdata.npath = NULL;
-	cub->mdata.wpath = NULL;
-	cub->mdata.spath = NULL;
-	cub->mdata.epath = NULL;
-	while (!cub->mdata.npath || !cub->mdata.spath || !cub->mdata.epath || !cub->mdata.wpath)
-	{
-		temp = get_next_line(fd);
-		if (!temp)
-		{
-			errmsg("Map reading failed!");
-			exit(1);
-		}
-		texstore(temp, cub);
-		free(temp);
-	}
-	printf("NO: [%s]\nWE: [%s]\nSO: [%s]\nEA: [%s]\n", cub->mdata.npath, cub->mdata.wpath, cub->mdata.spath, cub->mdata.epath);
+	return (texstore(line, cub));
 }
