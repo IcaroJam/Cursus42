@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/20 13:27:22 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:08:46 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_vision_point
 	float	distance;
 	int		wall_orientation;// -1 Sur, 1 Norte, 0 Este, 2 Oeste
 	float	wall_texture_coord;
-}t_vision_point;
+}			t_vision_point;
 
 typedef struct s_cub
 {
@@ -84,28 +84,27 @@ typedef struct s_cub
 	mlx_image_t		*eimg;
 	mlx_image_t		*back;
 	t_vision_point	sight[WINWIDTH];
-
 }					t_cub;
 
 typedef struct s_collision
 {
-	int wall_collision;// yes/not
-	float x;//point of collision
-	float y;// point of colision
-} t_collision;
+	int		wall_collision;// yes/not
+	float	x;//point of collision
+	float	y;// point of colision
+}			t_collision;
 
 typedef struct s_ray
 {
-	float angle;
-	int direct_v;// 0 no direction, -1 arriba, 1 abajo
-	int direct_h;// 0 no direction, -1 izquierda, 1 derecha
-	t_collision vertical;
-	t_collision horizontal;
-} t_ray;
+	float		angle;
+	int			direct_v;// 0 no direction, -1 arriba, 1 abajo
+	int			direct_h;// 0 no direction, -1 izquierda, 1 derecha
+	t_collision	vertical;
+	t_collision	horizontal;
+}				t_ray;
 
 ///////GAME/////////////////////////////////////////////////////////////////////
 
-void ft_raycasting(t_cub *cub);
+void	ft_raycasting(t_cub *cub);
 
 ///////PARSING//////////////////////////////////////////////////////////////////
 
