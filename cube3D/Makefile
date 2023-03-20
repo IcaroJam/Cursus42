@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/20 10:44:51 by phijano-         ###   ########.fr        #
+#    Updated: 2023/03/20 13:08:02 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ FTFLGS	= -Llibft -lft
 
 MLXFLGS	= $(MLX) -Iinclude -ldl -lglfw -pthread -lm
 
-VPATH	= ./:./src/:./src/parser/:./src/utils/:./src/raycasting/ #<<your directories here (separated by :)>>
+VPATH	= ./:./src/:./src/parser/:./src/utils/:./src/raycasting/:./src/graphics/ #<<your directories here (separated by :)>>
 
 # Echo needs the (non existent in macosx) -e flag to print colours in Linux
 ECHO = echo -e
@@ -42,8 +42,9 @@ endif
 SHRDSRC	= main.c termination.c input.c
 PARSSRC	= atouc.c parsetextures.c parsemap.c parsecolours.c checkmap.c makeitsquared.c
 RAYSSRC = raycasting.c
+GRPHSRC	= backpaint.c
 #------------------------------------------------------------------------------#
-SRCS	= $(SHRDSRC) $(PARSSRC) $(RAYSSRC)
+SRCS	= $(SHRDSRC) $(PARSSRC) $(RAYSSRC) $(GRPHSRC)
 BNSSRCS	= $(SHRDSRC)
 
 #------------------------------------------------------------------------------#

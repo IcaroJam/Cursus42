@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:27:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/12 18:15:48 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/20 11:57:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	freecub(t_cub *cub)
 	free(cub->mdata.wpath);
 	free(cub->mdata.spath);
 	free(cub->mdata.epath);
+	mlx_delete_texture(cub->ntex);
+	mlx_delete_texture(cub->wtex);
+	mlx_delete_texture(cub->stex);
+	mlx_delete_texture(cub->etex);
 	if (cub->mlx)
 		mlx_terminate(cub->mlx);
 }

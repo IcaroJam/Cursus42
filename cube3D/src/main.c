@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/20 11:49:11 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:07:29 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,6 @@ void	infodump(t_cub *cub)
 	printf("Player:\n\tX: %f\n\tY: %f\n\tA: %f\n", cub->player.x, cub->player.y, cub->player.a);
 }
 
-void ft_update(void *cub)//
-{
-	t_cub *game =(t_cub *)cub;
-
-	ft_raycasting(game);
-	write(1, "working\n",8);
-}
-
-void ft_start_game(t_cub *cub)//
-{
-	mlx_loop_hook(cub->mlx, ft_update, cub);
-	mlx_loop(cub->mlx);
-}
-
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
@@ -87,7 +73,13 @@ int	main(int argc, char **argv)
 	parsemap(argv[1], &cub);
 	infodump(&cub);
 	loadimgsandinit(&cub);
-	ft_start_game(&cub);//added
+
+	backpaint(&cub);
+	mlx_image_to_window(cub.mlx, cub.nimg, 0, 0);
+	mlx_put_pixel(cub.back, 100, 50, 0xff0000ff);
+
+	mlx_key_hook(cub.mlx, keyhooks, &cub);
+	mlx_loop(cub.mlx);
 	freecub(&cub);
 	return (0);
 }

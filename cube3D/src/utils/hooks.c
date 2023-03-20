@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 10:27:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/07 10:29:00 by ntamayo-         ###   ########.fr       */
+/*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
+/*   Updated: 2023/03/20 13:19:33 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
+#include "../../cube3d.h"
 
-void	errmsg(char *msg)
+void	keyhooks(mlx_key_data_t keydata, void *param)
 {
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(msg, 2);
+	t_cub	*cub;
+
+	cub = param;
+	if (keydata.key == MLX_KEY_ESCAPE)
+	{
+		mlx_close_window(cub->mlx);
+		return ;
+	}
 }

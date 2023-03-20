@@ -18,8 +18,7 @@
 # include <stdio.h>
 # include <math.h>
 
-// CONSTANTS
-
+///////DEFINES//////////////////////////////////////////////////////////////////
 # define WINWIDTH 800
 # define WINHEIGHT 600
 
@@ -38,11 +37,11 @@
  * Total angle of player vision, typically between 60 and 90 grades in games
  * its better to work with radians, 360 grades is 2π radianes
  * so 60 is π/3 radians, M_PI is a constant defined in math.h for π
- * if we want 90 grades it would be π/2, there is a constant defined in math.h for that: M_PI_2
+ * if we want 90 grades it would be π/2, there is a constant defined in math.h
+ * for that: M_PI_2
 */
 
-
-//     STRUCTURES                                                             //
+///////STRUCTURES///////////////////////////////////////////////////////////////
 typedef struct s_mapdata
 {
 	char			**cmap;
@@ -55,7 +54,6 @@ typedef struct s_mapdata
 	int				floorc;
 	int				ceilic;
 }					t_mapdata;
-
 
 typedef struct s_player
 {
@@ -84,6 +82,7 @@ typedef struct s_cub
 	mlx_image_t		*wimg;
 	mlx_image_t		*simg;
 	mlx_image_t		*eimg;
+	mlx_image_t		*back;
 	t_vision_point	sight[WINWIDTH];
 
 }					t_cub;
@@ -103,6 +102,7 @@ typedef struct s_ray
 	t_collision vertical;
 	t_collision horizontal;
 } t_ray;
+
 ///////GAME/////////////////////////////////////////////////////////////////////
 
 void ft_raycasting(t_cub *cub);
@@ -177,6 +177,15 @@ void	makeitsquared(t_cub *cub);
 */
 void	checkmap(char **map, t_cub *cub);
 
+///////GRAPHIC STUFF////////////////////////////////////////////////////////////
+
+/**
+* @brief Creates and puts the background to window.
+*
+* @param cub
+*/
+void	backpaint(t_cub *cub);
+
 ///////UTILS////////////////////////////////////////////////////////////////////
 
 /**
@@ -207,5 +216,13 @@ void	freecub(t_cub *cub);
 	* @param cub
 	*/
 void	frerrxit(char *msg, t_cub *cub);
+
+/**
+* @brief Handles all key inputs.
+*
+	* @param keydata
+	* @param param Pointer to whatever the function may need. In this case: cub.
+	*/
+void	keyhooks(mlx_key_data_t keydata, void *param);
 
 #endif

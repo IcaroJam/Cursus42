@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:23:51 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/13 20:16:14 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:16:25 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,21 @@ static int	gethex(char *line, t_cub *cub)
 
 	if (!ft_isdigit(*line))
 		frerrxit("Illegal colour declaration.", cub);
-	ret = atouc(line, &i) << 16;
+	ret = atouc(line, &i) << 24;
+	i = getoffset(line, i, cub);
+	line += i;
+	if (!ft_isdigit(*line))
+		frerrxit("Illegal colour declaration.", cub);
+	ret += atouc(line, &i) << 16;
 	i = getoffset(line, i, cub);
 	line += i;
 	if (!ft_isdigit(*line))
 		frerrxit("Illegal colour declaration.", cub);
 	ret += atouc(line, &i) << 8;
-	i = getoffset(line, i, cub);
-	line += i;
-	if (!ft_isdigit(*line))
-		frerrxit("Illegal colour declaration.", cub);
-	ret += atouc(line, &i);
 	while (line[i])
 		if (!ft_isspace(line[i++]))
 			frerrxit("Trailing bad stuff in colour declaration.", cub);
+	ret += 255;
 	return (ret);
 }
 
