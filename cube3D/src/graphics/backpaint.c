@@ -6,11 +6,23 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:02:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/20 12:14:25 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:52:08 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
+
+static void	linebegin(t_cub *cub)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < WINWIDTH)
+	{
+		mlx_image_to_window(cub->mlx, cub->lines[i], i, 0);
+		i++;
+	}
+}
 
 void	backpaint(t_cub *cub)
 {
@@ -36,4 +48,5 @@ void	backpaint(t_cub *cub)
 		j++;
 	}
 	mlx_image_to_window(cub->mlx, cub->back, 0, 0);
+	linebegin(cub);
 }

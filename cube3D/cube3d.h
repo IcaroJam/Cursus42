@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/20 15:27:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:25:08 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,5 +227,12 @@ void	frerrxit(char *msg, t_cub *cub);
 	* @param param Pointer to whatever the function may need. In this case: cub.
 	*/
 void	keyhooks(mlx_key_data_t keydata, void *param);
+
+/**
+* @brief Handles screen updating.
+*
+	* @param param
+	*/
+void	mainhook(void *param);
 
 #endif
