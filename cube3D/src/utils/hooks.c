@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/20 18:52:08 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:04:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	move(t_cub *cub, int dir)
 	  * { */
 		cub->player.x = newx;
 		cub->player.y = newy;
+	printf("X: %f, Y: %f\n", cub->player.x, cub->player.y);
 	/** } */
 }
 
@@ -55,9 +56,9 @@ void	keyhooks(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
 		rotate(param, 1);
 	else if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
-		move(param, 1);
-	else if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
 		move(param, -1);
+	else if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
+		move(param, 1);
 }
 
 void	mainhook(void *param)
