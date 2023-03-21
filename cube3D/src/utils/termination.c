@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:27:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/20 11:57:30 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/21 22:11:47 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,24 @@ void	errexit(char *msg)
 
 void	freecub(t_cub *cub)
 {
-	int	i;
+    int	i;
 
 	i = 0;
 	while (cub->mdata.cmap && cub->mdata.cmap[i])
 		free(cub->mdata.cmap[i++]);
-	free(cub->mdata.cmap);
+    free(cub->mdata.cmap);
 	free(cub->mdata.npath);
 	free(cub->mdata.wpath);
 	free(cub->mdata.spath);
 	free(cub->mdata.epath);
-	mlx_delete_texture(cub->ntex);
-	mlx_delete_texture(cub->wtex);
-	mlx_delete_texture(cub->stex);
-	mlx_delete_texture(cub->etex);
 	if (cub->mlx)
+	{
+		mlx_delete_texture(cub->ntex);
+		mlx_delete_texture(cub->wtex);
+		mlx_delete_texture(cub->stex);
+		mlx_delete_texture(cub->etex);
 		mlx_terminate(cub->mlx);
+	}
 }
 
 void	frerrxit(char *msg, t_cub *cub)

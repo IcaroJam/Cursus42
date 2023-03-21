@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/21 21:05:15 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/21 22:10:36 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ static void	handleinputandinit(int argc, char **argv, t_cub *cub)
 	cub->mdata.epath = NULL;
 	cub->player.x = 0;
 	cub->mlx = NULL;
+	cub->ntex = NULL;
+	cub->wtex = NULL;
+	cub->stex = NULL;
+	cub->etex = NULL;
 }
 
 static void	loadimgsandinit(t_cub *cub)
