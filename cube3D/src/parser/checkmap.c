@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/21 12:09:17 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:55:34 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
 		cub->player.diry = sinf(cub->player.a);
 		cub->player.camvectx = 0;
 		cub->player.camvecty = tanf(VISION_FIELD / 2);
-		if (!cub->player.dirx)
+		if (cub->player.dirx < 0.00000001 || cub->player.dirx > -0.00000001 )
 		{
 			cub->player.camvectx = cub->player.camvecty;
 			cub->player.camvecty = 0;
 		}
+		printf("cx: %.32f, cy: %f\n", cub->player.dirx, cub->player.camvecty);
 	}
 }
 
