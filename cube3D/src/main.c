@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/21 13:41:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:05:15 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	infodump(t_cub *cub)
 	printf("Textures:\n\tNO: %s\n\tWE: %s\n\tSO: %s\n\tEA: %s\nColors:\n\tF: %x\n\tC: %x\nMap:\n", cub->mdata.npath, cub->mdata.wpath, cub->mdata.spath, cub->mdata.epath, cub->mdata.floorc, cub->mdata.ceilic);
 	while (i < cub->mdata.ysize)
 		printf("%s\n", cub->mdata.cmap[i++]);
-	printf("Player:\n\tX: %f\n\tY: %f\n\tA: %f\n", cub->player.x, cub->player.y, cub->player.a);
+	printf("Player:\n\tX: %f\n\tY: %f\n", cub->player.x, cub->player.y);
 }
 
 int	main(int argc, char **argv)

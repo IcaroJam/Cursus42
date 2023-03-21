@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/21 14:55:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:40:29 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,19 @@ static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
 			frerrxit("Dopplegangers?!?!", cub);
 		cub->player.x = i + 0.5;
 		cub->player.y = j + 0.5;
+		cub->player.dirx = 0;
+		cub->player.diry = 0;
 		if (c == 'N')
-			cub->player.a = M_PI_2;
+			cub->player.diry = -1;
 		else if (c == 'W')
-			cub->player.a = M_PI;
+			cub->player.dirx = -1;
 		else if (c == 'S')
-			cub->player.a = -M_PI_2;
+			cub->player.diry = 1;
 		else
-			cub->player.a = 0;
-		cub->player.dirx = cosf(cub->player.a);
-		cub->player.diry = sinf(cub->player.a);
-		cub->player.camvectx = 0;
-		cub->player.camvecty = tanf(VISION_FIELD / 2);
-		if (cub->player.dirx < 0.00000001 || cub->player.dirx > -0.00000001 )
-		{
-			cub->player.camvectx = cub->player.camvecty;
-			cub->player.camvecty = 0;
-		}
-		printf("cx: %.32f, cy: %f\n", cub->player.dirx, cub->player.camvecty);
+			cub->player.dirx = 1;
+		cub->player.camvectx = -cub->player.diry; // * fabsf(tanf(VISION_FIELD / 2));
+		cub->player.camvecty = cub->player.dirx; // * fabsf(tanf(VISION_FIELD / 2));
+		printf("Dir(%f, %f). Cam(%f, %f)\n", cub->player.dirx, cub->player.diry, cub->player.camvectx, cub->player.camvecty);
 	}
 }
 

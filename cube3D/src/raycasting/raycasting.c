@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/21 13:37:08 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:23:50 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,21 @@ static void	gethitinfo(t_cub *cub, unsigned int x)
 		cub->sight[x].distance = cub->rc.sidex - cub->rc.dx;
 	else
 		cub->sight[x].distance = cub->rc.sidey - cub->rc.dy;
-	/** if (cub->rc.sidex < cub->rc.sidey)
-	  * {
-	  *     if (cub->rc.sidex > 0)
-	  *         cub->sight[x].wall_orientation = 2;
-	  *     else
-	  *         cub->sight[x].wall_orientation = 0;
-	  * }
-	  * else
-	  * {
-	  *     if (cub->rc.sidey > 0)
-	  *         cub->sight[x].wall_orientation = -1;
-	  *     else
-	  *         cub->sight[x].wall_orientation = 1;
-	  * } */
-	cub->sight[x].wall_orientation = 0;
+	if (cub->rc.sidex < cub->rc.sidey)
+	{
+		if (cub->rc.sidex > 0)
+			cub->sight[x].wall_orientation = 2;
+		else
+			cub->sight[x].wall_orientation = 0;
+	}
+	else
+	{
+		if (cub->rc.sidey > 0)
+			cub->sight[x].wall_orientation = -1;
+		else
+			cub->sight[x].wall_orientation = 1;
+	}
+	//cub->sight[x].wall_orientation = 0;
 }
 
 // camx will be -1 for the first ray, 0 for the middle one and 1 for

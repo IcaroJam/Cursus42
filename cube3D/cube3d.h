@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/21 12:55:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:41:24 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_player
 	float	diry;
 	float	camvectx;
 	float	camvecty;
-	float	a;
 }			t_player;
 
 typedef struct s_vision_point
