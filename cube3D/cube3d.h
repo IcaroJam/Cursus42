@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/20 18:42:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:55:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,6 @@
 # define WINWIDTH 800
 # define WINHEIGHT 600
 
-# define CELL_LENGTH 1
-
-/**
- * Cell length
- * Amount of coordinates of the side of a cell of the map
- * We´ll be moving inside of cells, no more teleport like so_long :D
-*/
-
-# define VISION_FIELD 1.74532925199432957692369076848861
-
 /**
  * Vision Field
  * Total angle of player vision, typically between 60 and 90 grades in games
@@ -40,6 +30,7 @@
  * if we want 90 grades it would be π/2, there is a constant defined in math.h
  * for that: M_PI_2
 */
+# define VISION_FIELD 1.74532925199432957692369076848861
 
 ///////STRUCTURES///////////////////////////////////////////////////////////////
 typedef struct s_mapdata
@@ -59,15 +50,35 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
+	float	dirx;
+	float	diry;
+	float	camvectx;
+	float	camvecty;
 	float	a;
 }			t_player;
 
 typedef struct s_vision_point
 {
 	float	distance;
-	int		wall_orientation;// -1 Sur, 1 Norte, 0 Este, 2 Oeste
 	float	wall_texture_coord;
+	int		wall_orientation;// -1 Sur, 1 Norte, 0 Este, 2 Oeste
 }			t_vision_point;
+
+typedef struct s_raycast
+{
+	int		wallhit;
+	int		mapx;
+	int		mapy;
+	int		xstep;
+	int		ystep;
+	int		sidehit;
+	float	sidex;
+	float	sidey;
+	float	dx;
+	float	dy;
+	float	raydirx;
+	float	raydiry;
+}			t_raycast;
 
 typedef struct s_cub
 {
@@ -84,24 +95,9 @@ typedef struct s_cub
 	mlx_image_t		*eimg;
 	mlx_image_t		*back;
 	mlx_image_t		*lines[WINWIDTH];
+	t_raycast		rc;
 	t_vision_point	sight[WINWIDTH];
 }					t_cub;
-
-typedef struct s_collision
-{
-	int		wall_collision;// yes/not
-	float	x;//point of collision
-	float	y;// point of colision
-}			t_collision;
-
-typedef struct s_ray
-{
-	float		angle;
-	int			direct_v;// 0 no direction, -1 arriba, 1 abajo
-	int			direct_h;// 0 no direction, -1 izquierda, 1 derecha
-	t_collision	vertical;
-	t_collision	horizontal;
-}				t_ray;
 
 ///////GAME/////////////////////////////////////////////////////////////////////
 void	ft_raycasting(t_cub *cub);
