@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/21 22:09:54 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/21 22:57:38 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ static void	charcheck(char *line, unsigned int i, unsigned int lo, t_cub *cub)
 	}
 }
 
+// For this shit to work N/S have to be inverted so that N(0,-1) and S(0,1). 
+// W T F
+// Try to find out why the hell controls and the screen flip when N/S have their
+// true value.
 static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
 {
 	if (c == 'N' || c == 'W' || c == 'S' || c == 'E')
