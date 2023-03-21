@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/20 22:06:38 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:41:04 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_is_wall(t_cub *game, t_collision collision, int direct_x, int direct_y)
 
 //	cell_x = x/CELL_LENGTH - orientation_x;
 //	cell_y = y/CELL_LENGTH - orientation_y;
-//	printf("dx%d, dy%d\n", direct_x, direct_y);
+	printf("dx%d, dy%d\n", direct_x, direct_y);
 	if (direct_x < 0)
 		direct_x = 1;
 	else
@@ -71,9 +71,9 @@ void	ft_get_collisions(t_cub *game, t_ray *ray)
 	//write(1, "20\n", 3);
 	cell_x = game->player.x / CELL_LENGTH;
 	cell_y = game->player.y / CELL_LENGTH;
-//	printf("cx %d, cy %d\n", cell_x, cell_y);
-//	printf("px %f, py%f\n",game->player.x, game->player.y);
-//	printf("ray angle %f\n", ray->angle);
+	//printf("cx %d, cy %d\n", cell_x, cell_y);
+	//printf("px %f, py%f\n",game->player.x, game->player.y);
+	//printf("ray angle %f\n", ray->angle);
 	ray->vertical.wall_collision = 0;
 	count = 0;
 	if (ray->direct_h == 1)
@@ -114,7 +114,11 @@ void	ft_get_collisions(t_cub *game, t_ray *ray)
 
 float ft_get_distance(t_cub *game, t_collision collision)
 {
-	return (sqrt(exp2(game->player.x - collision.x) + exp2(game->player.y - collision.y)));
+	//printf("collx %f, colly %f", collision.x, collision.y);
+	printf("px %f, py %f ---- collx %f, colly %f\n", game->player.x, game->player.y, collision.x, collision.y);
+	printf("distance %f\n", sqrt(pow(game->player.x - collision.x, 2) + pow(game->player.y - collision.y, 2)));// esta fallando la formula las collisiones va bien
+	return (sqrt(pow(game->player.x - collision.x, 2) + pow(game->player.y - collision.y, 2)));// esta fallando la formula las collisiones va bien
+//	return (sqrt(exp2(collision.x - game->player.x) + exp2(collision.y - game->player.y)));
 }
 
 void	ft_get_vision_point(t_cub *game, t_ray *ray, int index) //mirar si conviene calcular la distancia en el calculo de colisiones para no hacerlo dos veces en
@@ -122,14 +126,17 @@ void	ft_get_vision_point(t_cub *game, t_ray *ray, int index) //mirar si conviene
 {
 	if (ray->vertical.wall_collision && ray->horizontal.wall_collision)
 	{
+	printf("\ndv1 %f, dh2 %f\n",ft_get_distance(game, ray->vertical), ft_get_distance(game, ray->horizontal));
 		if (ft_get_distance(game, ray->vertical) > ft_get_distance(game, ray->horizontal))
+		{	
 			ray->vertical.wall_collision = 0;
+		}
 		else 
 			ray->horizontal.wall_collision = 0;
 	}
 	if (ray->vertical.wall_collision)
 	{
-//		printf("collision E/O");
+		printf("collision E/O");
 		game->sight[index].distance = ft_get_distance(game, ray->vertical);
 		game->sight[index].wall_orientation = ray->direct_h + 1;// 0 Este 2 Oeste //comprobar las direcciones!!!!!!
 		if (ray->direct_h > 0)
@@ -139,7 +146,7 @@ void	ft_get_vision_point(t_cub *game, t_ray *ray, int index) //mirar si conviene
 	}
 	else
 	{
-//		printf("collision N/S");
+		printf("collision N/S");
 		game->sight[index].distance = ft_get_distance(game, ray->horizontal);
 		game->sight[index].wall_orientation = ray->direct_v;// -1 Sur 1 Norte //comprobar las direcciones!!!!!!
 		if (ray->direct_v > 0)
