@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/22 12:02:29 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:44:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ static void	rotate(t_player *p, int dir)
 	p->camvecty = oldcamx * sinf(dir * a) + p->camvecty * cosf(dir * a);
 }
 
-static void	move(t_cub *cub, int dir)
+static void	move(t_cub *cub, float xdir, float ydir)
 {
 	float		newx;
 	float		newy;
 	const float	mvspeed = 0.1;
 
-	newx = cub->player.x + dir * cub->player.dirx * mvspeed;
-	newy = cub->player.y + dir * cub->player.diry * mvspeed;
+	newx = cub->player.x + xdir * mvspeed;
+	newy = cub->player.y + ydir * mvspeed;
 	if (cub->mdata.cmap[(int)cub->player.y][(int)newx] != '1')
 		cub->player.x = newx;
 	if (cub->mdata.cmap[(int)newy][(int)cub->player.x] != '1')
@@ -61,13 +61,17 @@ void	mainhook(void *param)
 	t_cub	*cub;
 
 	cub = param;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) || mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate(&cub->player,-1);
-	else if (mlx_is_key_down(cub->mlx, MLX_KEY_D) || mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
 		rotate(&cub->player, 1);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) || mlx_is_key_down(cub->mlx, MLX_KEY_UP))
-		move(cub, 1);
-	else if (mlx_is_key_down(cub->mlx, MLX_KEY_S) || mlx_is_key_down(cub->mlx, MLX_KEY_DOWN))
-		move(cub, -1);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+		move(cub, cub->player.dirx, cub->player.diry);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
+		move(cub, -cub->player.dirx, -cub->player.diry);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+		move(cub, -cub->player.camvectx, -cub->player.camvecty);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+		move(cub, cub->player.camvectx, cub->player.camvecty);
 	lineupdate(param);
 }
