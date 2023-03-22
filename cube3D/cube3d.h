@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/22 12:11:13 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:01:20 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_cub
 	mlx_image_t		*simg;
 	mlx_image_t		*eimg;
 	mlx_image_t		*back;
+	mlx_image_t		*mmap;
 	mlx_image_t		*lines[WINWIDTH];
 	t_raycast		rc;
 	t_vision_point	sight[WINWIDTH];
@@ -184,6 +185,21 @@ void	backpaint(t_cub *cub);
 * @param cub
 */
 void	lineupdate(t_cub *cub);
+
+/**
+* @brief Create the minimap image.
+*
+*
+* @param cub
+*/
+void	loadminimap(t_cub *cub);
+
+/**
+* @brief Update the minimap image.
+*
+* @param cub
+*/
+void	updateminimap(t_cub *cub);
 
 ///////UTILS////////////////////////////////////////////////////////////////////
 /**

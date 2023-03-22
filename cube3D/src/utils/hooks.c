@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/22 12:44:23 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:21:30 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	mainhook(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
 		move(cub, cub->player.camvectx, cub->player.camvecty);
 	lineupdate(param);
+	updateminimap(cub);
 }

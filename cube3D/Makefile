@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/20 15:27:54 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/22 13:23:35 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME	= cube3D
 
-BONUS	= #<<Your bonus exec here>>
+BONUS	= cube3D_bonus
 
 LIBFT	= ./libft/libft.a
 
@@ -45,11 +45,11 @@ RAYSSRC = raycasting.c
 GRPHSRC	= backpaint.c lineupdate.c
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC) $(PARSSRC) $(RAYSSRC) $(GRPHSRC)
-BNSSRCS	= $(SHRDSRC)
+BNSSRCS	= $(SHRDSRC) $(PARSSRC) $(RAYSSRC) $(GRPHSRC) minimap.c
 
 #------------------------------------------------------------------------------#
 OBJS	= $(SRCS:.c=.o)
-BNSOBJS	= $(SHRDOBJ)
+BNSOBJS	= $(BNSSRCS:.c=.o)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -57,17 +57,17 @@ BNSOBJS	= $(SHRDOBJ)
 
 all:		$(NAME)
 
-#bonus:		$(BONUS)
+bonus:		$(BONUS)
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
 	@$(ECHO) "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) $(MLXFLGS) -o $(NAME)
 	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
 
-#$(BONUS):	$(BNSOBJS) $(LIBFT)
-#	@$(ECHO) "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
-#	@gcc $(CFLAGS) $(BNSOBJS) $(FTFLGS) -o $(BONUS)
-#	@$(ECHO) "\n\033[38;5;6mLook at all that extra.\033[0m"
+$(BONUS):	$(BNSOBJS) $(LIBFT)
+	@$(ECHO) "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
+	@gcc $(CFLAGS) $(BNSOBJS) $(FTFLGS) $(MLXFLGS) -o $(BONUS)
+	@$(ECHO) "\n\033[38;5;6mLook at all that extra.\033[0m"
 
 $(LIBFT):
 	@make -C ./libft
