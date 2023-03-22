@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/20 18:59:31 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:43:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	scanline(t_cub *cub, unsigned int i)
 		else if (cub->sight[i].wall_orientation == 2)
 			mlx_put_pixel(cub->lines[i], 0, j, 0x505099FF);
 		else
-			mlx_put_pixel(cub->lines[i], 0, j, 0x995050FF);
+			mlx_put_pixel(cub->lines[i], 0, j, 0x999950FF);
 		j++;
 	}
 	while (j < WINHEIGHT)

@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/22 10:57:59 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:42:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ static void	gethitinfo(t_cub *cub, unsigned int x)
 		cub->sight[x].distance = cub->rc.sidex - cub->rc.dx;
 	else
 		cub->sight[x].distance = cub->rc.sidey - cub->rc.dy;
-	if (cub->rc.sidex < cub->rc.sidey)
+	if (!cub->rc.sidehit)
 	{
-		if (cub->rc.sidex > 0)
-			cub->sight[x].wall_orientation = 2;
-		else
+		if (cub->player.x > cub->rc.mapx)
 			cub->sight[x].wall_orientation = 0;
+		else
+			cub->sight[x].wall_orientation = 2;
 	}
 	else
 	{
-		if (cub->rc.sidey > 0)
+		if (cub->player.y > cub->rc.mapy)
 			cub->sight[x].wall_orientation = -1;
 		else
 			cub->sight[x].wall_orientation = 1;
