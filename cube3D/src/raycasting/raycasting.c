@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/22 11:42:36 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:08:38 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,28 @@ static void	gethitinfo(t_cub *cub, unsigned int x)
 	if (!cub->rc.sidehit)
 	{
 		if (cub->player.x > cub->rc.mapx)
+		{
 			cub->sight[x].wall_orientation = 0;
+			cub->sight[x].wall_texture_coord = cub->rc.dy - (int)cub->rc.dy;
+		}
 		else
+		{
 			cub->sight[x].wall_orientation = 2;
+			cub->sight[x].wall_texture_coord = 1 - (cub->rc.dy - (int)cub->rc.dy);
+		}
 	}
 	else
 	{
 		if (cub->player.y > cub->rc.mapy)
+		{
 			cub->sight[x].wall_orientation = -1;
+			cub->sight[x].wall_texture_coord = 1 - (cub->rc.dx - (int)cub->rc.dx);
+		}
 		else
+		{
 			cub->sight[x].wall_orientation = 1;
+			cub->sight[x].wall_texture_coord = cub->rc.dx - (int)cub->rc.dx;
+		}
 	}
 	//cub->sight[x].wall_orientation = 0;
 }
