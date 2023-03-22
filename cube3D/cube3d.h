@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/22 10:56:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:11:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
  * if we want 90 grades it would be π/2, there is a constant defined in math.h
  * for that: M_PI_2
 */
-# define VISION_FIELD 1.74532925199432957692369076848861
+# define FOV 1.1519173063162575207696359072024843908722954464375388010241463505
 
 ///////STRUCTURES///////////////////////////////////////////////////////////////
 typedef struct s_mapdata
