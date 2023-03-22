@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/21 21:23:50 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/22 10:57:59 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void	ft_raycasting(t_cub *cub)
 		getstep(cub);
 		digitaldiferentialanalysis(cub);
 		gethitinfo(cub, x);
-		//printf("x: %d, Dist: %f\n", x, cub->sight[x].distance);
 		x++;
 	}
 }

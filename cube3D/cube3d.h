@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/21 21:41:24 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/22 10:56:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ void	frerrxit(char *msg, t_cub *cub);
 *
 * @return 
 */
-int	isvalid(char c);
+int		isvalid(char c);
 
 /**
 * @brief Handles all key inputs.

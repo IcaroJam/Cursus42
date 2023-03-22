@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/21 14:51:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:18:35 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // 0.0872... equals ~5º
 static void	rotate(t_player *p, int dir)
 {
-	const float	a = 0.08726646259971647884618453842443;
+	const float	a = 0.08726646259971647884618453842443 / 2;
 	const float	olddirx = p->dirx;
 	const float	oldcamx = p->camvectx;
 
@@ -30,22 +30,18 @@ static void	rotate(t_player *p, int dir)
 	p->camvecty = oldcamx * sinf(dir * a) + p->camvecty * cosf(dir * a);
 }
 
-static void	move(t_player *p, int dir)
+static void	move(t_cub *cub, int dir)
 {
 	float		newx;
 	float		newy;
 	const float	mvspeed = 0.1;
-	//char	newtile;
 
-	newx = p->x + dir * p->dirx * mvspeed;
-	newy = p->y + dir * p->diry * mvspeed;
-	//newtile = cub->mdata.cmap[(int)newy][(int)newx];
-	/** if (isvalid(newtile) && newtile != '1')
-	  * { */
-		p->x = newx;
-		p->y = newy;
-	printf("X: %f, Y: %f\n", p->x, p->y);
-	/** } */
+	newx = cub->player.x + dir * cub->player.dirx * mvspeed;
+	newy = cub->player.y + dir * cub->player.diry * mvspeed;
+	if (cub->mdata.cmap[(int)cub->player.y][(int)newx] != '1')
+		cub->player.x = newx;
+	if (cub->mdata.cmap[(int)newy][(int)cub->player.x] != '1')
+		cub->player.y = newy;
 }
 
 void	keyhooks(mlx_key_data_t keydata, void *param)
@@ -63,9 +59,9 @@ void	keyhooks(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
 		rotate(&cub->player, 1);
 	if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
-		move(&cub->player, 1);
+		move(cub, 1);
 	else if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
-		move(&cub->player, -1);
+		move(cub, -1);
 }
 
 void	mainhook(void *param)
