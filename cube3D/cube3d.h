@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/22 13:01:20 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:08:40 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ typedef struct s_player
 
 typedef struct s_vision_point
 {
-	float	distance;
-	float	wall_texture_coord;
-	int		wall_orientation;// -1 Sur, 1 Norte, 0 Este, 2 Oeste
+	float	dist;
+	float	wtexc;
+	int		worient;// -1 Sur, 1 Norte, 0 Este, 2 Oeste
 }			t_vision_point;
 
 typedef struct s_raycast

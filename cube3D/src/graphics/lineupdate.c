@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/22 11:43:19 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:10:57 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	scanline(t_cub *cub, unsigned int i)
 	int	start;
 	int	end;
 
-	h = WINHEIGHT / cub->sight[i].distance;
+	h = WINHEIGHT / cub->sight[i].dist;
 	start = -h / 2 + WINHEIGHT / 2;
 	if (start < 0)
 		start = 0;
@@ -31,11 +31,11 @@ static void	scanline(t_cub *cub, unsigned int i)
 		mlx_put_pixel(cub->lines[i], 0, j++, 0);
 	while (j < end)
 	{
-		if (cub->sight[i].wall_orientation == -1)
+		if (cub->sight[i].worient == -1)
 			mlx_put_pixel(cub->lines[i], 0, j, 0x995050FF);
-		else if (cub->sight[i].wall_orientation == 0)
+		else if (cub->sight[i].worient == 0)
 			mlx_put_pixel(cub->lines[i], 0, j, 0x509950FF);
-		else if (cub->sight[i].wall_orientation == 2)
+		else if (cub->sight[i].worient == 2)
 			mlx_put_pixel(cub->lines[i], 0, j, 0x505099FF);
 		else
 			mlx_put_pixel(cub->lines[i], 0, j, 0x999950FF);

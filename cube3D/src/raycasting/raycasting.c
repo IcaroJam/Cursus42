@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:31:39 by phijano-          #+#    #+#             */
-/*   Updated: 2023/03/22 12:08:38 by phijano-         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:10:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,36 +62,28 @@ static void	digitaldiferentialanalysis(t_cub *cub)
 static void	gethitinfo(t_cub *cub, unsigned int x)
 {
 	if (!cub->rc.sidehit)
-		cub->sight[x].distance = cub->rc.sidex - cub->rc.dx;
+		cub->sight[x].dist = cub->rc.sidex - cub->rc.dx;
 	else
-		cub->sight[x].distance = cub->rc.sidey - cub->rc.dy;
+		cub->sight[x].dist = cub->rc.sidey - cub->rc.dy;
 	if (!cub->rc.sidehit)
 	{
 		if (cub->player.x > cub->rc.mapx)
-		{
-			cub->sight[x].wall_orientation = 0;
-			cub->sight[x].wall_texture_coord = cub->rc.dy - (int)cub->rc.dy;
-		}
+			cub->sight[x].worient = 0;
 		else
-		{
-			cub->sight[x].wall_orientation = 2;
-			cub->sight[x].wall_texture_coord = 1 - (cub->rc.dy - (int)cub->rc.dy);
-		}
+			cub->sight[x].worient = 2;
+		cub->sight[x].wtexc = cub->sight[x].dist * cub->rc.raydiry;
+		cub->sight[x].wtexc += cub->player.y;
 	}
 	else
 	{
 		if (cub->player.y > cub->rc.mapy)
-		{
-			cub->sight[x].wall_orientation = -1;
-			cub->sight[x].wall_texture_coord = 1 - (cub->rc.dx - (int)cub->rc.dx);
-		}
+			cub->sight[x].worient = -1;
 		else
-		{
-			cub->sight[x].wall_orientation = 1;
-			cub->sight[x].wall_texture_coord = cub->rc.dx - (int)cub->rc.dx;
-		}
+			cub->sight[x].worient = 1;
+		cub->sight[x].wtexc = cub->sight[x].dist * cub->rc.raydirx;
+		cub->sight[x].wtexc += cub->player.x;
 	}
-	//cub->sight[x].wall_orientation = 0;
+	cub->sight[x].wtexc -= floorf(cub->sight[x].wtexc);
 }
 
 // camx will be -1 for the first ray, 0 for the middle one and 1 for
