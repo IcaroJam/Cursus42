@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/22 10:50:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:08:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ static void	charcheck(char *line, unsigned int i, unsigned int lo, t_cub *cub)
 // W T F
 // Try to find out why the hell controls and the screen flip when N/S have their
 // true value.
+// So apparently is because of the way the map is stored in memory. Since
+// characters of a row (and thus the X axis) progress positively to the right,
+// but the rows themselves progress positively downwards:
+//             [1, N, 1]
+// arr[3][3] = [1, 0, 1]   The character in arr[0][1] is N while the one in
+//             [1, S, 1]   arr[2][1] is S.
+// Which means N/S are flipped in map coords and so the math must be adjusted to
+// it.
 static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
 {
 	if (c == 'N' || c == 'W' || c == 'S' || c == 'E')
