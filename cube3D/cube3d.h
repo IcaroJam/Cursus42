@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/23 15:16:00 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:37:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,9 @@ typedef struct s_cub
 	mlx_texture_t	*wtex;
 	mlx_texture_t	*stex;
 	mlx_texture_t	*etex;
-	mlx_image_t		*nimg;
-	mlx_image_t		*wimg;
-	mlx_image_t		*simg;
-	mlx_image_t		*eimg;
 	mlx_image_t		*back;
 	mlx_image_t		*mmap;
-	mlx_image_t		*lines[WINWIDTH];
+	mlx_image_t		*lines;
 	t_raycast		rc;
 	t_vision_point	sight[WINWIDTH];
 }					t_cub;

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 15:22:40 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:30:48 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	handleinputandinit(int argc, char **argv, t_cub *cub)
 
 static void	loadimgsandinit(t_cub *cub)
 {
-	unsigned int	i;
-
 	cub->mlx = mlx_init(WINWIDTH, WINHEIGHT, "N&P's Cube3D!", false);
 	if (!cub->mlx)
 		frerrxit("MLX init failed!", cub);
@@ -50,19 +48,9 @@ static void	loadimgsandinit(t_cub *cub)
 	mlx_get_mouse_pos(cub->mlx, &cub->player.cursx, &cub->player.cursy);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 
-	cub->nimg = mlx_texture_to_image(cub->mlx, cub->ntex);
-	cub->wimg = mlx_texture_to_image(cub->mlx, cub->wtex);
-	cub->simg = mlx_texture_to_image(cub->mlx, cub->stex);
-	cub->eimg = mlx_texture_to_image(cub->mlx, cub->etex);
-	if (!cub->nimg || !cub->wimg || !cub->simg || !cub->eimg)
-		frerrxit("Failed to load images from textures.", cub);
-	i = 0;
-	while (i < WINWIDTH)
-	{
-		cub->lines[i] = mlx_new_image(cub->mlx, 1, WINHEIGHT);
-		if (!cub->lines[i++])
-			frerrxit("Line allocation failed!", cub);
-	}
+	cub->lines = mlx_new_image(cub->mlx, WINWIDTH, WINHEIGHT);
+	if (!cub->lines)
+		frerrxit("Lines allocation failed!", cub);
 }
 
 void	leakcheck(void)

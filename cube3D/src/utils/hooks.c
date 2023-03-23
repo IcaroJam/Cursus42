@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 15:26:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:36:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	mainhook(void *param)
 	t_cub	*cub;
 
 	cub = param;
-	printf("%d\n", cub->player.cursx);
 	mlx_get_mouse_pos(cub->mlx, &cub->player.cursx, &cub->player.cursy);
 	mouserotate(&cub->player);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))

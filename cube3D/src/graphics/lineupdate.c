@@ -6,13 +6,13 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 15:19:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:35:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
 
-static unsigned int	texturer(mlx_image_t *img, int lineh, int j, float texcoord)
+static unsigned int	texturer(mlx_texture_t *img, int lineh, int j, float texcrd)
 {
 	const uint_fast32_t	*px = (uint_fast32_t *)img->pixels;
 	unsigned int		hex;
@@ -20,7 +20,7 @@ static unsigned int	texturer(mlx_image_t *img, int lineh, int j, float texcoord)
 	int					pixindex;
 
 	hex = 0;
-	pixindex = (img->width * (int)(j * step) + (int)(img->width * texcoord));
+	pixindex = (img->width * (int)(j * step) + (int)(img->width * texcrd));
 	hex |= (px[pixindex] & 0xff000000) >> 24;
 	hex |= (px[pixindex] & 0x00ff0000) >> 8;
 	hex |= (px[pixindex] & 0x0000ff00) << 8;
@@ -42,17 +42,17 @@ static void	scanline(t_cub *cub, unsigned int i)
 		end = WINHEIGHT;
 	j = 0;
 	while (j < start)
-		mlx_put_pixel(cub->lines[i], 0, j++, 0);
+		mlx_put_pixel(cub->lines, i, j++, 0);
 	while (j < end)
 	{
 		if (cub->sight[i].worient == -1)
-			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->simg, h, j - start, cub->sight[i].wtexc));
+			mlx_put_pixel(cub->lines, i, j, texturer(cub->stex, h, j - start, cub->sight[i].wtexc));
 		else if (cub->sight[i].worient == 0)
-			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->eimg, h, j - start, cub->sight[i].wtexc));
+			mlx_put_pixel(cub->lines, i, j, texturer(cub->etex, h, j - start, cub->sight[i].wtexc));
 		else if (cub->sight[i].worient == 2)
-			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->wimg, h, j - start, cub->sight[i].wtexc));
+			mlx_put_pixel(cub->lines, i, j, texturer(cub->wtex, h, j - start, cub->sight[i].wtexc));
 		else
-		    mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->nimg, h, j - start, cub->sight[i].wtexc));
+		    mlx_put_pixel(cub->lines, i, j, texturer(cub->ntex, h, j - start, cub->sight[i].wtexc));
 		/** if (cub->sight[i].worient == -1)
 		  *     mlx_put_pixel(cub->lines[i], 0, j, 0x997070FF);
 		  * else if (cub->sight[i].worient == 0)
@@ -64,7 +64,7 @@ static void	scanline(t_cub *cub, unsigned int i)
 		j++;
 	}
 	while (j < WINHEIGHT)
-		mlx_put_pixel(cub->lines[i], 0, j++, 0);
+		mlx_put_pixel(cub->lines, i, j++, 0);
 }
 
 void	lineupdate(t_cub *cub)
