@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/23 15:37:54 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:00:19 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 
 ///////DEFINES//////////////////////////////////////////////////////////////////
-# define WINWIDTH 800
-# define WINHEIGHT 600
+# define WINWIDTH 1600
+# define WINHEIGHT 1200
 
 /**
  * Vision Field
