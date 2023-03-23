@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 12:39:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:14:06 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ static void	loadimgsandinit(t_cub *cub)
 	cub->etex = mlx_load_png(cub->mdata.epath);
 	if (!cub->ntex || !cub->wtex || !cub->stex || !cub->etex)
 		frerrxit("Failed to load png textures.", cub);
+
+	mlx_get_mouse_pos(cub->mlx, &cub->player.cursx, &cub->player.cursy);
+	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
+
 	cub->nimg = mlx_texture_to_image(cub->mlx, cub->ntex);
 	cub->wimg = mlx_texture_to_image(cub->mlx, cub->wtex);
 	cub->simg = mlx_texture_to_image(cub->mlx, cub->stex);
@@ -89,7 +93,6 @@ int	main(int argc, char **argv)
 	backpaint(&cub);
 	loadminimap(&cub);
 	//lineupdate(&cub);
-	mlx_set_mouse_pos(cub.mlx, 0, 0);
 	mlx_key_hook(cub.mlx, keyhooks, &cub);
 	mlx_loop_hook(cub.mlx, mainhook, &cub);
 	mlx_loop(cub.mlx);

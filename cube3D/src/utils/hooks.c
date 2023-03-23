@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 12:45:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 14:45:13 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,19 @@ void	keyhooks(mlx_key_data_t keydata, void *param)
 	}
 }
 
-static void	mouserotate(t_cub *cub)
+static void	mouserotate(t_player *p)
 {
 	float		a;
-	const float	olddirx = cub->player.dirx;
-	const float	oldcamx = cub->player.camvectx;
+	const float	olddirx = p->dirx;
+	const float	oldcamx = p->camvectx;
 
-	if (cub->player.cursx)
+	if (p->cursx)
 	{
-		a = atanf(cub->player.cursx * 0.005);
-		cub->player.dirx = olddirx * cosf(a) - cub->player.diry * sinf(a);
-		cub->player.diry = olddirx * sinf(a) + cub->player.diry * cosf(a);
-		cub->player.camvectx = oldcamx * cosf(a) - cub->player.camvecty * sinf(a);
-		cub->player.camvecty = oldcamx * sinf(a) + cub->player.camvecty * cosf(a);
+		a = atanf(p->cursx * 0.005);
+		p->dirx = olddirx * cosf(a) - p->diry * sinf(a);
+		p->diry = olddirx * sinf(a) + p->diry * cosf(a);
+		p->camvectx = oldcamx * cosf(a) - p->camvecty * sinf(a);
+		p->camvecty = oldcamx * sinf(a) + p->camvecty * cosf(a);
 	}
 }
 
@@ -77,8 +77,9 @@ void	mainhook(void *param)
 	t_cub	*cub;
 
 	cub = param;
+	printf("%d\n", cub->player.cursx);
 	mlx_get_mouse_pos(cub->mlx, &cub->player.cursx, &cub->player.cursy);
-	mouserotate(cub);
+	mouserotate(&cub->player);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate(&cub->player,-1);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
