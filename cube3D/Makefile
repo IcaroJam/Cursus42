@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/22 13:23:35 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/23 15:05:26 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ $(NAME):	$(LIBFT) $(MLX) $(OBJS)
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) $(MLXFLGS) -o $(NAME)
 	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
 
-$(BONUS):	$(BNSOBJS) $(LIBFT)
+$(BONUS):	$(LIBFT) $(MLX) $(BNSOBJS) $(LIBFT)
 	@$(ECHO) "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
 	@gcc $(CFLAGS) $(BNSOBJS) $(FTFLGS) $(MLXFLGS) -o $(BONUS)
 	@$(ECHO) "\n\033[38;5;6mLook at all that extra.\033[0m"
