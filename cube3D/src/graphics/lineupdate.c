@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 11:48:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:07:00 by phijano-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static void	scanline(t_cub *cub, unsigned int i)
 	while (j < end)
 	{
 		if (cub->sight[i].worient == -1)
-			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->simg, h, j - start, cub->sight[i].wtexc));
+			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->simg, h, j -(-h / 2 + WINHEIGHT / 2), cub->sight[i].wtexc));
 		else if (cub->sight[i].worient == 0)
-			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->eimg, h, j - start, cub->sight[i].wtexc));
+			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->eimg, h, j -(-h / 2 + WINHEIGHT / 2), cub->sight[i].wtexc));
 		else if (cub->sight[i].worient == 2)
-			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->wimg, h, j - start, cub->sight[i].wtexc));
+			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->wimg, h, j -(-h / 2 + WINHEIGHT / 2), cub->sight[i].wtexc));
 		else
-		    mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->nimg, h, j - start, cub->sight[i].wtexc));
+		    mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->nimg, h, j -(-h / 2 + WINHEIGHT / 2), cub->sight[i].wtexc));
 		/** if (cub->sight[i].worient == -1)
 		  *     mlx_put_pixel(cub->lines[i], 0, j, 0x997070FF);
 		  * else if (cub->sight[i].worient == 0)
