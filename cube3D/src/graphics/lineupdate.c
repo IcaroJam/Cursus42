@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 10:51:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 11:48:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 static unsigned int	texturer(mlx_image_t *img, int lineh, int j, float texcoord)
 {
-	unsigned int	hex;
-	const float		step = (float)lineh / img->height;
-	int				pixindex;
+	const uint_fast32_t	*px = (uint_fast32_t *)img->pixels;
+	unsigned int		hex;
+	const float			step = img->height / (float)lineh;
+	int					pixindex;
 
 	hex = 0;
-	pixindex = 4 * (img->width * (int)(j / step) + (int)(img->width * texcoord));
-	hex |= img->pixels[pixindex] << 24;
-	hex |= img->pixels[pixindex + 1] << 16;
-	hex |= img->pixels[pixindex + 2] << 8;
-	hex |= img->pixels[pixindex + 3];
+	pixindex = (img->width * (int)(j * step) + (int)(img->width * texcoord));
+	hex |= (px[pixindex] & 0xff000000) >> 24;
+	hex |= (px[pixindex] & 0x00ff0000) >> 8;
+	hex |= (px[pixindex] & 0x0000ff00) << 8;
+	hex |= (px[pixindex] & 0x000000ff) << 24;
 	return (hex);
 }
 
@@ -54,7 +55,15 @@ static void	scanline(t_cub *cub, unsigned int i)
 		else if (cub->sight[i].worient == 2)
 			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->wimg, h, j - start, cub->sight[i].wtexc));
 		else
-			mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->nimg, h, j - start, cub->sight[i].wtexc));
+		    mlx_put_pixel(cub->lines[i], 0, j, texturer(cub->nimg, h, j - start, cub->sight[i].wtexc));
+		/** if (cub->sight[i].worient == -1)
+		  *     mlx_put_pixel(cub->lines[i], 0, j, 0x997070FF);
+		  * else if (cub->sight[i].worient == 0)
+		  *     mlx_put_pixel(cub->lines[i], 0, j, 0x997070FF);
+		  * else if (cub->sight[i].worient == 2)
+		  *     mlx_put_pixel(cub->lines[i], 0, j, 0x997070FF);
+		  * else
+		  *     mlx_put_pixel(cub->lines[i], 0, j, 0x997070FF); */
 		j++;
 	}
 	while (j < WINHEIGHT)
