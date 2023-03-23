@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 16:33:30 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:12:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	scanline(t_cub *cub, mlx_texture_t *tex, unsigned int i)
 	coordstep[0] = tex->width * cub->sight[i].wtexc;
 	coordstep[1] = tex->height / (float)h;
 	j = 0;
-	(void)tex;
 	while (j < start)
 		mlx_put_pixel(cub->lines, i, j++, 0);
 	while (j < end)
