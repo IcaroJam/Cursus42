@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 10:53:41 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:39:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	main(int argc, char **argv)
 	backpaint(&cub);
 	loadminimap(&cub);
 	//lineupdate(&cub);
+	mlx_set_mouse_pos(cub.mlx, 0, 0);
 	mlx_key_hook(cub.mlx, keyhooks, &cub);
 	mlx_loop_hook(cub.mlx, mainhook, &cub);
 	mlx_loop(cub.mlx);

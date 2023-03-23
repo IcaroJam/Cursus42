@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/22 13:21:30 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:45:11 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,29 @@ void	keyhooks(mlx_key_data_t keydata, void *param)
 	}
 }
 
+static void	mouserotate(t_cub *cub)
+{
+	float		a;
+	const float	olddirx = cub->player.dirx;
+	const float	oldcamx = cub->player.camvectx;
+
+	if (cub->player.cursx)
+	{
+		a = atanf(cub->player.cursx * 0.005);
+		cub->player.dirx = olddirx * cosf(a) - cub->player.diry * sinf(a);
+		cub->player.diry = olddirx * sinf(a) + cub->player.diry * cosf(a);
+		cub->player.camvectx = oldcamx * cosf(a) - cub->player.camvecty * sinf(a);
+		cub->player.camvecty = oldcamx * sinf(a) + cub->player.camvecty * cosf(a);
+	}
+}
+
 void	mainhook(void *param)
 {
 	t_cub	*cub;
 
 	cub = param;
+	mlx_get_mouse_pos(cub->mlx, &cub->player.cursx, &cub->player.cursy);
+	mouserotate(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate(&cub->player,-1);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
@@ -73,6 +91,7 @@ void	mainhook(void *param)
 		move(cub, -cub->player.camvectx, -cub->player.camvecty);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
 		move(cub, cub->player.camvectx, cub->player.camvecty);
+	mlx_set_mouse_pos(cub->mlx, 0, 0);
 	lineupdate(param);
 	updateminimap(cub);
 }
