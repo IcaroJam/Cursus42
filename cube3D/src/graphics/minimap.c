@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 12:57:13 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/22 15:57:56 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:20:07 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static unsigned int	getmapcolour(t_cub *cub, unsigned int i, unsigned int j)
 	mapy = cub->player.y + j / 8.5 - 7;
 	if (mapx >= 0 && mapx < (int)cub->mdata.xsize - 1
 		&& mapy >= 0 && mapy < (int)cub->mdata.ysize - 1)
-		if (cub->mdata.cmap[mapy][mapx] != '1' && cub->mdata.cmap[mapy][mapx] != ' ')
+		if (cub->mdata.cmap[mapy][mapx] != '1'
+			&& cub->mdata.cmap[mapy][mapx] != ' ')
 			hex = 0x100070CC;
 	return (hex);
 }

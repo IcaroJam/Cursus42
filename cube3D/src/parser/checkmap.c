@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:25:33 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/22 12:09:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:22:17 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	playerinfo(char c, unsigned int i, unsigned int j, t_cub *cub)
 			cub->player.dirx = 1;
 		cub->player.camvectx = -cub->player.diry * fabsf(tanf(FOV / 2));
 		cub->player.camvecty = cub->player.dirx * fabsf(tanf(FOV / 2));
-		printf("Dir(%f, %f). Cam(%f, %f)\n", cub->player.dirx, cub->player.diry, cub->player.camvectx, cub->player.camvecty);
 	}
 }
 

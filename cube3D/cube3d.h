@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/23 12:32:46 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:16:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ typedef struct s_player
 	int		cursy;
 }			t_player;
 
+// In worient: -1(S), 0(E), 1(N), 2(W)
 typedef struct s_vision_point
 {
 	float	dist;
 	float	wtexc;
-	int		worient;// -1 Sur, 1 Norte, 0 Este, 2 Oeste
+	int		worient;
 }			t_vision_point;
 
 typedef struct s_raycast

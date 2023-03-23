@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 13:14:06 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:22:40 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ void	infodump(t_cub *cub)
 	unsigned int	i;
 
 	i = 0;
-	printf("Textures:\n\tNO: %s\n\tWE: %s\n\tSO: %s\n\tEA: %s\nColors:\n\tF: %x\n\tC: %x\nMap:\n", cub->mdata.npath, cub->mdata.wpath, cub->mdata.spath, cub->mdata.epath, cub->mdata.floorc, cub->mdata.ceilic);
+	printf("Dir(%f, %f). Cam(%f, %f)\n", cub->player.dirx, cub->player.diry,
+		cub->player.camvectx, cub->player.camvecty);
+	printf("Textures:\n\tNO: %s\n\tWE: %s\n\tSO: %s\n\tEA: %s\nColors:\n\tF: \
+%x\n\tC: %x\nMap:\n", cub->mdata.npath, cub->mdata.wpath, cub->mdata.spath,
+		cub->mdata.epath, cub->mdata.floorc, cub->mdata.ceilic);
 	while (i < cub->mdata.ysize)
 		printf("%s\n", cub->mdata.cmap[i++]);
 	printf("Player:\n\tX: %f\n\tY: %f\n", cub->player.x, cub->player.y);
@@ -92,7 +96,6 @@ int	main(int argc, char **argv)
 	loadimgsandinit(&cub);
 	backpaint(&cub);
 	loadminimap(&cub);
-	//lineupdate(&cub);
 	mlx_key_hook(cub.mlx, keyhooks, &cub);
 	mlx_loop_hook(cub.mlx, mainhook, &cub);
 	mlx_loop(cub.mlx);

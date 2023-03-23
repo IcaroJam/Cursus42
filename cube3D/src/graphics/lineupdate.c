@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 12:15:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:19:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	scanline(t_cub *cub, unsigned int i)
 	if (end >= WINHEIGHT)
 		end = WINHEIGHT;
 	j = 0;
-	//printf("h: %d, s: %d, e: %d\n", h, start, end);
 	while (j < start)
 		mlx_put_pixel(cub->lines[i], 0, j++, 0);
 	while (j < end)
@@ -70,7 +69,7 @@ static void	scanline(t_cub *cub, unsigned int i)
 
 void	lineupdate(t_cub *cub)
 {
-    unsigned int	i;
+	unsigned int	i;
 
 	i = 0;
 	ft_raycasting(cub);
@@ -78,5 +77,5 @@ void	lineupdate(t_cub *cub)
 	{
 		scanline(cub, i);
 		i++;
-    }
+	}
 }
