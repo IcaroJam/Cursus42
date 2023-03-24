@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 15:30:48 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:17:33 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ static void	loadimgsandinit(t_cub *cub)
 	if (!cub->ntex || !cub->wtex || !cub->stex || !cub->etex)
 		frerrxit("Failed to load png textures.", cub);
 
-	mlx_get_mouse_pos(cub->mlx, &cub->player.cursx, &cub->player.cursy);
+	cub->player.cursx = WINWIDTH / 2;
+	cub->player.cursy = WINHEIGHT / 2;
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
+	mlx_set_mouse_pos(cub->mlx, cub->player.cursx, cub->player.cursy);
 
 	cub->lines = mlx_new_image(cub->mlx, WINWIDTH, WINHEIGHT);
 	if (!cub->lines)
@@ -85,6 +87,7 @@ int	main(int argc, char **argv)
 	backpaint(&cub);
 	loadminimap(&cub);
 	mlx_key_hook(cub.mlx, keyhooks, &cub);
+	mlx_cursor_hook(cub.mlx, mouserotate, &cub);
 	mlx_loop_hook(cub.mlx, mainhook, &cub);
 	mlx_loop(cub.mlx);
 	freecub(&cub);
