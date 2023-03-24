@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/24 11:11:18 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/24 20:56:09 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ typedef struct s_player
 	float	diry;
 	float	camvectx;
 	float	camvecty;
-	int		cursx;
-	int		cursy;
 }			t_player;
 
 // In worient: -1(S), 0(E), 1(N), 2(W)
@@ -84,6 +82,8 @@ typedef struct s_raycast
 
 typedef struct s_cub
 {
+	unsigned int	halfwidth;
+	unsigned int	halfheight;
 	t_mapdata		mdata;
 	t_player		player;
 	mlx_t			*mlx;

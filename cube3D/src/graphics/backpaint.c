@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:02:49 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 15:33:34 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/24 20:57:39 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	backpaint(t_cub *cub)
 {
 	unsigned int		i;
 	unsigned int		j;
-	const unsigned int	halfheight = WINHEIGHT / 2;
 
 	cub->back = mlx_new_image(cub->mlx, WINWIDTH, WINHEIGHT);
 	if (!cub->back)
@@ -27,7 +26,7 @@ void	backpaint(t_cub *cub)
 		i = 0;
 		while (i < WINWIDTH)
 		{
-			if (j < halfheight)
+			if (j < cub->halfheight)
 				mlx_put_pixel(cub->back, i, j, cub->mdata.ceilic);
 			else
 				mlx_put_pixel(cub->back, i, j, cub->mdata.floorc);

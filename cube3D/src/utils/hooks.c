@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/24 11:24:44 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/24 21:07:53 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 // (cosA -sinA)(X)
 // (sinA  cosA)(Y)
 // Where A is the angle a vector (X, Y) rotates.
-// 0.0872... equals ~5º
-static void	rotate(t_player *p, int dir)
+static void	rotate(t_player *p, float a)
 {
-	const float	a = 0.08726646259971647884618453842443;
 	const float	olddirx = p->dirx;
 	const float	oldcamx = p->camvectx;
+	const float	cosval = cosf(a);
+	const float	sinval = sinf(a);
 
-	p->dirx = olddirx * cosf(dir * a) - p->diry * sinf(dir * a);
-	p->diry = olddirx * sinf(dir * a) + p->diry * cosf(dir * a);
-	p->camvectx = oldcamx * cosf(dir * a) - p->camvecty * sinf(dir * a);
-	p->camvecty = oldcamx * sinf(dir * a) + p->camvecty * cosf(dir * a);
+	p->dirx = olddirx * cosval - p->diry * sinval;
+	p->diry = olddirx * sinval + p->diry * cosval;
+	p->camvectx = oldcamx * cosval - p->camvecty * sinval;
+	p->camvecty = oldcamx * sinval + p->camvecty * cosval;
 }
 
 static void	move(t_cub *cub, float xdir, float ydir)
@@ -58,35 +58,29 @@ void	keyhooks(mlx_key_data_t keydata, void *param)
 
 void	mouserotate(double x, double y, void *param)
 {
-	float		a;
+	float	a;
 	t_cub	*cub;
-	float	olddirx;
-	float	oldcamx;
 
 	cub = param;
-	olddirx = cub->player.dirx;
-	oldcamx = cub->player.camvectx;
 	(void)y;
-	if (x != cub->player.cursx)
+	if (x != cub->halfwidth)
 	{
-		a = atanf((x - cub->player.cursx) * 0.005);
-		cub->player.dirx = olddirx * cosf(a) - cub->player.diry * sinf(a);
-		cub->player.diry = olddirx * sinf(a) + cub->player.diry * cosf(a);
-		cub->player.camvectx = oldcamx * cosf(a) - cub->player.camvecty * sinf(a);
-		cub->player.camvecty = oldcamx * sinf(a) + cub->player.camvecty * cosf(a);
+		a = atanf((x - cub->halfwidth) * 0.005);
+		rotate(&cub->player, a);
+		mlx_set_mouse_pos(cub->mlx, cub->halfwidth, cub->halfheight);
 	}
-	mlx_set_mouse_pos(cub->mlx, cub->player.cursx, cub->player.cursy);
 }
 
+// 0.0872... equals ~5º
 void	mainhook(void *param)
 {
 	t_cub	*cub;
 
 	cub = param;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
-		rotate(&cub->player, -1);
+		rotate(&cub->player, -0.08726646259971647884618453842443);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-		rotate(&cub->player, 1);
+		rotate(&cub->player, 0.08726646259971647884618453842443);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
 		move(cub, cub->player.dirx, cub->player.diry);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))

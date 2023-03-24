@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/24 11:17:33 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/24 20:56:46 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static void	loadimgsandinit(t_cub *cub)
 	if (!cub->ntex || !cub->wtex || !cub->stex || !cub->etex)
 		frerrxit("Failed to load png textures.", cub);
 
-	cub->player.cursx = WINWIDTH / 2;
-	cub->player.cursy = WINHEIGHT / 2;
+	cub->halfwidth = WINWIDTH / 2;
+	cub->halfheight = WINHEIGHT / 2;
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
-	mlx_set_mouse_pos(cub->mlx, cub->player.cursx, cub->player.cursy);
+	mlx_set_mouse_pos(cub->mlx, cub->halfwidth, cub->halfheight);
 
 	cub->lines = mlx_new_image(cub->mlx, WINWIDTH, WINHEIGHT);
 	if (!cub->lines)

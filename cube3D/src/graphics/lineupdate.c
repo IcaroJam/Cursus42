@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/23 17:12:11 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/24 20:58:45 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	scanline(t_cub *cub, mlx_texture_t *tex, unsigned int i)
 	float	coordstep[2];
 
 	h = WINHEIGHT / cub->sight[i].dist;
-	start = -h * 0.5 + WINHEIGHT * 0.5 ;
-	end = h * 0.5 + WINHEIGHT * 0.5;
-	if (end >= WINHEIGHT)
+	start = -h * 0.5 + cub->halfheight;
+	end = h * 0.5 + cub->halfheight;
+	if (end > WINHEIGHT)
 		end = WINHEIGHT;
 	coordstep[0] = tex->width * cub->sight[i].wtexc;
 	coordstep[1] = tex->height / (float)h;
