@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/24 21:07:53 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/25 00:07:17 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ static void	move(t_cub *cub, float xdir, float ydir)
 
 	newx = cub->player.x + xdir * mvspeed;
 	newy = cub->player.y + ydir * mvspeed;
-	if (cub->mdata.cmap[(int)cub->player.y][(int)newx] != '1')
+//	if (cub->mdata.cmap[(int)cub->player.y][(int)newx] != '1')
+	if (cub->mdata.cmap[(int)cub->player.y][(int)(newx + xdir * 0.00001)] != '1')
 		cub->player.x = newx;
-	if (cub->mdata.cmap[(int)newy][(int)cub->player.x] != '1')
+//	if (cub->mdata.cmap[(int)newy][(int)cub->player.x] != '1')
+	if (cub->mdata.cmap[(int)(newy + ydir * 0.00001)][(int)cub->player.x] != '1')
 		cub->player.y = newy;
 }
 
