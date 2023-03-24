@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:08:09 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/24 11:15:21 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/24 11:24:44 by senari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	mouserotate(double x, double y, void *param)
 		cub->player.camvecty = oldcamx * sinf(a) + cub->player.camvecty * cosf(a);
 	}
 	mlx_set_mouse_pos(cub->mlx, cub->player.cursx, cub->player.cursy);
-	printf("%d, %d\n", cub->player.cursx, cub->player.cursy);
 }
 
 void	mainhook(void *param)

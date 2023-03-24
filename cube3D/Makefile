@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2023/03/23 15:05:26 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/03/24 11:24:08 by senari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,6 @@
 #######################################/\#######################################
 
 NAME	= cube3D
-
-BONUS	= cube3D_bonus
 
 LIBFT	= ./libft/libft.a
 
@@ -42,14 +40,12 @@ endif
 SHRDSRC	= main.c termination.c input.c hooks.c
 PARSSRC	= atouc.c parsetextures.c parsemap.c parsecolours.c checkmap.c makeitsquared.c
 RAYSSRC = raycasting.c
-GRPHSRC	= backpaint.c lineupdate.c
+GRPHSRC	= backpaint.c lineupdate.c minimap.c
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC) $(PARSSRC) $(RAYSSRC) $(GRPHSRC)
-BNSSRCS	= $(SHRDSRC) $(PARSSRC) $(RAYSSRC) $(GRPHSRC) minimap.c
 
 #------------------------------------------------------------------------------#
 OBJS	= $(SRCS:.c=.o)
-BNSOBJS	= $(BNSSRCS:.c=.o)
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -57,16 +53,11 @@ BNSOBJS	= $(BNSSRCS:.c=.o)
 
 all:		$(NAME)
 
-bonus:		$(BONUS)
+bonus:		$(NAME)
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
-	@$(ECHO) "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
-	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) $(MLXFLGS) -o $(NAME)
-	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
-
-$(BONUS):	$(LIBFT) $(MLX) $(BNSOBJS) $(LIBFT)
 	@$(ECHO) "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
-	@gcc $(CFLAGS) $(BNSOBJS) $(FTFLGS) $(MLXFLGS) -o $(BONUS)
+	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) $(MLXFLGS) -o $(NAME)
 	@$(ECHO) "\n\033[38;5;6mLook at all that extra.\033[0m"
 
 $(LIBFT):
