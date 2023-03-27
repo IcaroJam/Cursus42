@@ -6,13 +6,13 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:55:33 by senari            #+#    #+#             */
-/*   Updated: 2023/03/06 11:42:21 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:50:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
 
-int	atouc(const char *s, int *offset)
+int	atouc(const char *s, int *offset, t_cub *cub)
 {
 	int	ret;
 	int	i;
@@ -24,7 +24,7 @@ int	atouc(const char *s, int *offset)
 		ret *= 10;
 		ret += s[i] - '0';
 		if (ret > 255)
-			return (-1);
+			frerrxit("Colour overflow. Accepted: [0, 255]", cub);
 		i++;
 	}
 	if (offset)

@@ -6,7 +6,7 @@
 /*   By: senari <ntamayo-@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:58:53 by senari            #+#    #+#             */
-/*   Updated: 2023/03/24 20:56:09 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:51:00 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int		filecheck(const char *s, size_t len);
 	*
 	* @return
 */
-int		atouc(const char *s, int *offset);
+int		atouc(const char *s, int *offset, t_cub *cub);
 
 /**
 * @brief Opens and parses mapfile, storing the processed values in cub and
