@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/24 20:58:45 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:32:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 
 static unsigned int	texturer(mlx_texture_t *tex, int j, int texcrd, float stp)
 {
-	/** const uint_fast32_t	*px = (uint_fast32_t *)tex->pixels; */
 	unsigned int		hex;
 	int					pixindex;
 
 	hex = 0;
 	pixindex = 4 * (tex->width * (int)(j * stp) + texcrd);
-	/** pixindex = (tex->width * (int)(j * stp) + texcrd); */
-	/** hex |= (px[pixindex] & 0xff000000) >> 24;
-	  * hex |= (px[pixindex] & 0x00ff0000) >> 8;
-	  * hex |= (px[pixindex] & 0x0000ff00) << 8;
-	  * hex |= (px[pixindex] & 0x000000ff) << 24; */
-	hex = (tex->pixels[pixindex] << 24) | (tex->pixels[pixindex + 1] << 16) | (tex->pixels[pixindex + 2] << 8) | (tex->pixels[pixindex + 3]);
+	hex = (tex->pixels[pixindex] << 24) | (tex->pixels[pixindex + 1] << 16)
+		| (tex->pixels[pixindex + 2] << 8) | (tex->pixels[pixindex + 3]);
 	return (hex);
 }
 
@@ -53,7 +48,6 @@ static void	scanline(t_cub *cub, mlx_texture_t *tex, unsigned int i)
 	{
 		mlx_put_pixel(cub->lines, i, j, texturer(tex,
 				j - start, coordstep[0], coordstep[1]));
-		//mlx_put_pixel(cub->lines, i, j, 0x997070FF);
 		j++;
 	}
 	while (j < WINHEIGHT)

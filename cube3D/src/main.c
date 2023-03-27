@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:07:06 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/03/24 20:56:46 by senari           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:31:34 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,16 @@ static void	loadimgsandinit(t_cub *cub)
 	cub->etex = mlx_load_png(cub->mdata.epath);
 	if (!cub->ntex || !cub->wtex || !cub->stex || !cub->etex)
 		frerrxit("Failed to load png textures.", cub);
-
 	cub->halfwidth = WINWIDTH / 2;
 	cub->halfheight = WINHEIGHT / 2;
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(cub->mlx, cub->halfwidth, cub->halfheight);
-
 	cub->lines = mlx_new_image(cub->mlx, WINWIDTH, WINHEIGHT);
 	if (!cub->lines)
 		frerrxit("Lines allocation failed!", cub);
 }
 
-void	leakcheck(void)
+/*void	leakcheck(void)
 {
 	system("leaks cube3D");
 }
@@ -73,16 +71,20 @@ void	infodump(t_cub *cub)
 	while (i < cub->mdata.ysize)
 		printf("%s\n", cub->mdata.cmap[i++]);
 	printf("Player:\n\tX: %f\n\tY: %f\n", cub->player.x, cub->player.y);
-}
+}*/
+
+// Right before handleinputandinit:
+	/** atexit(leakcheck); */
+
+// Right after parsemap:
+	/** infodump(&cub); */
 
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	atexit(leakcheck);
 	handleinputandinit(argc, argv, &cub);
 	parsemap(argv[1], &cub);
-	infodump(&cub);
 	loadimgsandinit(&cub);
 	backpaint(&cub);
 	loadminimap(&cub);
