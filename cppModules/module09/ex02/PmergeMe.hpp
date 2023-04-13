@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:07:02 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/13 12:39:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:19:38 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class PmergeMe {
 	private:
 		std::vector<uint32_t>	_vect;
 		std::list<uint32_t>		_lst;
+		char					**_preSort;
 };
 
 #endif
