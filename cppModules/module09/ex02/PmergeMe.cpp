@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:09:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/13 13:42:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:44:27 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,16 @@ void	PmergeMe::performtest() {
 	for (uint32_t i = 0; _preSort[i]; i++)
 		std::cout << " " << _preSort[i];
 	std::cout << std::endl;
+
+	// Measure initial time.
+	// Do the sorting.
+	// Measure final time.
+
 	std::cout << "After: ";
 	for (uint32_t i = 0; i < _vect.size(); i++)
 		std::cout << " " << _vect[i];
 	std::cout << std::endl;
+
+	// Print the rest of the stuff.
 }
 ////////////////////////////////////////////////////////////////////////////////
