@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:09:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/13 17:02:23 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:13:40 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,34 @@ int		PmergeMe::fillherup(char **argv) {
 	return (0);
 }
 
-// Redefine this little shit so I can not write it over and over again :)
+// Redefine this little shits so I can not write it over and over again :)
+typedef std::vector<uint32_t>::iterator vit;
 typedef std::list<uint32_t>::iterator lit;
 
-void	PmergeMe::vectormergeset(uint32_t start, uint32_t end) {
+void	PmergeMe::vectormergeset(std::vector<uint32_t> &vect, uint32_t start, uint32_t end) {
+	// Insert sort for vectors smaller than 11 elements:
 	if ((end - start) <= 10) {
-		for (uint32_t i = 1; i < _vect.size(); i++) {
+		for (uint32_t i = 1; i < vect.size(); i++) {
 			uint32_t	lookback = i;
-			uint32_t	movable = _vect[i];
+			uint32_t	movable = vect[i];
 
-			while (lookback > 0 && _vect[lookback - 1] > movable) {
-				_vect[lookback] = _vect[lookback - 1];
+			while (lookback > 0 && vect[lookback - 1] > movable) {
+				vect[lookback] = vect[lookback - 1];
 				lookback--;
 			}
-			_vect[lookback] = movable;
+			vect[lookback] = movable;
 		}
 	}
+
+	// Merge sort (recursivity, yay):
+	vit						goldenMean = vect.begin() + vect.size() / 2;
+	std::vector<uint32_t>	left(vect.begin(), goldenMean);
+	std::vector<uint32_t>	right(goldenMean, vect.end());
+	
+	vectormergeset(left, 0, left.size());
+	vectormergeset(right, 0, right.size());
+	// Merge that shit:
+	
 }
 
 void	PmergeMe::performtest() {
@@ -84,7 +96,7 @@ void	PmergeMe::performtest() {
 	// Measure initial time.
 	// Do the sorting.
 	// Measure final time.
-	vectormergeset(0, _vect.size());
+	vectormergeset(_vect, 0, _vect.size());
 
 	std::cout << "After: ";
 	for (uint32_t i = 0; i < _vect.size(); i++)
