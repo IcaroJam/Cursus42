@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:07:02 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/13 13:19:38 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:03:56 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,17 @@ class PmergeMe {
 		PmergeMe &operator=(const PmergeMe &cpyFrom);
 		~PmergeMe();
 
-		int	fillherup(char **argv);
+		int		fillherup(char **argv);
 		void	performtest();
 
 	private:
 		std::vector<uint32_t>	_vect;
 		std::list<uint32_t>		_lst;
 		char					**_preSort;
+
+		void	vectormergeset(uint32_t start, uint32_t end);
+		void	listmergeset(uint32_t start, uint32_t end);
+		
 };
 
 #endif

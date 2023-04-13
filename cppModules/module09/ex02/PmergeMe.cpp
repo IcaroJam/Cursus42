@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:09:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/13 13:44:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:02:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,24 @@ int		PmergeMe::fillherup(char **argv) {
 	return (0);
 }
 
+// Redefine this little shit so I can not write it over and over again :)
+typedef std::list<uint32_t>::iterator lit;
+
+void	PmergeMe::vectormergeset(uint32_t start, uint32_t end) {
+	if ((end - start) <= 10) {
+		for (uint32_t i = 1; i < _vect.size(); i++) {
+			uint32_t	lookback = i;
+			uint32_t	movable = _vect[i];
+
+			while (lookback > 0 && _vect[lookback - 1] > movable) {
+				_vect[lookback] = _vect[lookback - 1];
+				lookback--;
+			}
+			_vect[lookback] = movable;
+		}
+	}
+}
+
 void	PmergeMe::performtest() {
 	std::cout << "Before:";
 	for (uint32_t i = 0; _preSort[i]; i++)
@@ -66,6 +84,7 @@ void	PmergeMe::performtest() {
 	// Measure initial time.
 	// Do the sorting.
 	// Measure final time.
+	vectormergeset(0, _vect.size());
 
 	std::cout << "After: ";
 	for (uint32_t i = 0; i < _vect.size(); i++)
