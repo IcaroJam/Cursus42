@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:09:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/14 12:55:24 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:22:36 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,27 +126,36 @@ std::list<uint32_t>	PmergeMe::listmergeset(std::list<uint32_t> &lst, uint32_t st
 }
 
 void	PmergeMe::performtest() {
-	std::cout << "Before:";
+	std::cout << "Before:   ";
 	for (uint32_t i = 0; _preSort[i]; i++)
 		std::cout << " " << _preSort[i];
 	std::cout << std::endl;
 
 	// Measure initial time.
+	std::clock_t	vstart = clock();
+	std::clock_t	lstart = clock();
 	// Do the sorting.
-	// Measure final time.
 	_vect = vectormergeset(_vect, 0, _vect.size());
 	_lst = listmergeset(_lst, 0, _lst.size());
+	// Measure final time.
+	std::clock_t	vend = clock();
+	std::clock_t	lend = clock();
 
-	std::cout << "After (V): ";
+	std::cout << "After (V):";
 	for (uint32_t i = 0; i < _vect.size(); i++)
 		std::cout << " " << _vect[i];
 	std::cout << std::endl;
 
-	std::cout << "After (L): ";
+	std::cout << "After (L):";
 	for (lit i = _lst.begin(); i != _lst.end(); ++i)
 		std::cout << " " << *i;
 	std::cout << std::endl;
 
 	// Print the rest of the stuff.
+	double	vellapsed = (double)(vend - vstart) * 1.e6 / CLOCKS_PER_SEC;
+	double	lellapsed = (double)(lend - lstart) * 1.e6 / CLOCKS_PER_SEC;
+	std::cout.precision(5);
+	std::cout << "Time to process a range of " << _vect.size() << " elements with std::vector<uint32_t>" << " : " << vellapsed << " us" << std::endl;
+	std::cout << "Time to process a range of " << _lst.size() << " elements with std::list<uint32_t>" << "   : " << lellapsed << " us" << std::endl;
 }
 ////////////////////////////////////////////////////////////////////////////////

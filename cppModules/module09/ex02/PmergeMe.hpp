@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:07:02 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/14 12:00:52 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:05:05 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <ctime>
 
 class PmergeMe {
 	public:
