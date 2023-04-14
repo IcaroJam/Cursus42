@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:09:59 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/14 12:04:49 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:55:24 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,41 @@ std::vector<uint32_t>	PmergeMe::vectormergeset(std::vector<uint32_t> &vect, uint
 	return (merged);
 }
 
+std::list<uint32_t>	PmergeMe::listmergeset(std::list<uint32_t> &lst, uint32_t start, uint32_t end) {
+	// Insert sort for lists smaller than 11 elements:
+	if ((end - start) <= 10) {
+        for (lit i = ++lst.begin(); i != lst.end();) {
+			lit	lookback = i;
+			std::advance(lookback, -1);
+
+			while (lookback != lst.begin() && *lookback > *i)
+				--lookback;
+			if (*lookback < *i)
+				++lookback;
+			if (*lookback >= *i) {
+				lst.insert(lookback, *i);
+				i = lst.erase(i);
+			} else {
+				++i;
+			}
+        }
+		return (lst);
+	}
+
+	// Merge sort (recursivity, yay):
+	lit						goldenMean = lst.begin();
+	std::advance(goldenMean, std::distance(lst.begin(), lst.end()) / 2);
+	std::list<uint32_t>	left(lst.begin(), goldenMean);
+	std::list<uint32_t>	right(goldenMean, lst.end());
+
+	left = listmergeset(left, 0, left.size());
+	right = listmergeset(right, 0, right.size());
+	// Merge that shit:
+	std::list<uint32_t>	merged;
+	std::merge(left.begin(), left.end(), right.begin(), right.end(), std::back_inserter(merged));
+	return (merged);
+}
+
 void	PmergeMe::performtest() {
 	std::cout << "Before:";
 	for (uint32_t i = 0; _preSort[i]; i++)
@@ -100,10 +135,16 @@ void	PmergeMe::performtest() {
 	// Do the sorting.
 	// Measure final time.
 	_vect = vectormergeset(_vect, 0, _vect.size());
+	_lst = listmergeset(_lst, 0, _lst.size());
 
-	std::cout << "After: ";
+	std::cout << "After (V): ";
 	for (uint32_t i = 0; i < _vect.size(); i++)
 		std::cout << " " << _vect[i];
+	std::cout << std::endl;
+
+	std::cout << "After (L): ";
+	for (lit i = _lst.begin(); i != _lst.end(); ++i)
+		std::cout << " " << *i;
 	std::cout << std::endl;
 
 	// Print the rest of the stuff.
