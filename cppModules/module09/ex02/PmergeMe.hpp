@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:07:02 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/04/14 13:05:05 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:52:23 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ class PmergeMe {
 		std::list<uint32_t>		_lst;
 		char					**_preSort;
 
-	std::vector<uint32_t>	vectormergeset(std::vector<uint32_t> &vect, uint32_t start, uint32_t end);
-	std::list<uint32_t>		listmergeset(std::list<uint32_t> &lst, uint32_t start, uint32_t end);
+	std::vector<uint32_t>	vectormergeset(std::vector<uint32_t> &vect);
+	std::list<uint32_t>		listmergeset(std::list<uint32_t> &lst);
 		
 };
 
