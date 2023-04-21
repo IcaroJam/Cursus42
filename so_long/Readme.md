@@ -1,5 +1,5 @@
 ### Warning
-This project can only be run on MacOs systems and relies on the MLX42 graphics library, meaning both OpenGL and FrameKit are needed dependencies to compile and run.
+This project can only be run on MacOs systems and relies on the minilibx graphics library, meaning both OpenGL and FrameKit are needed dependencies to compile and run.
 
 ## The Game
 A tiny little desert themed game in which you must collect all chests before being able to exit de level, avoiding the dangerous sandstorms that lure through the map.
