@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:49:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/06/18 19:42:02 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/24 10:28:58 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	lecture_master(int fd, char **time_machine)
 			return (eoflag);
 		buffer[eoflag] = 0;
 		*time_machine = gnl_strjoin(*time_machine, buffer);
+		if (!*time_machine)
+			return (-1);
 	}
 	return (eoflag);
 }
@@ -53,7 +55,10 @@ char	*the_line_maker(char **time_machine)
 	temporal_distortion = gnl_strlen(&time_machine[0][len]);
 	tmach2 = malloc(sizeof(char) * (temporal_distortion + 1));
 	if (!tmach2)
+	{
+		free(retline);
 		return (NULL);
+	}
 	gnl_strlcpy(tmach2, &time_machine[0][len], temporal_distortion);
 	free(*time_machine);
 	*time_machine = tmach2;

@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 12:33:23 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/05/13 13:03:56 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/04/24 10:25:54 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ char	*gnl_strjoin(char *s1, char *s2)
 	s2len = gnl_strlen(s2);
 	ret = (char *) malloc((s1len + s2len + 1) * sizeof(char));
 	if (!ret)
+	{
+		free(s1);
 		return (0);
+	}
 	while (*s1)
 		*ret++ = *s1++;
 	while (*s2)
