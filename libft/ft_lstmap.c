@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:49:52 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/07/16 13:07:50 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:05:02 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *))
 	t_list	*ret;
 	t_list	*temp;
 
-	if (!lst)
+	if (!lst || !f || !del)
 		return (NULL);
 	ret = ft_lstnew(f(lst->content));
 	if (!ret)
