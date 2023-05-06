@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/11/23 15:27:21 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/05/06 15:42:17 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,9 @@ SHRDSRC	=
 SRCS	= $(SHRDSRC)
 BNSSRCS	= $(SHRDSRC)
 
-SHRDOBJ	= $(SHRDSRC:.c=.o)
 #------------------------------------------------------------------------------#
-OBJS	= $(SHRDOBJ)
-BNSOBJS	= $(SHRDOBJ)
+OBJS	= $(addprefix obj/, $(notdir $(SRCS:.c=.o)))
+BNSOBJS	= $(addprefix obj/, $(notdir $(BNSSRCS:.c=.o)))
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -52,15 +51,18 @@ all:		$(NAME)
 
 #bonus:		$(BONUS)
 
-$(NAME):	$(LIBFT) $(OBJS)
+$(NAME):	obj $(LIBFT) $(OBJS)
 	@$(ECHO) "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
 	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
 
-#$(BONUS):	$(BNSOBJS) $(LIBFT)
+#$(BONUS):	obj $(BNSOBJS) $(LIBFT)
 #	@$(ECHO) "\n \033[38;5;6m~Bonus objects for ya chief.\033[0m"
 #	@gcc $(CFLAGS) $(BNSOBJS) $(FTFLGS) -o $(BONUS)
 #	@$(ECHO) "\n\033[38;5;6mLook at all that extra.\033[0m"
+
+obj:
+	@mkdir obj
 
 $(LIBFT):
 	@make -C ./libft
@@ -68,15 +70,15 @@ $(LIBFT):
 
 #----                                                                      ----#
 
-%.o:	%.c
+obj/%.o:	%.c
 	@$(ECHO) -n '>'
-	@gcc $(CFLAGS) -c $<
+	@gcc $(CFLAGS) -c $< -o $@
 
 #----                                                                      ----#
 
 clean:
-	@rm -f $(OBJS) $(BNSOBJS)
 	@$(ECHO) "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
+	@rm -f obj
 
 libclean:
 	@make -C ./libft fclean

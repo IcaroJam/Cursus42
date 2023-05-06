@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/11/23 15:27:35 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/05/06 15:44:38 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,8 @@ SHRDSRC	=
 #------------------------------------------------------------------------------#
 SRCS	= $(SHRDSRC)
 
-SHRDOBJ	= $(SHRDSRC:.cpp=.o)
 #------------------------------------------------------------------------------#
-OBJS	= $(SHRDOBJ)
+OBJS	= $(addprefix obj/, $(notdir $(SRCS:.cpp=.o)))
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -42,21 +41,24 @@ OBJS	= $(SHRDOBJ)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	obj $(OBJS)
 	@$(ECHO) "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@c++ $(CFLAGS) $(OBJS) -o $(NAME)
 	@$(ECHO) "\n\033[38;5;6mReady to execute the protocol.\033[0m"
+
+obj:
+	@mkdir obj
 #----                                                                      ----#
 
-%.o:	%.cpp
+obj/%.o:	%.cpp
 	@$(ECHO) -n '>'
-	@c++ $(CFLAGS) -c $<
+	@c++ $(CFLAGS) -c $< -o $@
 
 #----                                                                      ----#
 
 clean:
-	@rm -f $(OBJS) $(BNSOBJS)
 	@$(ECHO) "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
+	@rm -f obj
 
 fclean:		clean
 	@rm -f $(NAME) $(BONUS)
