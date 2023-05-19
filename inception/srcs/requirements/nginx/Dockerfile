@@ -18,3 +18,7 @@ RUN		openssl req -x509 -sha256 -nodes \
 		-out /etc/ssl/certs/ntamayo-.crt \
 		-keyout /etc/ssl/private/ntamayo-.key \
 		-subj "/C=ES/ST=Andalusia/L=Malaga/O=42 School/OU=ntamayo-/CN=ntamayo-.42.fr"
+
+EXPOSE	443
+
+CMD		["nginx", "-v"]
