@@ -1,0 +1,51 @@
+version:  '3'
+
+services:
+
+  nginx:
+    container_name: nginx
+    build:  ./requirements/nginx
+    ports:
+      - '443:443'
+    volumes:
+      - vol_wp:/var/www/wordpress
+    depends_on:
+      - wordpress
+    networks:
+      - incepnet
+    restart:  always
+
+  wordpress:
+    container_name: wordpress
+    build:  ./requirements/wordpress
+    volumes:
+      - vol_wp:/var/www/wordpress
+    depends_on:
+      - mariadb
+    networks:
+      - incepnet
+    restart:  always
+
+  mariadb:
+    container_name: mariadb 
+    build:  ./requirements/mariadb
+    ports:
+      - 
+    volumes:
+      - 
+    depends_on:
+      - 
+    networks:
+      - incepnet
+    restart:  always
+
+volumes:
+  vol_wp:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ntamayo-/data/vol_wp
+      o:  bind
+
+networks:
+  incepnet: {}
