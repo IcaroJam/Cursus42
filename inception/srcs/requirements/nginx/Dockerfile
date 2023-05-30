@@ -19,6 +19,7 @@ RUN		openssl req -x509 -sha256 -nodes \
 		-keyout /etc/ssl/private/ntamayo-.key \
 		-subj "/C=ES/ST=Andalusia/L=Malaga/O=42 School/OU=ntamayo-/CN=ntamayo-.42.fr"
 
+# Overwrite the default config file for nginx.
 COPY	./config/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE	443
