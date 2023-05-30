@@ -20,6 +20,8 @@ services:
     build:  ./requirements/wordpress
     volumes:
       - vol_wp:/var/www/wordpress
+    env_file:
+      - ./.env
     depends_on:
       - mariadb
     networks:
