@@ -5,6 +5,7 @@ services:
   nginx:
     container_name: nginx
     build:  ./requirements/nginx
+    image:  nginx
     ports:
       - '443:443'
     volumes:
@@ -18,6 +19,7 @@ services:
   wordpress:
     container_name: wordpress
     build:  ./requirements/wordpress
+    image:  wordpress
     volumes:
       - vol_wp:/var/www/wordpress
     env_file:
@@ -31,12 +33,11 @@ services:
   mariadb:
     container_name: mariadb 
     build:  ./requirements/mariadb
-    ports:
-      - 
+    image:  mariadb
     volumes:
-      - 
-    depends_on:
-      - 
+      - vol_mdb
+    env_file:
+      - ./.env
     networks:
       - incepnet
     restart:  always
@@ -47,6 +48,13 @@ volumes:
     driver_opts:
       type: none
       device: /home/ntamayo-/data/vol_wp
+      o:  bind
+
+  vol_mdb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ntamayo-/data/vol_mdb
       o:  bind
 
 networks:

@@ -3,6 +3,16 @@ FROM	debian:buster
 
 RUN		apt-get update && apt-get install -y mariadb mariadb-server
 
+COPY	./config/sequel.conf /etc/mysql/my.cnf
+COPY	./tools/dascript.sh /dascript.sh
+RUN		chmod +x /dascript.sh \
+		echo "GRANT ALL ON *.* TO '$MYSQL_ROOT_USER'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; \
+		FLUSH PRIVILEGES; \
+		CREATE DATABASE IF NOT EXISTS $MYSQL_DB; \
+		CREATE USER '$MYSQL_USER'@'inception_wp.inception_net' IDENTIFIED BY '$MYSQL_PASSWORD'; \
+		GRANT ALL ON *.* TO '$MYSQL_USER'@'inception_wp.inception_net'; \
+		FLUSH PRIVILEGES;" > /tableup.scripture
+
 EXPOSE	3306
 
-CMD		[]
+CMD		["/dascript.sh"]
