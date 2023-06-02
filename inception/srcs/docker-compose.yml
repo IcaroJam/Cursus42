@@ -35,7 +35,7 @@ services:
     build:  ./requirements/mariadb
     image:  mariadb
     volumes:
-      - vol_mdb
+      - vol_mdb:/var/lib/mysql
     env_file:
       - ./.env
     networks:
