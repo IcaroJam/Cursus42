@@ -1,9 +1,11 @@
 #!/bin/bash
 
-if ! [[ mysql -u root -e "use $MYSQL_DB" ]]
+RESULT=$(mysql -u root -e "use $MYSQL_DB")
+
+if [[ -z "$RESULT" ]]
 then
 mysql_install_db
-mysql start
+/etc/init.d/mysql start
 
 mysql_secure_installation << EOF
 
@@ -18,7 +20,7 @@ EOF
 
 < /tableup.scripture mysql -u root
 sleep 3
-mysql stop
+/etc/init.d/mysql stop
 sleep 3
 fi
 
