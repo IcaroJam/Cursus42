@@ -1,7 +1,7 @@
 # Get the base image, in this case the oldest lts of debian os:
 FROM	debian:buster
 
-RUN		apt-get update && apt-get install -y mariadb-client mariadb-server
+RUN		apt-get update -y && apt-get upgrade -y && apt-get install -y mariadb-client mariadb-server
 
 COPY	./config/sequel.conf /etc/mysql/my.cnf
 COPY	./tools/dascript.sh /dascript.sh
