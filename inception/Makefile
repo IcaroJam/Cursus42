@@ -12,10 +12,19 @@
 
 CMPFILE	= ./srcs/docker-compose.yml
 
-all:
-	docker compose -f $(CMPFILE) up --build
+all: up
 
-clean:
+up:
+	docker compose -f $(CMPFILE) up
+
+recreate:
+	docker compose -f $(CMPFILE) up --build --force-recreate
+
+down:
 	docker compose -f $(CMPFILE) down
 
-.PHONY: all clean
+clean:
+	sudo rm -rf /home/ntamayo-/data/vol_wp/*
+	sudo rm -rf /home/ntamayo-/data/vol_mdb/*
+
+.PHONY: all clean down up recreate

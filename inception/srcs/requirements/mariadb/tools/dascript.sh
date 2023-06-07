@@ -1,9 +1,7 @@
 #!/bin/bash
 
-RESULT=$(mysql -u root -e "use $MYSQL_DB")
+mv /my.cnf /etc/mysql/my.cnf
 
-if [[ -z "$RESULT" ]]
-then
 mysql_install_db
 /etc/init.d/mysql start
 
@@ -18,10 +16,8 @@ y
 y
 EOF
 
-< /tableup.scripture mysql -u root
+echo "GRANT ALL ON *.* TO '$MYSQL_ROOT_USER'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; FLUSH PRIVILEGES; CREATE DATABASE IF NOT EXISTS $MYSQL_DB; CREATE USER '$MYSQL_USER'@'wordpress.inception_incepnet' IDENTIFIED BY '$MYSQL_PASSWORD'; GRANT ALL ON *.* TO '$MYSQL_USER'@'wordpress.inception_incepnet'; FLUSH PRIVILEGES;" | mysql -u root
+
 sleep 3
 /etc/init.d/mysql stop
 sleep 3
-fi
-
-mysqld

@@ -5,7 +5,6 @@ services:
   nginx:
     container_name: nginx
     build:  ./requirements/nginx
-    image:  nginx
     ports:
       - '443:443'
     volumes:
@@ -19,7 +18,7 @@ services:
   wordpress:
     container_name: wordpress
     build:  ./requirements/wordpress
-    image:  wordpress
+    hostname: wordpress.inception_incepnet
     volumes:
       - vol_wp:/var/www/wordpress
     env_file:
@@ -33,7 +32,6 @@ services:
   mariadb:
     container_name: mariadb 
     build:  ./requirements/mariadb
-    image:  mariadb
     volumes:
       - vol_mdb:/var/lib/mysql
     env_file:
@@ -58,4 +56,4 @@ volumes:
       o:  bind
 
 networks:
-  incepnet: {}
+  incepnet:

@@ -1,18 +1,21 @@
 # Get the base image, in this case the oldest lts of debian os:
 FROM	debian:buster
 
-RUN		apt-get update -y && apt-get upgrade -y && apt-get install -y mariadb-client mariadb-server
+RUN		apt-get update -y && apt-get install -y mariadb-client mariadb-server
 
-COPY	./config/sequel.conf /etc/mysql/my.cnf
+RUN		mkdir -p /var/run/mysqld && \
+		chown -R mysql:mysql /var/run/mysqld && \
+		chown 777 /var/run/mysqld
+
+COPY	./config/sequel.conf /my.cnf
+COPY	./tools/.env /.env
 COPY	./tools/dascript.sh /dascript.sh
-RUN		chmod +x /dascript.sh && \
-		echo "GRANT ALL ON *.* TO '$MYSQL_ROOT_USER'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; \
-		FLUSH PRIVILEGES; \
-		CREATE DATABASE IF NOT EXISTS $MYSQL_DB; \
-		CREATE USER '$MYSQL_USER'@'wordpress.inception_incepnet' IDENTIFIED BY '$MYSQL_PASSWORD'; \
-		GRANT ALL ON *.* TO '$MYSQL_USER'@'wordpress.inception_incepnet'; \
-		FLUSH PRIVILEGES;" > /tableup.scripture
+
+RUN		chmod +x /dascript.sh
 
 EXPOSE	3306
 
-CMD		["/dascript.sh"]
+RUN		export $(cat /.env | xargs) && \
+		/dascript.sh
+
+CMD		["mysqld"]

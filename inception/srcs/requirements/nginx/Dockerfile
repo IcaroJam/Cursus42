@@ -1,7 +1,7 @@
 # Get the base image, in this case the oldest lts of debian os:
 FROM	debian:buster
 
-RUN		apt-get update -y && apt-get upgrade -y && apt-get install -y nginx openssl
+RUN		apt-get update -y && apt-get install -y nginx openssl
 
 # Create a new ssl certificate as to allow the server to use the https protocol.
 # req: This subcommand specifies that we want to use X.509 certificate signing request (CSR) management.
