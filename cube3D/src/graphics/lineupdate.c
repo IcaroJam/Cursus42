@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:27:42 by ntamayo-          #+#    #+#             */
-/*   Updated: 2023/06/09 16:34:35 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/06/12 11:03:41 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 static unsigned int	texturer(mlx_texture_t *tex, int j, int texcrd, float stp)
 {
-	int	pixindex;
+	uint8_t	*ptr;
 
-	pixindex = 4 * (tex->width * (int)(j * stp) + texcrd);
-	return ((tex->pixels[pixindex] << 24) | (tex->pixels[pixindex + 1] << 16)
-		| (tex->pixels[pixindex + 2] << 8) | (tex->pixels[pixindex + 3]));
+	ptr = tex->pixels + 4 * (tex->width * (int)(j * stp) + texcrd);
+	return ((ptr[0] << 24) | (ptr[1] << 16) | (ptr[2] << 8) | (ptr[3]));
 }
 
 // Optimization (and specially the norm) made this one really fucking ugly,
