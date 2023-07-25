@@ -27,10 +27,10 @@ The map is designed in a '.cub' format and processed by a parser that ensures:
 ![Map sample](./media/MapShot.png)
 
 ### Controls
-WASD - Four direction movement.
-Right/Left keys - Camera rotation.
-Mouse movement - Camera rotation.
-Esc - Close the game.
+WASD - Four direction movement.  
+Right/Left keys - Camera rotation.  
+Mouse movement - Camera rotation.  
+Esc - Close the game.  
 That's it!
 
 ### Launching
