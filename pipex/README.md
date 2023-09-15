@@ -1,5 +1,5 @@
 ## Pipex
-The aim of this project is to replicate ![Unix's pipes](https://en.wikipedia.org/wiki/Pipeline_(Unix)) as a way to learn about processes and execution and get a better understanding of file descriptors.
+The aim of this project is to replicate [Unix's pipes](https://en.wikipedia.org/wiki/Pipeline_(Unix)) as a way to learn about processes and execution and get a better understanding of file descriptors.
 
 ### Mandatory part
 This one is as simple as it gets. The goal is creating a program that when launched like this:
@@ -27,4 +27,4 @@ Works exacly like this does:
 < infile cmd1 | cmd2 | ... | cmdN > outfile
 ```
 
-But that ain't all folks! The bonus comes with two more redirections. Forget about puny input files, you can now create the input on the fly with the `<<` redirection, say hello to ![heredocs](https://en.wikipedia.org/wiki/Here_document)! Also, what's that? Tired of having your output files truncated? Well tire no more for the `>>` redirection is here. This bad boy can append so many characters to the end of the provided outfile it should be illegal. But it isn't, it is very legal.
+But that ain't all folks! The bonus comes with two more redirections. Forget about puny input files, you can now create the input on the fly with the `<<` redirection, say hello to [heredocs](https://en.wikipedia.org/wiki/Here_document)! Also, what's that? Tired of having your output files truncated? Well tire no more for the `>>` redirection is here. This bad boy can append so many characters to the end of the provided outfile it should be illegal. But it isn't, it is very legal.

@@ -6,7 +6,7 @@ The aim of the project was the implementation of a raycaster in order to create 
 
 ![game gif](./media/game.gif)
 
-Everything is coded in C making use of the aforementioned graphics library. A ![DDA algorithm](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm)) is used for the raycaster because of it's precision and small number of cpu heavy operations, since the gpu isn't used.
+Everything is coded in C making use of the aforementioned graphics library. A [DDA algorithm](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm)) is used for the raycaster because of it's precision and small number of cpu heavy operations, since the gpu isn't used.
 
 Some features include:
 - Linear key movement.
