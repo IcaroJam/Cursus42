@@ -4,3 +4,6 @@
 [submodule "webserv"]
 	path = webserv
 	url = git@github.com:apena-ba/webserv.git
+[submodule "ft_transcendence"]
+	path = ft_transcendence
+	url = git@github.com:emilefournout/ft_transcendence.git
