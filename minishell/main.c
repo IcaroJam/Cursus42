@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:19:12 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/27 12:45:16 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:27:47 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,12 @@ static int	stuffinit(int argc, char **argv, char **envp, char **prompt)
 	}
 	return (0);
 }
+/** 
+  * atexit(outt);
+  * void outt()
+  * {
+  *     system("leaks minishell");
+  * } */
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -137,7 +143,7 @@ int	main(int argc, char **argv, char **envp)
 			cts = parse_line(cmndline);
 			if (cts && !ft_strncmp(cts[0].cmndtable[0], "exit", 5))
 				return (ms_exit(cts, cmndline, prompt));
-			ft_executor(cts, envp);
+			ft_executor(cts, g_env);
 			free_tables(cts);
 		}
 		free(cmndline);
