@@ -6,7 +6,7 @@
 /*   By: ntamayo- <ntamayo-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:55:53 by ntamayo-          #+#    #+#             */
-/*   Updated: 2022/09/23 12:08:03 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:52:09 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ int	envupdate(char *var, const char *newval)
 	int		varlen;
 	int		vallen;
 
+	if (!newval)
+		newval = "1";
 	varlen = ft_strlen(var);
 	vallen = ft_strlen(newval);
 	tmp = ft_calloc(varlen + vallen + 2, sizeof(char));
-	if (!tmp || !newval)
+	if (!tmp)
 	{
 		free(tmp);
 		perror("Error");
