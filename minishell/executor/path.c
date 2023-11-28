@@ -6,7 +6,7 @@
 /*   By: phijano- <phijano-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:14:53 by phijano-          #+#    #+#             */
-/*   Updated: 2023/11/28 15:34:27 by ntamayo-         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:05:49 by ntamayo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ char	**ft_get_path(char **envp)
 	char	**path;
 
 	path = NULL;
-	if (envp[0])
-		full_path = ft_get_env_path(envp);
+	full_path = ft_get_env_path(envp);
 	path = ft_fix_path(full_path);
 	free(full_path);
 	return (path);
