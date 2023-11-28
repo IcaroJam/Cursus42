@@ -6,7 +6,7 @@
 #    By: ntamayo- <ntamayo-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 18:54:04 by ntamayo-          #+#    #+#              #
-#    Updated: 2022/09/30 13:28:05 by ntamayo-         ###   ########.fr        #
+#    Updated: 2023/11/28 14:56:54 by ntamayo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT	= ./libft/libft.a
 
 CFLAGS	= -Wall -Werror -Wextra -I /Users/$(USER)/.brew/opt/readline/include
 
-FTFLGS	= -Llibft -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib 
+FTFLGS	= -Llibft -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 VPATH	= ./:./parser/:./executor/:./signals:./builtins #<<your directories here (separated by :)>>
 
@@ -29,7 +29,7 @@ VPATH	= ./:./parser/:./executor/:./signals:./builtins #<<your directories here (
 SHRDSRC	= main.c utils.c
 PARSSRC	= $(addprefix ./parser/, parsingutils.c parsermain.c lexingutils.c lexer.c expansion.c expansion_utils.c copy_utils.c)
 EXECSRC	= $(addprefix ./executor/, executor.c fds.c doc_here.c check_cmds.c execute.c path.c exit_status.c)
-BLTNSRC	= $(addprefix ./builtins/, builtins.c,  exit.c cd.c echo.c pwd.c environ.c export.c unset.c)
+BLTNSRC	= $(addprefix ./builtins/, builtins.c, exit.c cd.c echo.c pwd.c environ.c export.c unset.c)
 SIGNSRC	= $(addprefix ./signals/, signals.c)
 
 #------------------------------------------------------------------------------#
@@ -44,7 +44,7 @@ SIGNOBJ	= $(addsuffix .o, $(notdir $(basename $(SIGNSRC))))
 
 #------------------------------------------------------------------------------#
 
-OBJS	= $(SHRDOBJ) $(PARSOBJ) $(EXECOBJ) $(BLTNOBJ) $(SIGNOBJ)
+OBJS	= $(addprefix obj/, $(SHRDOBJ) $(PARSOBJ) $(EXECOBJ) $(BLTNOBJ) $(SIGNOBJ))
 
 #######################################\/#######################################
 #                                     Ruls                                     #
@@ -52,38 +52,42 @@ OBJS	= $(SHRDOBJ) $(PARSOBJ) $(EXECOBJ) $(BLTNOBJ) $(SIGNOBJ)
 
 all:		$(NAME)
 
-$(NAME):	$(LIBFT) $(OBJS)
-	@echo "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
+$(NAME):	obj $(LIBFT) $(OBJS)
+	@printf "\n \033[38;5;6m~Material stuff in a material world.\033[0m"
 	@gcc $(CFLAGS) $(OBJS) $(FTFLGS) -o $(NAME)
-	@echo "\n\033[38;5;6mReady to execute the protocol.\033[0m"
+	@printf "\n\033[38;5;35mReady to execute the protocol.\033[0m\n"
 
 $(LIBFT):
 	@make -C ./libft
-	@echo "\n \033[38;5;35m~Bookcases restocked.\033[0m"
+	@printf "\n \033[38;5;35m~Bookcases restocked.\033[0m\n"
+
+obj:
+	@mkdir obj
 
 #----                                                                      ----#
 
-%.o:	%.c
-	@echo -n '>'
-	@gcc $(CFLAGS) -c $<
+obj/%.o:	%.c
+	@gcc $(CFLAGS) -c $< -o $@
+	@printf "\r\033[38;5;6m[$<]\033[0m Compiled!\n"
+	@$(foreach file,$(shell ls obj/),printf '>';)
 
 #----                                                                      ----#
 
 clean:
-	@rm -f $(OBJS)
-	@echo "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
+	@rm -rf obj
+	@printf "\n\033[38;5;11mPressing objects into sweet sweet nothingness...\033[0m\n"
 
 libclean:
 	@make -C ./libft fclean
-	@echo "\n\033[38;5;202m/Library reduced to ashes\\ \n\033[0m"
+	@printf "\033[38;5;202m/Library reduced to ashes\\ \n\033[0m"
 
 fclean:		clean
 	@rm -f $(NAME)
-	@echo "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n"
+	@printf "\033[38;5;1mNo more \033[4m$(NAME).\033[0m\n\n"
 
 re:			fclean all
 
-.PHONY: all compilemsg clean libclean fclean re
+.PHONY: all clean libclean fclean re
 #-------------------------------------Tmpl-------------------------------------#
 
 #TMPLSRC	= $(addprefix ./yourdirhere/, sourcefiles.c)
